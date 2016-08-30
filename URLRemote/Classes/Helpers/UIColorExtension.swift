@@ -10,6 +10,9 @@ import UIKit
 
 /**
  UIColor extension supporting Name declaration in order to prevent tedious RGB initialization.
+ 
+ Inspired by article by @aligatr available at:
+ http://alisoftware.github.io/swift/enum/constants/2015/07/19/enums-as-constants/
  */
 extension UIColor {
     
@@ -31,7 +34,7 @@ extension UIColor {
     }
     
     /**
-     Convenience initializer to initialize color with given Name.
+     Convenience initializer to initialize color with a given Name enum value.
      
      - parameter name: Enum Name value representing one of the additional colors.
      */
