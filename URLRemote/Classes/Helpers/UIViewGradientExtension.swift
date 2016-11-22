@@ -13,12 +13,12 @@ import Foundation
  Adds gradient as background wherever it gets called.
  */
 extension UIView {
-    func setCustomGradient(startPoint: CGPoint, endPoint: CGPoint, bounds: CGRect, colors: [CGColor]) {
+    func setCustomGradient(_ startPoint: CGPoint, endPoint: CGPoint, bounds: CGRect, colors: [CGColor]) {
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.startPoint = startPoint
         gradient.endPoint = endPoint
         gradient.frame = bounds
         gradient.colors = colors
-        self.layer.insertSublayer(gradient, atIndex: 0)
+        self.layer.insertSublayer(gradient, at: 0)
     }
 }

@@ -20,17 +20,17 @@ extension UIColor {
      Enum values of additional colors.
      */
     enum Name: UInt32 {
-        case Green = 0x268988ff
-        case UltraLightGray = 0xeaeaeaff
-        case TransparentBlack = 0x00000088
-        case CloudBlue = 0x70a2cbff
-        case DarkerGreen = 0x28a4b7ff
-        case GradientStart = 0xb4e6e6ff
-        case GradientEnd = 0xe9f2d7ff
+        case green = 0x268988ff
+        case ultraLightGray = 0xeaeaeaff
+        case transparentBlack = 0x00000088
+        case cloudBlue = 0x70a2cbff
+        case darkerGreen = 0x28a4b7ff
+        case gradientStart = 0xb4e6e6ff
+        case gradientEnd = 0xe9f2d7ff
         
-        case GradientBackgroundStart = 0x00d5b4ff
-        case GradientBackgroundMiddle = 0x00b3c2ff
-        case GradientBackgroundEnd = 0x0070dbff
+        case gradientBackgroundStart = 0x00d5b4ff
+        case gradientBackgroundMiddle = 0x00b3c2ff
+        case gradientBackgroundEnd = 0x0070dbff
     }
     
     /**
