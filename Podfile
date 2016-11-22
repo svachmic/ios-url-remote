@@ -5,6 +5,8 @@ target "URLRemote" do
 	pod 'Alamofire', '~> 4.0'
 	pod 'MBProgressHUD', '~> 1.0'
     pod 'Bond', '~> 5.0'
+    pod 'Fabric'
+    pod 'Crashlytics'
 end
 
 target "URLRemoteTests" do
