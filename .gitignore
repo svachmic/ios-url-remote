@@ -16,3 +16,5 @@ profile
 DerivedData
 .idea/
 Pods
+fastlane/*
+URLRemote/Resources/GoogleService-Info.plist

@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "01216405E4D841B9A227D0DCEF221562"
+               BlueprintIdentifier = "45E909EEF628BF6CFAAA46FD9603E3EB"
                BuildableName = "Pods_URLRemote.framework"
                BlueprintName = "Pods-URLRemote"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
