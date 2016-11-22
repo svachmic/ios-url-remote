@@ -15,9 +15,9 @@ class ActionsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.alwaysBounceVertical = true
-        self.collectionView!.backgroundColor = UIColor(named: .UltraLightGray)
+        self.collectionView!.backgroundColor = UIColor(named: .ultraLightGray)
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,25 +26,25 @@ class ActionsCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
         cell.contentView.layer.cornerRadius = cell.frame.width / 2.0
         cell.contentView.layer.borderWidth = 1.0
-        cell.contentView.layer.borderColor = UIColor.clearColor().CGColor
+        cell.contentView.layer.borderColor = UIColor.clear.cgColor
         cell.contentView.layer.masksToBounds = true
         
-        cell.contentView.setCustomGradient(CGPoint(x: 0.0, y: 0.0), endPoint: CGPoint(x: 1.0, y: 1.0), bounds: view.bounds, colors: [UIColor(named: .GradientBackgroundStart).CGColor, UIColor(named: .GradientBackgroundEnd).CGColor])
+        cell.contentView.setCustomGradient(CGPoint(x: 0.0, y: 0.0), endPoint: CGPoint(x: 1.0, y: 1.0), bounds: view.bounds, colors: [UIColor(named: .gradientBackgroundStart).cgColor, UIColor(named: .gradientBackgroundEnd).cgColor])
         
-        cell.layer.shadowColor = UIColor.grayColor().CGColor
+        cell.layer.shadowColor = UIColor.gray.cgColor
         cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
         cell.layer.shadowRadius = 2.0
         cell.layer.shadowOpacity = 1.0
@@ -58,10 +58,10 @@ class ActionsCollectionViewController: UICollectionViewController {
             let label = UILabel(frame: CGRect(x: 0, y: y, width: cell.frame.width, height: height))
             label.tag = 5
             
-            label.textAlignment = NSTextAlignment.Center
-            label.font = UIFont.boldSystemFontOfSize(70)
+            label.textAlignment = NSTextAlignment.center
+            label.font = UIFont.boldSystemFont(ofSize: 70)
             label.text = String(format: "%@%@", arguments: ["YO", ""])
-            label.textColor = UIColor.whiteColor()
+            label.textColor = UIColor.white
             label.numberOfLines = 1
             label.minimumScaleFactor = 8/label.font.pointSize
             label.adjustsFontSizeToFitWidth = true
@@ -80,11 +80,11 @@ class ActionsCollectionViewController: UICollectionViewController {
      - parameter collectionView: The collection view object that is notifying you of the highlight change.
      - parameter indexPath: The index path of the cell that was highlighted.
      */
-    override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-        if let cell = collectionView.cellForItemAtIndexPath(indexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
             if cell.viewWithTag(1337) == nil {
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height))
-                view.backgroundColor = UIColor(named: .TransparentBlack)
+                view.backgroundColor = UIColor(named: .transparentBlack)
                 view.tag = 1337
                 cell.addSubview(view)
             }
@@ -99,8 +99,8 @@ class ActionsCollectionViewController: UICollectionViewController {
      - parameter collectionView: The collection view object that is notifying you of the highlight change.
      - parameter indexPath: The index path of the cell that had its highlight removed.
      */
-    override func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.cellForItemAtIndexPath(indexPath)?.viewWithTag(1337)?.removeFromSuperview()
+    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        collectionView.cellForItem(at: indexPath)?.viewWithTag(1337)?.removeFromSuperview()
     }
     
     // MARK: - Flow layout delegate
@@ -113,7 +113,7 @@ class ActionsCollectionViewController: UICollectionViewController {
      - parameter section: The index number of the section whose insets are needed.
      - returns: The margins to apply to items in the section.
      */
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         let diff = collectionView.frame.width * (1.0 / 22.0)
         return UIEdgeInsets(top: 8.0, left: diff/2.0, bottom: 0, right: diff/2.0)
     }
@@ -128,10 +128,10 @@ class ActionsCollectionViewController: UICollectionViewController {
      - parameter indexPath: The index path of the item.
      - returns: The width and height of the specified item. Both values must be greater than 0.
      */
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         //return CGSize(width: collectionView.frame.width/2.2, height: collectionView.frame.width/2.2)
         
-        let screenRect =  UIScreen.mainScreen().bounds
+        let screenRect =  UIScreen.main.bounds
         let screenWidth = screenRect.size.width
         let cellWidth = screenWidth / 3.5
         let size = CGSize(width: cellWidth, height: cellWidth)
