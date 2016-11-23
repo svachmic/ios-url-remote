@@ -8,6 +8,7 @@ target "URLRemote" do
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'Firebase/Core'
+    pod 'Firebase/Auth'
 end
 
 target "URLRemoteTests" do
@@ -16,6 +17,7 @@ target "URLRemoteTests" do
     pod 'Alamofire', '~> 4.0'
     pod 'Bond', '~> 5.0'
     pod 'Firebase/Core'
+    pod 'Firebase/Auth'
 end
 
 post_install do |installer|
