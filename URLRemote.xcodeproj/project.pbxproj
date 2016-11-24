@@ -27,6 +27,8 @@
 		E005D09D1DE5EC6E002B79C0 /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D09C1DE5EC6E002B79C0 /* LoginTableViewController.swift */; };
 		E005D09F1DE60018002B79C0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E005D09E1DE60018002B79C0 /* Localizable.strings */; };
 		E005D0A11DE61967002B79C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D0A01DE61967002B79C0 /* LoginViewModel.swift */; };
+		E005D0A41DE76BC5002B79C0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D0A31DE76BC5002B79C0 /* StringExtension.swift */; };
+		E005D0A61DE76D27002B79C0 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D0A51DE76D27002B79C0 /* TextFieldExtension.swift */; };
 		E0ADCD6F1DE4A98D004B7BAD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0ADCD6E1DE4A98D004B7BAD /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,8 @@
 		E005D09E1DE60018002B79C0 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		E005D0A01DE61967002B79C0 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E005D0A21DE6437D002B79C0 /* URLRemote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "URLRemote-Bridging-Header.h"; sourceTree = "<group>"; };
+		E005D0A31DE76BC5002B79C0 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		E005D0A51DE76D27002B79C0 /* TextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
 		E08C6FDE1DE4AECB0002A3D0 /* URLRemote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = URLRemote.entitlements; sourceTree = "<group>"; };
 		E0ADCD6E1DE4A98D004B7BAD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E54CFC7B981ED0D16AA8E2F4 /* Pods-URLRemoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLRemoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-URLRemoteTests/Pods-URLRemoteTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 			children = (
 				C16B4F6B1CFC8392001E572E /* UIViewGradientExtension.swift */,
 				C16B4F671CFC834F001E572E /* UIColorExtension.swift */,
+				E005D0A31DE76BC5002B79C0 /* StringExtension.swift */,
+				E005D0A51DE76D27002B79C0 /* TextFieldExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -484,6 +490,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E005D09D1DE5EC6E002B79C0 /* LoginTableViewController.swift in Sources */,
+				E005D0A61DE76D27002B79C0 /* TextFieldExtension.swift in Sources */,
+				E005D0A41DE76BC5002B79C0 /* StringExtension.swift in Sources */,
 				C16B4F6C1CFC8392001E572E /* UIViewGradientExtension.swift in Sources */,
 				E005D0A11DE61967002B79C0 /* LoginViewModel.swift in Sources */,
 				C16B4F631CFC7C1B001E572E /* ActionsCollectionViewController.swift in Sources */,
