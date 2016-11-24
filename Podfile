@@ -9,6 +9,8 @@ target "URLRemote" do
     pod 'Crashlytics'
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
+    pod 'GoogleSignIn'
+    pod 'Material', '~> 2.0'
 end
 
 target "URLRemoteTests" do
@@ -18,6 +20,8 @@ target "URLRemoteTests" do
     pod 'Bond', '~> 5.0'
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
+    pod 'GoogleSignIn'
+    pod 'Material', '~> 2.0'
 end
 
 post_install do |installer|
