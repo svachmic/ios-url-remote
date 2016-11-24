@@ -7,17 +7,38 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Material
 
 private let reuseIdentifier = "actionCell"
 
 class ActionsCollectionViewController: UICollectionViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if let user = user {
+                // User is signed in.
+                print("signed in as \(user.description)")
+            } else {
+                // No user is signed in.
+                let loginController = self.storyboard?.instantiateViewController(withIdentifier: "loginController")
+                let navigationController = ToolbarController(rootViewController: loginController!)
+                navigationController.statusBarStyle = .lightContent
+                navigationController.statusBar.backgroundColor = UIColor(named: .greener).darker()
+                navigationController.toolbar.backgroundColor = UIColor(named: .greener)
+                
+                self.navigationController?.present(navigationController, animated: true, completion: nil)
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.alwaysBounceVertical = true
-        self.collectionView!.backgroundColor = UIColor(named: .ultraLightGray)
+        self.collectionView!.backgroundColor = UIColor(named: .gray)
+        self.navigationController?.navigationBar.barStyle = .black
     }
 
     override func didReceiveMemoryWarning() {
