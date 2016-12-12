@@ -10,10 +10,10 @@ import Foundation
 import Material
 import Bond
 
-///
+/// TextField extension for reactive binding
 extension TextField {
     
-    ///
+    /// computed variable Bond allowing binding with a String object
     var bndDetail: Bond<TextField, String> {
         return Bond(target: self) { field, text in
             field.detail = text
