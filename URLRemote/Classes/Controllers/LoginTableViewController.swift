@@ -11,7 +11,7 @@ import Bond
 import ReactiveKit
 import Material
 
-///
+/// Controller used for logging user in. It is presented when the there is no user logged in.
 class LoginTableViewController: UITableViewController {
     let viewModel = LoginViewModel()
 
@@ -25,6 +25,10 @@ class LoginTableViewController: UITableViewController {
         
         self.setupNotificationHandler()
         self.setupTableView()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     /// Sets up notification handlers for sign in/up actions.
@@ -52,7 +56,7 @@ class LoginTableViewController: UITableViewController {
             message: message)
     }
     
-    ///
+    /// Sets up the full table view by hooking in up to the view-model.
     func setupTableView() {
         self.viewModel.contents.bind(to: self.tableView) { conts, indexPath, tableView in
             let content = conts[indexPath.row]
@@ -86,14 +90,12 @@ class LoginTableViewController: UITableViewController {
                 }
                 
                 textField.leftView = leftView
-                
                 break
             case "signUpCell":
                 let button = cell.viewWithTag(1) as! RaisedButton
                 button.titleLabel?.font = RobotoFont.bold(with: 17)
                 button.title = content.text
                 button.backgroundColor = UIColor(named: .red)
-                
                 self.bindSignButton(state: .signIn, button: button)
                 break
             case "signInCell":
@@ -101,7 +103,6 @@ class LoginTableViewController: UITableViewController {
                 button.titleLabel?.font = RobotoFont.bold(with: 17)
                 button.title = content.text
                 button.backgroundColor = UIColor(named: .yellow)
-                
                 self.bindSignButton(state: .signUp, button: button)
                 break
             case "textCell":
@@ -118,24 +119,29 @@ class LoginTableViewController: UITableViewController {
     
     // MARK: - Bindings
     
+    /// Binds the e-mail TextField to the view-model. Also sets up binding for detail label of the TextField to display when the e-mail is invalid.
     ///
+    /// - Parameter textField: TextField object to be bound.
     func bindEmailCell(textField: TextField) {
         textField.bnd_text.bind(to: self.viewModel.email)
         
         _ = textField.bnd_text.map { text -> String in
             if let text = text, !text.isValidEmail(), text != "" {
                 return NSLocalizedString("INVALID_EMAIL", comment: "")
-            } else {
-                return ""
             }
+            return ""
         }.bind(to: textField.bndDetail)
     }
     
+    /// Binds the password and repeated password TextFields to the view-model.
+    /// - First TextField has length validation.
+    /// - Second TextField has similarity validation (to the first one entered).
     ///
+    /// - Parameter index: Integer indicating which TextField is to be handled. 0 is for the first, 1 is for the second.
+    /// - Parameter textField: TextField object to be bound.
     func bindPasswordCell(index: Int, textField: TextField) {
         if index == 0 {
             // first password field during both sign in/up
-            
             textField.bnd_text.bind(to: self.viewModel.password)
             
             textField.bnd_text.skip(first: 1).map { text in
@@ -146,21 +152,24 @@ class LoginTableViewController: UITableViewController {
             }.bind(to: textField.bndDetail)
         } else {
             // second password field during sign up
-            
             textField.bnd_text.bind(to: self.viewModel.passwordAgain)
             
             _ = combineLatest(self.viewModel.password, self.viewModel.passwordAgain)
-                .map { pass, pass2 in
-                    if let p = pass, let p2 = pass2, p != p2 {
+                .map { password, repeated in
+                    if let pwd = password, let rep = repeated, pwd != rep {
                         return NSLocalizedString("INVALID_PASSWORD", comment: "")
-                    } else {
-                        return ""
                     }
+                    return ""
                 }.bind(to: textField.bndDetail)
         }
     }
     
+    /// Binds the sign-action button to the desired activity. It is used for both "Sign In" and "Sign Up" buttons, because their actions are the same (just reversed).
+    /// - "Sign In" transforms when state is .signUp.
+    /// - "Sign Up" transforms when state is .signIn.
     ///
+    /// - Parameter state: State to be compared for transformation.
+    /// - Parameter button: RaisedButton object to be bound.
     func bindSignButton(state: LoginState, button: RaisedButton) {
         _ = button.bnd_tap.observeNext {
             if self.viewModel.state == state {
@@ -170,12 +179,9 @@ class LoginTableViewController: UITableViewController {
             }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
-    ///
+    // MARK: - UITableView delegate
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.viewModel.contents[indexPath.row].height
     }
