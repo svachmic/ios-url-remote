@@ -8,6 +8,7 @@
 
 import Foundation
 import Bond
+import FirebaseAuth
 
 ///
 enum LoginState {
@@ -34,11 +35,11 @@ class LoginViewModel {
         LoginTableCell(
             identifier: "headerCell",
             text: "",
-            height: 82.0),
+            height: 20.0),
         LoginTableCell(
             identifier: "emailCell",
             text: NSLocalizedString("EMAIL", comment: ""),
-            height: 72.0),
+            height: 78.0),
         LoginTableCell(
             identifier: "passwordCell",
             text: NSLocalizedString("PASSWORD", comment: ""),
@@ -67,7 +68,7 @@ class LoginViewModel {
             self.contents.insert(LoginTableCell(
                 identifier: "passwordAgainCell",
                 text: NSLocalizedString("PASSWORD_AGAIN", comment: ""),
-                height: 72.0), at: 3)
+                height: 78.0), at: 3)
             self.contents.moveItem(from: 4, to: 7)
             self.contents.moveItem(from: 6, to: 4)
             self.contents.remove(at: 6)
@@ -88,6 +89,42 @@ class LoginViewModel {
                 text: NSLocalizedString("NO_ACCOUNT", comment: ""),
                 height: 46.0), at: 5)
             self.state = .signIn
+        }
+    }
+    
+    func signUp() {
+        // TODO: validate fields
+        
+        guard let auth = FIRAuth.auth() else {
+            return
+        }
+        
+        guard let email = self.email.value, let password = self.password.value else {
+            return
+        }
+        
+        auth.createUser(withEmail: email, password: password) { user, error in
+            if error == nil {
+                self.signIn()
+            } else {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FAILED_SIGN_UP"), object: error)
+            }
+        }
+    }
+    
+    func signIn() {
+        // TODO: validate fields
+        
+        guard let auth = FIRAuth.auth() else {
+            return
+        }
+        
+        guard let email = self.email.value, let password = self.password.value else {
+            return
+        }
+        
+        auth.signIn(withEmail: email, password: password) { user, error in
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FAILED_SIGN_IN"), object: error)
         }
     }
 }
