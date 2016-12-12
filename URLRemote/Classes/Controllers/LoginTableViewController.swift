@@ -27,7 +27,7 @@ class LoginTableViewController: UITableViewController {
         self.setupTableView()
     }
     
-    ///
+    /// Sets up notification handlers for sign in/up actions.
     func setupNotificationHandler() {
         NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "FAILED_SIGN_UP"))
             .observeNext { self.handle(notification: $0) }
@@ -38,7 +38,9 @@ class LoginTableViewController: UITableViewController {
             .disposeIn(bnd_bag)
     }
     
+    /// Handles a notification simply by displaying an alert dialog with an error message describing the problem that has occurred.
     ///
+    /// - Parameter notification: Notification to be handled.
     func handle(notification: Notification) {
         var message = NSLocalizedString("GENERIC_ERROR", comment: "")
         if let body = notification.object as? Error {
