@@ -15,3 +15,13 @@
 "SIGN_UP" = "Sign up";
 "NO_ACCOUNT" = "Don't have an account?";
 "YES_ACCOUNT" = "Already have an account?";
+"INVALID_EMAIL" = "E-mail is in invalid format.";
+"INVALID_PASSWORD" = "Passwords are not matching";
+"CLOSE" = "Close";
+"INVALID_PASSWORD_LENGTH" = "Password must have at least 6 characters.";
+
+// Networking
+
+"GENERIC_ERROR" = "An error has occurred while processing your request. Please try again later.";
+"FAILED_SIGN_UP" = "Sign up failed";
+"FAILED_SIGN_IN" = "Sign in failed";
