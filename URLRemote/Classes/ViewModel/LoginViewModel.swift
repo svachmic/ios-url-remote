@@ -31,6 +31,7 @@ class LoginViewModel {
     var password = Observable<String?>("")
     var passwordAgain = Observable<String?>("")
     
+    ///
     let contents = MutableObservableArray<LoginTableCell>([
         LoginTableCell(
             identifier: "headerCell",
@@ -92,14 +93,9 @@ class LoginViewModel {
         }
     }
     
+    ///
     func signUp() {
-        // TODO: validate fields
-        
-        guard let auth = FIRAuth.auth() else {
-            return
-        }
-        
-        guard let email = self.email.value, let password = self.password.value else {
+        guard let auth = FIRAuth.auth(), let email = self.email.value, let password = self.password.value else {
             return
         }
         
@@ -107,24 +103,30 @@ class LoginViewModel {
             if error == nil {
                 self.signIn()
             } else {
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FAILED_SIGN_UP"), object: error)
+                NotificationCenter.default.post(
+                    name: NSNotification.Name(rawValue: "FAILED_SIGN_UP"),
+                    object: error)
             }
         }
     }
     
+    ///
     func signIn() {
-        // TODO: validate fields
-        
-        guard let auth = FIRAuth.auth() else {
-            return
-        }
-        
-        guard let email = self.email.value, let password = self.password.value else {
+        guard let auth = FIRAuth.auth(), let email = self.email.value, let password = self.password.value else {
             return
         }
         
         auth.signIn(withEmail: email, password: password) { user, error in
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "FAILED_SIGN_IN"), object: error)
+            if error == nil {
+                // success
+                NotificationCenter.default.post(
+                    name: NSNotification.Name(rawValue: "SUCCESS_SIGN_IN"),
+                    object: nil)
+            } else {
+                NotificationCenter.default.post(
+                    name: NSNotification.Name(rawValue: "FAILED_SIGN_IN"),
+                    object: error)
+            }
         }
     }
 }

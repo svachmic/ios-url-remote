@@ -40,6 +40,10 @@ class LoginTableViewController: UITableViewController {
         NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "FAILED_SIGN_IN"))
             .observeNext { self.handle(notification: $0) }
             .disposeIn(bnd_bag)
+        
+        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "SUCCESS_SIGN_IN"))
+            .observeNext { _ in self.parent?.dismiss(animated: true) }
+            .disposeIn(bnd_bag)
     }
     
     /// Handles a notification simply by displaying an alert dialog with an error message describing the problem that has occurred.
@@ -172,10 +176,16 @@ class LoginTableViewController: UITableViewController {
     /// - Parameter button: RaisedButton object to be bound.
     func bindSignButton(state: LoginState, button: RaisedButton) {
         _ = button.bnd_tap.observeNext {
+            self.view.endEditing(true)
+            
             if self.viewModel.state == state {
                 self.viewModel.transform()
             } else {
-                self.viewModel.signUp()
+                if state == .signIn {
+                    self.viewModel.signUp()
+                } else {
+                    self.viewModel.signIn()
+                }
             }
         }
     }
