@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0810"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "45E909EEF628BF6CFAAA46FD9603E3EB"
+               BlueprintIdentifier = "E920C525E84453C23A5197F3C18D8DFB"
                BuildableName = "Pods_URLRemote.framework"
                BlueprintName = "Pods-URLRemote"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
