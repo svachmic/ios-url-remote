@@ -7,42 +7,55 @@
 //
 
 import UIKit
-import FirebaseAuth
 import Material
+import Bond
 
-private let reuseIdentifier = "actionCell"
+private let reuseIdentifier = "testCell"
 
 class ActionsCollectionViewController: UICollectionViewController {
+    var viewModel: ActionsViewModel!
     
-    override func viewWillAppear(_ animated: Bool) {
-        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if let user = user {
-                // User is signed in.
-                print("signed in as \(user.description)")
-            } else {
-                // No user is signed in.
-                let loginController = self.storyboard?.instantiateViewController(withIdentifier: "loginController")
-                let navigationController = ToolbarController(rootViewController: loginController!)
-                navigationController.statusBarStyle = .lightContent
-                navigationController.statusBar.backgroundColor = UIColor(named: .greener).darker()
-                navigationController.toolbar.backgroundColor = UIColor(named: .greener)
-                
-                self.navigationController?.present(navigationController, animated: true, completion: nil)
-            }
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(ActionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.alwaysBounceVertical = true
         self.collectionView!.backgroundColor = UIColor(named: .gray)
-        self.navigationController?.navigationBar.barStyle = .black
+        
+        if let navigationController = self.navigationController as? ApplicationNavigationController {
+            navigationController.prepare()
+            navigationController.statusBarStyle = .lightContent
+            navigationController.navigationBar.barTintColor = UIColor(named: .yellow)
+            
+            let starButton = IconButton(image: Icon.cm.star, tintColor: .white)
+            starButton.pulseColor = .white
+            self.navigationItem.leftViews = [starButton]
+            
+            self.navigationItem.titleLabel.textColor = .white
+            self.navigationItem.detailLabel.textColor = .white
+            
+            self.navigationItem.title = "URLRemote"
+            self.navigationItem.detail = "Making your IoT awesome!"
+        }
+        
+        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "USER_LOGGED_OUT"))
+            .observeNext { _ in self.displayLogin() }
+            .disposeIn(bnd_bag)
+        
+        self.viewModel = ActionsViewModel()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func displayLogin() {
+        let loginController = self.storyboard?.instantiateViewController(withIdentifier: "loginController")
+        let toolbarController = ToolbarController(rootViewController: loginController!)
+        toolbarController.statusBarStyle = .lightContent
+        toolbarController.statusBar.backgroundColor = UIColor(named: .greener).darker()
+        toolbarController.toolbar.backgroundColor = UIColor(named: .greener)
+        self.navigationController?.present(toolbarController, animated: true, completion: nil)
     }
 
     // MARK: UICollectionViewDataSource
@@ -56,40 +69,10 @@ class ActionsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        cell.contentView.layer.cornerRadius = cell.frame.width / 2.0
-        cell.contentView.layer.borderWidth = 1.0
-        cell.contentView.layer.borderColor = UIColor.clear.cgColor
-        cell.contentView.layer.masksToBounds = true
-        
-        cell.contentView.setCustomGradient(CGPoint(x: 0.0, y: 0.0), endPoint: CGPoint(x: 1.0, y: 1.0), bounds: view.bounds, colors: [UIColor(named: .gradientBackgroundStart).cgColor, UIColor(named: .gradientBackgroundEnd).cgColor])
-        
-        cell.layer.shadowColor = UIColor.gray.cgColor
-        cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        cell.layer.shadowRadius = 2.0
-        cell.layer.shadowOpacity = 1.0
-        cell.layer.masksToBounds = false
-        
-        if let label = cell.viewWithTag(5) as? UILabel {
-            label.text = String(format: "%@%@", arguments: ["YO", ""])
-        } else {
-            let height = cell.frame.height * 0.8
-            let y = (cell.frame.height - height) * 0.5
-            let label = UILabel(frame: CGRect(x: 0, y: y, width: cell.frame.width, height: height))
-            label.tag = 5
-            
-            label.textAlignment = NSTextAlignment.center
-            label.font = UIFont.boldSystemFont(ofSize: 70)
-            label.text = String(format: "%@%@", arguments: ["YO", ""])
-            label.textColor = UIColor.white
-            label.numberOfLines = 1
-            label.minimumScaleFactor = 8/label.font.pointSize
-            label.adjustsFontSizeToFitWidth = true
-            
-            cell.addSubview(label)
-        }
-    
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: reuseIdentifier,
+            for: indexPath) as! ActionViewCell
+        cell.setUpViews(bounds: view.bounds)
         return cell
     }
 
