@@ -61,6 +61,7 @@ PODS:
     - Material/Core (= 2.4.0)
   - Material/Core (2.4.0)
   - MBProgressHUD (1.0.0)
+  - ObjectMapper (2.2.2)
   - OHHTTPStubs (5.2.3):
     - OHHTTPStubs/Default (= 5.2.3)
   - OHHTTPStubs/Core (5.2.3)
@@ -89,6 +90,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - Material (~> 2.0)
   - MBProgressHUD (~> 1.0)
+  - ObjectMapper (~> 2.0)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
 
@@ -112,9 +114,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   Material: a366cee7e9f7bee5e55ff6a2afe91fcb91514b95
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  ObjectMapper: 9e385c2295bcc4e16eabbcfc85db801442bba545
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
   ReactiveKit: e830df3deeb6cdf2acd18cee5cf07cb25488ae4e
 
-PODFILE CHECKSUM: 2c8c21b2cef98945cce0b38e92d4ce914c2ad765
+PODFILE CHECKSUM: 1b74a9fbc4294d0fcb8906b1fd8d573bdc092e27
 
 COCOAPODS: 1.1.1

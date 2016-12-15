@@ -12,6 +12,7 @@ target "URLRemote" do
     pod 'Firebase/Database'
     pod 'GoogleSignIn'
     pod 'Material', '~> 2.0'
+    pod 'ObjectMapper', '~> 2.0'
 end
 
 target "URLRemoteTests" do
@@ -24,6 +25,7 @@ target "URLRemoteTests" do
     pod 'Firebase/Database'
     pod 'GoogleSignIn'
     pod 'Material', '~> 2.0'
+    pod 'ObjectMapper', '~> 2.0'
 end
 
 post_install do |installer|
