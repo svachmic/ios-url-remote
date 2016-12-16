@@ -8,35 +8,36 @@
 
 import UIKit
 
+/// Enum values of additional colors.
+enum ColorName: UInt32 {
+    case green = 0x268988ff
+    case transparentBlack = 0x00000088
+    case cloudBlue = 0x70a2cbff
+    case darkerGreen = 0x28a4b7ff
+    case gradientStart = 0xb4e6e6ff
+    case gradientEnd = 0xe9f2d7ff
+    
+    case gradientBackgroundStart = 0x00d5b4ff
+    case gradientBackgroundMiddle = 0x00b3c2ff
+    case gradientBackgroundEnd = 0x0070dbff
+    
+    case red = 0xec704fff
+    case yellow = 0xf8c861ff
+    case greener = 0x62c9b7ff
+    case gray = 0xeaeaeaff
+}
+
 /// UIColor extension supporting Name declaration in order to prevent tedious RGB initialization.
+/// Other helper methods used throughout the application are also included here.
 ///
 /// Inspired by article by @aligatr available at:
 /// http://alisoftware.github.io/swift/enum/constants/2015/07/19/enums-as-constants/
 extension UIColor {
     
-    /// Enum values of additional colors.
-    enum Name: UInt32 {
-        case green = 0x268988ff
-        case transparentBlack = 0x00000088
-        case cloudBlue = 0x70a2cbff
-        case darkerGreen = 0x28a4b7ff
-        case gradientStart = 0xb4e6e6ff
-        case gradientEnd = 0xe9f2d7ff
-        
-        case gradientBackgroundStart = 0x00d5b4ff
-        case gradientBackgroundMiddle = 0x00b3c2ff
-        case gradientBackgroundEnd = 0x0070dbff
-        
-        case red = 0xec704fff
-        case yellow = 0xf8c861ff
-        case greener = 0x62c9b7ff
-        case gray = 0xeaeaeaff
-    }
-    
     /// Convenience initializer to initialize color with a given Name enum value.
     ///
     /// - parameter name: Enum Name value representing one of the additional colors.
-    convenience init(named name: Name) {
+    convenience init(named name: ColorName) {
         let RGBAValue = name.rawValue
         let R = CGFloat((RGBAValue >> 24) & 0xff) / 255.0
         let G = CGFloat((RGBAValue >> 16) & 0xff) / 255.0
@@ -46,6 +47,9 @@ extension UIColor {
         self.init(red: R, green: G, blue: B, alpha: alpha)
     }
     
+    /// Makes current color a bit darker and returns the new object. In case of failure, plain UIColor() is returned.
+    ///
+    /// - Returns: UIColor object with darker color then before.
     func darker() -> UIColor {
         var r: CGFloat = 0
         var g: CGFloat = 0
