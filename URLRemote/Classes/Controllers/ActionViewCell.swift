@@ -7,48 +7,40 @@
 //
 
 import UIKit
+import Material
 
+///
 class ActionViewCell: UICollectionViewCell {
+    var button: RaisedButton?
     
-    func setUpViews(bounds: CGRect) {
-        self.contentView.layer.cornerRadius = self.frame.width / 2.0
-        self.contentView.layer.borderWidth = 1.0
-        self.contentView.layer.borderColor = UIColor.clear.cgColor
-        self.contentView.layer.masksToBounds = true
-        
-        self.contentView.setCustomGradient(
-            startPoint: CGPoint(x: 0.0, y: 0.0),
-            endPoint: CGPoint(x: 1.0, y: 1.0),
-            bounds: bounds,
-            colors: [
-                UIColor(named: .gradientBackgroundStart).cgColor,
-                UIColor(named: .gradientBackgroundEnd).cgColor
-            ])
-        
-        // no shadows
-        //self.layer.shadowColor = UIColor.gray.cgColor
-        //self.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        //self.layer.shadowRadius = 2.0
-        //self.layer.shadowOpacity = 1.0
-        //self.layer.masksToBounds = false
-        
-        if let label = self.viewWithTag(5) as? UILabel {
-            label.text = String(format: "%@%@", arguments: ["YO", ""])
-        } else {
-            let height = self.frame.height * 0.8
-            let y = (self.frame.height - height) * 0.5
-            let label = UILabel(frame: CGRect(x: 0, y: y, width: self.frame.width, height: height))
-            label.tag = 5
-            
-            label.textAlignment = NSTextAlignment.center
-            label.font = UIFont.boldSystemFont(ofSize: 70)
-            label.text = String(format: "%@%@", arguments: ["YO", ""])
-            label.textColor = UIColor.white
-            label.numberOfLines = 1
-            label.minimumScaleFactor = 8/label.font.pointSize
-            label.adjustsFontSizeToFitWidth = true
-            
-            self.addSubview(label)
+    ///
+    func setUpView() {
+        if button == nil {
+            button = RaisedButton(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+            button?.backgroundColor = UIColor.gray
+            button?.layer.cornerRadius = self.frame.width / 2.0
+            self.addSubview(button!)
         }
+    }
+    
+    ///
+    ///
+    /// - Parameter entry:
+    func bind(with entry: Entry) {
+        var color = UIColor.gray
+        if let hex = entry.color, let hexEnum = ColorName(rawValue: hex) {
+            color = UIColor(named: hexEnum)
+        }
+        button?.backgroundColor = color
+        
+        if let url = entry.url {
+            _ = button?.bnd_tap.observe() { _ in self.bindSignal(url: url) }
+        }
+    }
+    
+    func bindSignal(url: String) {
+        _ = self.button?.bndAction.bind(signal:
+            EntryAction().signalForAction(url: url)
+        )
     }
 }
