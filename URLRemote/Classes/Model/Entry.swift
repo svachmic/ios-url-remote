@@ -7,8 +7,23 @@
 //
 
 import Foundation
+import ObjectMapper
 
 ///
-class Entry {
-    ///
+class Entry: Mappable {
+    var color: UInt32?
+    var icon: String?
+    var url: String?
+    
+    init() {}
+    
+    // MARK: - ObjectMapper methods
+    
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        color <- map["color"]
+        icon <- map["icon"]
+        url <- map["url"]
+    }
 }
