@@ -75,9 +75,9 @@ class LoginTableViewController: UITableViewController {
                 textField.placeholder = content.text
                 textField.font = RobotoFont.regular(with: 15)
                 textField.leftViewMode = .always
-                textField.placeholderActiveColor = UIColor(named: .greener).darker()
-                textField.dividerActiveColor = UIColor(named: .greener).darker()
-                textField.leftViewActiveColor = UIColor(named: .greener).darker()
+                textField.placeholderActiveColor = UIColor(named: .green).darker()
+                textField.dividerActiveColor = UIColor(named: .green).darker()
+                textField.leftViewActiveColor = UIColor(named: .green).darker()
                 textField.isClearIconButtonEnabled = true
                 textField.detailColor = UIColor(named: .red)
                 let leftView = UIImageView()

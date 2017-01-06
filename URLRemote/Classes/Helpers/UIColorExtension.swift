@@ -10,20 +10,11 @@ import UIKit
 
 /// Enum values of additional colors.
 enum ColorName: UInt32 {
-    case green = 0x268988ff
     case transparentBlack = 0x00000088
-    case cloudBlue = 0x70a2cbff
-    case darkerGreen = 0x28a4b7ff
-    case gradientStart = 0xb4e6e6ff
-    case gradientEnd = 0xe9f2d7ff
-    
-    case gradientBackgroundStart = 0x00d5b4ff
-    case gradientBackgroundMiddle = 0x00b3c2ff
-    case gradientBackgroundEnd = 0x0070dbff
     
     case red = 0xec704fff
     case yellow = 0xf8c861ff
-    case greener = 0x62c9b7ff
+    case green = 0x62c9b7ff
     case gray = 0xeaeaeaff
 }
 
