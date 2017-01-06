@@ -18,7 +18,7 @@ enum EntryType: Int {
 
 ///
 class Entry: Mappable {
-    var color: UInt32?
+    var color: ColorName?
     var icon: String?
     var url: String?
     var type: EntryType?
