@@ -28,8 +28,8 @@ class ActionViewCell: UICollectionViewCell {
     /// - Parameter entry:
     func bind(with entry: Entry) {
         var color = UIColor.gray
-        if let hex = entry.color, let hexEnum = ColorName(rawValue: hex) {
-            color = UIColor(named: hexEnum)
+        if let hex = entry.color {
+            color = UIColor(named: hex)
         }
         button?.backgroundColor = color
         
