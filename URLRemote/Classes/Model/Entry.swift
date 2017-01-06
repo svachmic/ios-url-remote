@@ -10,10 +10,18 @@ import Foundation
 import ObjectMapper
 
 ///
+enum EntryType: Int {
+    case Custom = 0
+    case SimpleHTTP = 1
+    case Quido = 2
+}
+
+///
 class Entry: Mappable {
     var color: UInt32?
     var icon: String?
     var url: String?
+    var type: EntryType?
     
     init() {}
     
@@ -25,5 +33,6 @@ class Entry: Mappable {
         color <- map["color"]
         icon <- map["icon"]
         url <- map["url"]
+        type <- map["type"]
     }
 }
