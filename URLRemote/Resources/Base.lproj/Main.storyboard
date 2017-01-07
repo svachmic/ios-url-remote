@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -55,29 +54,17 @@
         <scene sceneID="XP2-zl-VeA">
             <objects>
                 <tableViewController storyboardIdentifier="entrySetupVC" id="nCe-Om-ooZ" customClass="EntrySetupViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="211" sectionHeaderHeight="28" sectionFooterHeight="28" id="TFA-6d-qyF">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="97" sectionHeaderHeight="28" sectionFooterHeight="28" id="TFA-6d-qyF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="entryCell" rowHeight="211" id="2Rs-d8-7yd">
-                                <rect key="frame" x="0.0" y="28" width="375" height="211"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="entryCell" rowHeight="97" id="2Rs-d8-7yd">
+                                <rect key="frame" x="0.0" y="28" width="375" height="97"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Rs-d8-7yd" id="rTg-Tc-VzG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LgM-VD-K4O" customClass="Card" customModule="Material">
-                                            <rect key="frame" x="8" y="8" width="359" height="195"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="leadingMargin" secondItem="LgM-VD-K4O" secondAttribute="leading" id="GDb-Er-06p"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="LgM-VD-K4O" secondAttribute="trailing" id="JSr-W7-kml"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="LgM-VD-K4O" secondAttribute="bottom" constant="-0.5" id="etb-pz-nK6"/>
-                                        <constraint firstAttribute="topMargin" secondItem="LgM-VD-K4O" secondAttribute="top" id="igj-3z-dQj"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
