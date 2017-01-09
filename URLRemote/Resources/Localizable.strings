@@ -20,6 +20,16 @@
 "CLOSE" = "Close";
 "INVALID_PASSWORD_LENGTH" = "Password must have at least 6 characters.";
 
+/// Entry Setup View Controller
+
+"ENTRY_NAME" = "Entry name";
+"COLOR" = "Color";
+"TYPE_CUSTOM" = "Custom";
+"TYPE_SIMPLE_HTTP" = "Simple HTTP";
+"TYPE_QUIDO" = "Quido";
+"REQUIRES_AUTH" = "Requires authentication";
+"USER" = "User";
+
 // Networking
 
 "GENERIC_ERROR" = "An error has occurred while processing your request. Please try again later.";

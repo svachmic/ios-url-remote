@@ -9,14 +9,20 @@
 import UIKit
 import Bond
 import Material
+import ReactiveKit
 
+///
 class EntrySetupViewController: UITableViewController {
     let viewModel = EntrySetupViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.tableFooterView = UIView(frame: .zero)
+        self.tableView.separatorStyle = .none
+        
         self.setupBar()
+        self.setupTableView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,6 +31,7 @@ class EntrySetupViewController: UITableViewController {
     
     // MARK: - Setup
     
+    ///
     func setupBar() {
         let cancel = FlatButton(title: "Cancel")
         cancel.titleColor = .white
@@ -41,30 +48,82 @@ class EntrySetupViewController: UITableViewController {
             self.parent?.dismiss(animated: true, completion: nil)
         }
         self.toolbarController?.toolbar.rightViews = [done]
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "entryCell", for: indexPath)
         
-        ///
-        
-        return cell
+        self.toolbarController?.toolbar.titleLabel.textColor = .white
+        self.viewModel.name.bind(to: self.toolbarController!.toolbar.bndTitle)
+    }
+    
+    ///
+    func setupTableView() {
+        self.viewModel.contents.bind(to: tableView) {
+            contents, indexPath, tableView in
+            let content = contents[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: content.identifier, for: indexPath)
+            
+            switch content.identifier {
+            case "designCell":
+                if let designCell = cell as? DesignEntryTableViewCell {
+                    self.setupDesignCell(cell: designCell)
+                }
+                break
+            case "typeCell":
+                if let typeCell = cell as? TypeEntryTableViewCell {
+                    self.setupTypeCell(cell: typeCell)
+                }
+                break
+            case "actionCell":
+                if let actionCell = cell as? ActionEntryTableViewCell {
+                    self.setupActionCell(cell: actionCell)
+                }
+                break
+            default:
+                break
+            }
+            
+            return cell
+        }
+    }
+    
+    // MARK: - Cell setup
+    
+    ///
+    func setupDesignCell(cell: DesignEntryTableViewCell) {
+        cell.layoutSubviews()
+        self.viewModel.color
+            .map { return UIColor(named: $0) }
+            .bind(to: cell.icon!.bnd_backgroundColor)
+        cell.nameField?.bnd_text
+            .map { $0 ?? "" }
+            .bind(to: self.viewModel.name)
+        cell.colorSelector!.setupViews(with: [.green, .yellow, .red])
+        cell.colorSelector!.signal.bind(to: self.viewModel.color)
+    }
+    
+    ///
+    func setupTypeCell(cell: TypeEntryTableViewCell) {
+        cell.layoutSubviews()
+        self.viewModel.type
+            .map { $0.toString() }
+            .bind(to: cell.button!.bnd_title)
+    }
+    
+    ///
+    func setupActionCell(cell: ActionEntryTableViewCell) {
+        cell.layoutSubviews()
+        cell.urlField?.bnd_text
+            .map { $0 ?? "" }
+            .bind(to: self.viewModel.url)
+        cell.checkbox?.isChecked.bind(to: self.viewModel.requiresAuthentication)
+        cell.userField?.bnd_text
+            .bind(to: self.viewModel.login)
+        cell.passwordField?.bnd_text
+            .bind(to: self.viewModel.password)
     }
     
     // MARK: - UITableView delegate
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200.0
+        return self.viewModel.contents[indexPath.row].height
     }
 
     /*
