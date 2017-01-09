@@ -14,6 +14,17 @@ enum EntryType: Int {
     case Custom = 0
     case SimpleHTTP = 1
     case Quido = 2
+    
+    func toString() -> String {
+        switch self {
+        case .Custom:
+            return NSLocalizedString("TYPE_CUSTOM", comment: "")
+        case .SimpleHTTP:
+            return NSLocalizedString("TYPE_SIMPLE_HTTP", comment: "")
+        case .Quido:
+            return NSLocalizedString("TYPE_QUIDO", comment: "")
+        }
+    }
 }
 
 ///
