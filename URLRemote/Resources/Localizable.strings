@@ -24,6 +24,9 @@
 
 "ENTRY_NAME" = "Entry name";
 "COLOR" = "Color";
+"TYPE_CUSTOM" = "Custom";
+"TYPE_SIMPLE_HTTP" = "Simple HTTP";
+"TYPE_QUIDO" = "Quido";
 "REQUIRES_AUTHORIZATION" = "Requires authorization";
 "USER" = "User";
 
