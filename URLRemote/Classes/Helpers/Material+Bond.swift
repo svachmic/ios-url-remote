@@ -22,3 +22,14 @@ extension RaisedButton {
         }
     }
 }
+
+///
+extension Toolbar {
+    
+    ///
+    var bndTitle: Bond<Toolbar, String> {
+        return Bond(target: self) { toolbar, title in
+            toolbar.title = title
+        }
+    }
+}
