@@ -12,7 +12,7 @@ import ReactiveKit
 
 ///
 class ColorSelectorView: UIView {
-    let colors = PublishSubject<ColorName, NoError>()
+    let signal = PublishSubject<ColorName, NoError>()
 
     ///
     required init?(coder aDecoder: NSCoder) {
@@ -35,7 +35,7 @@ class ColorSelectorView: UIView {
             button.backgroundColor = UIColor(named: colors[index])
             button.layer.cornerRadius = size / 2.0
             _ = button.bnd_tap.observeNext {
-                self.colors.next(colors[index])
+                self.signal.next(colors[index])
             }
             self.addSubview(button)
         }
