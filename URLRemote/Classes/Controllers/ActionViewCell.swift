@@ -33,6 +33,13 @@ class ActionViewCell: UICollectionViewCell {
         }
         button?.backgroundColor = color
         
+        if let imageName = entry.icon, let image = UIImage(named: imageName) {
+            button?.image = image.withRenderingMode(.alwaysTemplate)
+            button?.imageView?.tintColor = .white
+        }
+        
+        button?.pulseColor = .white
+        
         if let url = entry.url {
             _ = button?.bnd_tap.observe() { _ in self.bindSignal(url: url) }
         }

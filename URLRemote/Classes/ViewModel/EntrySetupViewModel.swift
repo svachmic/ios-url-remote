@@ -18,8 +18,8 @@ struct EntrySetupTableCell {
 ///
 class EntrySetupViewModel {
     var name = Observable<String>("")
-    var color = Observable<ColorName>(.green)
-    var icon = Observable<String>("")
+    var color = Observable<ColorName>(.yellow)
+    var icon = Observable<String>("plus")
     var url = Observable<String>("")
     var type = Observable<EntryType>(.SimpleHTTP)
     var requiresAuthentication = Observable<Bool>(false)
@@ -30,7 +30,7 @@ class EntrySetupViewModel {
     let contents = MutableObservableArray<EntrySetupTableCell>([
         EntrySetupTableCell(
             identifier: "designCell",
-            height: 116.0),
+            height: 133.0),
         EntrySetupTableCell(
             identifier: "typeCell",
             height: 68.0),
