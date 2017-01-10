@@ -42,6 +42,7 @@ class DesignEntryTableViewCell: UITableViewCell {
         let label = self.viewWithTag(3) as? UILabel
         label?.font = RobotoFont.bold(with: 12)
         label?.text = "\(NSLocalizedString("COLOR", comment: "")):"
+        label?.textColor = .gray
         
         self.selectionStyle = .none
     }

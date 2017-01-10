@@ -34,10 +34,12 @@ class ActionEntryTableViewCell: UITableViewCell {
         self.urlField?.detailColor = UIColor(named: .red)
         
         self.checkbox = container.viewWithTag(2) as? CheckboxButton
+        self.checkbox?.tintColor = .gray
         
         let checkboxLabel = container.viewWithTag(3) as? UILabel
         checkboxLabel?.text = NSLocalizedString("REQUIRES_AUTH", comment: "")
         checkboxLabel?.font = RobotoFont.bold(with: 13)
+        checkboxLabel?.textColor = .gray
         
         self.userField = container.viewWithTag(4) as? TextField
         self.userField?.placeholder = NSLocalizedString("USER", comment: "")
