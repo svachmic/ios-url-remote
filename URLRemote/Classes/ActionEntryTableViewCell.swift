@@ -36,7 +36,7 @@ class ActionEntryTableViewCell: UITableViewCell {
         self.checkbox = container.viewWithTag(2) as? CheckboxButton
         
         let checkboxLabel = container.viewWithTag(3) as? UILabel
-        checkboxLabel?.text = "REQUIRES_AUTHORIZATION"
+        checkboxLabel?.text = "REQUIRES_AUTH"
         checkboxLabel?.font = RobotoFont.bold(with: 13)
         
         self.userField = container.viewWithTag(4) as? TextField

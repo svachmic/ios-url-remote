@@ -27,7 +27,7 @@
 "TYPE_CUSTOM" = "Custom";
 "TYPE_SIMPLE_HTTP" = "Simple HTTP";
 "TYPE_QUIDO" = "Quido";
-"REQUIRES_AUTHORIZATION" = "Requires authorization";
+"REQUIRES_AUTH" = "Requires authentication";
 "USER" = "User";
 
 // Networking
