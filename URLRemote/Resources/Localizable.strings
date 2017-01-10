@@ -24,6 +24,7 @@
 
 "ENTRY_NAME" = "Entry name";
 "COLOR" = "Color";
+"CANCEL" = "Cancel";
 "TYPE_CUSTOM" = "Custom";
 "TYPE_SIMPLE_HTTP" = "Simple HTTP";
 "TYPE_QUIDO" = "Quido";
