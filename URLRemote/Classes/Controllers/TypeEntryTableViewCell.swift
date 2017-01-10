@@ -25,6 +25,7 @@ class TypeEntryTableViewCell: UITableViewCell {
         self.button?.titleColor = .black
         self.button?.titleLabel?.font = RobotoFont.bold(with: 13)
         self.button?.contentHorizontalAlignment = .left
+        self.button?.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10.0, bottom: 0, right: 0)
         
         self.selectionStyle = .none
     }
