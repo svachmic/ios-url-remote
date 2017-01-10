@@ -29,10 +29,14 @@ enum EntryType: Int {
 
 ///
 class Entry: Mappable {
+    var name: String?
     var color: ColorName?
     var icon: String?
     var url: String?
     var type: EntryType?
+    var requiresAuthentication = false
+    var user: String?
+    var password: String?
     
     init() {}
     
@@ -41,9 +45,13 @@ class Entry: Mappable {
     required init?(map: Map) {}
     
     func mapping(map: Map) {
+        name <- map["name"]
         color <- map["color"]
         icon <- map["icon"]
         url <- map["url"]
         type <- map["type"]
+        requiresAuthentication <- map["requiresAuthentication"]
+        user <- map["user"]
+        password <- map["password"]
     }
 }
