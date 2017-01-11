@@ -33,7 +33,7 @@ class EntrySetupViewController: UITableViewController {
     
     ///
     func setupBar() {
-        let cancel = FlatButton(title: "Cancel")
+        let cancel = FlatButton(title: NSLocalizedString("CANCEL", comment: ""))
         cancel.titleColor = .white
         cancel.pulseColor = .white
         cancel.titleLabel?.font = RobotoFont.bold(with: 15)
@@ -89,9 +89,27 @@ class EntrySetupViewController: UITableViewController {
     ///
     func setupDesignCell(cell: DesignEntryTableViewCell) {
         cell.layoutSubviews()
+        _ = cell.icon?.bnd_tap.observeNext {
+            let loginController = self.storyboard?.instantiateViewController(withIdentifier: "iconController")
+            let toolbarController = ToolbarController(rootViewController: loginController!)
+            toolbarController.statusBarStyle = .lightContent
+            toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
+            toolbarController.toolbar.backgroundColor = UIColor(named: .green)
+            self.toolbarController?.present(toolbarController, animated: true, completion: nil)
+        }
         self.viewModel.color
             .map { return UIColor(named: $0) }
             .bind(to: cell.icon!.bnd_backgroundColor)
+        
+        _ = self.viewModel.icon
+            .map { UIImage(named: $0) }
+            .observeNext {
+                if let image = $0 {
+                    cell.icon?.image = image.withRenderingMode(.alwaysTemplate)
+                    cell.icon?.imageView?.tintColor = .white
+                }
+        }
+        
         cell.nameField?.bnd_text
             .map { $0 ?? "" }
             .bind(to: self.viewModel.name)
@@ -125,14 +143,4 @@ class EntrySetupViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.viewModel.contents[indexPath.row].height
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
