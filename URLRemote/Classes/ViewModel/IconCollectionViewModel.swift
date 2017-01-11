@@ -13,7 +13,7 @@ import Bond
 class IconCollectionViewModel {
     ///
     let contents = MutableObservableArray<String>([
-        "lightbulb",
+        "lightbulb_on",
         "lock_on",
         "play"
         ])
