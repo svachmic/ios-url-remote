@@ -30,6 +30,11 @@
 "TYPE_QUIDO" = "Quido";
 "REQUIRES_AUTH" = "Requires authentication";
 "USER" = "User";
+"SELECT_ICON" = "Select an icon";
+"GENERAL" = "GENERAL";
+"PLAYER" = "PLAYER";
+"ARROWS" = "ARROWS";
+"LIGHTS" = "LIGHTS";
 
 // Networking
 
