@@ -90,8 +90,9 @@ class EntrySetupViewController: UITableViewController {
     func setupDesignCell(cell: DesignEntryTableViewCell) {
         cell.layoutSubviews()
         _ = cell.icon?.bnd_tap.observeNext {
-            let loginController = self.storyboard?.instantiateViewController(withIdentifier: "iconController")
-            let toolbarController = ToolbarController(rootViewController: loginController!)
+            let iconController = self.storyboard?.instantiateViewController(withIdentifier: "iconController") as! IconCollectionViewController
+            iconController.iconColor = UIColor(named: self.viewModel.color.value)
+            let toolbarController = ToolbarController(rootViewController: iconController)
             toolbarController.statusBarStyle = .lightContent
             toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
             toolbarController.toolbar.backgroundColor = UIColor(named: .green)
