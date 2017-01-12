@@ -10,21 +10,35 @@ import UIKit
 import Material
 import Bond
 
-private let reuseIdentifier = "Cell"
-
+///
 class IconCollectionViewController: UICollectionViewController {
+    private let reuseIdentifier = "iconCell"
+    private let headerReuseIdentifier = "iconHeaderCell"
+    
+    let viewModel = IconCollectionViewModel()
+    var iconColor: UIColor?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+        self.collectionView?.backgroundColor = UIColor(named: .gray)
         self.setupBar()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        let viewFrame = self.view.frame
+        
+        if let collectionFrame = self.collectionView?.frame, viewFrame.height < collectionFrame.height {
+            self.collectionView?.frame = CGRect(
+                x: collectionFrame.origin.x,
+                y: collectionFrame.origin.y,
+                width: collectionFrame.width,
+                height: viewFrame.height)
+        }
     }
 
     // MARK: - Setup
@@ -48,57 +62,70 @@ class IconCollectionViewController: UICollectionViewController {
         self.toolbarController?.toolbar.rightViews = [done]
         
         self.toolbarController?.toolbar.titleLabel.textColor = .white
-        self.toolbarController?.toolbar.title = "Select an icon"
+        self.toolbarController?.toolbar.title = NSLocalizedString("SELECT_ICON", comment: "")
     }
-
+    
     // MARK: UICollectionViewDataSource
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 0
+        return self.viewModel.contents.sections.count
     }
-
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return self.viewModel.contents[section].items.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: reuseIdentifier,
+            for: indexPath) as! IconCollectionViewCell
+        cell.backgroundColor = iconColor
+        cell.layer.cornerRadius = cell.frame.width / 2.0
+        
+        let imageView = cell.viewWithTag(1) as? UIImageView
+        let imageName = self.viewModel.contents[indexPath.section].items[indexPath.row]
+        imageView?.image = UIImage(named: imageName)!.withRenderingMode(.alwaysTemplate)
+        imageView?.tintColor = .white
+        
+        if self.viewModel.userSelection.value == indexPath {
+            cell.highlight()
+        } else {
+            cell.unhighlight()
+        }
+        
+        return cell
+    }
     
-        // Configure the cell
-    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let cell = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionElementKindSectionHeader,
+            withReuseIdentifier:headerReuseIdentifier,
+            for: indexPath)
+        
+        let label = cell.viewWithTag(1) as? UILabel
+        label?.font = RobotoFont.bold(with: 14)
+        label?.textColor = .gray
+        label?.text = NSLocalizedString(self.viewModel.contents[indexPath.section].metadata, comment: "")
+        
         return cell
     }
 
     // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 90, height: 90)
     }
-    */
-
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(10, 10, 10, 10)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: self.view.frame.size.width, height: 30)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.viewModel.userSelection.value = indexPath
+        self.collectionView?.reloadData()
+    }
 }
