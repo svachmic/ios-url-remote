@@ -22,26 +22,55 @@
         <scene sceneID="5GI-Dz-51I">
             <objects>
                 <collectionViewController storyboardIdentifier="iconController" id="Opx-eF-RHe" customClass="IconCollectionViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="zcT-x0-bl7">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="zcT-x0-bl7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="X1l-gy-Pmb">
-                            <size key="itemSize" width="50" height="50"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="itemSize" width="90" height="90"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="GIi-s4-4XO">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="iconCell" id="GIi-s4-4XO" customClass="IconCollectionViewCell" customModule="URLRemote" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="90" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DKW-Qg-Sfe">
+                                            <rect key="frame" x="8" y="8" width="74" height="74"/>
+                                        </imageView>
+                                    </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="topMargin" secondItem="DKW-Qg-Sfe" secondAttribute="top" id="7Ce-tE-Dxr"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="DKW-Qg-Sfe" secondAttribute="trailing" id="JnC-FK-x8i"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="DKW-Qg-Sfe" secondAttribute="bottom" id="NJX-Ok-Phu"/>
+                                    <constraint firstAttribute="leadingMargin" secondItem="DKW-Qg-Sfe" secondAttribute="leading" id="vg3-ka-Ca7"/>
+                                </constraints>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="iconHeaderCell" id="3AX-9d-zHX">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcK-xE-bcQ">
+                                    <rect key="frame" x="8" y="8" width="359" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottomMargin" secondItem="VcK-xE-bcQ" secondAttribute="bottom" id="0xn-tD-dnK"/>
+                                <constraint firstAttribute="leadingMargin" secondItem="VcK-xE-bcQ" secondAttribute="leading" id="970-FK-ctc"/>
+                                <constraint firstAttribute="topMargin" secondItem="VcK-xE-bcQ" secondAttribute="top" id="Z0S-Ey-3UM"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="VcK-xE-bcQ" secondAttribute="trailing" id="vDD-J5-nxE"/>
+                            </constraints>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="Opx-eF-RHe" id="YRp-Em-21U"/>
                             <outlet property="delegate" destination="Opx-eF-RHe" id="02h-qr-jhw"/>
@@ -50,13 +79,13 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eeS-eZ-XhF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4114" y="429"/>
+            <point key="canvasLocation" x="4112.8000000000002" y="428.63568215892059"/>
         </scene>
         <!--Actions Collection View Controller-->
         <scene sceneID="T3J-Lz-dgV">
             <objects>
                 <collectionViewController id="VGH-zW-REb" customClass="ActionsCollectionViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="i1A-XI-pmO">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="i1A-XI-pmO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MuY-kB-QMo">
@@ -103,16 +132,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DrU-P3-wpm" customClass="ShadedView" customModule="URLRemote" customModuleProvider="target">
-                                            <rect key="frame" x="8" y="8" width="359" height="116.5"/>
+                                            <rect key="frame" x="8" y="8" width="359" height="116"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="46X-wj-U8i" customClass="TextField" customModule="Material">
-                                                    <rect key="frame" x="104" y="25" width="237" height="30"/>
+                                                    <rect key="frame" x="103" y="25" width="238" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mC3-NV-z8S">
-                                                    <rect key="frame" x="104" y="70" width="71" height="22"/>
+                                                    <rect key="frame" x="103" y="69" width="71" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="mC3-NV-z8S" secondAttribute="height" multiplier="71:22" id="fhE-rV-AaB"/>
                                                         <constraint firstAttribute="width" constant="71" id="jbt-GE-fsa"/>
@@ -122,14 +151,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UhW-ZA-JWw" customClass="ColorSelectorView" customModule="URLRemote" customModuleProvider="target">
-                                                    <rect key="frame" x="183" y="70" width="158" height="22"/>
+                                                    <rect key="frame" x="182" y="69" width="159" height="22"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="UhW-ZA-JWw" secondAttribute="height" multiplier="79:11" id="YZt-xl-6IE"/>
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRf-HL-c81" customClass="FlatButton" customModule="Material">
-                                                    <rect key="frame" x="8" y="14" width="88" height="88"/>
+                                                    <rect key="frame" x="8" y="14" width="87" height="87"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="YRf-HL-c81" secondAttribute="height" multiplier="1:1" id="VtD-ok-Lv1"/>
                                                     </constraints>
@@ -462,7 +491,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CZ7-Za-4LE" customClass="ApplicationNavigationController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9tY-FJ-mJ1" customClass="NavigationBar" customModule="Material">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9tY-FJ-mJ1" customClass="NavigationBar" customModule="Material">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
