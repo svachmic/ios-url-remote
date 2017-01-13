@@ -23,6 +23,11 @@ class EntrySetupViewController: UITableViewController {
         
         self.setupBar()
         self.setupTableView()
+        
+        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "SELECTED_ICON"))
+            .map { return $0.object as! String }
+            .bind(to: self.viewModel.icon)
+            .disposeIn(self.bnd_bag)
     }
 
     override func didReceiveMemoryWarning() {

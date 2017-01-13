@@ -61,19 +61,21 @@ class IconCollectionViewController: UICollectionViewController {
         
         let done = IconButton(image: Icon.cm.check, tintColor: .white)
         done.pulseColor = .white
+        _ = combineLatest(
+            self.viewModel.initialSelection,
+            self.viewModel.userSelection)
+            .map { return $0 != $1 }
+            .bind(to: done.bnd_isEnabled)
         _ = done.bnd_tap.observeNext {
-            self.parent?.dismiss(animated: true, completion: nil)
-        }
-        
-        _ = combineLatest(self.viewModel.initialSelection, self.viewModel.userSelection)
-            .map { initial, user in
-            guard let initial = initial, let user = user else {
-                return false
+            if let indexPath = self.viewModel.userSelection.value {
+                let icon = self.viewModel.contents[indexPath.section].items[indexPath.row]
+                NotificationCenter.default.post(
+                    name: NSNotification.Name(rawValue: "SELECTED_ICON"),
+                    object: icon)
             }
             
-            return initial != user
-            }.bind(to: done.bnd_isEnabled)
-        
+            self.parent?.dismiss(animated: true, completion: nil)
+        }
         self.toolbarController?.toolbar.rightViews = [done]
         
         self.toolbarController?.toolbar.titleLabel.textColor = .white
@@ -132,7 +134,7 @@ class IconCollectionViewController: UICollectionViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(10, 10, 10, 10)
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
