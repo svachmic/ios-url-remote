@@ -128,7 +128,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="133"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Rs-d8-7yd" id="rTg-Tc-VzG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="132.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DrU-P3-wpm" customClass="ShadedView" customModule="URLRemote" customModuleProvider="target">
@@ -192,7 +192,7 @@
                                 <rect key="frame" x="0.0" y="161" width="375" height="68"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="30S-aI-4zS" id="wuc-K1-gYv">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vSl-lX-zGq" customClass="ShadedView" customModule="URLRemote" customModuleProvider="target">
@@ -234,14 +234,14 @@
                                 <rect key="frame" x="0.0" y="229" width="375" height="228"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hgd-Qo-47b" id="Wla-HP-zGa">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="227.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rDc-5h-qiB" customClass="ShadedView" customModule="URLRemote" customModuleProvider="target">
                                             <rect key="frame" x="8" y="8" width="359" height="211"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X7v-aZ-x6c" customClass="TextField" customModule="Material">
-                                                    <rect key="frame" x="18" y="20" width="323" height="30"/>
+                                                    <rect key="frame" x="18" y="25" width="323" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -285,13 +285,13 @@
                                                 <constraint firstItem="802-6B-STV" firstAttribute="leading" secondItem="q4W-us-DIr" secondAttribute="trailing" constant="8" id="BKV-Xn-gI9"/>
                                                 <constraint firstItem="RN0-aE-e8h" firstAttribute="leading" secondItem="rDc-5h-qiB" secondAttribute="leading" constant="18" id="HiH-nJ-DFM"/>
                                                 <constraint firstItem="q4W-us-DIr" firstAttribute="leading" secondItem="rDc-5h-qiB" secondAttribute="leading" constant="18" id="LtB-XI-nGc"/>
-                                                <constraint firstItem="X7v-aZ-x6c" firstAttribute="top" secondItem="rDc-5h-qiB" secondAttribute="top" constant="20" id="bcn-Xo-Mc5"/>
-                                                <constraint firstItem="q4W-us-DIr" firstAttribute="top" secondItem="X7v-aZ-x6c" secondAttribute="bottom" constant="16" id="fok-Wn-EyY"/>
+                                                <constraint firstItem="X7v-aZ-x6c" firstAttribute="top" secondItem="rDc-5h-qiB" secondAttribute="top" constant="25" id="bcn-Xo-Mc5"/>
+                                                <constraint firstItem="q4W-us-DIr" firstAttribute="top" secondItem="X7v-aZ-x6c" secondAttribute="bottom" constant="11" id="fok-Wn-EyY"/>
                                                 <constraint firstAttribute="trailing" secondItem="RN0-aE-e8h" secondAttribute="trailing" constant="18" id="jC0-rP-dOc"/>
                                                 <constraint firstItem="X7v-aZ-x6c" firstAttribute="leading" secondItem="rDc-5h-qiB" secondAttribute="leading" constant="18" id="lLN-Y5-sGz"/>
                                                 <constraint firstAttribute="trailing" secondItem="X7v-aZ-x6c" secondAttribute="trailing" constant="18" id="ngw-8u-I8g"/>
                                                 <constraint firstItem="Xer-dw-yiE" firstAttribute="leading" secondItem="rDc-5h-qiB" secondAttribute="leading" constant="18" id="sbw-dX-5id"/>
-                                                <constraint firstItem="802-6B-STV" firstAttribute="top" secondItem="X7v-aZ-x6c" secondAttribute="bottom" constant="16" id="ybW-Ot-dnh"/>
+                                                <constraint firstItem="802-6B-STV" firstAttribute="top" secondItem="X7v-aZ-x6c" secondAttribute="bottom" constant="11" id="ybW-Ot-dnh"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -307,7 +307,7 @@
                                 <rect key="frame" x="0.0" y="457" width="375" height="74"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2QK-so-pB6" id="rRg-fe-bE9">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="73.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwD-6e-KZS" customClass="ShadedView" customModule="URLRemote" customModuleProvider="target">
@@ -347,7 +347,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="20"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w8w-RA-Thl" id="kK0-Lc-WkK">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="19"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="19.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -355,7 +355,7 @@
                                 <rect key="frame" x="0.0" y="48" width="375" height="78"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uG4-b7-wAV" id="Y2G-7L-acf">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="77.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ptL-XL-nEI" customClass="TextField" customModule="Material">
@@ -372,7 +372,7 @@
                                 <rect key="frame" x="0.0" y="126" width="375" height="72"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uTa-dS-qGU" id="XpB-QQ-RFc">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="71.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rYK-B5-wqS" customClass="TextField" customModule="Material">
@@ -389,7 +389,7 @@
                                 <rect key="frame" x="0.0" y="198" width="375" height="78"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nWw-3G-w33" id="kaB-iX-Dpq">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="77.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BWk-uB-8jo" customClass="TextField" customModule="Material">
@@ -406,7 +406,7 @@
                                 <rect key="frame" x="0.0" y="276" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kRj-p1-0qk" id="STH-9d-pqQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2o-Eh-TJQ" customClass="RaisedButton" customModule="Material">
@@ -427,7 +427,7 @@
                                 <rect key="frame" x="0.0" y="342" width="375" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gsw-27-svh" id="JVp-lF-xp6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="45.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PLACEHOLDER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5V-ss-anR">
@@ -444,7 +444,7 @@
                                 <rect key="frame" x="0.0" y="388" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sDI-KK-Pxp" id="ecF-yw-2Nd">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfH-Ji-f4I" customClass="RaisedButton" customModule="Material">
@@ -465,7 +465,7 @@
                                 <rect key="frame" x="0.0" y="454" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hss-bc-EWC" id="rgn-iR-jk2">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2gV-2L-vI5" customClass="GIDSignInButton">
