@@ -92,6 +92,7 @@ class EntrySetupViewController: UITableViewController {
         _ = cell.icon?.bnd_tap.observeNext {
             let iconController = self.storyboard?.instantiateViewController(withIdentifier: "iconController") as! IconCollectionViewController
             iconController.iconColor = UIColor(named: self.viewModel.color.value)
+            iconController.viewModel.setInitial(value: self.viewModel.icon.value)
             let toolbarController = ToolbarController(rootViewController: iconController)
             toolbarController.statusBarStyle = .lightContent
             toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
