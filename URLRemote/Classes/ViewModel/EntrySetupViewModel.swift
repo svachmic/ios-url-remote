@@ -8,6 +8,7 @@
 
 import Foundation
 import Bond
+import ReactiveKit
 
 ///
 struct EntrySetupTableCell {
@@ -17,14 +18,17 @@ struct EntrySetupTableCell {
 
 ///
 class EntrySetupViewModel {
-    var name = Observable<String>("")
-    var color = Observable<ColorName>(.yellow)
-    var icon = Observable<String>("plus")
-    var url = Observable<String>("")
-    var type = Observable<EntryType>(.SimpleHTTP)
-    var requiresAuthentication = Observable<Bool>(false)
-    var login = Observable<String?>(nil)
-    var password = Observable<String?>(nil)
+    let name = Observable<String>("")
+    let color = Observable<ColorName>(.yellow)
+    let icon = Observable<String>("plus")
+    let url = Observable<String>("")
+    let type = Observable<EntryType>(.SimpleHTTP)
+    let requiresAuthentication = Observable<Bool>(false)
+    let login = Observable<String?>(nil)
+    let password = Observable<String?>(nil)
+    
+    ///
+    let isFormComplete = Observable<Bool>(false)
     
     // Table
     let contents = MutableObservableArray<EntrySetupTableCell>([
@@ -39,6 +43,31 @@ class EntrySetupViewModel {
             height: 228.0)
         ])
     
+    ///
+    init() {
+        self.bindValidation()
+    }
+    
+    ///
+    func bindValidation() {
+        combineLatest(
+            self.name,
+            self.url,
+            self.requiresAuthentication)
+            .map { name, url, auth in
+                if name == "" || url == "" {
+                    return false
+                }
+                
+                if auth && (self.login.value == nil || self.password.value == nil) {
+                    return false
+                }
+                
+                return true
+            }.bind(to: self.isFormComplete)
+    }
+    
+    ///
     func toEntry() -> Entry {
         let entry = Entry()
         //entry.name = self.name.value
