@@ -18,6 +18,8 @@ struct EntrySetupTableCell {
 
 ///
 class EntrySetupViewModel {
+    let bnd_bag = DisposeBag()
+    
     let name = Observable<String>("")
     let color = Observable<ColorName>(.yellow)
     let icon = Observable<String>("plus")
@@ -46,6 +48,11 @@ class EntrySetupViewModel {
     ///
     init() {
         self.bindValidation()
+        
+        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "SELECTED_ICON"))
+            .map { return $0.object as! String }
+            .bind(to: self.icon)
+            .disposeIn(self.bnd_bag)
     }
     
     ///
@@ -70,11 +77,17 @@ class EntrySetupViewModel {
     ///
     func toEntry() -> Entry {
         let entry = Entry()
-        //entry.name = self.name.value
+        entry.name = self.name.value
         entry.color = self.color.value
         entry.icon = self.icon.value
         entry.url = self.url.value
         entry.type = self.type.value
+        if let l = self.login.value, let p = self.password.value, self.requiresAuthentication.value {
+            entry.requiresAuthentication = true
+            entry.user = l
+            entry.password = p
+        }
+        
         return entry
     }
 }
