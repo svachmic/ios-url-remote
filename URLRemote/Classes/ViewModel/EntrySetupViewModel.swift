@@ -19,7 +19,7 @@ struct EntrySetupTableCell {
 class EntrySetupViewModel {
     var name = Observable<String>("")
     var color = Observable<ColorName>(.yellow)
-    var icon = Observable<String>("lightbulb_on")
+    var icon = Observable<String>("plus")
     var url = Observable<String>("")
     var type = Observable<EntryType>(.SimpleHTTP)
     var requiresAuthentication = Observable<Bool>(false)
