@@ -18,7 +18,7 @@ struct EntrySetupTableCell {
 
 ///
 class EntrySetupViewModel {
-    let bnd_bag = DisposeBag()
+    let bndBag = DisposeBag()
     
     let name = Observable<String>("")
     let color = Observable<ColorName>(.yellow)
@@ -52,7 +52,7 @@ class EntrySetupViewModel {
         NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "SELECTED_ICON"))
             .map { return $0.object as! String }
             .bind(to: self.icon)
-            .disposeIn(self.bnd_bag)
+            .disposeIn(self.bndBag)
     }
     
     ///
