@@ -99,7 +99,7 @@ class LoginViewModel {
             return
         }
         
-        auth.createUser(withEmail: email, password: password) { user, error in
+        auth.createUser(withEmail: email, password: password) { _, error in
             if error == nil {
                 self.signIn()
             } else {
@@ -116,7 +116,7 @@ class LoginViewModel {
             return
         }
         
-        auth.signIn(withEmail: email, password: password) { user, error in
+        auth.signIn(withEmail: email, password: password) { _, error in
             if error == nil {
                 // success
                 NotificationCenter.default.post(
