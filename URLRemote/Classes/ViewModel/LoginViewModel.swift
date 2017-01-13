@@ -52,7 +52,7 @@ class LoginViewModel {
         LoginTableCell(
             identifier: "googleCell",
             text: "",
-            height: 80.0),
+            height: 5.0),
         LoginTableCell(
             identifier: "textCell",
             text: NSLocalizedString("NO_ACCOUNT", comment: ""),
