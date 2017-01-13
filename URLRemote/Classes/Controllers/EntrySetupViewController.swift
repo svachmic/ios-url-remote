@@ -23,11 +23,6 @@ class EntrySetupViewController: UITableViewController {
         
         self.setupBar()
         self.setupTableView()
-        
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "SELECTED_ICON"))
-            .map { return $0.object as! String }
-            .bind(to: self.viewModel.icon)
-            .disposeIn(self.bnd_bag)
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +46,11 @@ class EntrySetupViewController: UITableViewController {
         done.pulseColor = .white
         self.viewModel.isFormComplete.bind(to: done.bnd_isEnabled)
         _ = done.bnd_tap.observeNext {
+            let entry = self.viewModel.toEntry()
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: "CREATED_ENTRY"),
+                object: entry)
+            
             self.parent?.dismiss(animated: true, completion: nil)
         }
         self.toolbarController?.toolbar.rightViews = [done]
@@ -61,8 +61,7 @@ class EntrySetupViewController: UITableViewController {
     
     ///
     func setupTableView() {
-        self.viewModel.contents.bind(to: tableView) {
-            contents, indexPath, tableView in
+        self.viewModel.contents.bind(to: tableView) { contents, indexPath, tableView in
             let content = contents[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: content.identifier, for: indexPath)
             
