@@ -22,7 +22,7 @@
         <scene sceneID="5GI-Dz-51I">
             <objects>
                 <collectionViewController storyboardIdentifier="iconController" id="Opx-eF-RHe" customClass="IconCollectionViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="zcT-x0-bl7">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="zcT-x0-bl7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,11 +81,61 @@
             </objects>
             <point key="canvasLocation" x="4112.8000000000002" y="428.63568215892059"/>
         </scene>
+        <!--Type Table View Controller-->
+        <scene sceneID="dNQ-w4-Xw1">
+            <objects>
+                <tableViewController storyboardIdentifier="typeController" id="v6Q-DS-w5t" customClass="TypeTableViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" id="orv-9K-n7B">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="typeCell" rowHeight="58" id="6xg-9u-nW2" customClass="TypeSelectionTableViewCell" customModule="URLRemote" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="58"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6xg-9u-nW2" id="TyR-Ib-8E0">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEZ-NX-uBG">
+                                            <rect key="frame" x="334" y="17" width="22" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="22" id="yWv-j3-swa"/>
+                                            </constraints>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEk-lj-3nX">
+                                            <rect key="frame" x="20" y="8" width="306" height="41"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="MEk-lj-3nX" secondAttribute="bottom" id="32A-fB-0ef"/>
+                                        <constraint firstItem="cEZ-NX-uBG" firstAttribute="centerY" secondItem="TyR-Ib-8E0" secondAttribute="centerY" id="7bE-ds-Ql1"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="cEZ-NX-uBG" secondAttribute="trailing" constant="11" id="PUl-Go-P0x"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="MEk-lj-3nX" secondAttribute="leading" constant="-12" id="QgK-mn-PGM"/>
+                                        <constraint firstItem="cEZ-NX-uBG" firstAttribute="leading" secondItem="MEk-lj-3nX" secondAttribute="trailing" constant="8" id="jz6-PS-jRZ"/>
+                                        <constraint firstAttribute="topMargin" secondItem="MEk-lj-3nX" secondAttribute="top" id="veM-FQ-X8Z"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="v6Q-DS-w5t" id="Hg7-ii-ryc"/>
+                            <outlet property="delegate" destination="v6Q-DS-w5t" id="9vM-lu-dVK"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mzF-ap-c8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4112.8000000000002" y="1193.2533733133434"/>
+        </scene>
         <!--Actions Collection View Controller-->
         <scene sceneID="T3J-Lz-dgV">
             <objects>
                 <collectionViewController id="VGH-zW-REb" customClass="ActionsCollectionViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="i1A-XI-pmO">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="i1A-XI-pmO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MuY-kB-QMo">
@@ -515,7 +565,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CZ7-Za-4LE" customClass="ApplicationNavigationController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9tY-FJ-mJ1" customClass="NavigationBar" customModule="Material">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9tY-FJ-mJ1" customClass="NavigationBar" customModule="Material">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
