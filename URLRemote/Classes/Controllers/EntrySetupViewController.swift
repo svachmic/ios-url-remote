@@ -20,6 +20,7 @@ class EntrySetupViewController: UITableViewController {
         
         self.tableView.tableFooterView = UIView(frame: .zero)
         self.tableView.separatorStyle = .none
+        self.tableView.backgroundColor = UIColor(named: .gray)
         
         self.setupBar()
         self.setupTableView()
@@ -64,6 +65,7 @@ class EntrySetupViewController: UITableViewController {
         self.viewModel.contents.bind(to: tableView) { contents, indexPath, tableView in
             let content = contents[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: content.identifier, for: indexPath)
+            cell.backgroundColor = .clear
             
             switch content.identifier {
             case "designCell":
@@ -123,6 +125,9 @@ class EntrySetupViewController: UITableViewController {
         self.viewModel.type
             .map { $0.toString() }
             .bind(to: cell.button!.bnd_title)
+        _ = cell.button?.bnd_tap.observeNext {
+            self.presentTypeController()
+        }
     }
     
     ///
@@ -143,6 +148,16 @@ class EntrySetupViewController: UITableViewController {
         iconController.iconColor = UIColor(named: self.viewModel.color.value)
         iconController.viewModel.setInitial(value: self.viewModel.icon.value)
         let toolbarController = ToolbarController(rootViewController: iconController)
+        toolbarController.statusBarStyle = .lightContent
+        toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
+        toolbarController.toolbar.backgroundColor = UIColor(named: .green)
+        self.toolbarController?.present(toolbarController, animated: true, completion: nil)
+    }
+    
+    func presentTypeController() {
+        let typeController = self.storyboard?.instantiateViewController(withIdentifier: "typeController") as! TypeTableViewController
+        typeController.viewModel.signal.bind(to: self.viewModel.type)
+        let toolbarController = ToolbarController(rootViewController: typeController)
         toolbarController.statusBarStyle = .lightContent
         toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
         toolbarController.toolbar.backgroundColor = UIColor(named: .green)
