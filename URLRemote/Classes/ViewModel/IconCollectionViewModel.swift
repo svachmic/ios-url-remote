@@ -9,7 +9,6 @@
 import Foundation
 import Bond
 
-
 ///
 class IconCollectionViewModel {
     ///
