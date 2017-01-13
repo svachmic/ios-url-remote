@@ -9,6 +9,7 @@
 import UIKit
 import Material
 import Bond
+import ReactiveKit
 
 ///
 class IconCollectionViewController: UICollectionViewController {
@@ -23,6 +24,10 @@ class IconCollectionViewController: UICollectionViewController {
 
         self.collectionView?.backgroundColor = UIColor(named: .gray)
         self.setupBar()
+        
+        if let initial = self.viewModel.initialSelection.value {
+            self.viewModel.userSelection.value = initial
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,6 +64,16 @@ class IconCollectionViewController: UICollectionViewController {
         _ = done.bnd_tap.observeNext {
             self.parent?.dismiss(animated: true, completion: nil)
         }
+        
+        _ = combineLatest(self.viewModel.initialSelection, self.viewModel.userSelection)
+            .map { initial, user in
+            guard let initial = initial, let user = user else {
+                return false
+            }
+            
+            return initial != user
+            }.bind(to: done.bnd_isEnabled)
+        
         self.toolbarController?.toolbar.rightViews = [done]
         
         self.toolbarController?.toolbar.titleLabel.textColor = .white
