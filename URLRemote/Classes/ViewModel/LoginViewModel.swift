@@ -52,7 +52,7 @@ class LoginViewModel {
         LoginTableCell(
             identifier: "googleCell",
             text: "",
-            height: 80.0),
+            height: 5.0),
         LoginTableCell(
             identifier: "textCell",
             text: NSLocalizedString("NO_ACCOUNT", comment: ""),
@@ -99,7 +99,7 @@ class LoginViewModel {
             return
         }
         
-        auth.createUser(withEmail: email, password: password) { user, error in
+        auth.createUser(withEmail: email, password: password) { _, error in
             if error == nil {
                 self.signIn()
             } else {
@@ -116,7 +116,7 @@ class LoginViewModel {
             return
         }
         
-        auth.signIn(withEmail: email, password: password) { user, error in
+        auth.signIn(withEmail: email, password: password) { _, error in
             if error == nil {
                 // success
                 NotificationCenter.default.post(

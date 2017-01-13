@@ -23,11 +23,6 @@ class EntrySetupViewController: UITableViewController {
         
         self.setupBar()
         self.setupTableView()
-        
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "SELECTED_ICON"))
-            .map { return $0.object as! String }
-            .bind(to: self.viewModel.icon)
-            .disposeIn(self.bnd_bag)
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,7 +44,13 @@ class EntrySetupViewController: UITableViewController {
         
         let done = IconButton(image: Icon.cm.check, tintColor: .white)
         done.pulseColor = .white
+        self.viewModel.isFormComplete.bind(to: done.bnd_isEnabled)
         _ = done.bnd_tap.observeNext {
+            let entry = self.viewModel.toEntry()
+            NotificationCenter.default.post(
+                name: NSNotification.Name(rawValue: "CREATED_ENTRY"),
+                object: entry)
+            
             self.parent?.dismiss(animated: true, completion: nil)
         }
         self.toolbarController?.toolbar.rightViews = [done]
@@ -60,8 +61,7 @@ class EntrySetupViewController: UITableViewController {
     
     ///
     func setupTableView() {
-        self.viewModel.contents.bind(to: tableView) {
-            contents, indexPath, tableView in
+        self.viewModel.contents.bind(to: tableView) { contents, indexPath, tableView in
             let content = contents[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: content.identifier, for: indexPath)
             
@@ -95,14 +95,7 @@ class EntrySetupViewController: UITableViewController {
     func setupDesignCell(cell: DesignEntryTableViewCell) {
         cell.layoutSubviews()
         _ = cell.icon?.bnd_tap.observeNext {
-            let iconController = self.storyboard?.instantiateViewController(withIdentifier: "iconController") as! IconCollectionViewController
-            iconController.iconColor = UIColor(named: self.viewModel.color.value)
-            iconController.viewModel.setInitial(value: self.viewModel.icon.value)
-            let toolbarController = ToolbarController(rootViewController: iconController)
-            toolbarController.statusBarStyle = .lightContent
-            toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
-            toolbarController.toolbar.backgroundColor = UIColor(named: .green)
-            self.toolbarController?.present(toolbarController, animated: true, completion: nil)
+            self.presentIconController()
         }
         self.viewModel.color
             .map { return UIColor(named: $0) }
@@ -143,6 +136,17 @@ class EntrySetupViewController: UITableViewController {
             .bind(to: self.viewModel.login)
         cell.passwordField?.bnd_text
             .bind(to: self.viewModel.password)
+    }
+    
+    func presentIconController() {
+        let iconController = self.storyboard?.instantiateViewController(withIdentifier: "iconController") as! IconCollectionViewController
+        iconController.iconColor = UIColor(named: self.viewModel.color.value)
+        iconController.viewModel.setInitial(value: self.viewModel.icon.value)
+        let toolbarController = ToolbarController(rootViewController: iconController)
+        toolbarController.statusBarStyle = .lightContent
+        toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
+        toolbarController.toolbar.backgroundColor = UIColor(named: .green)
+        self.toolbarController?.present(toolbarController, animated: true, completion: nil)
     }
     
     // MARK: - UITableView delegate

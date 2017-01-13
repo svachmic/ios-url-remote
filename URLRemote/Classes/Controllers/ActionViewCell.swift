@@ -41,7 +41,7 @@ class ActionViewCell: UICollectionViewCell {
         button?.pulseColor = .white
         
         if let url = entry.url {
-            _ = button?.bnd_tap.observe() { _ in self.bindSignal(url: url) }
+            _ = button?.bnd_tap.observe { _ in self.bindSignal(url: url) }
         }
     }
     
