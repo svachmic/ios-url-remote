@@ -16,7 +16,7 @@ class IconCollectionViewModel {
     
     let general = Observable2DArraySection<String, String>(
         metadata: NSLocalizedString("GENERAL", comment: ""),
-        items: ["house_1", "house_2", "lock_on", "lock_off", "plus", "minus", "on", "off"]
+        items: ["plus", "minus", "on", "off", "house_1", "house_2", "lock_on", "lock_off"]
     )
     
     let player = Observable2DArraySection<String, String>(
@@ -44,5 +44,22 @@ class IconCollectionViewModel {
         self.contents.appendSection(player)
         self.contents.appendSection(lights)
         self.contents.appendSection(arrows)
+    }
+    
+    func setInitial(value: String) {
+        self.initialSelection.value = self.find(value)
+    }
+    
+    private func find(_ value: String) -> IndexPath {
+        for i in 0..<self.contents.sections.count {
+            for j in 0..<self.contents[i].items.count {
+                let item = self.contents[i].items[j]
+                if value == item {
+                    return IndexPath(row: j, section: i)
+                }
+            }
+        }
+        
+        return IndexPath(row: 0, section: 0)
     }
 }
