@@ -20,14 +20,20 @@
 "CLOSE" = "Close";
 "INVALID_PASSWORD_LENGTH" = "Password must have at least 6 characters.";
 
+/// Entry
+
+"TYPE_CUSTOM" = "Custom";
+"TYPE_CUSTOM_DESC" = "Custom";
+"TYPE_SIMPLE_HTTP" = "Simple HTTP";
+"TYPE_SIMPLE_HTTP_DESC" = "Simple HTTP";
+"TYPE_QUIDO" = "Quido";
+"TYPE_QUIDO_DESC" = "Quido";
+
 /// Entry Setup View Controller
 
 "ENTRY_NAME" = "Entry name";
 "COLOR" = "Color";
 "CANCEL" = "Cancel";
-"TYPE_CUSTOM" = "Custom";
-"TYPE_SIMPLE_HTTP" = "Simple HTTP";
-"TYPE_QUIDO" = "Quido";
 "REQUIRES_AUTH" = "Requires authentication";
 "USER" = "User";
 "SELECT_ICON" = "Select an icon";
@@ -35,6 +41,7 @@
 "PLAYER" = "PLAYER";
 "ARROWS" = "ARROWS";
 "LIGHTS" = "LIGHTS";
+"SELECT_TYPE" = "Select a type";
 
 // Networking
 
