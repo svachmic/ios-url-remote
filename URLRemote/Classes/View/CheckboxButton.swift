@@ -9,12 +9,14 @@
 import UIKit
 import Bond
 
-///
+/// UIButton subclass with two states (checked/unchecked).
 class CheckboxButton: UIButton {
-    ///
+    /// Observable property indicating the state of the button.
     let isChecked = Observable<Bool>(false)
 
+    /// Required initializer for the storyboard
     ///
+    /// Sets up the checkbox functionality via bindings.
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         

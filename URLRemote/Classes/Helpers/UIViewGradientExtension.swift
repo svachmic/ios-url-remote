@@ -7,10 +7,16 @@
 //
 
 import UIKit
-import Foundation
 
-/// Adds gradient as background wherever it gets called.
+/// UIView extension with utilities used throughout the application.
 extension UIView {
+    
+    /// Adds gradient as background wherever it gets called.
+    ///
+    /// - Parameter starPoint: Starting point of the grandient.
+    /// - Parameter endPoint: Ending point of the gradient.
+    /// - Parameter bounds: Bounds for the frame of the view.
+    /// - Parameter colors: Colors to make the gradient from.
     func setCustomGradient(startPoint: CGPoint, endPoint: CGPoint, bounds: CGRect, colors: [CGColor]) {
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.startPoint = startPoint

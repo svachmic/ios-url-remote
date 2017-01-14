@@ -10,16 +10,19 @@ import UIKit
 import Material
 import ReactiveKit
 
-///
+/// View with round color buttons that emits signals after a button has been pressed.
 class ColorSelectorView: UIView {
+    /// Signal emitter - emits signal upon button click (the color of the button).
     let signal = PublishSubject<ColorName, NoError>()
 
-    ///
+    /// Required initializer for the storyboard
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    /// Sets up all buttons and hooks them up to the signal emitter.
     ///
+    /// - Parameter colors: Array with ColorName enum values to fill buttons with. This is the enum that later on gets emitted through the signal.
     func setupViews(with colors: [ColorName]) {
         let margin: CGFloat = 10.0
         let size = self.frame.height
