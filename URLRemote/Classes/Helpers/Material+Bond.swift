@@ -11,10 +11,11 @@ import Material
 import Bond
 import ReactiveKit
 
-///
+/// ReactiveKit/Bond bindings for Material components.
+
 extension RaisedButton {
     
-    /// computed variable Bond allowing binding with a String object
+    /// Binding with a button after EntryAction has been performed.
     var bndAction: Bond<RaisedButton, EntryActionStatus> {
         return Bond(target: self) { button, status in
             print(status)
@@ -23,13 +24,22 @@ extension RaisedButton {
     }
 }
 
-///
 extension Toolbar {
     
-    ///
+    /// Binding for the toolbar's title.
     var bndTitle: Bond<Toolbar, String> {
         return Bond(target: self) { toolbar, title in
             toolbar.title = title
+        }
+    }
+}
+
+extension TextField {
+    
+    /// Binding for the detail field of the TextField.
+    var bndDetail: Bond<TextField, String> {
+        return Bond(target: self) { field, text in
+            field.detail = text
         }
     }
 }
