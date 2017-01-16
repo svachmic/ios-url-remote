@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 ///
-enum EntryType: Int {
+enum EntryType: Int, EnumCollection {
     case Custom = 0
     case SimpleHTTP = 1
     case Quido = 2
