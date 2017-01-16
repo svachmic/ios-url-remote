@@ -40,6 +40,7 @@ enum EntryType: Int {
 
 ///
 class Entry: Mappable {
+    var firebaseKey: String?
     var name: String?
     var color: ColorName?
     var icon: String?
@@ -56,6 +57,7 @@ class Entry: Mappable {
     required init?(map: Map) {}
     
     func mapping(map: Map) {
+        firebaseKey <- map["firebaseKey"]
         name <- map["name"]
         color <- map["color"]
         icon <- map["icon"]
