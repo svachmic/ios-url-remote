@@ -12,11 +12,7 @@ import ReactiveKit
 
 ///
 class TypeViewModel {
-    let contents = ObservableArray<EntryType>([
-        .Custom,
-        .SimpleHTTP,
-        .Quido
-        ])
+    let contents = ObservableArray<EntryType>(EntryType.allValues)
     
     let signal = PublishSubject<EntryType, NoError>()
     
