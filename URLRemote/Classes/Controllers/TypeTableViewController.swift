@@ -17,10 +17,6 @@ class TypeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.tableFooterView = UIView(frame: .zero)
-        self.tableView.separatorInset = UIEdgeInsets.zero
-        self.tableView.backgroundColor = UIColor(named: .gray)
-        
         self.setupBar()
         self.setupTableView()
     }
@@ -62,6 +58,10 @@ class TypeTableViewController: UITableViewController {
             
             return cell
         }
+        
+        self.tableView.tableFooterView = UIView(frame: .zero)
+        self.tableView.separatorInset = UIEdgeInsets.zero
+        self.tableView.backgroundColor = UIColor(named: .gray)
     }
 
     // MARK: - Table view data source
