@@ -10,6 +10,7 @@ import UIKit
 import Bond
 import Material
 
+///
 class SettingsTableViewController: UITableViewController {
     let viewModel = SettingsViewModel()
 
@@ -44,8 +45,9 @@ class SettingsTableViewController: UITableViewController {
     ///
     func setupTableView() {
         self.viewModel.entries.bind(to: self.tableView) { conts, indexPath, tableView in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "editCell")!
-            cell.textLabel?.text = conts[indexPath.row].name
+            let cell = tableView.dequeueReusableCell(withIdentifier: "editCell") as! EntrySettingsTableViewCell
+            cell.layoutSubviews()
+            cell.label?.text = conts[indexPath.row].name
             cell.showsReorderControl = true
             return cell
         }
