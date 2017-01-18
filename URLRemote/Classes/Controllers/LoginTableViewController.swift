@@ -35,15 +35,15 @@ class LoginTableViewController: UITableViewController {
     func setupNotificationHandler() {
         NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "FAILED_SIGN_UP"))
             .observeNext { self.handle(notification: $0) }
-            .disposeIn(bnd_bag)
+            .dispose(in: bnd_bag)
         
         NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "FAILED_SIGN_IN"))
             .observeNext { self.handle(notification: $0) }
-            .disposeIn(bnd_bag)
+            .dispose(in: bnd_bag)
         
         NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "SUCCESS_SIGN_IN"))
             .observeNext { _ in self.parent?.dismiss(animated: true) }
-            .disposeIn(bnd_bag)
+            .dispose(in: bnd_bag)
     }
     
     /// Handles a notification simply by displaying an alert dialog with an error message describing the problem that has occurred.
