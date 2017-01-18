@@ -43,6 +43,10 @@
 "LIGHTS" = "LIGHTS";
 "SELECT_TYPE" = "Select a type";
 
+/// Settings View Controller
+
+"SETTINGS" = "Settings";
+
 // Networking
 
 "GENERIC_ERROR" = "An error has occurred while processing your request. Please try again later.";
