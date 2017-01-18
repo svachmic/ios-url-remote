@@ -46,9 +46,22 @@ class SettingsTableViewController: UITableViewController {
     func setupTableView() {
         self.viewModel.entries.bind(to: self.tableView) { conts, indexPath, tableView in
             let cell = tableView.dequeueReusableCell(withIdentifier: "editCell") as! EntrySettingsTableViewCell
+            let entry = conts[indexPath.row]
             cell.layoutSubviews()
-            cell.label?.text = conts[indexPath.row].name
+            cell.label?.text = entry.name
             cell.showsReorderControl = true
+            
+            _ = cell.button?.bnd_tap.observeNext {
+                let entryController = self.storyboard?.instantiateViewController(withIdentifier: "entrySetupController") as! EntrySetupViewController
+                entryController.viewModel.setup(with: entry)
+                
+                let toolbarController = ToolbarController(rootViewController: entryController)
+                toolbarController.statusBarStyle = .lightContent
+                toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
+                toolbarController.toolbar.backgroundColor = UIColor(named: .green)
+                self.toolbarController?.present(toolbarController, animated: true, completion: nil)
+            }
+            
             return cell
         }
         
@@ -72,7 +85,7 @@ class SettingsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        self.viewModel.entries.moveItem(from: fromIndexPath.row, to: to.row)
+        self.viewModel.moveItem(from: fromIndexPath.row, to: to.row)
     }
 
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {

@@ -41,6 +41,7 @@ enum EntryType: Int, EnumCollection {
 ///
 class Entry: Mappable {
     var firebaseKey: String?
+    var order: Int = 0
     var name: String?
     var color: ColorName?
     var icon: String?
@@ -58,6 +59,7 @@ class Entry: Mappable {
     
     func mapping(map: Map) {
         firebaseKey <- map["firebaseKey"]
+        order <- map["order"]
         name <- map["name"]
         color <- map["color"]
         icon <- map["icon"]

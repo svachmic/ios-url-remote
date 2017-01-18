@@ -112,9 +112,11 @@ class EntrySetupViewController: UITableViewController {
                 }
         }
         
-        cell.nameField?.bnd_text
-            .map { $0 ?? "" }
-            .bind(to: self.viewModel.name)
+        _ = self.viewModel.name.bidirectionalBind(
+            to: cell.nameField!.bnd_text.bidirectionalMap(
+                to: { $0 ?? "" },
+                from: { $0 }))
+        
         cell.colorSelector!.setupViews(with: [.green, .yellow, .red])
         cell.colorSelector!.signal.bind(to: self.viewModel.color)
     }
@@ -133,31 +135,40 @@ class EntrySetupViewController: UITableViewController {
     ///
     func setupActionCell(cell: ActionEntryTableViewCell) {
         cell.layoutSubviews()
-        cell.urlField?.bnd_text
-            .map { $0 ?? "" }
-            .bind(to: self.viewModel.url)
-        cell.checkbox?.isChecked.bind(to: self.viewModel.requiresAuthentication)
-        cell.userField?.bnd_text
-            .bind(to: self.viewModel.login)
-        cell.passwordField?.bnd_text
-            .bind(to: self.viewModel.password)
+        
+        _ = self.viewModel.url.bidirectionalBind(
+            to: cell.urlField!.bnd_text.bidirectionalMap(
+                to: { $0 ?? "" },
+                from: { $0 }))
+        
+        _ = self.viewModel.requiresAuthentication.bidirectionalBind(to: cell.checkbox!.isChecked)
+        
+        _ = self.viewModel.user.bidirectionalBind(
+            to: cell.userField!.bnd_text.bidirectionalMap(
+                to: { $0 ?? "" },
+                from: { $0 }))
+        
+        _ = self.viewModel.password.bidirectionalBind(
+            to: cell.passwordField!.bnd_text.bidirectionalMap(
+                to: { $0 ?? "" },
+                from: { $0 }))
     }
     
     func presentIconController() {
         let iconController = self.storyboard?.instantiateViewController(withIdentifier: "iconController") as! IconCollectionViewController
         iconController.iconColor = UIColor(named: self.viewModel.color.value)
         iconController.viewModel.setInitial(value: self.viewModel.icon.value)
-        let toolbarController = ToolbarController(rootViewController: iconController)
-        toolbarController.statusBarStyle = .lightContent
-        toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
-        toolbarController.toolbar.backgroundColor = UIColor(named: .green)
-        self.toolbarController?.present(toolbarController, animated: true, completion: nil)
+        self.presentViewController(iconController)
     }
     
     func presentTypeController() {
         let typeController = self.storyboard?.instantiateViewController(withIdentifier: "typeController") as! TypeTableViewController
         typeController.viewModel.signal.bind(to: self.viewModel.type)
-        let toolbarController = ToolbarController(rootViewController: typeController)
+        self.presentViewController(typeController)
+    }
+    
+    func presentViewController(_ viewController: UIViewController) {
+        let toolbarController = ToolbarController(rootViewController: viewController)
         toolbarController.statusBarStyle = .lightContent
         toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
         toolbarController.toolbar.backgroundColor = UIColor(named: .green)
