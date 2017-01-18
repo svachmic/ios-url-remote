@@ -22,7 +22,7 @@
         <scene sceneID="5GI-Dz-51I">
             <objects>
                 <collectionViewController storyboardIdentifier="iconController" id="Opx-eF-RHe" customClass="IconCollectionViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="zcT-x0-bl7">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="zcT-x0-bl7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -186,7 +186,7 @@
         <scene sceneID="T3J-Lz-dgV">
             <objects>
                 <collectionViewController id="VGH-zW-REb" customClass="ActionsCollectionViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="i1A-XI-pmO">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="i1A-XI-pmO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MuY-kB-QMo">
@@ -219,7 +219,7 @@
         <!--Entry Setup View Controller-->
         <scene sceneID="XP2-zl-VeA">
             <objects>
-                <tableViewController storyboardIdentifier="entrySetupVC" id="nCe-Om-ooZ" customClass="EntrySetupViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="entrySetupController" id="nCe-Om-ooZ" customClass="EntrySetupViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="TFA-6d-qyF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -616,7 +616,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CZ7-Za-4LE" customClass="ApplicationNavigationController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9tY-FJ-mJ1" customClass="NavigationBar" customModule="Material">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9tY-FJ-mJ1" customClass="NavigationBar" customModule="Material">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
