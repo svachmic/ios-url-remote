@@ -20,13 +20,15 @@ struct EntrySetupTableCell {
 class EntrySetupViewModel {
     let bndBag = DisposeBag()
     
+    private var firebaseKey: String? = nil
+    private var order: Int = 0
     let name = Observable<String>("")
     let color = Observable<ColorName>(.yellow)
     let icon = Observable<String>("plus")
     let url = Observable<String>("")
     let type = Observable<EntryType>(.SimpleHTTP)
     let requiresAuthentication = Observable<Bool>(false)
-    let login = Observable<String?>(nil)
+    let user = Observable<String?>(nil)
     let password = Observable<String?>(nil)
     
     ///
@@ -66,7 +68,7 @@ class EntrySetupViewModel {
                     return false
                 }
                 
-                if auth && (self.login.value == nil || self.password.value == nil) {
+                if auth && (self.user.value == nil || self.password.value == nil) {
                     return false
                 }
                 
@@ -75,14 +77,30 @@ class EntrySetupViewModel {
     }
     
     ///
+    func setup(with entry: Entry) {
+        self.firebaseKey = entry.firebaseKey
+        self.order = entry.order
+        self.name.value = entry.name ?? ""
+        self.color.value = entry.color ?? .yellow
+        self.icon.value = entry.icon ?? "plus"
+        self.url.value = entry.url ?? ""
+        self.type.value = entry.type ?? .SimpleHTTP
+        self.requiresAuthentication.value = entry.requiresAuthentication
+        self.user.value = entry.user
+        self.password.value = entry.password
+    }
+    
+    ///
     func toEntry() -> Entry {
         let entry = Entry()
+        entry.firebaseKey = self.firebaseKey
+        entry.order = self.order
         entry.name = self.name.value
         entry.color = self.color.value
         entry.icon = self.icon.value
         entry.url = self.url.value
         entry.type = self.type.value
-        if let l = self.login.value, let p = self.password.value, self.requiresAuthentication.value {
+        if let l = self.user.value, let p = self.password.value, self.requiresAuthentication.value {
             entry.requiresAuthentication = true
             entry.user = l
             entry.password = p
