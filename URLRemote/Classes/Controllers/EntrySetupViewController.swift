@@ -158,21 +158,13 @@ class EntrySetupViewController: UITableViewController {
         let iconController = self.storyboard?.instantiateViewController(withIdentifier: "iconController") as! IconCollectionViewController
         iconController.iconColor = UIColor(named: self.viewModel.color.value)
         iconController.viewModel.setInitial(value: self.viewModel.icon.value)
-        self.presentViewController(iconController)
+        self.presentEmbedded(viewController: iconController, barTintColor: UIColor(named: .green))
     }
     
     func presentTypeController() {
         let typeController = self.storyboard?.instantiateViewController(withIdentifier: "typeController") as! TypeTableViewController
         typeController.viewModel.signal.bind(to: self.viewModel.type)
-        self.presentViewController(typeController)
-    }
-    
-    func presentViewController(_ viewController: UIViewController) {
-        let toolbarController = ToolbarController(rootViewController: viewController)
-        toolbarController.statusBarStyle = .lightContent
-        toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
-        toolbarController.toolbar.backgroundColor = UIColor(named: .green)
-        self.toolbarController?.present(toolbarController, animated: true, completion: nil)
+        self.presentEmbedded(viewController: typeController, barTintColor: UIColor(named: .green))
     }
     
     // MARK: - UITableView delegate

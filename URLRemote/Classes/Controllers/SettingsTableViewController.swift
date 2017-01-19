@@ -55,11 +55,7 @@ class SettingsTableViewController: UITableViewController {
                 let entryController = self.storyboard?.instantiateViewController(withIdentifier: "entrySetupController") as! EntrySetupViewController
                 entryController.viewModel.setup(with: entry)
                 
-                let toolbarController = ToolbarController(rootViewController: entryController)
-                toolbarController.statusBarStyle = .lightContent
-                toolbarController.statusBar.backgroundColor = UIColor(named: .green).darker()
-                toolbarController.toolbar.backgroundColor = UIColor(named: .green)
-                self.toolbarController?.present(toolbarController, animated: true, completion: nil)
+                self.presentEmbedded(viewController: entryController, barTintColor: UIColor(named: .green))
             }
             
             return cell
