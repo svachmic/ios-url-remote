@@ -16,8 +16,11 @@ class SettingsViewModel {
     let bndBag = DisposeBag()
     ///
     let entries = MutableObservableArray<Entry>([])
-    ///
+    
+    /// Signal emitting Entries to be modified
     let signal = PublishSubject<Entry, NoError>()
+    /// Signal emitting Entries to be deleted
+    let deleteSignal = PublishSubject<Entry, NoError>()
     
     init() {
         NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "CREATED_ENTRY"))
@@ -66,5 +69,14 @@ class SettingsViewModel {
             entry.order = index
             self.signal.next(entry)
         }
+    }
+    
+    ///
+    ///
+    /// - Parameter index:
+    func removeItem(index: Int) {
+        let entry = self.entries[index]
+        self.entries.remove(at: index)
+        self.deleteSignal.next(entry)
     }
 }

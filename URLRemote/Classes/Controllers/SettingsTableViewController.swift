@@ -76,7 +76,7 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.viewModel.entries.remove(at: indexPath.row)
+            self.viewModel.removeItem(index: indexPath.row)
         }
     }
 
