@@ -9,10 +9,15 @@
 import Foundation
 
 ///
-class QuidoValidator: ActionValidator {
+class QuidoValidator: GenericValidator {
     
     ///
-    func validateOutput(output: String) -> Bool {
-        return output == "1"
+    init() {
+        super.init(with: "1")
+    }
+    
+    ///
+    private override init(with criteria: String) {
+        super.init(with: criteria)
     }
 }
