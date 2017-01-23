@@ -9,7 +9,7 @@
 import Foundation
 
 ///
-class GenericValidator: ActionValidator {
+class GenericValidator: Validator {
     ///
     var criteria: String
     

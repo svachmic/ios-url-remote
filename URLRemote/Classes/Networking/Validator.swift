@@ -9,7 +9,7 @@
 import Foundation
 
 /// Protocol for output validation to be implemented for various EntryTypes.
-protocol ActionValidator {
+protocol Validator {
     
     /// Validates the performed action and returns the outcome.
     ///
