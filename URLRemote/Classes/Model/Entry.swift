@@ -50,6 +50,7 @@ class Entry: Mappable {
     var requiresAuthentication = false
     var user: String?
     var password: String?
+    var customCriteria: String = ""
     
     init() {}
     
