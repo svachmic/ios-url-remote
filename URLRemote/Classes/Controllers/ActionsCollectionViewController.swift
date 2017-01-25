@@ -9,16 +9,15 @@
 import UIKit
 import Material
 import Bond
+import ReactiveKit
 
-private let reuseIdentifier = "testCell"
-
+///
 class ActionsCollectionViewController: UICollectionViewController {
     var viewModel: ActionsViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView!.register(ActionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.alwaysBounceVertical = true
         self.collectionView!.backgroundColor = UIColor(named: .gray)
         
@@ -28,8 +27,31 @@ class ActionsCollectionViewController: UICollectionViewController {
             navigationController.navigationBar.barTintColor = UIColor(named: .yellow)
             
             let starButton = IconButton(image: Icon.cm.star, tintColor: .white)
+            _ = starButton.bnd_tap.observeNext {
+                self.viewModel.logout()
+            }
             starButton.pulseColor = .white
             self.navigationItem.leftViews = [starButton]
+            
+            let addButton = IconButton(image: Icon.cm.add, tintColor: .white)
+            addButton.pulseColor = .white
+            _ = addButton.bnd_tap.observeNext {
+                self.displayEntrySetup()
+            }
+            
+            let settingsButton = IconButton(image: Icon.cm.settings, tintColor: .white)
+            settingsButton.pulseColor = .white
+            _ = settingsButton.bnd_tap.observeNext {
+                self.viewModel.addItem()
+            }
+            
+            let editButton = IconButton(image: Icon.cm.edit, tintColor: .white)
+            editButton.pulseColor = .white
+            _ = editButton.bnd_tap.observeNext {
+                self.displaySettings()
+            }
+            
+            self.navigationItem.rightViews = [editButton, settingsButton, addButton]
             
             self.navigationItem.titleLabel.textColor = .white
             self.navigationItem.detailLabel.textColor = .white
@@ -38,9 +60,7 @@ class ActionsCollectionViewController: UICollectionViewController {
             self.navigationItem.detail = "Making your IoT awesome!"
         }
         
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "USER_LOGGED_OUT"))
-            .observeNext { _ in self.displayLogin() }
-            .disposeIn(bnd_bag)
+        self.setLoginNotifications()
         
         self.viewModel = ActionsViewModel()
     }
@@ -49,89 +69,84 @@ class ActionsCollectionViewController: UICollectionViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func displayLogin() {
-        let loginController = self.storyboard?.instantiateViewController(withIdentifier: "loginController")
-        let toolbarController = ToolbarController(rootViewController: loginController!)
-        toolbarController.statusBarStyle = .lightContent
-        toolbarController.statusBar.backgroundColor = UIColor(named: .greener).darker()
-        toolbarController.toolbar.backgroundColor = UIColor(named: .greener)
-        self.navigationController?.present(toolbarController, animated: true, completion: nil)
-    }
-
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: reuseIdentifier,
-            for: indexPath) as! ActionViewCell
-        cell.setUpViews(bounds: view.bounds)
-        return cell
-    }
-
-    // MARK: UICollectionViewDelegate
+    // MARK: - View setup
     
-    /**
-     Adds highlight when cell gets selected.
-     
-     - parameter collectionView: The collection view object that is notifying you of the highlight change.
-     - parameter indexPath: The index path of the cell that was highlighted.
-     */
-    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            if cell.viewWithTag(1337) == nil {
-                let view = UIView(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height))
-                view.backgroundColor = UIColor(named: .transparentBlack)
-                view.tag = 1337
-                cell.addSubview(view)
-            }
+    ///
+    func setLoginNotifications() {
+        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "USER_LOGGED_OUT"))
+            .observeNext { _ in self.displayLogin() }
+            .dispose(in: bnd_bag)
+        
+        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "USER_LOGGED_IN"))
+            .observeNext { _ in self.setupCollectionDataSource() }
+            .dispose(in: bnd_bag)
+    }
+    
+    ///
+    func setupCollectionDataSource() {
+        self.viewModel.dataSource?.entriesSignal().mapToDataSourceEvent().bind(to: self.collectionView!) { (entries: [Entry], indexPath: IndexPath, collectionView: UICollectionView) -> UICollectionViewCell in
+            
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "entryCell",
+                for: indexPath) as! ActionViewCell
+            cell.setUpView()
+            cell.bind(with: entries[indexPath.row])
+            return cell
         }
     }
     
-    /**
-     Removes highlight when cell gets unselected.
-     
-     The collection view calls this method only in response to user interactions and does not call it if you programmatically change the highlighting on a cell.
-     
-     - parameter collectionView: The collection view object that is notifying you of the highlight change.
-     - parameter indexPath: The index path of the cell that had its highlight removed.
-     */
-    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        collectionView.cellForItem(at: indexPath)?.viewWithTag(1337)?.removeFromSuperview()
+    /// MARK: - ViewController presentation
+    
+    ///
+    func displayLogin() {
+        let loginController = self.storyboard?.instantiateViewController(withIdentifier: "loginController")
+        
+        self.presentEmbedded(viewController: loginController!, barTintColor: UIColor(named: .green))
+    }
+    
+    func displayEntrySetup() {
+        let entryController = self.storyboard?.instantiateViewController(withIdentifier: "entrySetupController")
+        
+        self.presentEmbedded(viewController: entryController!, barTintColor: UIColor(named: .green))
+    }
+    
+    func displaySettings() {
+        let settingsController = self.storyboard?.instantiateViewController(withIdentifier: "editController") as! SettingsTableViewController
+        _ = self.viewModel.dataSource?.entriesSignal().first().observeNext { entries in
+            settingsController.viewModel.setupEntries(entries: entries)
+        }
+        _ = settingsController.viewModel.signal.observeNext { entry in
+            self.viewModel.dataSource?.write(entry)
+        }
+        
+        _ = settingsController.viewModel.deleteSignal.observeNext { entry in
+            self.viewModel.dataSource?.delete(entry)
+        }
+        
+        self.presentEmbedded(viewController: settingsController, barTintColor: UIColor(named: .green))
     }
     
     // MARK: - Flow layout delegate
     
-    /**
-     Adds margins on the left and on the right.
-     
-     - parameter collectionView: The collection view object displaying the flow layout.
-     - parameter collectionViewLayout: The layout object requesting the information.
-     - parameter section: The index number of the section whose insets are needed.
-     - returns: The margins to apply to items in the section.
-     */
+    /// Adds margins on the left and on the right.
+    ///
+    /// - Parameter collectionView: The collection view object displaying the flow layout.
+    /// - Parameter collectionViewLayout: The layout object requesting the information.
+    /// - Parameter section: The index number of the section whose insets are needed.
+    /// - Returns: The margins to apply to items in the section.
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         let diff = collectionView.frame.width * (1.0 / 22.0)
         return UIEdgeInsets(top: 8.0, left: diff/2.0, bottom: 0, right: diff/2.0)
     }
     
-    /**
-     Separates the cells in pairs.
-     
-     - warning: Should change later on for iPad to display more cells in one row.
-     
-     - parameter collectionView: The collection view object displaying the flow layout.
-     - parameter collectionViewLayout: The layout object requesting the information.
-     - parameter indexPath: The index path of the item.
-     - returns: The width and height of the specified item. Both values must be greater than 0.
-     */
+    /// Separates the cells in pairs.
+    ///
+    /// - Warning: Should change later on for iPad to display more cells in one row.
+    ///
+    /// - Parameter collectionView: The collection view object displaying the flow layout.
+    /// - Parameter collectionViewLayout: The layout object requesting the information.
+    /// - Parameter indexPath: The index path of the item.
+    /// - Returns: The width and height of the specified item. Both values must be greater than 0.
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         //return CGSize(width: collectionView.frame.width/2.2, height: collectionView.frame.width/2.2)
         
@@ -141,19 +156,4 @@ class ActionsCollectionViewController: UICollectionViewController {
         let size = CGSize(width: cellWidth, height: cellWidth)
         return size
     }
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
 }
