@@ -9,6 +9,7 @@
 import UIKit
 import Material
 
+///
 class DesignEntryTableViewCell: UITableViewCell {
     var icon: FlatButton?
     var nameField: TextField?
@@ -29,7 +30,7 @@ class DesignEntryTableViewCell: UITableViewCell {
         self.icon?.imageEdgeInsets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
         self.icon?.layer.cornerRadius = self.icon!.frame.width / 2.0
         
-        self.nameField = self.viewWithTag(2) as? TextField
+        self.nameField = container.viewWithTag(2) as? TextField
         self.nameField?.placeholder = NSLocalizedString("ENTRY_NAME", comment: "")
         self.nameField?.font = RobotoFont.regular(with: 13)
         self.nameField?.placeholderActiveColor = UIColor(named: .green).darker()
@@ -39,16 +40,11 @@ class DesignEntryTableViewCell: UITableViewCell {
         
         self.colorSelector = container.viewWithTag(4) as? ColorSelectorView
         
-        let label = self.viewWithTag(3) as? UILabel
+        let label = container.viewWithTag(3) as? UILabel
         label?.font = RobotoFont.bold(with: 12)
         label?.text = "\(NSLocalizedString("COLOR", comment: "")):"
         label?.textColor = .gray
         
         self.selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
 }

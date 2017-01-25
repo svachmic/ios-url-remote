@@ -41,13 +41,18 @@ class ActionViewCell: UICollectionViewCell {
         button?.pulseColor = .white
         
         if let url = entry.url {
-            _ = button?.bnd_tap.observe { _ in self.bindSignal(url: url) }
+            let action = EntryAction()
+            
+            _ = button?.bnd_tap.observe { _ in
+                _ = self.button?.bndAction.bind(signal:
+                    action.signalForAction(
+                        url: url,
+                        validator: ValidatorFactory.validator(for: entry),
+                        requiresAuthentication: entry.requiresAuthentication,
+                        user: entry.user,
+                        password: entry.password)
+                )
+            }
         }
-    }
-    
-    func bindSignal(url: String) {
-        _ = self.button?.bndAction.bind(signal:
-            EntryAction().signalForAction(url: url)
-        )
     }
 }

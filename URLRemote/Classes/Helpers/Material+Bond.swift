@@ -19,7 +19,21 @@ extension RaisedButton {
     var bndAction: Bond<RaisedButton, EntryActionStatus> {
         return Bond(target: self) { button, status in
             print(status)
+            
+            switch status {
+            case .success:
+                button.pulseColor = .green
+                break
+            case .failure:
+                button.pulseColor = .yellow
+                break
+            case .error:
+                button.pulseColor = .red
+                break
+            }
+            
             button.pulse()
+            button.pulseColor = .white
         }
     }
 }
