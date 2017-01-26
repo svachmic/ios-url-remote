@@ -22,7 +22,7 @@
         <scene sceneID="5GI-Dz-51I">
             <objects>
                 <collectionViewController storyboardIdentifier="iconController" id="Opx-eF-RHe" customClass="IconCollectionViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="zcT-x0-bl7">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="zcT-x0-bl7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -186,7 +186,7 @@
         <scene sceneID="T3J-Lz-dgV">
             <objects>
                 <collectionViewController id="VGH-zW-REb" customClass="ActionsCollectionViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="i1A-XI-pmO">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="i1A-XI-pmO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MuY-kB-QMo">
@@ -404,24 +404,24 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="criteriaCell" rowHeight="90" id="2QK-so-pB6" customClass="CustomCriteriaTableViewCell" customModule="URLRemote" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="457" width="375" height="90"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="criteriaCell" rowHeight="94" id="2QK-so-pB6" customClass="CustomCriteriaTableViewCell" customModule="URLRemote" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="457" width="375" height="94"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2QK-so-pB6" id="rRg-fe-bE9">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwD-6e-KZS" customClass="ShadedView" customModule="URLRemote" customModuleProvider="target">
-                                            <rect key="frame" x="8" y="8" width="359" height="73"/>
+                                            <rect key="frame" x="8" y="8" width="359" height="77"/>
                                             <subviews>
                                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ndt-Cd-aem">
-                                                    <rect key="frame" x="319" y="25" width="22" height="22"/>
+                                                    <rect key="frame" x="319" y="29" width="22" height="22"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="Ndt-Cd-aem" secondAttribute="height" multiplier="1:1" id="Snn-Ex-TVZ"/>
+                                                        <constraint firstAttribute="width" secondItem="Ndt-Cd-aem" secondAttribute="height" multiplier="1:1" id="4RP-65-EbP"/>
                                                     </constraints>
                                                 </button>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gJN-Na-DQu" customClass="TextField" customModule="Material">
-                                                    <rect key="frame" x="18" y="21" width="293" height="30"/>
+                                                    <rect key="frame" x="18" y="25" width="293" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -430,12 +430,12 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="gJN-Na-DQu" firstAttribute="leading" secondItem="dwD-6e-KZS" secondAttribute="leading" constant="18" id="00S-cm-3sG"/>
-                                                <constraint firstItem="gJN-Na-DQu" firstAttribute="top" secondItem="dwD-6e-KZS" secondAttribute="top" constant="21" id="MmL-5W-pAA"/>
+                                                <constraint firstAttribute="bottom" secondItem="gJN-Na-DQu" secondAttribute="bottom" constant="22" id="MIQ-Mz-vbc"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ndt-Cd-aem" secondAttribute="trailing" constant="18" id="OkG-Ja-A84"/>
-                                                <constraint firstItem="Ndt-Cd-aem" firstAttribute="top" secondItem="dwD-6e-KZS" secondAttribute="top" constant="25" id="Wpv-pc-RkW"/>
-                                                <constraint firstAttribute="bottom" secondItem="gJN-Na-DQu" secondAttribute="bottom" constant="22" id="Xrp-8b-8ky"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ndt-Cd-aem" secondAttribute="bottom" constant="26" id="Unh-tE-e5w"/>
                                                 <constraint firstItem="Ndt-Cd-aem" firstAttribute="leading" secondItem="gJN-Na-DQu" secondAttribute="trailing" constant="8" id="i1N-0L-O3L"/>
-                                                <constraint firstAttribute="bottom" secondItem="Ndt-Cd-aem" secondAttribute="bottom" constant="26" id="u3s-dk-Xy9"/>
+                                                <constraint firstItem="Ndt-Cd-aem" firstAttribute="top" secondItem="dwD-6e-KZS" secondAttribute="top" constant="29" id="uqa-th-LVq"/>
+                                                <constraint firstItem="gJN-Na-DQu" firstAttribute="top" secondItem="dwD-6e-KZS" secondAttribute="top" constant="25" id="vpi-UR-dYG"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -639,7 +639,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CZ7-Za-4LE" customClass="ApplicationNavigationController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9tY-FJ-mJ1" customClass="NavigationBar" customModule="Material">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9tY-FJ-mJ1" customClass="NavigationBar" customModule="Material">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
