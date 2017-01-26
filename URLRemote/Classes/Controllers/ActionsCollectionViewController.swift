@@ -26,23 +26,19 @@ class ActionsCollectionViewController: UICollectionViewController {
             navigationController.statusBarStyle = .lightContent
             navigationController.navigationBar.barTintColor = UIColor(named: .yellow)
             
-            let starButton = IconButton(image: Icon.cm.star, tintColor: .white)
-            _ = starButton.bnd_tap.observeNext {
+            let logout = FlatButton(title: NSLocalizedString("LOGOUT", comment: ""))
+            logout.titleColor = .white
+            logout.pulseColor = .white
+            logout.titleLabel?.font = RobotoFont.bold(with: 15)
+            _ = logout.bnd_tap.observeNext {
                 self.viewModel.logout()
             }
-            starButton.pulseColor = .white
-            self.navigationItem.leftViews = [starButton]
+            self.navigationItem.leftViews = [logout]
             
             let addButton = IconButton(image: Icon.cm.add, tintColor: .white)
             addButton.pulseColor = .white
             _ = addButton.bnd_tap.observeNext {
                 self.displayEntrySetup()
-            }
-            
-            let settingsButton = IconButton(image: Icon.cm.settings, tintColor: .white)
-            settingsButton.pulseColor = .white
-            _ = settingsButton.bnd_tap.observeNext {
-                self.viewModel.addItem()
             }
             
             let editButton = IconButton(image: Icon.cm.edit, tintColor: .white)
@@ -51,7 +47,7 @@ class ActionsCollectionViewController: UICollectionViewController {
                 self.displaySettings()
             }
             
-            self.navigationItem.rightViews = [editButton, settingsButton, addButton]
+            self.navigationItem.rightViews = [editButton, addButton]
             
             self.navigationItem.titleLabel.textColor = .white
             self.navigationItem.detailLabel.textColor = .white
