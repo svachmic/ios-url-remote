@@ -19,6 +19,7 @@
 "INVALID_PASSWORD" = "Passwords are not matching";
 "CLOSE" = "Close";
 "INVALID_PASSWORD_LENGTH" = "Password must have at least 6 characters.";
+"LOGOUT" = "Log out";
 
 /// Entry
 
