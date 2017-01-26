@@ -30,6 +30,7 @@ class EntrySetupViewModel {
     let requiresAuthentication = Observable<Bool>(false)
     let user = Observable<String?>(nil)
     let password = Observable<String?>(nil)
+    let customCriteria = Observable<String>("")
     
     ///
     let isFormComplete = Observable<Bool>(false)
@@ -50,6 +51,22 @@ class EntrySetupViewModel {
     ///
     init() {
         self.bindValidation()
+        
+        _ = self.type.observeNext { type in
+            if type == .Custom {
+                if self.contents.count == 3 {
+                    let cell = EntrySetupTableCell(
+                        identifier: "criteriaCell",
+                        height: 94.0)
+                    self.contents.insert(cell, at: 2)
+                }
+            } else {
+                if self.contents.count == 4 {
+                    self.contents.remove(at: 2)
+                    self.customCriteria.value = ""
+                }
+            }
+        }
         
         NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "SELECTED_ICON"))
             .map { return $0.object as! String }
@@ -99,11 +116,16 @@ class EntrySetupViewModel {
         entry.color = self.color.value
         entry.icon = self.icon.value
         entry.url = self.url.value
-        entry.type = self.type.value
+        
         if let l = self.user.value, let p = self.password.value, self.requiresAuthentication.value {
             entry.requiresAuthentication = true
             entry.user = l
             entry.password = p
+        }
+        
+        entry.type = self.type.value
+        if self.type.value == .Custom {
+            entry.customCriteria = self.customCriteria.value
         }
         
         return entry
