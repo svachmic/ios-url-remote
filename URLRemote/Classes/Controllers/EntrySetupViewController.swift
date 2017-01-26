@@ -83,6 +83,11 @@ class EntrySetupViewController: UITableViewController {
                     self.setupActionCell(cell: actionCell)
                 }
                 break
+            case "criteriaCell":
+                if let criteriaCell = cell as? CustomCriteriaTableViewCell {
+                    self.setupCustomCriteriaCell(cell: criteriaCell)
+                }
+                break
             default:
                 break
             }
@@ -152,6 +157,22 @@ class EntrySetupViewController: UITableViewController {
             to: cell.passwordField!.bnd_text.bidirectionalMap(
                 to: { $0 ?? "" },
                 from: { $0 }))
+    }
+    
+    ///
+    func setupCustomCriteriaCell(cell: CustomCriteriaTableViewCell) {
+        cell.layoutSubviews()
+        
+        _ = self.viewModel.customCriteria.bidirectionalBind(
+            to: cell.criteriaField!.bnd_text.bidirectionalMap(
+                to: { $0 ?? "" },
+                from: { $0 }))
+        
+        _ = cell.infoButton?.bnd_tap.observeNext {
+            self.presentSimpleAlertDialog(
+                header: NSLocalizedString("CUSTOM_CRITERIA", comment: ""),
+                message: NSLocalizedString("CUSTOM_CRITERIA_DESC", comment: ""))
+        }
     }
     
     func presentIconController() {
