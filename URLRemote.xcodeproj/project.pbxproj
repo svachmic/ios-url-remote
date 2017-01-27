@@ -97,6 +97,9 @@
 		E0E2FC011E2581FF00C54FF8 /* IconCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FC001E2581FF00C54FF8 /* IconCollectionViewModel.swift */; };
 		E0E2FC031E2802AA00C54FF8 /* IconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FC021E2802A900C54FF8 /* IconCollectionViewCell.swift */; };
 		E0F328941E3A554E00282B33 /* CustomCriteriaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F328931E3A554E00282B33 /* CustomCriteriaTableViewCell.swift */; };
+		E0F328961E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F328951E3B86FB00282B33 /* CustomCriteriaValidator.swift */; };
+		E0F328971E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F328951E3B86FB00282B33 /* CustomCriteriaValidator.swift */; };
+		E0F328981E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F328951E3B86FB00282B33 /* CustomCriteriaValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +183,7 @@
 		E0E2FC001E2581FF00C54FF8 /* IconCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconCollectionViewModel.swift; sourceTree = "<group>"; };
 		E0E2FC021E2802A900C54FF8 /* IconCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconCollectionViewCell.swift; path = Controllers/IconCollectionViewCell.swift; sourceTree = "<group>"; };
 		E0F328931E3A554E00282B33 /* CustomCriteriaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCriteriaTableViewCell.swift; path = Controllers/CustomCriteriaTableViewCell.swift; sourceTree = "<group>"; };
+		E0F328951E3B86FB00282B33 /* CustomCriteriaValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCriteriaValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,6 +414,7 @@
 				E0C2E35D1E328DA400923A2D /* Validator.swift */,
 				E00A20471E368C0200FF8DA6 /* ValidatorFactory.swift */,
 				E0C2E3621E354C1600923A2D /* GenericValidator.swift */,
+				E0F328951E3B86FB00282B33 /* CustomCriteriaValidator.swift */,
 				E052E7701E368F58007D19EB /* SimpleHTTPValidator.swift */,
 				E0C2E3601E33C60300923A2D /* QuidoValidator.swift */,
 			);
@@ -731,6 +736,7 @@
 				E06828271E01C48400EB0041 /* ApplicationNavigationController.swift in Sources */,
 				C16B4F681CFC834F001E572E /* UIColorExtension.swift in Sources */,
 				E098E84B1E314F3000456FCB /* UIViewController+Material.swift in Sources */,
+				E0F328961E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */,
 				E0C2E35E1E328DA400923A2D /* Validator.swift in Sources */,
 				E0628FAF1E2F9EDF00DADAB3 /* SettingsViewModel.swift in Sources */,
 				E0B41D171E2D4AD300F7242E /* EnumCollection.swift in Sources */,
@@ -751,6 +757,7 @@
 				E082D9721E39358400E143F5 /* QuidoValidator.swift in Sources */,
 				E0E2FBFC1E2413DF00C54FF8 /* ActionEntryTableViewCell.swift in Sources */,
 				C16B4F6D1CFC8392001E572E /* UIViewGradientExtension.swift in Sources */,
+				E0F328971E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */,
 				E082D9701E39357F00E143F5 /* SimpleHTTPValidator.swift in Sources */,
 				E0B41D181E2D4AD300F7242E /* EnumCollection.swift in Sources */,
 				E082D96E1E39357C00E143F5 /* GenericValidator.swift in Sources */,
@@ -779,6 +786,7 @@
 				E082D9731E39358500E143F5 /* QuidoValidator.swift in Sources */,
 				E0E2FBFD1E2413E000C54FF8 /* ActionEntryTableViewCell.swift in Sources */,
 				C16B4F6E1CFC8392001E572E /* UIViewGradientExtension.swift in Sources */,
+				E0F328981E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */,
 				E082D9711E39358000E143F5 /* SimpleHTTPValidator.swift in Sources */,
 				E0B41D191E2D4AD300F7242E /* EnumCollection.swift in Sources */,
 				E082D96F1E39357D00E143F5 /* GenericValidator.swift in Sources */,
