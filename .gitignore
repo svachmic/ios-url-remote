@@ -18,3 +18,5 @@ DerivedData
 Pods
 fastlane/*
 URLRemote/Resources/GoogleService-Info.plist
+*.zip
+*.ipa
