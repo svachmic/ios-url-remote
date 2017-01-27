@@ -23,7 +23,7 @@ class ValidatorFactory {
         case .Quido:
             return QuidoValidator()
         case .Custom:
-            return GenericValidator(with: entry.customCriteria)
+            return CustomCriteriaValidator(with: entry.customCriteria)
         }
     }
 }
