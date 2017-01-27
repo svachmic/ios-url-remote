@@ -46,7 +46,6 @@ class ActionsViewModel {
     }
     
     func logout() {
-        self.dataSource = nil
         try? FIRAuth.auth()?.signOut()
     }
     
