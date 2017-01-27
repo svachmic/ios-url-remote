@@ -24,11 +24,11 @@
 /// Entry
 
 "TYPE_CUSTOM" = "Custom";
-"TYPE_CUSTOM_DESC" = "Custom";
+"TYPE_CUSTOM_DESC" = "Custom type lets you define your own success criteria returned by the device.";
 "TYPE_SIMPLE_HTTP" = "Simple HTTP";
-"TYPE_SIMPLE_HTTP_DESC" = "Simple HTTP";
+"TYPE_SIMPLE_HTTP_DESC" = "Simple HTTP is a type of device that is considered to be successfully triggered if the call has been performed, disregarding the output of the device.";
 "TYPE_QUIDO" = "Quido";
-"TYPE_QUIDO_DESC" = "Quido";
+"TYPE_QUIDO_DESC" = "Quido is a specific type of device that returns 1 on the output if the action was successful.";
 
 /// Entry Setup View Controller
 
