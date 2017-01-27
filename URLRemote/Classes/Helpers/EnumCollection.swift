@@ -23,11 +23,15 @@ extension EnumCollection {
     ///
     /// - Returns: Sequence of all the cases as an object of the enum.
     static func cases() -> AnySequence<Self> {
-        typealias S = Self
-        return AnySequence { () -> AnyIterator<S> in
+        typealias Obj = Self
+        return AnySequence { () -> AnyIterator<Obj> in
             var raw = 0
             return AnyIterator {
-                let current : Self = withUnsafePointer(to: &raw) { $0.withMemoryRebound(to: S.self, capacity: 1) { $0.pointee } }
+                let current: Self = withUnsafePointer(to: &raw) {
+                    $0.withMemoryRebound(to: Obj.self, capacity: 1) {
+                        $0.pointee
+                    }
+                }
                 guard current.hashValue == raw else { return nil }
                 raw += 1
                 return current
