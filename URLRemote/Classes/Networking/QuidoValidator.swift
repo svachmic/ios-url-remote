@@ -10,6 +10,7 @@ import Foundation
 
 /// Quido is a specialized I/O module made by Papouch s.r.o.
 /// Website: https://www.papouch.com/cz/shop/products/io-moduly/quido/
+/// Tha validator evaluates the output against Quido defined criteria.
 class QuidoValidator: GenericValidator {
     
     /// Custom initializer because Quido has an exact output for success.
