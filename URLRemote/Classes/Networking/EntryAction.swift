@@ -10,20 +10,30 @@ import Foundation
 import ReactiveKit
 import Alamofire
 
-///
+/// Enum indicating the status of the performed action.
 enum EntryActionStatus {
+    
+    /// The action was performed and validated as a success.
     case success
+    
+    /// The action was performed but the Validator evaluated the ouput as a failure.
     case failure
+    
+    // An error has occurred - either network or device problem.
     case error
 }
 
-///
+/// Encapsulation for Entry actions.
 class EntryAction {
     
+    /// Creates a signal with the end result of the action.
     ///
-    ///
-    /// - Parameter url: ...
-    /// - Returns: ...
+    /// - Parameter url: URL of the desired action.
+    /// - Parameter validator: A Validator that will evaluate the output.
+    /// - Parameter requiresAuthentication: Boolean flag indicating whether or not this action requires a HTTP Authentication.
+    /// - Parameter user: Username for HTTP Authentication.
+    /// - Parameter password: Password for HTTP Authentication.
+    /// - Returns: Signal emitting EntryActionStatus and no errors.
     func signalForAction(url: String, validator: Validator, requiresAuthentication: Bool = false, user: String? = nil, password: String? = nil) -> Signal<EntryActionStatus, NoError> {
         return Signal { observer in
             var request = Alamofire.request(url, method: HTTPMethod.get)
