@@ -30,7 +30,6 @@ class SettingsViewModel {
             }.dispose(in: self.bndBag)
     }
     
-    
     ///
     ///
     /// - Parameter entries:
