@@ -9,12 +9,22 @@
 import Foundation
 import ObjectMapper
 
-///
+/// Enum for all the Entry types.
+/// Represented by an integer in order for it to be easily serializable from/to online database.
 enum EntryType: Int, EnumCollection {
+    
+    /// Custom criteria type evaluated against a user-defined criteria.
     case Custom = 0
+    
+    /// Simple HTTP type evaluated only by HTTP status code.
     case SimpleHTTP = 1
+    
+    /// Quido I/O module type evaluated against specific criteria.
     case Quido = 2
     
+    /// Returns human-readable, localized name of the enum value.
+    ///
+    /// - Returns: String object with the name of the EntryType.
     func toString() -> String {
         switch self {
         case .Custom:
@@ -26,6 +36,9 @@ enum EntryType: Int, EnumCollection {
         }
     }
     
+    /// Returns human-readable, localized description of the enum value.
+    ///
+    /// - Returns: String object with the description of the EntryType.
     func description() -> String {
         switch self {
         case .Custom:
@@ -38,18 +51,29 @@ enum EntryType: Int, EnumCollection {
     }
 }
 
-///
+/// Model class for an Entry. An entry represents one callable IoT device action.
 class Entry: Mappable {
+    /// Internal Firebase Key for editing functions and binding.
     var firebaseKey: String?
+    /// Order of the entry in the list/collection.
     var order: Int = 0
+    /// User-defined name for the entry.
     var name: String?
+    /// Color of the entry from the application specific range of colors.
     var color: ColorName?
+    /// Name of the icon in the icon set.
     var icon: String?
+    /// URL for the action.
     var url: String?
+    /// Type of the entry.
     var type: EntryType?
+    /// Flag indicating whether the URL also needs HTTP Authentication.
     var requiresAuthentication = false
+    /// Username for HTTP Authentication.
     var user: String?
+    /// Password for HTTP Authentication.
     var password: String?
+    /// User-defined criteria for EntryType Custom.
     var customCriteria: String = ""
     
     init() {}
