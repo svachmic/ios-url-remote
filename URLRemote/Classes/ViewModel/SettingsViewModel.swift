@@ -10,16 +10,16 @@ import Foundation
 import ReactiveKit
 import Bond
 
-///
+/// View Model for controller enabling editing/deleting/rearranging of entries.
 class SettingsViewModel {
-    ///
+    /// Dispose bag for observables/signals in the scope of the viewModel.
     let bndBag = DisposeBag()
-    ///
+    /// Entries to be edited.
     let entries = MutableObservableArray<Entry>([])
     
-    /// Signal emitting Entries to be modified
+    /// Signal emitting Entries to be modified.
     let signal = PublishSubject<Entry, NoError>()
-    /// Signal emitting Entries to be deleted
+    /// Signal emitting Entries to be deleted.
     let deleteSignal = PublishSubject<Entry, NoError>()
     
     init() {
@@ -30,17 +30,19 @@ class SettingsViewModel {
             }.dispose(in: self.bndBag)
     }
     
+    /// Sets up/populates observable entries array.
     ///
-    ///
-    /// - Parameter entries:
+    /// - Parameter entries: Array of entries to be displayed.
     func setupEntries(entries: [Entry]) {
         self.entries.removeAll()
         self.entries.insert(contentsOf: entries, at: 0)
     }
     
+    /// Replaces the entry in the observable array with the entrygiven on the input.
+    /// This method is used when an entry is modified to reflect the changes in the observable array for next edits.
+    /// It finds the existing entry by its ID and replaces it.
     ///
-    ///
-    /// - Parameter entry:
+    /// - Parameter entry: Entry to be put into the array.
     func replace(with entry: Entry) {
         var entryIndex = -1
         for index in 0..<self.entries.count {
@@ -56,10 +58,10 @@ class SettingsViewModel {
         }
     }
     
+    /// Moves entries up/down. This method is called when an entry has been drag & dropped in the table view.
     ///
-    ///
-    /// - Parameter from:
-    /// - Parameter to:
+    /// - Parameter from: Index where the d&d started.
+    /// - Parameter to: Index where the d&d ended.
     func moveItem(from: Int, to: Int) {
         self.entries.moveItem(from: from, to: to)
         
@@ -70,9 +72,9 @@ class SettingsViewModel {
         }
     }
     
+    /// Removes item fully from the database.
     ///
-    ///
-    /// - Parameter index:
+    /// - Parameter index: Index of the entry to be deleted.
     func removeItem(index: Int) {
         let entry = self.entries[index]
         self.entries.remove(at: index)
