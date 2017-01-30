@@ -52,7 +52,7 @@ enum EntryType: Int, EnumCollection {
 }
 
 /// Model class for an Entry. An entry represents one callable IoT device action.
-class Entry: Mappable {
+class Entry: Mappable, Equatable {
     /// Internal Firebase Key for editing functions and binding.
     var firebaseKey: String?
     /// Order of the entry in the list/collection.
@@ -93,5 +93,20 @@ class Entry: Mappable {
         requiresAuthentication <- map["requiresAuthentication"]
         user <- map["user"]
         password <- map["password"]
+    }
+    
+    // MARK: - Equatable method
+    
+    /// Equation method comparing two entries.
+    ///
+    /// - Parameter lhs: First entry to be compared.
+    /// - Parameter rhs: Second entry to be compared.
+    /// - Returns: True only if the Firebase keys exist on both entries and are equal.
+    static func == (lhs: Entry, rhs: Entry) -> Bool {
+        if let lhsFIRKey = lhs.firebaseKey, let rhsFIRKey = lhs.firebaseKey, lhsFIRKey == rhsFIRKey {
+            return true
+        }
+        
+        return false
     }
 }
