@@ -13,6 +13,48 @@ import ReactiveKit
 
 /// ReactiveKit/Bond bindings for Material components.
 
+extension Menu: MenuDelegate {
+    
+    /// Toggles the menu open/close.
+    func toggle() {
+        var angle: CGFloat = 0.0
+        
+        if self.isOpened {
+            self.close()
+            for v in self.views {
+                (v as? MenuItem)?.hideTitleLabel()
+            }
+        } else {
+            angle = 45.0
+            self.open()
+            for v in self.views {
+                (v as? MenuItem)?.showTitleLabel()
+            }
+            
+        }
+        
+        self.views.first?.animate(animation: Motion.animate(
+            group: [Motion.rotate(angle: angle, duration: 0.1)]
+        ))
+    }
+    
+    /// Binding for menu toggle open/collapse on button tap.
+    var bndToggle: Bond<Menu, Void> {
+        return Bond(target: self) { _, _ in
+            self.toggle()
+        }
+    }
+    
+    /// MARK: - Menu delegate method
+    
+    ///
+    public func menu(menu: Menu, tappedAt point: CGPoint, isOutside: Bool) {
+        if isOutside {
+            menu.toggle()
+        }
+    }
+}
+
 extension RaisedButton {
     
     /// Binding with a button after EntryAction has been performed.
