@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FirebaseDatabase
 import FirebaseAuth
 import ObjectMapper
 import Bond
@@ -26,7 +25,7 @@ class ActionsViewModel {
                 if let data = self.dataSource, data.user.uid == user.uid {
                     // do nothing
                 } else {
-                    self.dataSource = FirebaseDataSource(user: user, database: FIRDatabase.database())
+                    self.dataSource = FirebaseDataSource(user: user)
                     NotificationCenter.default.post(
                         name: NSNotification.Name(rawValue: "USER_LOGGED_IN"),
                         object: nil)

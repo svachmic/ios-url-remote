@@ -52,11 +52,7 @@ enum EntryType: Int, EnumCollection {
 }
 
 /// Model class for an Entry. An entry represents one callable IoT device action.
-class Entry: Mappable {
-    /// Internal Firebase Key for editing functions and binding.
-    var firebaseKey: String?
-    /// Order of the entry in the list/collection.
-    var order: Int = 0
+class Entry: FirebaseObject {
     /// User-defined name for the entry.
     var name: String?
     /// Color of the entry from the application specific range of colors.
@@ -76,15 +72,18 @@ class Entry: Mappable {
     /// User-defined criteria for EntryType Custom.
     var customCriteria: String = ""
     
-    init() {}
+    override init() {
+        super.init()
+    }
     
     // MARK: - ObjectMapper methods
     
-    required init?(map: Map) {}
+    required init?(map: Map) {
+        super.init(map: map)
+    }
     
-    func mapping(map: Map) {
-        firebaseKey <- map["firebaseKey"]
-        order <- map["order"]
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         name <- map["name"]
         color <- map["color"]
         icon <- map["icon"]
