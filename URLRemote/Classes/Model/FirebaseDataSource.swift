@@ -13,26 +13,28 @@ import FirebaseAuth
 import FirebaseDatabase
 import ObjectMapper
 
-///
+/// Firebase ReactiveKit wrapper to enable reactive bindings.
 class FirebaseDataSource {
     var user: FIRUser
     var database: FIRDatabase
     var isOnline = Observable<Bool>(false)
     
-    init(user: FIRUser, database: FIRDatabase) {
+    init(user: FIRUser) {
         self.user = user
-        self.database = database
+        self.database = FIRDatabase.database()
         _ = self.isOnline.bind(signal: connectionSignal())
     }
     
     // MARK: - Connection status
     
-    ///
+    /// Computed value indicating connection status.
     private var connectedRef: FIRDatabaseReference {
         return database.reference(withPath: ".info/connected")
     }
     
+    /// Turns computed value into a signal to indicate connection status.
     ///
+    /// - Returns: Signal with Bool value giving no error.
     private func connectionSignal() -> Signal<Bool, NoError> {
         return connectedRef.signalForEvent(event: .value)
             .map { $0.value as! Bool }
@@ -41,17 +43,19 @@ class FirebaseDataSource {
     
     // MARK: - Data
     
-    ///
+    /// Computed variable with all user data.
     private var userDataRef: FIRDatabaseReference {
         return database.reference().child("users/\(user.uid)")
     }
     
-    ///
+    /// Computed variable with all entries of the user.
     private var entriesRef: FIRDatabaseReference {
         return userDataRef.child("entries")
     }
     
+    /// Returns a signal with Firebase events.
     ///
+    /// - Returns: Signal with an array of entries giving no error.
     func entriesSignal() -> Signal<[Entry], NoError> {
         return entriesRef.signalForEvent(event: .value)
             .map { snapshot in
@@ -65,7 +69,9 @@ class FirebaseDataSource {
     
     // MARK: - Write
     
+    /// Performs writing operation. If an entry with the saem Firebase Key does not exist a new one is created. Otherwise the old one is updated.
     ///
+    /// - Parameter entry: Entry to be written in the database.
     func write(_ entry: Entry) {
         var reference: FIRDatabaseReference?
         
@@ -79,7 +85,9 @@ class FirebaseDataSource {
         reference?.setValue(entry.toJSON())
     }
     
+    /// Deletes entry from the database.
     ///
+    /// - Parameter entry: Entry to be deleted.
     func delete(_ entry: Entry) {
         if let key = entry.firebaseKey {
             let reference = entriesRef.child(key)
