@@ -13,6 +13,27 @@ import ReactiveKit
 
 /// ReactiveKit/Bond bindings for Material components.
 
+extension Menu {
+    
+    /// Binding for menu toggle open/collapse on button tap.
+    var bndToggle: Bond<Menu, Void> {
+        return Bond(target: self) { menu, _ in
+            if menu.isOpened {
+                menu.close()
+                for v in menu.views {
+                    (v as? MenuItem)?.hideTitleLabel()
+                }
+            } else {
+                menu.open()
+                for v in menu.views {
+                    (v as? MenuItem)?.showTitleLabel()
+                }
+                
+            }
+        }
+    }
+}
+
 extension RaisedButton {
     
     /// Binding with a button after EntryAction has been performed.
