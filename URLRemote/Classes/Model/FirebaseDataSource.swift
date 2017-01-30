@@ -13,6 +13,21 @@ import FirebaseAuth
 import FirebaseDatabase
 import ObjectMapper
 
+/// Firebase + ObjectMapper extension
+extension FIRDataSnapshot {
+    
+    /// Parses Firebase Data Snapshot into an array of model objects.
+    ///
+    /// - Returns: Object array of type that is a subclass of FirebaseObject.
+    func toArray<T: FirebaseObject>() -> [T] {
+        return Mapper<T>().mapArray(
+            JSONArray: self.children
+                .map { $0 as! FIRDataSnapshot }
+                .map { $0.value as! [String : AnyObject] }
+            )?.sorted() ?? []
+    }
+}
+
 /// Firebase ReactiveKit wrapper to enable reactive bindings.
 class FirebaseDataSource {
     var user: FIRUser
@@ -49,6 +64,21 @@ class FirebaseDataSource {
     }
     
     /// Computed variable with all entries of the user.
+    private var categoriesRef: FIRDatabaseReference {
+        return userDataRef.child("categories")
+    }
+    
+    /// Returns a signal with Firebase events.
+    ///
+    /// - Returns: Signal with an array of entries giving no error.
+    func categoriesSignal() -> Signal<[Category], NoError> {
+        return entriesRef.signalForEvent(event: .value)
+            .map { snapshot in
+                return snapshot.toArray()
+            }.flatMapError { _ in Signal<[Category], NoError>.sequence([])}
+    }
+    
+    /// Computed variable with all entries of the user.
     private var entriesRef: FIRDatabaseReference {
         return userDataRef.child("entries")
     }
@@ -59,11 +89,7 @@ class FirebaseDataSource {
     func entriesSignal() -> Signal<[Entry], NoError> {
         return entriesRef.signalForEvent(event: .value)
             .map { snapshot in
-                return Mapper<Entry>().mapArray(
-                    JSONArray: snapshot.children
-                        .map { $0 as! FIRDataSnapshot }
-                        .map { $0.value as! [String : AnyObject] }
-                    )?.sorted { $0.0.order < $0.1.order } ?? []
+                return snapshot.toArray()
         }.flatMapError { _ in Signal<[Entry], NoError>.sequence([])}
     }
     
