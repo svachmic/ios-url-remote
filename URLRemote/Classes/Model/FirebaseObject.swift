@@ -10,9 +10,11 @@ import Foundation
 import ObjectMapper
 
 /// Superclass for all Firebase objects.
-class FirebaseObject: Equatable, Mappable {
+class FirebaseObject: Equatable, Mappable, Comparable {
     /// Internal Firebase Key for editing functions and binding.
     var firebaseKey: String?
+    /// Order of the object for easy sorting.
+    var order: Int = 0
     
     init() {}
     
@@ -22,6 +24,13 @@ class FirebaseObject: Equatable, Mappable {
     
     func mapping(map: Map) {
         firebaseKey <- map["firebaseKey"]
+        order <- map["order"]
+    }
+    
+    // MARK: - Comparable method
+    
+    static func < (lhs: FirebaseObject, rhs: FirebaseObject) -> Bool {
+        return lhs.order < rhs.order
     }
     
     // MARK: - Equatable method

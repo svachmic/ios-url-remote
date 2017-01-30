@@ -13,8 +13,6 @@ import ObjectMapper
 class Category: FirebaseObject {
     /// User-defined name for the category.
     var name: String = ""
-    /// Order of the category in the collection of categories.
-    var order: Int = 0
     /// Firebase keys to all entries listed in this category.
     var entryKeys: [String] = []
     
@@ -31,7 +29,6 @@ class Category: FirebaseObject {
     override func mapping(map: Map) {
         super.mapping(map: map)
         name <- map["name"]
-        order <- map["order"]
         entryKeys <- map["entryKeys"]
     }
 }
