@@ -95,7 +95,25 @@ class FirebaseDataSource {
     
     // MARK: - Write
     
-    /// Performs writing operation. If an entry with the saem Firebase Key does not exist a new one is created. Otherwise the old one is updated.
+    /// Performs writing operation. If a category with the same Firebase Key does not exist a new one is created. Otherwise the old one is updated.
+    ///
+    /// - Parameter category: Category to be written in the database.
+    func write(_ category: Category) {
+        var reference: FIRDatabaseReference?
+        
+        if let key = category.firebaseKey {
+            reference = entriesRef.child(key)
+        } else {
+            reference = entriesRef.childByAutoId()
+            category.firebaseKey = reference!.key
+        }
+        
+        reference?.setValue(category.toJSON())
+    }
+    
+    /// Performs writing operation. If an entry with the same Firebase Key does not exist a new one is created. Otherwise the old one is updated.
+    ///
+    /// - Warning: Subject to change with full Category implementation.
     ///
     /// - Parameter entry: Entry to be written in the database.
     func write(_ entry: Entry) {
