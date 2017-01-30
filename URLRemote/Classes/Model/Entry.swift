@@ -52,9 +52,7 @@ enum EntryType: Int, EnumCollection {
 }
 
 /// Model class for an Entry. An entry represents one callable IoT device action.
-class Entry: Mappable, Equatable {
-    /// Internal Firebase Key for editing functions and binding.
-    var firebaseKey: String?
+class Entry: FirebaseObject {
     /// Order of the entry in the list/collection.
     var order: Int = 0
     /// User-defined name for the entry.
@@ -76,14 +74,18 @@ class Entry: Mappable, Equatable {
     /// User-defined criteria for EntryType Custom.
     var customCriteria: String = ""
     
-    init() {}
+    override init() {
+        super.init()
+    }
     
     // MARK: - ObjectMapper methods
     
-    required init?(map: Map) {}
+    required init?(map: Map) {
+        super.init(map: map)
+    }
     
-    func mapping(map: Map) {
-        firebaseKey <- map["firebaseKey"]
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         order <- map["order"]
         name <- map["name"]
         color <- map["color"]
@@ -93,20 +95,5 @@ class Entry: Mappable, Equatable {
         requiresAuthentication <- map["requiresAuthentication"]
         user <- map["user"]
         password <- map["password"]
-    }
-    
-    // MARK: - Equatable method
-    
-    /// Equation method comparing two entries.
-    ///
-    /// - Parameter lhs: First entry to be compared.
-    /// - Parameter rhs: Second entry to be compared.
-    /// - Returns: True only if the Firebase keys exist on both entries and are equal.
-    static func == (lhs: Entry, rhs: Entry) -> Bool {
-        if let lhsFIRKey = lhs.firebaseKey, let rhsFIRKey = lhs.firebaseKey, lhsFIRKey == rhsFIRKey {
-            return true
-        }
-        
-        return false
     }
 }
