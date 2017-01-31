@@ -18,18 +18,25 @@ extension Menu {
     /// Binding for menu toggle open/collapse on button tap.
     var bndToggle: Bond<Menu, Void> {
         return Bond(target: self) { menu, _ in
+            var angle: CGFloat = 0.0
+            
             if menu.isOpened {
                 menu.close()
                 for v in menu.views {
                     (v as? MenuItem)?.hideTitleLabel()
                 }
             } else {
+                angle = 45.0
                 menu.open()
                 for v in menu.views {
                     (v as? MenuItem)?.showTitleLabel()
                 }
                 
             }
+            
+            menu.views.first?.animate(animation: Motion.animate(
+                group: [Motion.rotate(angle: angle, duration: 0.1)]
+            ))
         }
     }
 }
