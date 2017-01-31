@@ -29,6 +29,12 @@
 		E00A20481E368C0200FF8DA6 /* ValidatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00A20471E368C0200FF8DA6 /* ValidatorFactory.swift */; };
 		E01BFF5A1E2A4BE600862906 /* ActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828201E01876F00EB0041 /* ActionViewCell.swift */; };
 		E01BFF5B1E2A4BE700862906 /* ActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828201E01876F00EB0041 /* ActionViewCell.swift */; };
+		E02C36EF1E3F8B14009649B3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36EE1E3F8B14009649B3 /* Category.swift */; };
+		E02C36F01E3F8B20009649B3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36EE1E3F8B14009649B3 /* Category.swift */; };
+		E02C36F11E3F8B21009649B3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36EE1E3F8B14009649B3 /* Category.swift */; };
+		E02C36F31E3F8EBF009649B3 /* FirebaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */; };
+		E02C36F41E3F8EBF009649B3 /* FirebaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */; };
+		E02C36F51E3F8EBF009649B3 /* FirebaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */; };
 		E04DB69A1E292D8400AC8C3D /* TypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB6991E292D8400AC8C3D /* TypeTableViewController.swift */; };
 		E04DB69C1E292DF100AC8C3D /* TypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB69B1E292DF100AC8C3D /* TypeViewModel.swift */; };
 		E04DB69F1E29331100AC8C3D /* TypeSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB69E1E29331100AC8C3D /* TypeSelectionTableViewCell.swift */; };
@@ -57,6 +63,7 @@
 		E06828331E0309C700EB0041 /* Firebase+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828301E0309C700EB0041 /* Firebase+ReactiveKit.swift */; };
 		E06828351E043B7500EB0041 /* EntryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828341E043B7500EB0041 /* EntryAction.swift */; };
 		E068283B1E04436F00EB0041 /* Material+Bond.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068283A1E04436F00EB0041 /* Material+Bond.swift */; };
+		E072B1351E40EB9A0012589D /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072B1341E40EB9A0012589D /* ArrayExtension.swift */; };
 		E082D9681E3934FE00E143F5 /* EntryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828341E043B7500EB0041 /* EntryAction.swift */; };
 		E082D9691E3934FF00E143F5 /* EntryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828341E043B7500EB0041 /* EntryAction.swift */; };
 		E082D96A1E39350700E143F5 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E35D1E328DA400923A2D /* Validator.swift */; };
@@ -76,6 +83,9 @@
 		E0B41D181E2D4AD300F7242E /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D161E2D4AD300F7242E /* EnumCollection.swift */; };
 		E0B41D191E2D4AD300F7242E /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D161E2D4AD300F7242E /* EnumCollection.swift */; };
 		E0B41D1B1E2E5BE600F7242E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D1A1E2E5BE600F7242E /* SettingsTableViewController.swift */; };
+		E0C0FA261E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */; };
+		E0C0FA271E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */; };
+		E0C0FA281E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */; };
 		E0C2E35E1E328DA400923A2D /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E35D1E328DA400923A2D /* Validator.swift */; };
 		E0C2E3611E33C60300923A2D /* QuidoValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3601E33C60300923A2D /* QuidoValidator.swift */; };
 		E0C2E3631E354C1600923A2D /* GenericValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3621E354C1600923A2D /* GenericValidator.swift */; };
@@ -148,6 +158,8 @@
 		E005D0A21DE6437D002B79C0 /* URLRemote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "URLRemote-Bridging-Header.h"; sourceTree = "<group>"; };
 		E005D0A31DE76BC5002B79C0 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E00A20471E368C0200FF8DA6 /* ValidatorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatorFactory.swift; sourceTree = "<group>"; };
+		E02C36EE1E3F8B14009649B3 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = Model/Category.swift; sourceTree = "<group>"; };
+		E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseObject.swift; path = Model/FirebaseObject.swift; sourceTree = "<group>"; };
 		E04DB6991E292D8400AC8C3D /* TypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeTableViewController.swift; path = Controllers/TypeTableViewController.swift; sourceTree = "<group>"; };
 		E04DB69B1E292DF100AC8C3D /* TypeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeViewModel.swift; sourceTree = "<group>"; };
 		E04DB69E1E29331100AC8C3D /* TypeSelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeSelectionTableViewCell.swift; path = Controllers/TypeSelectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -162,12 +174,14 @@
 		E06828301E0309C700EB0041 /* Firebase+ReactiveKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Firebase+ReactiveKit.swift"; sourceTree = "<group>"; };
 		E06828341E043B7500EB0041 /* EntryAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryAction.swift; sourceTree = "<group>"; };
 		E068283A1E04436F00EB0041 /* Material+Bond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Material+Bond.swift"; sourceTree = "<group>"; };
+		E072B1341E40EB9A0012589D /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		E083933F1DFACAAF0012A28A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		E08C6FDE1DE4AECB0002A3D0 /* URLRemote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = URLRemote.entitlements; sourceTree = "<group>"; };
 		E098E84A1E314F3000456FCB /* UIViewController+Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Material.swift"; sourceTree = "<group>"; };
 		E0ADCD6E1DE4A98D004B7BAD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E0B41D161E2D4AD300F7242E /* EnumCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumCollection.swift; sourceTree = "<group>"; };
 		E0B41D1A1E2E5BE600F7242E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = Controllers/SettingsTableViewController.swift; sourceTree = "<group>"; };
+		E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocalAuthentication+ReactiveKit.swift"; sourceTree = "<group>"; };
 		E0C2E35D1E328DA400923A2D /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		E0C2E3601E33C60300923A2D /* QuidoValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuidoValidator.swift; sourceTree = "<group>"; };
 		E0C2E3621E354C1600923A2D /* GenericValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericValidator.swift; sourceTree = "<group>"; };
@@ -240,11 +254,13 @@
 				E083933F1DFACAAF0012A28A /* UIViewControllerExtension.swift */,
 				C16B4F6B1CFC8392001E572E /* UIViewGradientExtension.swift */,
 				C16B4F671CFC834F001E572E /* UIColorExtension.swift */,
+				E072B1341E40EB9A0012589D /* ArrayExtension.swift */,
 				E005D0A31DE76BC5002B79C0 /* StringExtension.swift */,
 				E0B41D161E2D4AD300F7242E /* EnumCollection.swift */,
 				E06828301E0309C700EB0041 /* Firebase+ReactiveKit.swift */,
 				E068283A1E04436F00EB0041 /* Material+Bond.swift */,
 				E098E84A1E314F3000456FCB /* UIViewController+Material.swift */,
+				E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -362,6 +378,8 @@
 		E056B96D1E00A47400B70AA0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */,
+				E02C36EE1E3F8B14009649B3 /* Category.swift */,
 				E056B96E1E00A48900B70AA0 /* Entry.swift */,
 				E068282C1E03067D00EB0041 /* FirebaseDataSource.swift */,
 			);
@@ -710,6 +728,7 @@
 				E04DB69A1E292D8400AC8C3D /* TypeTableViewController.swift in Sources */,
 				E06828351E043B7500EB0041 /* EntryAction.swift in Sources */,
 				E0E2FBEE1E22BB1900C54FF8 /* ColorSelectorView.swift in Sources */,
+				E0C0FA261E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */,
 				E068282D1E03067D00EB0041 /* FirebaseDataSource.swift in Sources */,
 				E0E2FBFF1E2540B000C54FF8 /* IconCollectionViewController.swift in Sources */,
 				E0628FB41E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift in Sources */,
@@ -721,6 +740,7 @@
 				E0E25A4E1E1D7874006F8C14 /* EntrySetupViewController.swift in Sources */,
 				E0E2FBF11E23BE8A00C54FF8 /* DesignEntryTableViewCell.swift in Sources */,
 				E0E25A501E1D78A4006F8C14 /* EntrySetupViewModel.swift in Sources */,
+				E02C36F31E3F8EBF009649B3 /* FirebaseObject.swift in Sources */,
 				E005D0A11DE61967002B79C0 /* LoginViewModel.swift in Sources */,
 				E0E2FC031E2802AA00C54FF8 /* IconCollectionViewCell.swift in Sources */,
 				C16B4F631CFC7C1B001E572E /* ActionsCollectionViewController.swift in Sources */,
@@ -730,6 +750,7 @@
 				E0F328941E3A554E00282B33 /* CustomCriteriaTableViewCell.swift in Sources */,
 				E052E7711E368F58007D19EB /* SimpleHTTPValidator.swift in Sources */,
 				C1BBC12C1CFC511D00EB62B1 /* AppDelegate.swift in Sources */,
+				E072B1351E40EB9A0012589D /* ArrayExtension.swift in Sources */,
 				E0C2E3631E354C1600923A2D /* GenericValidator.swift in Sources */,
 				E0E2FBF91E23F7D500C54FF8 /* CheckboxButton.swift in Sources */,
 				E0E2FBF71E23F4E700C54FF8 /* ActionEntryTableViewCell.swift in Sources */,
@@ -741,6 +762,7 @@
 				E0628FAF1E2F9EDF00DADAB3 /* SettingsViewModel.swift in Sources */,
 				E0B41D171E2D4AD300F7242E /* EnumCollection.swift in Sources */,
 				E068283B1E04436F00EB0041 /* Material+Bond.swift in Sources */,
+				E02C36EF1E3F8B14009649B3 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,6 +778,7 @@
 				E0E2FBF41E23F15500C54FF8 /* Material+Bond.swift in Sources */,
 				E082D9721E39358400E143F5 /* QuidoValidator.swift in Sources */,
 				E0E2FBFC1E2413DF00C54FF8 /* ActionEntryTableViewCell.swift in Sources */,
+				E02C36F41E3F8EBF009649B3 /* FirebaseObject.swift in Sources */,
 				C16B4F6D1CFC8392001E572E /* UIViewGradientExtension.swift in Sources */,
 				E0F328971E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */,
 				E082D9701E39357F00E143F5 /* SimpleHTTPValidator.swift in Sources */,
@@ -766,10 +789,12 @@
 				E06828241E018E1900EB0041 /* ActionsViewModel.swift in Sources */,
 				E082D96A1E39350700E143F5 /* Validator.swift in Sources */,
 				E082D96C1E39357800E143F5 /* ValidatorFactory.swift in Sources */,
+				E0C0FA271E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */,
 				E082D9681E3934FE00E143F5 /* EntryAction.swift in Sources */,
 				E0E2FBFA1E23FA0500C54FF8 /* CheckboxButton.swift in Sources */,
 				E0628FB51E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift in Sources */,
 				C16B4F691CFC834F001E572E /* UIColorExtension.swift in Sources */,
+				E02C36F01E3F8B20009649B3 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,6 +810,7 @@
 				E0E2FBF51E23F15500C54FF8 /* Material+Bond.swift in Sources */,
 				E082D9731E39358500E143F5 /* QuidoValidator.swift in Sources */,
 				E0E2FBFD1E2413E000C54FF8 /* ActionEntryTableViewCell.swift in Sources */,
+				E02C36F51E3F8EBF009649B3 /* FirebaseObject.swift in Sources */,
 				C16B4F6E1CFC8392001E572E /* UIViewGradientExtension.swift in Sources */,
 				E0F328981E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */,
 				E082D9711E39358000E143F5 /* SimpleHTTPValidator.swift in Sources */,
@@ -795,10 +821,12 @@
 				E06828251E018E1900EB0041 /* ActionsViewModel.swift in Sources */,
 				E082D96B1E39350800E143F5 /* Validator.swift in Sources */,
 				E082D96D1E39357800E143F5 /* ValidatorFactory.swift in Sources */,
+				E0C0FA281E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */,
 				E082D9691E3934FF00E143F5 /* EntryAction.swift in Sources */,
 				E0E2FBFB1E23FA0600C54FF8 /* CheckboxButton.swift in Sources */,
 				E0628FB61E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift in Sources */,
 				C16B4F6A1CFC834F001E572E /* UIColorExtension.swift in Sources */,
+				E02C36F11E3F8B21009649B3 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
