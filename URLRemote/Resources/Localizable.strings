@@ -21,6 +21,11 @@
 "INVALID_PASSWORD_LENGTH" = "Password must have at least 6 characters.";
 "LOGOUT" = "Log out";
 
+/// Actions Collection View Controller
+
+"NEW_CATEGORY" = "New category";
+"NEW_ENTRY" = "New entry";
+
 /// Entry
 
 "TYPE_CUSTOM" = "Custom";
