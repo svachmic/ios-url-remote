@@ -151,9 +151,12 @@ class ActionsCollectionViewController: UICollectionViewController {
     
     ///
     func displayEntrySetup() {
-        let entryController = self.storyboard?.instantiateViewController(withIdentifier: "entrySetupController")
+        let entryController = self.storyboard?.instantiateViewController(withIdentifier: "entrySetupController") as! EntrySetupViewController
+        self.viewModel.dataSource?.entriesSignal()
+            .map { return $0.count }
+            .bind(to: entryController.viewModel.order)
         
-        self.presentEmbedded(viewController: entryController!, barTintColor: UIColor(named: .green))
+        self.presentEmbedded(viewController: entryController, barTintColor: UIColor(named: .green))
     }
     
     ///
