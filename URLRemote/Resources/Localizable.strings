@@ -24,7 +24,10 @@
 /// Actions Collection View Controller
 
 "NEW_CATEGORY" = "New category";
+"NEW_CATEGORY_DESC" = "Type the name of your new category.";
+"NEW_CATEGORY_PLACEHOLDER" = "E.g. \"Home\" or \"Garden\".";
 "NEW_ENTRY" = "New entry";
+"OK" = "OK";
 
 /// Entry
 
