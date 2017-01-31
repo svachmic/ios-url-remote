@@ -21,7 +21,7 @@ class EntrySetupViewModel {
     let bndBag = DisposeBag()
     
     private var firebaseKey: String? = nil
-    private var order: Int = 0
+    let order = Observable<Int>(0)
     let name = Observable<String>("")
     let color = Observable<ColorName>(.yellow)
     let icon = Observable<String>("plus")
@@ -96,7 +96,7 @@ class EntrySetupViewModel {
     ///
     func setup(with entry: Entry) {
         self.firebaseKey = entry.firebaseKey
-        self.order = entry.order
+        self.order.value = entry.order
         self.name.value = entry.name ?? ""
         self.color.value = entry.color ?? .yellow
         self.icon.value = entry.icon ?? "plus"
@@ -111,7 +111,7 @@ class EntrySetupViewModel {
     func toEntry() -> Entry {
         let entry = Entry()
         entry.firebaseKey = self.firebaseKey
-        entry.order = self.order
+        entry.order = self.order.value
         entry.name = self.name.value
         entry.color = self.color.value
         entry.icon = self.icon.value
