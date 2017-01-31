@@ -40,7 +40,7 @@ extension Menu: MenuDelegate {
     
     /// Binding for menu toggle open/collapse on button tap.
     var bndToggle: Bond<Menu, Void> {
-        return Bond(target: self) { menu, _ in
+        return Bond(target: self) { _, _ in
             self.toggle()
         }
     }
