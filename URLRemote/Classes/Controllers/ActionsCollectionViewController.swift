@@ -178,6 +178,7 @@ class ActionsCollectionViewController: UICollectionViewController {
         }))
         
         categoryDialog.addTextField { textField in
+            textField.placeholder = NSLocalizedString("NEW_CATEGORY_PLACEHOLDER", comment: "")
             _ = textField.bnd_text.map {
                 guard let text = $0 else { return false }
                 return text != ""
