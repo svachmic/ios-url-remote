@@ -10,20 +10,30 @@ import Foundation
 import Bond
 import FirebaseAuth
 
-///
+/// Enum representing the state of the Login View Controller.
 enum LoginState {
+    
+    /// Sign in should offer e-mail + password combination.
     case signIn
+    
+    /// Sign up should offer e-mail + double password combination.
     case signUp
 }
 
-///
+/// Struct representing a cell in the Login View Controller.
 struct LoginTableCell {
+    
+    /// The Storyboard identifier by which the cell is initialized.
     let identifier: String
+    
+    /// The description text to be used in the cell.
     let text: String
+    
+    /// The height of the label.
     let height: CGFloat
 }
 
-///
+/// View Model of the Login View Controller. Handles UI state + form validity.
 class LoginViewModel {
     var state = LoginState.signIn
     
@@ -31,7 +41,7 @@ class LoginViewModel {
     var password = Observable<String?>("")
     var passwordAgain = Observable<String?>("")
     
-    ///
+    /// Contents of the form - change/rearrange when changing between sign up/in.
     let contents = MutableObservableArray<LoginTableCell>([
         LoginTableCell(
             identifier: "headerCell",
@@ -63,7 +73,7 @@ class LoginViewModel {
             height: 66.0)
         ])
     
-    ///
+    /// Transforms the view from one state to another. After each transformation, one of the buttons should be higher than the other.
     func transform() {
         if self.state == .signIn {
             self.contents.insert(LoginTableCell(
@@ -93,7 +103,7 @@ class LoginViewModel {
         }
     }
     
-    ///
+    /// Attempts signing up - creating a new user.
     func signUp() {
         guard let auth = FIRAuth.auth(), let email = self.email.value, let password = self.password.value else {
             return
@@ -110,7 +120,7 @@ class LoginViewModel {
         }
     }
     
-    ///
+    /// Attempts signing in - letting the user in.
     func signIn() {
         guard let auth = FIRAuth.auth(), let email = self.email.value, let password = self.password.value else {
             return
