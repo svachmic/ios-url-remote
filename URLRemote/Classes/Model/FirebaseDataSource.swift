@@ -102,9 +102,9 @@ class FirebaseDataSource {
         var reference: FIRDatabaseReference?
         
         if let key = category.firebaseKey {
-            reference = entriesRef.child(key)
+            reference = categoriesRef.child(key)
         } else {
-            reference = entriesRef.childByAutoId()
+            reference = categoriesRef.childByAutoId()
             category.firebaseKey = reference!.key
         }
         
