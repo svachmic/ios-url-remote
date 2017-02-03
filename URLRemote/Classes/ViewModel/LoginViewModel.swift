@@ -29,7 +29,7 @@ struct LoginTableCell {
     /// The description text to be used in the cell.
     let text: String
     
-    /// The height of the label.
+    /// The height of the cell.
     let height: CGFloat
 }
 
