@@ -10,17 +10,21 @@ import Foundation
 import Bond
 import ReactiveKit
 
-///
+/// Struct representing a cell in the Entry Setup View Controller.
 struct EntrySetupTableCell {
+    
+    /// The Storyboard identifier by which the cell is initialized.
     let identifier: String
+    
+    /// The height of the cell.
     let height: CGFloat
 }
 
-///
+/// View Model of the Entry Setup View Controller. Handles UI state + form validity.
 class EntrySetupViewModel {
     let bndBag = DisposeBag()
     
-    private var firebaseKey: String? = nil
+    private var firebaseKey: String?
     let order = Observable<Int>(0)
     let name = Observable<String>("")
     let color = Observable<ColorName>(.yellow)
@@ -32,10 +36,10 @@ class EntrySetupViewModel {
     let password = Observable<String?>(nil)
     let customCriteria = Observable<String>("")
     
-    ///
+    /// Observable property indicating the completeness of the form.
     let isFormComplete = Observable<Bool>(false)
     
-    // Table
+    /// Contents of the form.
     let contents = MutableObservableArray<EntrySetupTableCell>([
         EntrySetupTableCell(
             identifier: "designCell",
@@ -48,7 +52,10 @@ class EntrySetupViewModel {
             height: 228.0)
         ])
     
-    ///
+    /// Initializes all necessary bindings:
+    /// 1. Validation of data.
+    /// 2. Addition/Removal of custom criteria cell into the table view model.
+    /// 3. Notification handling for selection of icon.
     init() {
         self.bindValidation()
         
@@ -74,26 +81,37 @@ class EntrySetupViewModel {
             .dispose(in: self.bndBag)
     }
     
-    ///
+    /// Binds form validation to isFormComplete observable property.
     func bindValidation() {
         combineLatest(
             self.name,
             self.url,
-            self.requiresAuthentication)
-            .map { name, url, auth in
+            self.requiresAuthentication,
+            self.user,
+            self.password)
+            .map { name, url, auth, usr, pwd in
                 if name == "" || url == "" {
                     return false
                 }
                 
-                if auth && (self.user.value == nil || self.password.value == nil) {
-                    return false
+                if auth {
+                    let areCredentialsNil = (usr == nil || pwd == nil)
+                    let areCredentialsBlank = (usr == "" || pwd == "")
+                    
+                    /// The return must be exclusive and return a value if and only if the undesired state ocurrs.
+                    if areCredentialsNil || areCredentialsBlank {
+                        return false
+                    }
                 }
                 
                 return true
             }.bind(to: self.isFormComplete)
+            .dispose(in: self.bndBag)
     }
     
+    /// Sets observed form data to have previously generated Entry data.
     ///
+    /// - Parameter entry: Previously created Entry object with data.
     func setup(with entry: Entry) {
         self.firebaseKey = entry.firebaseKey
         self.order.value = entry.order
@@ -107,7 +125,9 @@ class EntrySetupViewModel {
         self.password.value = entry.password
     }
     
+    /// Transforms the form data into an Entry object.
     ///
+    /// - Returns: Model Entry object filled with user-generated data.
     func toEntry() -> Entry {
         let entry = Entry()
         entry.firebaseKey = self.firebaseKey
