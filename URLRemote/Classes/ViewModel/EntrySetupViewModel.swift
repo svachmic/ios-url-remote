@@ -90,7 +90,7 @@ class EntrySetupViewModel {
             self.user,
             self.password)
             .map { name, url, auth, usr, pwd in
-                if name == "" || url == "" {
+                if name == "" || url == "" || !url.isValidURL() {
                     return false
                 }
                 
