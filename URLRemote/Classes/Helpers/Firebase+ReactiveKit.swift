@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseDatabase
 import ReactiveKit
 
 /// ReactiveKit extension to allow turning events into signals.

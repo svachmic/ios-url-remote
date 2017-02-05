@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "79C040AFDDCE1BCBF6D8B5EB0B85887F"
+               BlueprintIdentifier = "88E9EC28B8B46C3631E6B242B50F4442"
                BuildableName = "Alamofire.framework"
                BlueprintName = "Alamofire"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DBA6001481CEA0EBA031CC5C94508FAA"
+               BlueprintIdentifier = "41FA54D12162DAD51D02FC58A2CD5034"
                BuildableName = "MBProgressHUD.framework"
                BlueprintName = "MBProgressHUD"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8A38792F1100B0732A480E9530C5DF08"
+               BlueprintIdentifier = "462DB9D0F551FEC603027722233443C7"
                BuildableName = "Pods_URLRemote.framework"
                BlueprintName = "Pods-URLRemote"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -82,7 +82,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">

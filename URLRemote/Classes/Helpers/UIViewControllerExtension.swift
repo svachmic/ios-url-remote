@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// UIViewController extension with utilities used throughout the application.
 extension UIViewController {

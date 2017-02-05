@@ -12,7 +12,7 @@ import Bond
 import ReactiveKit
 
 ///
-class ActionsCollectionViewController: UICollectionViewController {
+class ActionsCollectionViewController: UICollectionViewController, MenuDelegate {
     var viewModel: ActionsViewModel!
     var menu: Menu?
     
@@ -38,6 +38,7 @@ class ActionsCollectionViewController: UICollectionViewController {
     ///
     func setupNavigationController() {
         let navigationController = self.navigationController as? ApplicationNavigationController
+        
         navigationController?.prepare()
         navigationController?.statusBarStyle = .lightContent
         navigationController?.navigationBar.barTintColor = UIColor(named: .yellow)
@@ -131,7 +132,7 @@ class ActionsCollectionViewController: UICollectionViewController {
             self.displayCategorySetup()
         }
         
-        menu.delegate = menu
+        menu.delegate = self
         menu.views = [addButton, entryItem, categoryItem]
         menu.baseSize = CGSize(width: 48.0, height: 48.0)
         menu.itemSize = CGSize(width: 40.0, height: 40.0)
@@ -176,7 +177,9 @@ class ActionsCollectionViewController: UICollectionViewController {
             style: .default,
             handler: { _ in
                 if let textFields = categoryDialog.textFields, let textField = textFields[safe: 0], let text = textField.text, text != "" {
-                    print(text)
+                    let cat = Category()
+                    cat.name = text
+                    self.viewModel.dataSource?.write(cat)
                 }
         }))
         
@@ -208,6 +211,15 @@ class ActionsCollectionViewController: UICollectionViewController {
         }
         
         self.presentEmbedded(viewController: settingsController, barTintColor: UIColor(named: .green))
+    }
+    
+    /// MARK: - Menu delegate method
+    
+    ///
+    public func menu(menu: Menu, tappedAt point: CGPoint, isOutside: Bool) {
+        if isOutside {
+            menu.toggle()
+        }
     }
     
     // MARK: - Flow layout delegate
