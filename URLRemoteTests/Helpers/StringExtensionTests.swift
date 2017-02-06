@@ -24,6 +24,12 @@ class StringExtensionTests: XCTestCase {
     }
     
     func testURLValidator() {
-        ///
+        XCTAssertTrue("http://www.google.cz".isValidURL())
+        XCTAssertTrue("http://www.seznam.cz".isValidURL())
+        XCTAssertTrue("http://192.168.0.1:8080".isValidURL())
+        XCTAssertTrue("http://192.168.0.1".isValidURL())
+        XCTAssertTrue("http://localhost:8080".isValidURL())
+        
+        XCTAssertFalse("http://www.goog le.com".isValidURL())
     }
 }
