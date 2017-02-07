@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /// String extension with utilities used throughout the application.
 extension String {
