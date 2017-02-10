@@ -11,18 +11,12 @@ target "URLRemote" do
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'Firebase/Database'
-    pod 'FirebaseAnalytics'
     pod 'Material', '~> 2.0'
     pod 'Motion', '~> 1.0'
     pod 'ObjectMapper', '~> 2.0'
 
     target "URLRemoteTests" do
-        inherit! :search_paths
-        
-        pod 'Firebase/Core'
-        pod 'Firebase/Auth'
-        pod 'Firebase/Database'
-        pod 'FirebaseAnalytics'
+        inherit! :complete
 
         pod 'OHHTTPStubs'
         pod 'OHHTTPStubs/Swift'

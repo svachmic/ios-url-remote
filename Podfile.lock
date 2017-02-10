@@ -80,7 +80,6 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
-  - FirebaseAnalytics
   - Material (~> 2.0)
   - MBProgressHUD (~> 1.0)
   - Motion (~> 1.0)
@@ -111,6 +110,6 @@ SPEC CHECKSUMS:
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
   ReactiveKit: 56a5b949847ba137da40045149785e569f292e07
 
-PODFILE CHECKSUM: d5889d08b1edac129284ce481870f399533cf185
+PODFILE CHECKSUM: f53ebd5673277bf8872b8450c889f46edd501a9e
 
 COCOAPODS: 1.2.0
