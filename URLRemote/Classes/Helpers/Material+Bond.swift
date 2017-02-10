@@ -8,12 +8,13 @@
 
 import Foundation
 import Material
+import Motion
 import Bond
 import ReactiveKit
 
 /// ReactiveKit/Bond bindings for Material components.
 
-extension Menu: MenuDelegate {
+extension Menu {
     
     /// Toggles the menu open/close.
     func toggle() {
@@ -33,24 +34,13 @@ extension Menu: MenuDelegate {
             
         }
         
-        self.views.first?.animate(animation: Motion.animate(
-            group: [Motion.rotate(angle: angle, duration: 0.1)]
-        ))
+        self.views.first?.motion(.rotationAngle(angle), .duration(0.1))
     }
     
     /// Binding for menu toggle open/collapse on button tap.
     var bndToggle: Bond<Menu, Void> {
         return Bond(target: self) { _, _ in
             self.toggle()
-        }
-    }
-    
-    /// MARK: - Menu delegate method
-    
-    ///
-    public func menu(menu: Menu, tappedAt point: CGPoint, isOutside: Bool) {
-        if isOutside {
-            menu.toggle()
         }
     }
 }
