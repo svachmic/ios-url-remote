@@ -19,8 +19,48 @@ class StringExtensionTests: XCTestCase {
         super.tearDown()
     }
     
-    func testEmailValidator() {
-        ///
+    /// Success tests - should be acceped as OK e-mail addresses.
+    /// Taken from a blog post: Email Address test cases
+    /// Available at: https://blogs.msdn.microsoft.com/testing123/2009/02/06/email-address-test-cases/
+    ///
+    /// - Failing:
+    /// 1. email@123.123.123.123 // Domain is valid IP address
+    /// 2. email@[123.123.123.123] // Square bracket around IP address is considered valid
+    /// 3. “email”@domain.com // Quotes around email is considered valid
+    func testEmailValidatorSuccess() {
+        XCTAssertTrue("email@domain.com".isValidEmail())
+        XCTAssertTrue("firstname.lastname@domain.com".isValidEmail())
+        XCTAssertTrue("email@subdomain.domain.com".isValidEmail())
+        XCTAssertTrue("firstname+lastname@domain.com".isValidEmail())
+        XCTAssertTrue("1234567890@domain.com".isValidEmail())
+        XCTAssertTrue("email@domain-one.com".isValidEmail())
+        XCTAssertTrue("_______@domain.com".isValidEmail())
+        XCTAssertTrue("email@domain.name".isValidEmail())
+        XCTAssertTrue("email@domain.co.jp".isValidEmail())
+        XCTAssertTrue("firstname-lastname@domain.com".isValidEmail())
+    }
+    
+    /// Failure tests - should be declined as BAD e-mail addresses.
+    /// Taken from a blog post: Email Address test cases
+    /// Available at: https://blogs.msdn.microsoft.com/testing123/2009/02/06/email-address-test-cases/
+    ///
+    /// - Failing:
+    /// 1. Joe Smith <email@domain.com> // Encoded html within email is invalid
+    /// 2. email@domain@domain.com // Two @ sign
+    /// 3. .email@domain.com // Leading dot in address is not allowed
+    /// 4. email.@domain.com // Trailing dot in address is not allowed
+    /// 5. email..email@domain.com // Multiple dots
+    /// 6. email@domain.com (Joe Smith) // Text followed email is not allowed
+    /// 7. email@-domain.com // Leading dash in front of domain is invalid
+    /// 8. email@domain..com // Multiple dot in the domain portion is invalid
+    func testEmailValidatorFailure() {
+        XCTAssertFalse("plainaddress".isValidEmail())
+        XCTAssertFalse("#@%^%#$@#$@#.com".isValidEmail())
+        XCTAssertFalse("@domain.com".isValidEmail())
+        XCTAssertFalse("email.domain.com".isValidEmail())
+        XCTAssertFalse("あいうえお@domain.com".isValidEmail())
+        XCTAssertFalse("email@domain".isValidEmail())
+        XCTAssertFalse("email@111.222.333.44444".isValidEmail())
     }
     
     /// Success tests - should be acceped as OK urls.
@@ -42,7 +82,7 @@ class StringExtensionTests: XCTestCase {
     /// 12. ftp://foo.bar/baz
     /// 13. http://foo.bar/?q=Test%20URL-encoded%20stuff
     /// 14. http://-.~_!$&'()*+,;=:%40:80%2f::::::@example.com
-    func testURLValidator() {
+    func testURLValidatorSuccess() {
         XCTAssertTrue("http://foo.com/blah_blah".isValidURL())
         XCTAssertTrue("http://foo.com/blah_blah/".isValidURL())
         XCTAssertTrue("http://www.example.com/wpstyle/?p=364".isValidURL())
