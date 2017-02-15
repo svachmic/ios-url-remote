@@ -22,7 +22,9 @@ class ArrayExtensionTests: XCTestCase {
     func testSafeSubscript() {
         var array = [0, 1]
         XCTAssertNotNil(array[safe: 0])
+        XCTAssertEqual(array[safe: 0], 0)
         XCTAssertNotNil(array[safe: 1])
+        XCTAssertEqual(array[safe: 1], 1)
         XCTAssertNil(array[safe: 2])
         
         array.removeAll()
