@@ -21,12 +21,15 @@ target "URLRemote" do
         pod 'OHHTTPStubs'
         pod 'OHHTTPStubs/Swift'
     end
+end
 
-    post_install do |installer|
-        installer.pods_project.targets.each do |target|
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '3.0'
-            end
+# 1. Setting Swift version to 3
+# 2. Code Coverage disable for Pods projects
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.0'
+            config.build_settings['CLANG_ENABLE_CODE_COVERAGE'] = 'NO'
         end
     end
 end
