@@ -1,8 +1,8 @@
 PODS:
   - Alamofire (4.4.0)
-  - Bond (5.4.6):
+  - Bond (6.0.4):
     - Diff (~> 0.4)
-    - ReactiveKit (~> 3.2)
+    - ReactiveKit (~> 3.3)
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - Diff (0.5.0)
@@ -67,7 +67,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
-  - Bond (~> 5.0)
+  - Bond (~> 6.0)
   - Crashlytics
   - Fabric
   - Firebase/Auth
@@ -82,7 +82,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
-  Bond: 7cc794569520e611e46d7d77c35d568a6b5ded00
+  Bond: bc982d559e9c7fe30f50c29bbb5396ded9529699
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Diff: eceb93a3adf508574ba9b8560da185ace83de055
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
@@ -101,6 +101,6 @@ SPEC CHECKSUMS:
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
   ReactiveKit: 27df79c2e2f0771aef1061551fcd7e82b92066e9
 
-PODFILE CHECKSUM: 191f42307f21caa424bbda0cd14ede8427b14943
+PODFILE CHECKSUM: 551ac26acca2d7d335c514bb2eda10c0b4bf8477
 
 COCOAPODS: 1.2.0

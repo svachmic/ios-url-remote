@@ -3,9 +3,9 @@ use_frameworks!
 inhibit_all_warnings!
 
 target "URLRemote" do
-	pod 'Alamofire', '~> 4.0'
-	pod 'MBProgressHUD', '~> 1.0'
-    pod 'Bond', '~> 5.0'
+    pod 'Alamofire', '~> 4.0'
+    pod 'MBProgressHUD', '~> 1.0'
+    pod 'Bond', '~> 6.0'
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'Firebase/Core'
