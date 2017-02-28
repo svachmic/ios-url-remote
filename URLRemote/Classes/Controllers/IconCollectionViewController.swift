@@ -54,7 +54,7 @@ class IconCollectionViewController: UICollectionViewController {
         cancel.titleColor = .white
         cancel.pulseColor = .white
         cancel.titleLabel?.font = RobotoFont.bold(with: 15)
-        _ = cancel.bnd_tap.observeNext {
+        _ = cancel.reactive.tap.observeNext {
             self.parent?.dismiss(animated: true, completion: nil)
         }
         self.toolbarController?.toolbar.leftViews = [cancel]
@@ -65,8 +65,8 @@ class IconCollectionViewController: UICollectionViewController {
             self.viewModel.initialSelection,
             self.viewModel.userSelection)
             .map { return $0 != $1 }
-            .bind(to: done.bnd_isEnabled)
-        _ = done.bnd_tap.observeNext {
+            .bind(to: done.reactive.isEnabled)
+        _ = done.reactive.tap.observeNext {
             if let indexPath = self.viewModel.userSelection.value {
                 let icon = self.viewModel.contents[indexPath.section].items[indexPath.row]
                 NotificationCenter.default.post(

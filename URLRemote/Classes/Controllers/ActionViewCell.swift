@@ -45,8 +45,8 @@ class ActionViewCell: UICollectionViewCell {
         if let url = entry.url {
             let action = EntryAction()
             
-            _ = button?.bnd_tap.observe { _ in
-                _ = self.button?.bndAction.bind(signal:
+            _ = button?.reactive.tap.observe { _ in
+                _ = self.button?.reactive.bndAction.bind(signal:
                     action.signalForAction(
                         url: url,
                         validator: ValidatorFactory.validator(for: entry),

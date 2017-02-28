@@ -37,7 +37,7 @@ class ColorSelectorView: UIView {
             button.pulseColor = .white
             button.backgroundColor = UIColor(named: colors[index])
             button.layer.cornerRadius = size / 2.0
-            _ = button.bnd_tap.observeNext {
+            _ = button.reactive.tap.observeNext {
                 self.signal.next(colors[index])
             }
             self.addSubview(button)

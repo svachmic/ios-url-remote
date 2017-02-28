@@ -33,7 +33,7 @@ class SettingsTableViewController: UITableViewController {
         close.titleColor = .white
         close.pulseColor = .white
         close.titleLabel?.font = RobotoFont.bold(with: 15)
-        _ = close.bnd_tap.observeNext {
+        _ = close.reactive.tap.observeNext {
             self.parent?.dismiss(animated: true, completion: nil)
         }
         self.toolbarController?.toolbar.leftViews = [close]
@@ -51,7 +51,7 @@ class SettingsTableViewController: UITableViewController {
             cell.label?.text = entry.name
             cell.showsReorderControl = true
             
-            _ = cell.button?.bnd_tap.observeNext {
+            _ = cell.button?.reactive.tap.observeNext {
                 let entryController = self.storyboard?.instantiateViewController(withIdentifier: "entrySetupController") as! EntrySetupViewController
                 entryController.viewModel.setup(with: entry)
                 
@@ -61,7 +61,7 @@ class SettingsTableViewController: UITableViewController {
             return cell
         }
         
-        self.tableView.bnd_dataSource.forwardTo = self
+        self.tableView.reactive.dataSource.forwardTo = self
         self.tableView.tableFooterView = UIView(frame: .zero)
         self.tableView.separatorInset = UIEdgeInsets.zero
         self.tableView.backgroundColor = UIColor(named: .gray)

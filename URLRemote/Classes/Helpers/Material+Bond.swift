@@ -8,13 +8,12 @@
 
 import Foundation
 import Material
-import Motion
 import Bond
 import ReactiveKit
 
 /// ReactiveKit/Bond bindings for Material components.
 
-extension Menu {
+extension FABMenu {
     
     /// Toggles the menu open/close.
     func toggle() {
@@ -22,34 +21,37 @@ extension Menu {
         
         if self.isOpened {
             self.close()
-            for v in self.views {
-                (v as? MenuItem)?.hideTitleLabel()
+            for v in self.subviews {
+                (v as? FABMenuItem)?.hideTitleLabel()
             }
         } else {
             angle = 45.0
             self.open()
-            for v in self.views {
-                (v as? MenuItem)?.showTitleLabel()
+            for v in self.subviews {
+                (v as? FABMenuItem)?.showTitleLabel()
             }
             
         }
         
-        self.views.first?.motion(.rotationAngle(angle), .duration(0.1))
+        self.subviews.first?.motion(.rotationAngle(angle), .duration(0.1))
     }
+}
+
+extension ReactiveExtensions where Base: FABMenu {
     
     /// Binding for menu toggle open/collapse on button tap.
-    var bndToggle: Bond<Menu, Void> {
-        return Bond(target: self) { _, _ in
-            self.toggle()
+    var bndToggle: Bond<Void> {
+        return bond { menu, _ in
+            menu.toggle()
         }
     }
 }
 
-extension RaisedButton {
+extension ReactiveExtensions where Base: RaisedButton {
     
     /// Binding with a button after EntryAction has been performed.
-    var bndAction: Bond<RaisedButton, EntryActionStatus> {
-        return Bond(target: self) { button, status in
+    var bndAction: Bond<EntryActionStatus> {
+        return bond { button, status in
             print(status)
             
             switch status {
@@ -70,21 +72,21 @@ extension RaisedButton {
     }
 }
 
-extension Toolbar {
+extension ReactiveExtensions where Base: Toolbar {
     
     /// Binding for the toolbar's title.
-    var bndTitle: Bond<Toolbar, String> {
-        return Bond(target: self) { toolbar, title in
+    var bndTitle: Bond<String> {
+        return bond { toolbar, title in
             toolbar.title = title
         }
     }
 }
 
-extension TextField {
+extension ReactiveExtensions where Base: TextField {
     
     /// Binding for the detail field of the TextField.
-    var bndDetail: Bond<TextField, String> {
-        return Bond(target: self) { field, text in
+    var bndDetail: Bond<String> {
+        return bond { field, text in
             field.detail = text
         }
     }

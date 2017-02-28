@@ -22,7 +22,7 @@ class CheckboxButton: UIButton {
         
         self.tintColor = .black
         
-        _ = self.bnd_tap.observeNext {
+        _ = self.reactive.tap.observeNext {
             self.isChecked.value = !self.isChecked.value
         }
         

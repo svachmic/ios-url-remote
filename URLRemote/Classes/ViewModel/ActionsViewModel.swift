@@ -37,7 +37,7 @@ class ActionsViewModel {
             }
         }
         
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "CREATED_ENTRY"))
+        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "CREATED_ENTRY"))
             .observeNext { notification in
                 let entry = notification.object as! Entry
                 self.dataSource?.write(entry)

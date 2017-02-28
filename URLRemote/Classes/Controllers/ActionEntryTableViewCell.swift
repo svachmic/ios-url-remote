@@ -57,8 +57,8 @@ class ActionEntryTableViewCell: UITableViewCell {
         self.passwordField?.isClearIconButtonEnabled = true
         self.passwordField?.detailColor = UIColor(named: .red)
         
-        self.checkbox?.isChecked.bind(to: self.userField!.bnd_isEnabled)
-        self.checkbox?.isChecked.bind(to: self.passwordField!.bnd_isEnabled)
+        self.checkbox?.isChecked.bind(to: self.userField!.reactive.isEnabled)
+        self.checkbox?.isChecked.bind(to: self.passwordField!.reactive.isEnabled)
         _ = self.checkbox?.isChecked.observeNext {
             let alpha: CGFloat = $0 ? 1.0 : 0.5
             self.userField?.alpha = alpha

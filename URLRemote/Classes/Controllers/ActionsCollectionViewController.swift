@@ -12,9 +12,9 @@ import Bond
 import ReactiveKit
 
 ///
-class ActionsCollectionViewController: UICollectionViewController, MenuDelegate {
+class ActionsCollectionViewController: UICollectionViewController, FABMenuDelegate {
     var viewModel: ActionsViewModel!
-    var menu: Menu?
+    var menu: FABMenu?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,20 +47,20 @@ class ActionsCollectionViewController: UICollectionViewController, MenuDelegate 
         logout.titleColor = .white
         logout.pulseColor = .white
         logout.titleLabel?.font = RobotoFont.bold(with: 15)
-        _ = logout.bnd_tap.observeNext {
+        _ = logout.reactive.tap.observeNext {
             self.viewModel.logout()
         }
         self.navigationItem.leftViews = [logout]
         
         let addButton = IconButton(image: Icon.cm.add, tintColor: .white)
         addButton.pulseColor = .white
-        _ = addButton.bnd_tap.observeNext {
+        _ = addButton.reactive.tap.observeNext {
             self.displayEntrySetup()
         }
         
         let editButton = IconButton(image: Icon.cm.edit, tintColor: .white)
         editButton.pulseColor = .white
-        _ = editButton.bnd_tap.observeNext {
+        _ = editButton.reactive.tap.observeNext {
             self.displaySettings()
         }
         
@@ -75,13 +75,13 @@ class ActionsCollectionViewController: UICollectionViewController, MenuDelegate 
     
     ///
     func setLoginNotifications() {
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "USER_LOGGED_OUT"))
+        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "USER_LOGGED_OUT"))
             .observeNext { _ in self.displayLogin() }
-            .dispose(in: bnd_bag)
+            .dispose(in: reactive.bag)
         
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "USER_LOGGED_IN"))
+        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "USER_LOGGED_IN"))
             .observeNext { _ in self.setupCollectionDataSource() }
-            .dispose(in: bnd_bag)
+            .dispose(in: reactive.bag)
     }
     
     ///
@@ -99,46 +99,51 @@ class ActionsCollectionViewController: UICollectionViewController, MenuDelegate 
     
     ///
     func setupMenu() {
-        self.menu = Menu()
+        self.menu = FABMenu()
         guard let menu = self.menu else { return }
         
-        let addButton = FabButton(image: Icon.cm.add, tintColor: .white)
+        let addButton = FABButton(image: Icon.cm.add, tintColor: .white)
+        addButton.frame = CGRect(x: 0.0, y: 0.0, width: 48.0, height: 48.0)
         addButton.pulseColor = .white
         addButton.backgroundColor = UIColor(named: .green).darker()
-        self.menu?.bndToggle
-            .bind(signal: addButton.bnd_tap)
-            .dispose(in: bnd_bag)
+        self.menu?.reactive.bndToggle
+            .bind(signal: addButton.reactive.tap)
+            .dispose(in: reactive.bag)
         
-        let entryItem = MenuItem()
-        entryItem.button.image = UIImage(named: "new_entry")
-        entryItem.button.tintColor = .white
-        entryItem.button.pulseColor = .white
-        entryItem.button.backgroundColor = Color.grey.base
-        entryItem.button.depthPreset = .depth1
+        let entryItem = FABMenuItem()
+        entryItem.fabButton.image = UIImage(named: "new_entry")
+        entryItem.fabButton.tintColor = .white
+        entryItem.fabButton.pulseColor = .white
+        entryItem.fabButton.backgroundColor = Color.grey.base
+        entryItem.fabButton.depthPreset = .depth1
         entryItem.title = NSLocalizedString("NEW_ENTRY", comment: "")
-        _ = entryItem.button.bnd_tap.observeNext {
+        _ = entryItem.fabButton.reactive.tap.observeNext {
             menu.toggle()
             self.displayEntrySetup()
         }
         
-        let categoryItem = MenuItem()
-        categoryItem.button.image = UIImage(named: "new_category")
-        categoryItem.button.tintColor = .white
-        categoryItem.button.pulseColor = .white
-        categoryItem.button.backgroundColor = Color.grey.base
+        let categoryItem = FABMenuItem()
+        categoryItem.fabButton.image = UIImage(named: "new_category")
+        categoryItem.fabButton.tintColor = .white
+        categoryItem.fabButton.pulseColor = .white
+        categoryItem.fabButton.backgroundColor = Color.grey.base
         categoryItem.title = NSLocalizedString("NEW_CATEGORY", comment: "")
-        _ = categoryItem.button.bnd_tap.observeNext {
+        _ = categoryItem.fabButton.reactive.tap.observeNext {
             menu.toggle()
             self.displayCategorySetup()
         }
         
         menu.delegate = self
-        menu.views = [addButton, entryItem, categoryItem]
-        menu.baseSize = CGSize(width: 48.0, height: 48.0)
-        menu.itemSize = CGSize(width: 40.0, height: 40.0)
+        menu.fabButton = addButton
+        menu.fabMenuItems = [entryItem, categoryItem]
+        //menu.subviews = [addButton, entryItem, categoryItem]
+        //menu.baseSize = CGSize(width: 48.0, height: 48.0)
+        //menu.itemSize = CGSize(width: 40.0, height: 40.0)
+        menu.fabMenuItemSize = CGSize(width: 40.0, height: 40.0)
         
         let margin: CGFloat = 30.0
-        self.view.layout(menu).size(menu.baseSize).bottom(margin).right(margin)
+        self.view.layout(menu).size(addButton.frame.size).bottom(margin).right(margin)
+        //self.view.layout(menu).size(menu.baseSize).bottom(margin).right(margin)
     }
     
     /// MARK: - ViewController presentation
@@ -185,7 +190,7 @@ class ActionsCollectionViewController: UICollectionViewController, MenuDelegate 
         
         categoryDialog.addTextField { textField in
             textField.placeholder = NSLocalizedString("NEW_CATEGORY_PLACEHOLDER", comment: "")
-            _ = textField.bnd_text.map {
+            _ = textField.reactive.text.map {
                 guard let text = $0 else { return false }
                 return text != ""
             }.observeNext { next in
@@ -216,7 +221,7 @@ class ActionsCollectionViewController: UICollectionViewController, MenuDelegate 
     /// MARK: - Menu delegate method
     
     ///
-    public func menu(menu: Menu, tappedAt point: CGPoint, isOutside: Bool) {
+    public func fabMenu(fabMenu menu: FABMenu, tappedAt point: CGPoint, isOutside: Bool) {
         if isOutside {
             menu.toggle()
         }
