@@ -38,15 +38,15 @@ class EntrySetupViewController: UITableViewController {
         cancel.titleColor = .white
         cancel.pulseColor = .white
         cancel.titleLabel?.font = RobotoFont.bold(with: 15)
-        _ = cancel.bnd_tap.observeNext {
+        _ = cancel.reactive.tap.observeNext {
             self.parent?.dismiss(animated: true, completion: nil)
         }
         self.toolbarController?.toolbar.leftViews = [cancel]
         
         let done = IconButton(image: Icon.cm.check, tintColor: .white)
         done.pulseColor = .white
-        self.viewModel.isFormComplete.bind(to: done.bnd_isEnabled)
-        _ = done.bnd_tap.observeNext {
+        self.viewModel.isFormComplete.bind(to: done.reactive.isEnabled)
+        _ = done.reactive.tap.observeNext {
             let entry = self.viewModel.toEntry()
             NotificationCenter.default.post(
                 name: NSNotification.Name(rawValue: "CREATED_ENTRY"),
@@ -57,7 +57,7 @@ class EntrySetupViewController: UITableViewController {
         self.toolbarController?.toolbar.rightViews = [done]
         
         self.toolbarController?.toolbar.titleLabel.textColor = .white
-        self.viewModel.name.bind(to: self.toolbarController!.toolbar.bndTitle)
+        self.viewModel.name.bind(to: self.toolbarController!.toolbar.reactive.bndTitle)
     }
     
     ///
@@ -101,12 +101,12 @@ class EntrySetupViewController: UITableViewController {
     ///
     func setupDesignCell(cell: DesignEntryTableViewCell) {
         cell.layoutSubviews()
-        _ = cell.icon?.bnd_tap.observeNext {
+        _ = cell.icon?.reactive.tap.observeNext {
             self.presentIconController()
         }
         self.viewModel.color
             .map { return UIColor(named: $0) }
-            .bind(to: cell.icon!.bnd_backgroundColor)
+            .bind(to: cell.icon!.reactive.backgroundColor)
         
         _ = self.viewModel.icon
             .map { UIImage(named: $0) }
@@ -118,7 +118,7 @@ class EntrySetupViewController: UITableViewController {
         }
         
         _ = self.viewModel.name.bidirectionalBind(
-            to: cell.nameField!.bnd_text.bidirectionalMap(
+            to: cell.nameField!.reactive.text.bidirectionalMap(
                 to: { $0 ?? "" },
                 from: { $0 }))
         
@@ -131,8 +131,8 @@ class EntrySetupViewController: UITableViewController {
         cell.layoutSubviews()
         self.viewModel.type
             .map { $0.toString() }
-            .bind(to: cell.button!.bnd_title)
-        _ = cell.button?.bnd_tap.observeNext {
+            .bind(to: cell.button!.reactive.title)
+        _ = cell.button?.reactive.tap.observeNext {
             self.presentTypeController()
         }
     }
@@ -142,19 +142,19 @@ class EntrySetupViewController: UITableViewController {
         cell.layoutSubviews()
         
         _ = self.viewModel.url.bidirectionalBind(
-            to: cell.urlField!.bnd_text.bidirectionalMap(
+            to: cell.urlField!.reactive.text.bidirectionalMap(
                 to: { $0 ?? "" },
                 from: { $0 }))
         
         _ = self.viewModel.requiresAuthentication.bidirectionalBind(to: cell.checkbox!.isChecked)
         
         _ = self.viewModel.user.bidirectionalBind(
-            to: cell.userField!.bnd_text.bidirectionalMap(
+            to: cell.userField!.reactive.text.bidirectionalMap(
                 to: { $0 ?? "" },
                 from: { $0 }))
         
         _ = self.viewModel.password.bidirectionalBind(
-            to: cell.passwordField!.bnd_text.bidirectionalMap(
+            to: cell.passwordField!.reactive.text.bidirectionalMap(
                 to: { $0 ?? "" },
                 from: { $0 }))
     }
@@ -164,11 +164,11 @@ class EntrySetupViewController: UITableViewController {
         cell.layoutSubviews()
         
         _ = self.viewModel.customCriteria.bidirectionalBind(
-            to: cell.criteriaField!.bnd_text.bidirectionalMap(
+            to: cell.criteriaField!.reactive.text.bidirectionalMap(
                 to: { $0 ?? "" },
                 from: { $0 }))
         
-        _ = cell.infoButton?.bnd_tap.observeNext {
+        _ = cell.infoButton?.reactive.tap.observeNext {
             self.presentSimpleAlertDialog(
                 header: NSLocalizedString("CUSTOM_CRITERIA", comment: ""),
                 message: NSLocalizedString("CUSTOM_CRITERIA_DESC", comment: ""))

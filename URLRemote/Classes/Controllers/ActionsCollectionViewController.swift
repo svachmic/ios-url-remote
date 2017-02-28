@@ -47,20 +47,20 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         logout.titleColor = .white
         logout.pulseColor = .white
         logout.titleLabel?.font = RobotoFont.bold(with: 15)
-        _ = logout.bnd_tap.observeNext {
+        _ = logout.reactive.tap.observeNext {
             self.viewModel.logout()
         }
         self.navigationItem.leftViews = [logout]
         
         let addButton = IconButton(image: Icon.cm.add, tintColor: .white)
         addButton.pulseColor = .white
-        _ = addButton.bnd_tap.observeNext {
+        _ = addButton.reactive.tap.observeNext {
             self.displayEntrySetup()
         }
         
         let editButton = IconButton(image: Icon.cm.edit, tintColor: .white)
         editButton.pulseColor = .white
-        _ = editButton.bnd_tap.observeNext {
+        _ = editButton.reactive.tap.observeNext {
             self.displaySettings()
         }
         
@@ -75,13 +75,13 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
     
     ///
     func setLoginNotifications() {
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "USER_LOGGED_OUT"))
+        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "USER_LOGGED_OUT"))
             .observeNext { _ in self.displayLogin() }
-            .dispose(in: bnd_bag)
+            .dispose(in: reactive.bag)
         
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "USER_LOGGED_IN"))
+        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "USER_LOGGED_IN"))
             .observeNext { _ in self.setupCollectionDataSource() }
-            .dispose(in: bnd_bag)
+            .dispose(in: reactive.bag)
     }
     
     ///
@@ -106,9 +106,9 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         addButton.frame = CGRect(x: 0.0, y: 0.0, width: 48.0, height: 48.0)
         addButton.pulseColor = .white
         addButton.backgroundColor = UIColor(named: .green).darker()
-        self.menu?.bndToggle
-            .bind(signal: addButton.bnd_tap)
-            .dispose(in: bnd_bag)
+        self.menu?.reactive.bndToggle
+            .bind(signal: addButton.reactive.tap)
+            .dispose(in: reactive.bag)
         
         let entryItem = FABMenuItem()
         entryItem.fabButton.image = UIImage(named: "new_entry")
@@ -117,7 +117,7 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         entryItem.fabButton.backgroundColor = Color.grey.base
         entryItem.fabButton.depthPreset = .depth1
         entryItem.title = NSLocalizedString("NEW_ENTRY", comment: "")
-        _ = entryItem.fabButton.bnd_tap.observeNext {
+        _ = entryItem.fabButton.reactive.tap.observeNext {
             menu.toggle()
             self.displayEntrySetup()
         }
@@ -128,7 +128,7 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         categoryItem.fabButton.pulseColor = .white
         categoryItem.fabButton.backgroundColor = Color.grey.base
         categoryItem.title = NSLocalizedString("NEW_CATEGORY", comment: "")
-        _ = categoryItem.fabButton.bnd_tap.observeNext {
+        _ = categoryItem.fabButton.reactive.tap.observeNext {
             menu.toggle()
             self.displayCategorySetup()
         }
@@ -190,7 +190,7 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         
         categoryDialog.addTextField { textField in
             textField.placeholder = NSLocalizedString("NEW_CATEGORY_PLACEHOLDER", comment: "")
-            _ = textField.bnd_text.map {
+            _ = textField.reactive.text.map {
                 guard let text = $0 else { return false }
                 return text != ""
             }.observeNext { next in

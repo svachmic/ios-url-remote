@@ -33,17 +33,17 @@ class LoginTableViewController: UITableViewController {
     
     /// Sets up notification handlers for sign in/up actions.
     func setupNotificationHandler() {
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "FAILED_SIGN_UP"))
+        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "FAILED_SIGN_UP"))
             .observeNext { self.handle(notification: $0) }
-            .dispose(in: bnd_bag)
+            .dispose(in: reactive.bag)
         
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "FAILED_SIGN_IN"))
+        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "FAILED_SIGN_IN"))
             .observeNext { self.handle(notification: $0) }
-            .dispose(in: bnd_bag)
+            .dispose(in: reactive.bag)
         
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "SUCCESS_SIGN_IN"))
+        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "SUCCESS_SIGN_IN"))
             .observeNext { _ in self.parent?.dismiss(animated: true) }
-            .dispose(in: bnd_bag)
+            .dispose(in: reactive.bag)
     }
     
     /// Handles a notification simply by displaying an alert dialog with an error message describing the problem that has occurred.
@@ -127,14 +127,14 @@ class LoginTableViewController: UITableViewController {
     ///
     /// - Parameter textField: TextField object to be bound.
     func bindEmailCell(textField: TextField) {
-        textField.bnd_text.bind(to: self.viewModel.email)
+        textField.reactive.text.bind(to: self.viewModel.email)
         
-        _ = textField.bnd_text.map { text -> String in
+        _ = textField.reactive.text.map { text -> String in
             if let text = text, !text.isValidEmail(), text != "" {
                 return NSLocalizedString("INVALID_EMAIL", comment: "")
             }
             return ""
-        }.bind(to: textField.bndDetail)
+        }.bind(to: textField.reactive.bndDetail)
     }
     
     /// Binds the password and repeated password TextFields to the view-model.
@@ -146,17 +146,17 @@ class LoginTableViewController: UITableViewController {
     func bindPasswordCell(index: Int, textField: TextField) {
         if index == 0 {
             // first password field during both sign in/up
-            textField.bnd_text.bind(to: self.viewModel.password)
+            textField.reactive.text.bind(to: self.viewModel.password)
             
-            textField.bnd_text.skip(first: 1).map { text in
+            textField.reactive.text.skip(first: 1).map { text in
                 if let text = text, (text.characters.count < 6 && text.characters.count != 0) {
                     return NSLocalizedString("INVALID_PASSWORD_LENGTH", comment: "")
                 }
                 return ""
-            }.bind(to: textField.bndDetail)
+            }.bind(to: textField.reactive.bndDetail)
         } else {
             // second password field during sign up
-            textField.bnd_text.bind(to: self.viewModel.passwordAgain)
+            textField.reactive.text.bind(to: self.viewModel.passwordAgain)
             
             _ = combineLatest(self.viewModel.password, self.viewModel.passwordAgain)
                 .map { password, repeated in
@@ -164,7 +164,7 @@ class LoginTableViewController: UITableViewController {
                         return NSLocalizedString("INVALID_PASSWORD", comment: "")
                     }
                     return ""
-                }.bind(to: textField.bndDetail)
+                }.bind(to: textField.reactive.bndDetail)
         }
     }
     
@@ -175,7 +175,7 @@ class LoginTableViewController: UITableViewController {
     /// - Parameter state: State to be compared for transformation.
     /// - Parameter button: RaisedButton object to be bound.
     func bindSignButton(state: LoginState, button: RaisedButton) {
-        _ = button.bnd_tap.observeNext {
+        _ = button.reactive.tap.observeNext {
             self.view.endEditing(true)
             
             if self.viewModel.state == state {

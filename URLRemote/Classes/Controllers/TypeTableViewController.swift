@@ -33,7 +33,7 @@ class TypeTableViewController: UITableViewController {
         cancel.titleColor = .white
         cancel.pulseColor = .white
         cancel.titleLabel?.font = RobotoFont.bold(with: 15)
-        _ = cancel.bnd_tap.observeNext {
+        _ = cancel.reactive.tap.observeNext {
             self.parent?.dismiss(animated: true, completion: nil)
         }
         self.toolbarController?.toolbar.leftViews = [cancel]
@@ -50,7 +50,7 @@ class TypeTableViewController: UITableViewController {
             cell.layoutSubviews()
             cell.label?.text = type.toString()
             
-            _ = cell.infoButton?.bnd_tap.observeNext {
+            _ = cell.infoButton?.reactive.tap.observeNext {
                 self.presentSimpleAlertDialog(
                     header: type.toString(),
                     message: type.description())

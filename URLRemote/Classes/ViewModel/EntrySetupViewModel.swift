@@ -75,7 +75,7 @@ class EntrySetupViewModel {
             }
         }
         
-        NotificationCenter.default.bnd_notification(name: NSNotification.Name(rawValue: "SELECTED_ICON"))
+        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "SELECTED_ICON"))
             .map { return $0.object as! String }
             .bind(to: self.icon)
             .dispose(in: self.bndBag)
