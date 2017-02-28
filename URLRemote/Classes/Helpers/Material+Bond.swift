@@ -35,20 +35,23 @@ extension FABMenu {
         
         self.subviews.first?.motion(.rotationAngle(angle), .duration(0.1))
     }
+}
+
+extension ReactiveExtensions where Base: FABMenu {
     
     /// Binding for menu toggle open/collapse on button tap.
-    var bndToggle: Bond<FABMenu, Void> {
-        return Bond(target: self) { _, _ in
-            self.toggle()
+    var bndToggle: Bond<Void> {
+        return bond { menu, _ in
+            menu.toggle()
         }
     }
 }
 
-extension RaisedButton {
+extension ReactiveExtensions where Base: RaisedButton {
     
     /// Binding with a button after EntryAction has been performed.
-    var bndAction: Bond<RaisedButton, EntryActionStatus> {
-        return Bond(target: self) { button, status in
+    var bndAction: Bond<EntryActionStatus> {
+        return bond { button, status in
             print(status)
             
             switch status {
@@ -69,21 +72,21 @@ extension RaisedButton {
     }
 }
 
-extension Toolbar {
+extension ReactiveExtensions where Base: Toolbar {
     
     /// Binding for the toolbar's title.
-    var bndTitle: Bond<Toolbar, String> {
-        return Bond(target: self) { toolbar, title in
+    var bndTitle: Bond<String> {
+        return bond { toolbar, title in
             toolbar.title = title
         }
     }
 }
 
-extension TextField {
+extension ReactiveExtensions where Base: TextField {
     
     /// Binding for the detail field of the TextField.
-    var bndDetail: Bond<TextField, String> {
-        return Bond(target: self) { field, text in
+    var bndDetail: Bond<String> {
+        return bond { field, text in
             field.detail = text
         }
     }
