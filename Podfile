@@ -11,7 +11,7 @@ target "URLRemote" do
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'Firebase/Database'
-    pod 'Material', '~> 2.0'
+    pod 'Material', '~> 2.5.0'
     pod 'Motion', '~> 1.0'
     pod 'ObjectMapper', '~> 2.0'
 
