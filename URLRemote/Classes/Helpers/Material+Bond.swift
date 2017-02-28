@@ -8,13 +8,12 @@
 
 import Foundation
 import Material
-import Motion
 import Bond
 import ReactiveKit
 
 /// ReactiveKit/Bond bindings for Material components.
 
-extension Menu {
+extension FABMenu {
     
     /// Toggles the menu open/close.
     func toggle() {
@@ -22,23 +21,23 @@ extension Menu {
         
         if self.isOpened {
             self.close()
-            for v in self.views {
-                (v as? MenuItem)?.hideTitleLabel()
+            for v in self.subviews {
+                (v as? FABMenuItem)?.hideTitleLabel()
             }
         } else {
             angle = 45.0
             self.open()
-            for v in self.views {
-                (v as? MenuItem)?.showTitleLabel()
+            for v in self.subviews {
+                (v as? FABMenuItem)?.showTitleLabel()
             }
             
         }
         
-        self.views.first?.motion(.rotationAngle(angle), .duration(0.1))
+        self.subviews.first?.motion(.rotationAngle(angle), .duration(0.1))
     }
     
     /// Binding for menu toggle open/collapse on button tap.
-    var bndToggle: Bond<Menu, Void> {
+    var bndToggle: Bond<FABMenu, Void> {
         return Bond(target: self) { _, _ in
             self.toggle()
         }
