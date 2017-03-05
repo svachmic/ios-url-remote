@@ -9,7 +9,7 @@
 import UIKit
 import Material
 
-///
+/// Cell displayed only when Custom criteria is selected as the action type. Displays a text field to type custom string to be evaluated against the action's result.
 class CustomCriteriaTableViewCell: UITableViewCell {
     var criteriaField: TextField?
     var infoButton: UIButton?
@@ -18,6 +18,7 @@ class CustomCriteriaTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
+    /// Has to be called in order to set up all the subviews. Container with tag 10 is otherwise nil before the super method is called.
     override func layoutSubviews() {
         super.layoutSubviews()
         

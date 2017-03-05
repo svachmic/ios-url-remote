@@ -9,7 +9,7 @@
 import UIKit
 import Material
 
-///
+/// View for a cell representing the type of an entry. Drawn simply as a text with currently selected type and an arrow indicating interaction with the cell.
 class TypeEntryTableViewCell: UITableViewCell {
     var button: FlatButton?
 
@@ -17,6 +17,7 @@ class TypeEntryTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
+    /// Has to be called in order to set up all the subviews. Container with tag 10 is otherwise nil before the super method is called.
     override func layoutSubviews() {
         super.layoutSubviews()
         
