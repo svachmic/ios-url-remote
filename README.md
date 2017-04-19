@@ -4,26 +4,30 @@
 
 iOS application for IoT devices operating via HTTP/HTTPS.
 
-### Features
+## 🌟 Features
 
-- [x] Add/Edit/Delete entry
-- [x] Custom icon/color
-- [x] HTTP Basic Authentication
-- [x] Firebase synchronization
-- [ ] Categories
-- [ ] TouchID Authentication
+- Add/Edit/Delete Entry
+- Custom Icon/Color
+- HTTP Basic Authentication
+- Firebase Synchronization
 
-### Validators
+## ⚖️ Validators
 
-- [x] HTTP Status Code based
-- [x] QUIDO
-- [x] Custom criteria
+- HTTP Status Code based
+- [QUIDO](https://www.papouch.com/en/website/mainmenu/how-to/http-get-in-quido/)
+- Custom Criteria
 
 For more validators either:
 
 1. Submit a PR.
 2. Create an issue.
 
-## License
+## 📋 TODO
+
+- Categories
+- TouchID Authentication
+- Apple Watch Extension
+
+## 🔖 License
 
 TBD
