@@ -27,7 +27,6 @@
 		E005D0A11DE61967002B79C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D0A01DE61967002B79C0 /* LoginViewModel.swift */; };
 		E005D0A41DE76BC5002B79C0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D0A31DE76BC5002B79C0 /* StringExtension.swift */; };
 		E00A20481E368C0200FF8DA6 /* ValidatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00A20471E368C0200FF8DA6 /* ValidatorFactory.swift */; };
-		E01A60E01E4349FE00AEF1A6 /* PagingActionsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01A60DF1E4349FD00AEF1A6 /* PagingActionsLayout.swift */; };
 		E01BFF5A1E2A4BE600862906 /* ActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828201E01876F00EB0041 /* ActionViewCell.swift */; };
 		E01BFF5B1E2A4BE700862906 /* ActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828201E01876F00EB0041 /* ActionViewCell.swift */; };
 		E02C36EF1E3F8B14009649B3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36EE1E3F8B14009649B3 /* Category.swift */; };
@@ -107,8 +106,6 @@
 		E09FECDC1E49E5B6002A8D91 /* IconCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FC001E2581FF00C54FF8 /* IconCollectionViewModel.swift */; };
 		E09FECDD1E49E5BC002A8D91 /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D09C1DE5EC6E002B79C0 /* LoginTableViewController.swift */; };
 		E09FECDE1E49E5BC002A8D91 /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D09C1DE5EC6E002B79C0 /* LoginTableViewController.swift */; };
-		E09FECDF1E49E5BF002A8D91 /* PagingActionsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01A60DF1E4349FD00AEF1A6 /* PagingActionsLayout.swift */; };
-		E09FECE01E49E5C0002A8D91 /* PagingActionsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01A60DF1E4349FD00AEF1A6 /* PagingActionsLayout.swift */; };
 		E09FECE11E49E5C2002A8D91 /* ActionsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B4F621CFC7C1B001E572E /* ActionsCollectionViewController.swift */; };
 		E09FECE21E49E5C3002A8D91 /* ActionsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B4F621CFC7C1B001E572E /* ActionsCollectionViewController.swift */; };
 		E09FECE31E49E5C7002A8D91 /* DesignEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF01E23BE8A00C54FF8 /* DesignEntryTableViewCell.swift */; };
@@ -208,7 +205,6 @@
 		E005D0A21DE6437D002B79C0 /* URLRemote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "URLRemote-Bridging-Header.h"; sourceTree = "<group>"; };
 		E005D0A31DE76BC5002B79C0 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E00A20471E368C0200FF8DA6 /* ValidatorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatorFactory.swift; sourceTree = "<group>"; };
-		E01A60DF1E4349FD00AEF1A6 /* PagingActionsLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PagingActionsLayout.swift; path = Controllers/PagingActionsLayout.swift; sourceTree = "<group>"; };
 		E02C36EE1E3F8B14009649B3 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = Model/Category.swift; sourceTree = "<group>"; };
 		E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseObject.swift; path = Model/FirebaseObject.swift; sourceTree = "<group>"; };
 		E04DB6991E292D8400AC8C3D /* TypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeTableViewController.swift; path = Controllers/TypeTableViewController.swift; sourceTree = "<group>"; };
@@ -462,7 +458,6 @@
 		E06828391E04431A00EB0041 /* ActionsCollection */ = {
 			isa = PBXGroup;
 			children = (
-				E01A60DF1E4349FD00AEF1A6 /* PagingActionsLayout.swift */,
 				C16B4F621CFC7C1B001E572E /* ActionsCollectionViewController.swift */,
 				E06828201E01876F00EB0041 /* ActionViewCell.swift */,
 			);
@@ -817,7 +812,6 @@
 				E052E7711E368F58007D19EB /* SimpleHTTPValidator.swift in Sources */,
 				C1BBC12C1CFC511D00EB62B1 /* AppDelegate.swift in Sources */,
 				E072B1351E40EB9A0012589D /* ArrayExtension.swift in Sources */,
-				E01A60E01E4349FE00AEF1A6 /* PagingActionsLayout.swift in Sources */,
 				E0C2E3631E354C1600923A2D /* GenericValidator.swift in Sources */,
 				E0E2FBF91E23F7D500C54FF8 /* CheckboxButton.swift in Sources */,
 				E0E2FBF71E23F4E700C54FF8 /* ActionEntryTableViewCell.swift in Sources */,
@@ -874,7 +868,6 @@
 				E09FECED1E49E5D8002A8D91 /* IconCollectionViewController.swift in Sources */,
 				E09FECCE1E49E451002A8D91 /* AppDelegate.swift in Sources */,
 				E09FECD71E49E5AF002A8D91 /* EntrySetupViewModel.swift in Sources */,
-				E09FECDF1E49E5BF002A8D91 /* PagingActionsLayout.swift in Sources */,
 				E082D96C1E39357800E143F5 /* ValidatorFactory.swift in Sources */,
 				E0C0FA271E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */,
 				E082D9681E3934FE00E143F5 /* EntryAction.swift in Sources */,
@@ -903,7 +896,6 @@
 				E09FECD61E49E5AB002A8D91 /* LoginViewModel.swift in Sources */,
 				E06828291E01C48400EB0041 /* ApplicationNavigationController.swift in Sources */,
 				E068282F1E03067D00EB0041 /* FirebaseDataSource.swift in Sources */,
-				E09FECE01E49E5C0002A8D91 /* PagingActionsLayout.swift in Sources */,
 				E0628FB11E2F9EDF00DADAB3 /* SettingsViewModel.swift in Sources */,
 				E09FECC91E49E3F4002A8D91 /* StringExtension.swift in Sources */,
 				E09FECE41E49E5C8002A8D91 /* DesignEntryTableViewCell.swift in Sources */,
