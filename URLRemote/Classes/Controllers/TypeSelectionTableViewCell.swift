@@ -18,6 +18,7 @@ class TypeSelectionTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
+    /// Has to be called in order to set up all the subviews. Container with tag 10 is otherwise nil before the super method is called.
     override func layoutSubviews() {
         super.layoutSubviews()
         
