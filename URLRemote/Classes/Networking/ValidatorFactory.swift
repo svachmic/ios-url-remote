@@ -19,11 +19,11 @@ class ValidatorFactory {
         switch entry.type {
         case .none:
             return SimpleHTTPValidator()
-        case .some(.SimpleHTTP):
+        case .some(.simpleHTTP):
             return SimpleHTTPValidator()
-        case .some(.Quido):
+        case .some(.quido):
             return QuidoValidator()
-        case .some(.Custom):
+        case .some(.custom):
             return CustomCriteriaValidator(with: entry.customCriteria ?? "")
         }
     }

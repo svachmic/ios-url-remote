@@ -14,24 +14,24 @@ import ObjectMapper
 enum EntryType: Int, EnumCollection {
     
     /// Custom criteria type evaluated against a user-defined criteria.
-    case Custom = 0
+    case custom = 0
     
     /// Simple HTTP type evaluated only by HTTP status code.
-    case SimpleHTTP = 1
+    case simpleHTTP = 1
     
     /// Quido I/O module type evaluated against specific criteria.
-    case Quido = 2
+    case quido = 2
     
     /// Returns human-readable, localized name of the enum value.
     ///
     /// - Returns: String object with the name of the EntryType.
     func toString() -> String {
         switch self {
-        case .Custom:
+        case .custom:
             return NSLocalizedString("TYPE_CUSTOM", comment: "")
-        case .SimpleHTTP:
+        case .simpleHTTP:
             return NSLocalizedString("TYPE_SIMPLE_HTTP", comment: "")
-        case .Quido:
+        case .quido:
             return NSLocalizedString("TYPE_QUIDO", comment: "")
         }
     }
@@ -41,11 +41,11 @@ enum EntryType: Int, EnumCollection {
     /// - Returns: String object with the description of the EntryType.
     func description() -> String {
         switch self {
-        case .Custom:
+        case .custom:
             return NSLocalizedString("TYPE_CUSTOM_DESC", comment: "")
-        case .SimpleHTTP:
+        case .simpleHTTP:
             return NSLocalizedString("TYPE_SIMPLE_HTTP_DESC", comment: "")
-        case .Quido:
+        case .quido:
             return NSLocalizedString("TYPE_QUIDO_DESC", comment: "")
         }
     }

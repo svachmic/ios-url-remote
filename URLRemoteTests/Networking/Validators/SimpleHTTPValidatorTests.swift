@@ -15,7 +15,7 @@ class SimpleHTTPValidatorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let entry = Entry()
-        entry.type = EntryType.SimpleHTTP
+        entry.type = EntryType.simpleHTTP
         validator = ValidatorFactory.validator(for: entry)
     }
     

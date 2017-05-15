@@ -46,13 +46,13 @@ class EntrySetupViewModelTests: XCTestCase {
     }
     
     func testTypeSwitching() {
-        XCTAssertTrue(viewModel.type.value == EntryType.SimpleHTTP)
+        XCTAssertTrue(viewModel.type.value == EntryType.simpleHTTP)
         XCTAssertTrue(viewModel.contents.count == 3)
         
-        viewModel.type.value = EntryType.Custom
+        viewModel.type.value = EntryType.custom
         XCTAssertTrue(viewModel.contents.count == 4)
         
-        viewModel.type.value = EntryType.SimpleHTTP
+        viewModel.type.value = EntryType.simpleHTTP
         XCTAssertTrue(viewModel.contents.count == 3)
     }
     
@@ -92,7 +92,7 @@ class EntrySetupViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.color.value == ColorName.yellow)
         XCTAssertTrue(viewModel.icon.value == "plus")
         XCTAssertTrue(viewModel.url.value == "")
-        XCTAssertTrue(viewModel.type.value == EntryType.SimpleHTTP)
+        XCTAssertTrue(viewModel.type.value == EntryType.simpleHTTP)
         XCTAssertTrue(viewModel.customCriteria.value == "")
     }
     

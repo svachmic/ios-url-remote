@@ -29,24 +29,24 @@ class EntryTests: XCTestCase {
         XCTAssertTrue(entry.requiresAuthentication)
         XCTAssertTrue(entry.user == "test_user")
         XCTAssertTrue(entry.password == "test_password")
-        XCTAssertTrue(entry.type == EntryType.Custom)
+        XCTAssertTrue(entry.type == EntryType.custom)
         XCTAssertTrue(entry.customCriteria == "success")
         XCTAssertTrue(entry.url == "https://www.seznam.cz")
     }
     
     func testEntryType() {
         let custom = EntryType(rawValue: 0)
-        XCTAssertTrue(custom == EntryType.Custom)
+        XCTAssertTrue(custom == EntryType.custom)
         XCTAssertTrue(custom?.description() == NSLocalizedString("TYPE_CUSTOM_DESC", comment: ""))
         XCTAssertTrue(custom?.toString() == NSLocalizedString("TYPE_CUSTOM", comment: ""))
         
         let simple = EntryType(rawValue: 1)
-        XCTAssertTrue(simple == EntryType.SimpleHTTP)
+        XCTAssertTrue(simple == EntryType.simpleHTTP)
         XCTAssertTrue(simple?.description() == NSLocalizedString("TYPE_SIMPLE_HTTP_DESC", comment: ""))
         XCTAssertTrue(simple?.toString() == NSLocalizedString("TYPE_SIMPLE_HTTP", comment: ""))
         
         let quido = EntryType(rawValue: 2)
-        XCTAssertTrue(quido == EntryType.Quido)
+        XCTAssertTrue(quido == EntryType.quido)
         XCTAssertTrue(quido?.description() == NSLocalizedString("TYPE_QUIDO_DESC", comment: ""))
         XCTAssertTrue(quido?.toString() == NSLocalizedString("TYPE_QUIDO", comment: ""))
     }

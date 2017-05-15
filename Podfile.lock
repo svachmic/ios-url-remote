@@ -1,34 +1,35 @@
 PODS:
   - Alamofire (4.4.0)
-  - Bond (6.0.4):
+  - Bond (6.2.6):
     - Diff (~> 0.4)
-    - ReactiveKit (~> 3.3)
+    - ReactiveKit (~> 3.5.3)
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
-  - Diff (0.5.0)
+  - Diff (0.5.3)
   - Fabric (1.6.11)
-  - Firebase/Auth (3.14.0):
+  - Firebase/Auth (3.17.0):
     - Firebase/Core
     - FirebaseAuth (= 3.1.1)
-  - Firebase/Core (3.14.0):
-    - FirebaseAnalytics (= 3.7.0)
-    - FirebaseCore (= 3.5.1)
-  - Firebase/Database (3.14.0):
+  - Firebase/Core (3.17.0):
+    - FirebaseAnalytics (= 3.9.0)
+    - FirebaseCore (= 3.6.0)
+  - Firebase/Database (3.17.0):
     - Firebase/Core
     - FirebaseDatabase (= 3.1.2)
-  - FirebaseAnalytics (3.7.0):
-    - FirebaseCore (~> 3.5)
+  - FirebaseAnalytics (3.9.0):
+    - FirebaseCore (~> 3.6)
     - FirebaseInstanceID (~> 1.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseAuth (3.1.1):
     - FirebaseAnalytics (~> 3.7)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (3.5.1):
+  - FirebaseCore (3.6.0):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseDatabase (3.1.2):
     - FirebaseAnalytics (~> 3.7)
-  - FirebaseInstanceID (1.0.9)
+  - FirebaseInstanceID (1.0.10):
+    - FirebaseCore (~> 3.6)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
@@ -39,40 +40,40 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - GTMSessionFetcher/Core (1.1.8)
-  - Material (2.5.1):
-    - Material/Core (= 2.5.1)
-  - Material/Core (2.5.1)
+  - GTMSessionFetcher/Core (1.1.9)
+  - Material (2.5.2):
+    - Material/Core (= 2.5.2)
+  - Material/Core (2.5.2)
   - MBProgressHUD (1.0.0)
-  - Motion (1.0.5):
-    - Motion/Core (= 1.0.5)
-  - Motion/Core (1.0.5)
-  - ObjectMapper (2.2.5)
-  - OHHTTPStubs (5.2.3):
-    - OHHTTPStubs/Default (= 5.2.3)
-  - OHHTTPStubs/Core (5.2.3)
-  - OHHTTPStubs/Default (5.2.3):
+  - Motion (1.0.8):
+    - Motion/Core (= 1.0.8)
+  - Motion/Core (1.0.8)
+  - ObjectMapper (2.2.6)
+  - OHHTTPStubs (6.0.0):
+    - OHHTTPStubs/Default (= 6.0.0)
+  - OHHTTPStubs/Core (6.0.0)
+  - OHHTTPStubs/Default (6.0.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.2.3):
+  - OHHTTPStubs/JSON (6.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.2.3):
+  - OHHTTPStubs/NSURLSession (6.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.2.3)
-  - OHHTTPStubs/Swift (5.2.3):
-    - OHHTTPStubs/Core
-  - ReactiveKit (3.3.1)
+  - OHHTTPStubs/OHPathHelpers (6.0.0)
+  - OHHTTPStubs/Swift (6.0.0):
+    - OHHTTPStubs/Default
+  - ReactiveKit (3.5.3)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - Bond (~> 6.0)
-  - Crashlytics
-  - Fabric
-  - Firebase/Auth
-  - Firebase/Core
-  - Firebase/Database
+  - Crashlytics (~> 3.8)
+  - Fabric (~> 1.6)
+  - Firebase/Auth (~> 3.17)
+  - Firebase/Core (~> 3.17)
+  - Firebase/Database (~> 3.17)
   - Material (~> 2.5.1)
   - MBProgressHUD (~> 1.0)
   - Motion (~> 1.0)
@@ -82,25 +83,25 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
-  Bond: bc982d559e9c7fe30f50c29bbb5396ded9529699
+  Bond: 0d7a52e9aec644c3b4985ceeb224a402b1efd691
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
-  Diff: eceb93a3adf508574ba9b8560da185ace83de055
+  Diff: befa1d19c32726b2b36ce915d98793e2fbde8dcc
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  Firebase: 85a581fb04e44f63ae9f4fbc8d6dabf4a4c18653
-  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
+  Firebase: 4b66b5b59c43edac745b87f0c87e42cdd0279c13
+  FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseAuth: cc8a1824170adbd351edb7f994490a3fb5c18be6
-  FirebaseCore: 225d40532489835a034b8f4e2c9c87fbf4f615a2
+  FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseDatabase: 05c96d7b43a7368dc91c07791adb49683e1738d1
-  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
+  FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
-  Material: 858f56406dd5bcf0e76f6f8e34f0746a409eed6a
+  GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
+  Material: 00ae261fa04dd3f3f8584d07e44ac658fa1bc6fd
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  Motion: 35d2c694cb62b0325c62504e15ffdf3cc3cc7d39
-  ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
-  OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
-  ReactiveKit: 27df79c2e2f0771aef1061551fcd7e82b92066e9
+  Motion: cae3bf09f58547f5866140b44f813f9f5af44b90
+  ObjectMapper: 042708195cc46c20871cbcbec0453826398273fd
+  OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
+  ReactiveKit: 39a0723167d04107140cf540f04526deecd18891
 
-PODFILE CHECKSUM: f8d8cbbb5f4466ff33927eb9af66996f1b7991e1
+PODFILE CHECKSUM: b7b554331f2d93b684f690843a8837033e283923
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

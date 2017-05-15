@@ -1,8 +1,17 @@
 # URLRemote
 
-![Release Status](https://img.shields.io/badge/status-beta-yellow.svg?style=flat)
-
 iOS application for IoT devices operating via HTTP/HTTPS.
+
+#### Master Branch
+
+![Release Status](https://img.shields.io/badge/status-beta-yellow.svg?style=flat)
+[![Build Status](https://travis-ci.org/svachmic/ios-url-remote.svg?branch=master)](https://travis-ci.org/svachmic/ios-url-remote)
+[![codecov](https://codecov.io/gh/svachmic/ios-url-remote/branch/master/graph/badge.svg)](https://codecov.io/gh/svachmic/ios-url-remote)
+
+#### Develop Branch
+
+[![Build Status](https://travis-ci.org/svachmic/ios-url-remote.svg?branch=develop)](https://travis-ci.org/svachmic/ios-url-remote)
+[![codecov](https://codecov.io/gh/svachmic/ios-url-remote/branch/develop/graph/badge.svg)](https://codecov.io/gh/svachmic/ios-url-remote)
 
 ## 🌟 Features
 
