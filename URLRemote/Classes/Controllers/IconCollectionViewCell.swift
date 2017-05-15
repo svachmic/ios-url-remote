@@ -22,7 +22,7 @@ class IconCollectionViewCell: UICollectionViewCell {
                 arcCenter: CGPoint(x: self.width / 2.0, y: self.width / 2.0),
                 radius: self.width / 2.0,
                 startAngle: CGFloat(0),
-                endAngle:CGFloat(M_PI * 2),
+                endAngle:CGFloat(Double.pi * 2),
                 clockwise: true)
             
             self.highlightLayer = CAShapeLayer()
