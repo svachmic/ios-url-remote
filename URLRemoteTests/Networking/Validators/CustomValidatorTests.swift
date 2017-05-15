@@ -15,7 +15,7 @@ class CustomValidatorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let entry = Entry()
-        entry.type = EntryType.Custom
+        entry.type = EntryType.custom
         entry.customCriteria = "test"
         validator = ValidatorFactory.validator(for: entry)
     }

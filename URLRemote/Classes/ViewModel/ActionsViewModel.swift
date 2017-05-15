@@ -54,7 +54,7 @@ class ActionsViewModel {
         testEntry.color = .green
         testEntry.icon = "lightbulb_on"
         testEntry.url = "https://www.seznam.cz"
-        testEntry.type = .SimpleHTTP
+        testEntry.type = .simpleHTTP
         testEntry.requiresAuthentication = false
         self.dataSource?.write(testEntry)
     }

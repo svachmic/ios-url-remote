@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8.2
+osx_image: xcode8.3
 
 branches:
   only:
@@ -13,8 +13,20 @@ before_install:
   - brew update
   - brew install swiftlint || true
   - pod update
-  - sudo gem update fastlane
+  - gem update fastlane
   - cp ./URLRemote/Resources/mock-GoogleService-Info.plist ./URLRemote/Resources/GoogleService-Info.plist
+  - cd ./URLRemote/Resources
+  - sed -i '' '/<key>AD_UNIT_ID_FOR_BANNER_TEST</{n;s/></>'$(echo "$AD_UNIT_ID_FOR_BANNER_TEST" | sed 's/\//\\\//g')'</;}' GoogleService-Info.plist
+  - sed -i '' '/<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</{n;s/></>'$(echo "$AD_UNIT_ID_FOR_INTERSTITIAL_TEST" | sed 's/\//\\\//g')'</;}' GoogleService-Info.plist
+  - sed -i '' '/<key>CLIENT_ID</{n;s/></>'$(echo "$CLIENT_ID" | sed 's/\//\\\//g')'</;}' GoogleService-Info.plist
+  - sed -i '' '/<key>REVERSED_CLIENT_ID</{n;s/></>'$(echo "$REVERSED_CLIENT_ID" | sed 's/\//\\\//g')'</;}' GoogleService-Info.plist
+  - sed -i '' '/<key>API_KEY</{n;s/></>'$(echo "$API_KEY" | sed 's/\//\\\//g')'</;}' GoogleService-Info.plist
+  - sed -i '' '/<key>GCM_SENDER_ID</{n;s/></>'$(echo "$GCM_SENDER_ID" | sed 's/\//\\\//g')'</;}' GoogleService-Info.plist
+  - sed -i '' '/<key>PROJECT_ID</{n;s/></>'$(echo "$PROJECT_ID" | sed 's/\//\\\//g')'</;}' GoogleService-Info.plist
+  - sed -i '' '/<key>STORAGE_BUCKET</{n;s/></>'$(echo "$STORAGE_BUCKET" | sed 's/\//\\\//g')'</;}' GoogleService-Info.plist
+  - sed -i '' '/<key>GOOGLE_APP_ID</{n;s/></>'$(echo "$GOOGLE_APP_ID" | sed 's/\//\\\//g')'</;}' GoogleService-Info.plist
+  - sed -i '' '/<key>DATABASE_URL</{n;s/></>'$(echo "$DATABASE_URL" | sed 's/\//\\\//g')'</;}' GoogleService-Info.plist
+  - cd ../..
 
 script:
   - if [ "$TRAVIS_BRANCH" = "develop" ]; then fastlane test; fi

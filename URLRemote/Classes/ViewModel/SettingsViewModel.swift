@@ -38,12 +38,12 @@ class SettingsViewModel {
         self.entries.insert(contentsOf: entries, at: 0)
     }
     
-    /// Replaces the entry in the observable array with the entrygiven on the input.
+    /// Replaces the entry in the observable array with the entry given on the input.
     /// This method is used when an entry is modified to reflect the changes in the observable array for next edits.
     /// It finds the existing entry by its ID and replaces it.
     ///
     /// - Parameter entry: Entry to be put into the array.
-    func replace(with entry: Entry) {
+    private func replace(with entry: Entry) {
         var entryIndex = -1
         for index in 0..<self.entries.count {
             let e = self.entries[index]
@@ -79,5 +79,11 @@ class SettingsViewModel {
         let entry = self.entries[index]
         self.entries.remove(at: index)
         self.deleteSignal.next(entry)
+        
+        for index in 0..<self.entries.count {
+            let entry = self.entries[index]
+            entry.order = index
+            self.signal.next(entry)
+        }
     }
 }

@@ -15,7 +15,7 @@ class QuidoValidatorTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let entry = Entry()
-        entry.type = EntryType.Quido
+        entry.type = EntryType.quido
         validator = ValidatorFactory.validator(for: entry)
     }
     

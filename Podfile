@@ -6,17 +6,17 @@ target "URLRemote" do
     pod 'Alamofire', '~> 4.0'
     pod 'MBProgressHUD', '~> 1.0'
     pod 'Bond', '~> 6.0'
-    pod 'Fabric'
-    pod 'Crashlytics'
-    pod 'Firebase/Core'
-    pod 'Firebase/Auth'
-    pod 'Firebase/Database'
+    pod 'Fabric', '~> 1.6' 
+    pod 'Crashlytics', '~> 3.8'
+    pod 'Firebase/Core', '~> 3.17'
+    pod 'Firebase/Database', '~> 3.17'
+    pod 'Firebase/Auth', '~> 3.17'
     pod 'Material', '~> 2.5.1'
     pod 'Motion', '~> 1.0'
     pod 'ObjectMapper', '~> 2.0'
 
     target "URLRemoteTests" do
-        inherit! :complete
+        inherit! :search_paths
 
         pod 'OHHTTPStubs'
         pod 'OHHTTPStubs/Swift'

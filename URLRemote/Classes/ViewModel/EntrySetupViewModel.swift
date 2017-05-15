@@ -30,7 +30,7 @@ class EntrySetupViewModel {
     let color = Observable<ColorName>(.yellow)
     let icon = Observable<String>("plus")
     let url = Observable<String>("")
-    let type = Observable<EntryType>(.SimpleHTTP)
+    let type = Observable<EntryType>(.simpleHTTP)
     let requiresAuthentication = Observable<Bool>(false)
     let user = Observable<String?>(nil)
     let password = Observable<String?>(nil)
@@ -60,7 +60,7 @@ class EntrySetupViewModel {
         self.bindValidation()
         
         _ = self.type.observeNext { type in
-            if type == .Custom {
+            if type == .custom {
                 if self.contents.count == 3 {
                     let cell = EntrySetupTableCell(
                         identifier: "criteriaCell",
@@ -119,7 +119,7 @@ class EntrySetupViewModel {
         self.color.value = entry.color ?? .yellow
         self.icon.value = entry.icon ?? "plus"
         self.url.value = entry.url ?? ""
-        self.type.value = entry.type ?? .SimpleHTTP
+        self.type.value = entry.type ?? .simpleHTTP
         self.requiresAuthentication.value = entry.requiresAuthentication
         self.user.value = entry.user
         self.password.value = entry.password
@@ -145,7 +145,7 @@ class EntrySetupViewModel {
         }
         
         entry.type = self.type.value
-        if self.type.value == .Custom {
+        if self.type.value == .custom {
             entry.customCriteria = self.customCriteria.value
         }
         
