@@ -16,7 +16,11 @@ profile
 DerivedData
 .idea/
 Pods
-fastlane/*
+.env.*
+fastlane/README.md
+fastlane/*.xml
+fastlane/test_output/*.junit
+fastlane/test_output/*.html
 URLRemote/Resources/GoogleService-Info.plist
 *.zip
 *.ipa
