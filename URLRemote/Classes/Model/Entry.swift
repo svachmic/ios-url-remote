@@ -70,7 +70,7 @@ class Entry: FirebaseObject {
     /// Password for HTTP Authentication.
     var password: String?
     /// User-defined criteria for EntryType Custom.
-    var customCriteria: String = ""
+    var customCriteria: String?
     
     override init() {
         super.init()
@@ -92,5 +92,6 @@ class Entry: FirebaseObject {
         requiresAuthentication <- map["requiresAuthentication"]
         user <- map["user"]
         password <- map["password"]
+        customCriteria <- map["customCriteria"]
     }
 }

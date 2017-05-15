@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import URLRemote
 
 class EnumCollectionTests: XCTestCase {
     

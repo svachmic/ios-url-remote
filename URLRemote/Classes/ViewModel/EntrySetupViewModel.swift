@@ -24,7 +24,7 @@ struct EntrySetupTableCell {
 class EntrySetupViewModel {
     let bndBag = DisposeBag()
     
-    private var firebaseKey: String?
+    var firebaseKey: String?
     let order = Observable<Int>(0)
     let name = Observable<String>("")
     let color = Observable<ColorName>(.yellow)
@@ -123,6 +123,7 @@ class EntrySetupViewModel {
         self.requiresAuthentication.value = entry.requiresAuthentication
         self.user.value = entry.user
         self.password.value = entry.password
+        self.customCriteria.value = entry.customCriteria ?? ""
     }
     
     /// Transforms the form data into an Entry object.

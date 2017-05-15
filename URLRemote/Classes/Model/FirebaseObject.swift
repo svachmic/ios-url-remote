@@ -41,7 +41,7 @@ class FirebaseObject: Equatable, Mappable, Comparable {
     /// - Parameter rhs: Second entry to be compared.
     /// - Returns: True only if the Firebase keys exist on both entries and are equal.
     static func == (lhs: FirebaseObject, rhs: FirebaseObject) -> Bool {
-        if let lhsFIRKey = lhs.firebaseKey, let rhsFIRKey = lhs.firebaseKey, lhsFIRKey == rhsFIRKey {
+        if let lhsFIRKey = lhs.firebaseKey, let rhsFIRKey = rhs.firebaseKey, lhsFIRKey == rhsFIRKey {
             return true
         }
         
