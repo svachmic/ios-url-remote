@@ -11,30 +11,19 @@
 		55278C191D3C11247CC1564B /* Pods_URLRemote_URLRemoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A134B02372EC09044FE9A66 /* Pods_URLRemote_URLRemoteTests.framework */; };
 		C16B4F631CFC7C1B001E572E /* ActionsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B4F621CFC7C1B001E572E /* ActionsCollectionViewController.swift */; };
 		C16B4F681CFC834F001E572E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B4F671CFC834F001E572E /* UIColorExtension.swift */; };
-		C16B4F691CFC834F001E572E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B4F671CFC834F001E572E /* UIColorExtension.swift */; };
-		C16B4F6A1CFC834F001E572E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B4F671CFC834F001E572E /* UIColorExtension.swift */; };
 		C16B4F6C1CFC8392001E572E /* UIViewGradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B4F6B1CFC8392001E572E /* UIViewGradientExtension.swift */; };
-		C16B4F6D1CFC8392001E572E /* UIViewGradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B4F6B1CFC8392001E572E /* UIViewGradientExtension.swift */; };
-		C16B4F6E1CFC8392001E572E /* UIViewGradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B4F6B1CFC8392001E572E /* UIViewGradientExtension.swift */; };
 		C1BBC12C1CFC511D00EB62B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BBC12B1CFC511D00EB62B1 /* AppDelegate.swift */; };
 		C1BBC1311CFC511D00EB62B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1BBC12F1CFC511D00EB62B1 /* Main.storyboard */; };
 		C1BBC1331CFC511D00EB62B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1BBC1321CFC511D00EB62B1 /* Assets.xcassets */; };
 		C1BBC1361CFC511D00EB62B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1BBC1341CFC511D00EB62B1 /* LaunchScreen.storyboard */; };
-		C1BBC1411CFC511D00EB62B1 /* URLRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BBC1401CFC511D00EB62B1 /* URLRemoteTests.swift */; };
 		C1BBC14C1CFC511D00EB62B1 /* URLRemoteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BBC14B1CFC511D00EB62B1 /* URLRemoteUITests.swift */; };
 		E005D09D1DE5EC6E002B79C0 /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D09C1DE5EC6E002B79C0 /* LoginTableViewController.swift */; };
 		E005D09F1DE60018002B79C0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E005D09E1DE60018002B79C0 /* Localizable.strings */; };
 		E005D0A11DE61967002B79C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D0A01DE61967002B79C0 /* LoginViewModel.swift */; };
 		E005D0A41DE76BC5002B79C0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D0A31DE76BC5002B79C0 /* StringExtension.swift */; };
 		E00A20481E368C0200FF8DA6 /* ValidatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00A20471E368C0200FF8DA6 /* ValidatorFactory.swift */; };
-		E01BFF5A1E2A4BE600862906 /* ActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828201E01876F00EB0041 /* ActionViewCell.swift */; };
-		E01BFF5B1E2A4BE700862906 /* ActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828201E01876F00EB0041 /* ActionViewCell.swift */; };
 		E02C36EF1E3F8B14009649B3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36EE1E3F8B14009649B3 /* Category.swift */; };
-		E02C36F01E3F8B20009649B3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36EE1E3F8B14009649B3 /* Category.swift */; };
-		E02C36F11E3F8B21009649B3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36EE1E3F8B14009649B3 /* Category.swift */; };
 		E02C36F31E3F8EBF009649B3 /* FirebaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */; };
-		E02C36F41E3F8EBF009649B3 /* FirebaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */; };
-		E02C36F51E3F8EBF009649B3 /* FirebaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */; };
 		E04DB69A1E292D8400AC8C3D /* TypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB6991E292D8400AC8C3D /* TypeTableViewController.swift */; };
 		E04DB69C1E292DF100AC8C3D /* TypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB69B1E292DF100AC8C3D /* TypeViewModel.swift */; };
 		E04DB69F1E29331100AC8C3D /* TypeSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB69E1E29331100AC8C3D /* TypeSelectionTableViewCell.swift */; };
@@ -43,100 +32,32 @@
 		E056B96F1E00A48900B70AA0 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E056B96E1E00A48900B70AA0 /* Entry.swift */; };
 		E056B9711E00A5EB00B70AA0 /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E056B9701E00A5EB00B70AA0 /* ActionsViewModel.swift */; };
 		E0628FAF1E2F9EDF00DADAB3 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0628FAE1E2F9EDF00DADAB3 /* SettingsViewModel.swift */; };
-		E0628FB01E2F9EDF00DADAB3 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0628FAE1E2F9EDF00DADAB3 /* SettingsViewModel.swift */; };
-		E0628FB11E2F9EDF00DADAB3 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0628FAE1E2F9EDF00DADAB3 /* SettingsViewModel.swift */; };
 		E0628FB41E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0628FB31E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift */; };
-		E0628FB51E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0628FB31E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift */; };
-		E0628FB61E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0628FB31E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift */; };
 		E06828211E01876F00EB0041 /* ActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828201E01876F00EB0041 /* ActionViewCell.swift */; };
-		E06828241E018E1900EB0041 /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E056B9701E00A5EB00B70AA0 /* ActionsViewModel.swift */; };
-		E06828251E018E1900EB0041 /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E056B9701E00A5EB00B70AA0 /* ActionsViewModel.swift */; };
 		E06828271E01C48400EB0041 /* ApplicationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828261E01C48400EB0041 /* ApplicationNavigationController.swift */; };
-		E06828281E01C48400EB0041 /* ApplicationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828261E01C48400EB0041 /* ApplicationNavigationController.swift */; };
-		E06828291E01C48400EB0041 /* ApplicationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828261E01C48400EB0041 /* ApplicationNavigationController.swift */; };
-		E068282A1E02FE8F00EB0041 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E056B96E1E00A48900B70AA0 /* Entry.swift */; };
-		E068282B1E02FE8F00EB0041 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E056B96E1E00A48900B70AA0 /* Entry.swift */; };
 		E068282D1E03067D00EB0041 /* FirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068282C1E03067D00EB0041 /* FirebaseDataSource.swift */; };
-		E068282E1E03067D00EB0041 /* FirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068282C1E03067D00EB0041 /* FirebaseDataSource.swift */; };
-		E068282F1E03067D00EB0041 /* FirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068282C1E03067D00EB0041 /* FirebaseDataSource.swift */; };
 		E06828311E0309C700EB0041 /* Firebase+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828301E0309C700EB0041 /* Firebase+ReactiveKit.swift */; };
-		E06828321E0309C700EB0041 /* Firebase+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828301E0309C700EB0041 /* Firebase+ReactiveKit.swift */; };
-		E06828331E0309C700EB0041 /* Firebase+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828301E0309C700EB0041 /* Firebase+ReactiveKit.swift */; };
 		E06828351E043B7500EB0041 /* EntryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828341E043B7500EB0041 /* EntryAction.swift */; };
 		E068283B1E04436F00EB0041 /* Material+Bond.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068283A1E04436F00EB0041 /* Material+Bond.swift */; };
 		E072B1351E40EB9A0012589D /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072B1341E40EB9A0012589D /* ArrayExtension.swift */; };
-		E082D9681E3934FE00E143F5 /* EntryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828341E043B7500EB0041 /* EntryAction.swift */; };
-		E082D9691E3934FF00E143F5 /* EntryAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828341E043B7500EB0041 /* EntryAction.swift */; };
-		E082D96A1E39350700E143F5 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E35D1E328DA400923A2D /* Validator.swift */; };
-		E082D96B1E39350800E143F5 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E35D1E328DA400923A2D /* Validator.swift */; };
-		E082D96C1E39357800E143F5 /* ValidatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00A20471E368C0200FF8DA6 /* ValidatorFactory.swift */; };
-		E082D96D1E39357800E143F5 /* ValidatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00A20471E368C0200FF8DA6 /* ValidatorFactory.swift */; };
-		E082D96E1E39357C00E143F5 /* GenericValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3621E354C1600923A2D /* GenericValidator.swift */; };
-		E082D96F1E39357D00E143F5 /* GenericValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3621E354C1600923A2D /* GenericValidator.swift */; };
-		E082D9701E39357F00E143F5 /* SimpleHTTPValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E052E7701E368F58007D19EB /* SimpleHTTPValidator.swift */; };
-		E082D9711E39358000E143F5 /* SimpleHTTPValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E052E7701E368F58007D19EB /* SimpleHTTPValidator.swift */; };
-		E082D9721E39358400E143F5 /* QuidoValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3601E33C60300923A2D /* QuidoValidator.swift */; };
-		E082D9731E39358500E143F5 /* QuidoValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3601E33C60300923A2D /* QuidoValidator.swift */; };
 		E08393401DFACAAF0012A28A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E083933F1DFACAAF0012A28A /* UIViewControllerExtension.swift */; };
 		E098E84B1E314F3000456FCB /* UIViewController+Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = E098E84A1E314F3000456FCB /* UIViewController+Material.swift */; };
 		E09FECC31E477A6A002A8D91 /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09FECC21E477A6A002A8D91 /* StringExtensionTests.swift */; };
-		E09FECC41E49E3E1002A8D91 /* Material+Bond.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068283A1E04436F00EB0041 /* Material+Bond.swift */; };
-		E09FECC51E49E3E1002A8D91 /* Material+Bond.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068283A1E04436F00EB0041 /* Material+Bond.swift */; };
-		E09FECC61E49E3E9002A8D91 /* UIViewController+Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = E098E84A1E314F3000456FCB /* UIViewController+Material.swift */; };
-		E09FECC71E49E3EA002A8D91 /* UIViewController+Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = E098E84A1E314F3000456FCB /* UIViewController+Material.swift */; };
-		E09FECC81E49E3F3002A8D91 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D0A31DE76BC5002B79C0 /* StringExtension.swift */; };
-		E09FECC91E49E3F4002A8D91 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D0A31DE76BC5002B79C0 /* StringExtension.swift */; };
-		E09FECCA1E49E3F7002A8D91 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072B1341E40EB9A0012589D /* ArrayExtension.swift */; };
-		E09FECCB1E49E3F7002A8D91 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072B1341E40EB9A0012589D /* ArrayExtension.swift */; };
-		E09FECCC1E49E3FF002A8D91 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E083933F1DFACAAF0012A28A /* UIViewControllerExtension.swift */; };
-		E09FECCD1E49E3FF002A8D91 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E083933F1DFACAAF0012A28A /* UIViewControllerExtension.swift */; };
-		E09FECCE1E49E451002A8D91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BBC12B1CFC511D00EB62B1 /* AppDelegate.swift */; };
-		E09FECCF1E49E452002A8D91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BBC12B1CFC511D00EB62B1 /* AppDelegate.swift */; };
-		E09FECD11E49E56E002A8D91 /* ColorSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBED1E22BB1900C54FF8 /* ColorSelectorView.swift */; };
-		E09FECD21E49E56F002A8D91 /* ColorSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBED1E22BB1900C54FF8 /* ColorSelectorView.swift */; };
-		E09FECD31E49E572002A8D91 /* ShadedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBEA1E22A38700C54FF8 /* ShadedView.swift */; };
-		E09FECD41E49E572002A8D91 /* ShadedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBEA1E22A38700C54FF8 /* ShadedView.swift */; };
-		E09FECD51E49E5AA002A8D91 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D0A01DE61967002B79C0 /* LoginViewModel.swift */; };
-		E09FECD61E49E5AB002A8D91 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D0A01DE61967002B79C0 /* LoginViewModel.swift */; };
-		E09FECD71E49E5AF002A8D91 /* EntrySetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E25A4F1E1D78A4006F8C14 /* EntrySetupViewModel.swift */; };
-		E09FECD81E49E5B0002A8D91 /* EntrySetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E25A4F1E1D78A4006F8C14 /* EntrySetupViewModel.swift */; };
-		E09FECD91E49E5B2002A8D91 /* TypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB69B1E292DF100AC8C3D /* TypeViewModel.swift */; };
-		E09FECDA1E49E5B3002A8D91 /* TypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB69B1E292DF100AC8C3D /* TypeViewModel.swift */; };
-		E09FECDB1E49E5B5002A8D91 /* IconCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FC001E2581FF00C54FF8 /* IconCollectionViewModel.swift */; };
-		E09FECDC1E49E5B6002A8D91 /* IconCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FC001E2581FF00C54FF8 /* IconCollectionViewModel.swift */; };
-		E09FECDD1E49E5BC002A8D91 /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D09C1DE5EC6E002B79C0 /* LoginTableViewController.swift */; };
-		E09FECDE1E49E5BC002A8D91 /* LoginTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E005D09C1DE5EC6E002B79C0 /* LoginTableViewController.swift */; };
-		E09FECE11E49E5C2002A8D91 /* ActionsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B4F621CFC7C1B001E572E /* ActionsCollectionViewController.swift */; };
-		E09FECE21E49E5C3002A8D91 /* ActionsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B4F621CFC7C1B001E572E /* ActionsCollectionViewController.swift */; };
-		E09FECE31E49E5C7002A8D91 /* DesignEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF01E23BE8A00C54FF8 /* DesignEntryTableViewCell.swift */; };
-		E09FECE41E49E5C8002A8D91 /* DesignEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF01E23BE8A00C54FF8 /* DesignEntryTableViewCell.swift */; };
-		E09FECE51E49E5CA002A8D91 /* TypeEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF21E23D6B900C54FF8 /* TypeEntryTableViewCell.swift */; };
-		E09FECE61E49E5CB002A8D91 /* TypeEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF21E23D6B900C54FF8 /* TypeEntryTableViewCell.swift */; };
-		E09FECE71E49E5CD002A8D91 /* CustomCriteriaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F328931E3A554E00282B33 /* CustomCriteriaTableViewCell.swift */; };
-		E09FECE81E49E5CE002A8D91 /* CustomCriteriaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F328931E3A554E00282B33 /* CustomCriteriaTableViewCell.swift */; };
-		E09FECE91E49E5D2002A8D91 /* EntrySetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E25A4D1E1D7874006F8C14 /* EntrySetupViewController.swift */; };
-		E09FECEA1E49E5D2002A8D91 /* EntrySetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E25A4D1E1D7874006F8C14 /* EntrySetupViewController.swift */; };
-		E09FECEB1E49E5D5002A8D91 /* IconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FC021E2802A900C54FF8 /* IconCollectionViewCell.swift */; };
-		E09FECEC1E49E5D6002A8D91 /* IconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FC021E2802A900C54FF8 /* IconCollectionViewCell.swift */; };
-		E09FECED1E49E5D8002A8D91 /* IconCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBFE1E2540B000C54FF8 /* IconCollectionViewController.swift */; };
-		E09FECEE1E49E5D8002A8D91 /* IconCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBFE1E2540B000C54FF8 /* IconCollectionViewController.swift */; };
-		E09FECEF1E49E5DC002A8D91 /* TypeSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB69E1E29331100AC8C3D /* TypeSelectionTableViewCell.swift */; };
-		E09FECF01E49E5DC002A8D91 /* TypeSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB69E1E29331100AC8C3D /* TypeSelectionTableViewCell.swift */; };
-		E09FECF11E49E5DE002A8D91 /* TypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB6991E292D8400AC8C3D /* TypeTableViewController.swift */; };
-		E09FECF21E49E5DF002A8D91 /* TypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB6991E292D8400AC8C3D /* TypeTableViewController.swift */; };
-		E09FECF31E49E5E4002A8D91 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D1A1E2E5BE600F7242E /* SettingsTableViewController.swift */; };
-		E09FECF41E49E5E5002A8D91 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D1A1E2E5BE600F7242E /* SettingsTableViewController.swift */; };
 		E0ADCD6F1DE4A98D004B7BAD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0ADCD6E1DE4A98D004B7BAD /* GoogleService-Info.plist */; };
 		E0B41D171E2D4AD300F7242E /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D161E2D4AD300F7242E /* EnumCollection.swift */; };
-		E0B41D181E2D4AD300F7242E /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D161E2D4AD300F7242E /* EnumCollection.swift */; };
-		E0B41D191E2D4AD300F7242E /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D161E2D4AD300F7242E /* EnumCollection.swift */; };
 		E0B41D1B1E2E5BE600F7242E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D1A1E2E5BE600F7242E /* SettingsTableViewController.swift */; };
 		E0C0FA261E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */; };
-		E0C0FA271E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */; };
-		E0C0FA281E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */; };
 		E0C2E35E1E328DA400923A2D /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E35D1E328DA400923A2D /* Validator.swift */; };
 		E0C2E3611E33C60300923A2D /* QuidoValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3601E33C60300923A2D /* QuidoValidator.swift */; };
 		E0C2E3631E354C1600923A2D /* GenericValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3621E354C1600923A2D /* GenericValidator.swift */; };
+		E0DAA5911EC999AD005FE314 /* FirebaseObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA5901EC999AD005FE314 /* FirebaseObjectTests.swift */; };
+		E0DAA5931EC99DC3005FE314 /* EntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA5921EC99DC3005FE314 /* EntryTests.swift */; };
+		E0DAA5951EC9AA2C005FE314 /* CategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA5941EC9AA2C005FE314 /* CategoryTests.swift */; };
+		E0DAA5991EC9AF9B005FE314 /* CustomValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA5981EC9AF9B005FE314 /* CustomValidatorTests.swift */; };
+		E0DAA59B1EC9B0CB005FE314 /* SimpleHTTPValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA59A1EC9B0CB005FE314 /* SimpleHTTPValidatorTests.swift */; };
+		E0DAA59D1EC9B0DC005FE314 /* QuidoValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA59C1EC9B0DC005FE314 /* QuidoValidatorTests.swift */; };
+		E0DAA5A01EC9B2CE005FE314 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA59F1EC9B2CE005FE314 /* LoginViewModelTests.swift */; };
+		E0DAA5A21EC9B7C0005FE314 /* EntrySetupViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA5A11EC9B7C0005FE314 /* EntrySetupViewModelTests.swift */; };
 		E0E09B081E54EB7E00B74CEA /* EnumCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E09B071E54EB7E00B74CEA /* EnumCollectionTests.swift */; };
 		E0E25A4E1E1D7874006F8C14 /* EntrySetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E25A4D1E1D7874006F8C14 /* EntrySetupViewController.swift */; };
 		E0E25A501E1D78A4006F8C14 /* EntrySetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E25A4F1E1D78A4006F8C14 /* EntrySetupViewModel.swift */; };
@@ -146,17 +67,11 @@
 		E0E2FBF31E23D6B900C54FF8 /* TypeEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF21E23D6B900C54FF8 /* TypeEntryTableViewCell.swift */; };
 		E0E2FBF71E23F4E700C54FF8 /* ActionEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF61E23F4E700C54FF8 /* ActionEntryTableViewCell.swift */; };
 		E0E2FBF91E23F7D500C54FF8 /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF81E23F7D500C54FF8 /* CheckboxButton.swift */; };
-		E0E2FBFA1E23FA0500C54FF8 /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF81E23F7D500C54FF8 /* CheckboxButton.swift */; };
-		E0E2FBFB1E23FA0600C54FF8 /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF81E23F7D500C54FF8 /* CheckboxButton.swift */; };
-		E0E2FBFC1E2413DF00C54FF8 /* ActionEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF61E23F4E700C54FF8 /* ActionEntryTableViewCell.swift */; };
-		E0E2FBFD1E2413E000C54FF8 /* ActionEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBF61E23F4E700C54FF8 /* ActionEntryTableViewCell.swift */; };
 		E0E2FBFF1E2540B000C54FF8 /* IconCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FBFE1E2540B000C54FF8 /* IconCollectionViewController.swift */; };
 		E0E2FC011E2581FF00C54FF8 /* IconCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FC001E2581FF00C54FF8 /* IconCollectionViewModel.swift */; };
 		E0E2FC031E2802AA00C54FF8 /* IconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E2FC021E2802A900C54FF8 /* IconCollectionViewCell.swift */; };
 		E0F328941E3A554E00282B33 /* CustomCriteriaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F328931E3A554E00282B33 /* CustomCriteriaTableViewCell.swift */; };
 		E0F328961E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F328951E3B86FB00282B33 /* CustomCriteriaValidator.swift */; };
-		E0F328971E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F328951E3B86FB00282B33 /* CustomCriteriaValidator.swift */; };
-		E0F328981E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F328951E3B86FB00282B33 /* CustomCriteriaValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,7 +109,6 @@
 		C1BBC1351CFC511D00EB62B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1BBC1371CFC511D00EB62B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1BBC13C1CFC511D00EB62B1 /* URLRemoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLRemoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C1BBC1401CFC511D00EB62B1 /* URLRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRemoteTests.swift; sourceTree = "<group>"; };
 		C1BBC1421CFC511D00EB62B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1BBC1471CFC511D00EB62B1 /* URLRemoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLRemoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1BBC14B1CFC511D00EB62B1 /* URLRemoteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRemoteUITests.swift; sourceTree = "<group>"; };
@@ -234,7 +148,15 @@
 		E0C2E35D1E328DA400923A2D /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		E0C2E3601E33C60300923A2D /* QuidoValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuidoValidator.swift; sourceTree = "<group>"; };
 		E0C2E3621E354C1600923A2D /* GenericValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericValidator.swift; sourceTree = "<group>"; };
-		E0E09B071E54EB7E00B74CEA /* EnumCollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumCollectionTests.swift; sourceTree = "<group>"; };
+		E0DAA5901EC999AD005FE314 /* FirebaseObjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseObjectTests.swift; path = Model/FirebaseObjectTests.swift; sourceTree = "<group>"; };
+		E0DAA5921EC99DC3005FE314 /* EntryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryTests.swift; path = Model/EntryTests.swift; sourceTree = "<group>"; };
+		E0DAA5941EC9AA2C005FE314 /* CategoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryTests.swift; path = Model/CategoryTests.swift; sourceTree = "<group>"; };
+		E0DAA5981EC9AF9B005FE314 /* CustomValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomValidatorTests.swift; path = Networking/Validators/CustomValidatorTests.swift; sourceTree = "<group>"; };
+		E0DAA59A1EC9B0CB005FE314 /* SimpleHTTPValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleHTTPValidatorTests.swift; path = Networking/Validators/SimpleHTTPValidatorTests.swift; sourceTree = "<group>"; };
+		E0DAA59C1EC9B0DC005FE314 /* QuidoValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuidoValidatorTests.swift; path = Networking/Validators/QuidoValidatorTests.swift; sourceTree = "<group>"; };
+		E0DAA59F1EC9B2CE005FE314 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModelTests.swift; path = ViewModel/LoginViewModelTests.swift; sourceTree = "<group>"; };
+		E0DAA5A11EC9B7C0005FE314 /* EntrySetupViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntrySetupViewModelTests.swift; path = ViewModel/EntrySetupViewModelTests.swift; sourceTree = "<group>"; };
+		E0E09B071E54EB7E00B74CEA /* EnumCollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnumCollectionTests.swift; path = Helpers/EnumCollectionTests.swift; sourceTree = "<group>"; };
 		E0E25A4D1E1D7874006F8C14 /* EntrySetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntrySetupViewController.swift; path = Controllers/EntrySetupViewController.swift; sourceTree = "<group>"; };
 		E0E25A4F1E1D78A4006F8C14 /* EntrySetupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrySetupViewModel.swift; sourceTree = "<group>"; };
 		E0E2FBEA1E22A38700C54FF8 /* ShadedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadedView.swift; sourceTree = "<group>"; };
@@ -351,8 +273,10 @@
 		C1BBC13F1CFC511D00EB62B1 /* URLRemoteTests */ = {
 			isa = PBXGroup;
 			children = (
-				C1BBC1401CFC511D00EB62B1 /* URLRemoteTests.swift */,
 				E09FECC11E477A2A002A8D91 /* Helpers */,
+				E0DAA5961EC9AF56005FE314 /* Networking */,
+				E0DAA58F1EC998F1005FE314 /* Model */,
+				E0DAA59E1EC9B26D005FE314 /* ViewModel */,
 				C1BBC1421CFC511D00EB62B1 /* Info.plist */,
 			);
 			path = URLRemoteTests;
@@ -480,8 +404,8 @@
 		E09FECC11E477A2A002A8D91 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				E09FECC21E477A6A002A8D91 /* StringExtensionTests.swift */,
 				E05020E31E5388CF0067AF0F /* ArrayExtensionTests.swift */,
+				E09FECC21E477A6A002A8D91 /* StringExtensionTests.swift */,
 				E0E09B071E54EB7E00B74CEA /* EnumCollectionTests.swift */,
 			);
 			name = Helpers;
@@ -498,6 +422,43 @@
 				E0C2E3601E33C60300923A2D /* QuidoValidator.swift */,
 			);
 			name = Validators;
+			sourceTree = "<group>";
+		};
+		E0DAA58F1EC998F1005FE314 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E0DAA5901EC999AD005FE314 /* FirebaseObjectTests.swift */,
+				E0DAA5941EC9AA2C005FE314 /* CategoryTests.swift */,
+				E0DAA5921EC99DC3005FE314 /* EntryTests.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E0DAA5961EC9AF56005FE314 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				E0DAA5971EC9AF5D005FE314 /* Validators */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		E0DAA5971EC9AF5D005FE314 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				E0DAA5981EC9AF9B005FE314 /* CustomValidatorTests.swift */,
+				E0DAA59A1EC9B0CB005FE314 /* SimpleHTTPValidatorTests.swift */,
+				E0DAA59C1EC9B0DC005FE314 /* QuidoValidatorTests.swift */,
+			);
+			name = Validators;
+			sourceTree = "<group>";
+		};
+		E0DAA59E1EC9B26D005FE314 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E0DAA59F1EC9B2CE005FE314 /* LoginViewModelTests.swift */,
+				E0DAA5A11EC9B7C0005FE314 /* EntrySetupViewModelTests.swift */,
+			);
+			name = ViewModel;
 			sourceTree = "<group>";
 		};
 		E0E2FBE91E22A35D00C54FF8 /* View */ = {
@@ -831,56 +792,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E068282A1E02FE8F00EB0041 /* Entry.swift in Sources */,
-				E06828321E0309C700EB0041 /* Firebase+ReactiveKit.swift in Sources */,
-				E09FECD31E49E572002A8D91 /* ShadedView.swift in Sources */,
-				E09FECCC1E49E3FF002A8D91 /* UIViewControllerExtension.swift in Sources */,
-				E06828281E01C48400EB0041 /* ApplicationNavigationController.swift in Sources */,
-				E068282E1E03067D00EB0041 /* FirebaseDataSource.swift in Sources */,
-				E09FECF31E49E5E4002A8D91 /* SettingsTableViewController.swift in Sources */,
-				E0628FB01E2F9EDF00DADAB3 /* SettingsViewModel.swift in Sources */,
-				E082D9721E39358400E143F5 /* QuidoValidator.swift in Sources */,
-				E0E2FBFC1E2413DF00C54FF8 /* ActionEntryTableViewCell.swift in Sources */,
-				E02C36F41E3F8EBF009649B3 /* FirebaseObject.swift in Sources */,
-				E09FECD51E49E5AA002A8D91 /* LoginViewModel.swift in Sources */,
-				E09FECC81E49E3F3002A8D91 /* StringExtension.swift in Sources */,
-				E09FECDB1E49E5B5002A8D91 /* IconCollectionViewModel.swift in Sources */,
-				C16B4F6D1CFC8392001E572E /* UIViewGradientExtension.swift in Sources */,
-				E0F328971E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */,
-				E082D9701E39357F00E143F5 /* SimpleHTTPValidator.swift in Sources */,
-				E09FECE71E49E5CD002A8D91 /* CustomCriteriaTableViewCell.swift in Sources */,
-				E09FECF11E49E5DE002A8D91 /* TypeTableViewController.swift in Sources */,
-				E09FECD11E49E56E002A8D91 /* ColorSelectorView.swift in Sources */,
-				E09FECE31E49E5C7002A8D91 /* DesignEntryTableViewCell.swift in Sources */,
-				E0B41D181E2D4AD300F7242E /* EnumCollection.swift in Sources */,
-				E082D96E1E39357C00E143F5 /* GenericValidator.swift in Sources */,
-				E09FECC61E49E3E9002A8D91 /* UIViewController+Material.swift in Sources */,
-				E09FECE11E49E5C2002A8D91 /* ActionsCollectionViewController.swift in Sources */,
-				E09FECC41E49E3E1002A8D91 /* Material+Bond.swift in Sources */,
-				E09FECEF1E49E5DC002A8D91 /* TypeSelectionTableViewCell.swift in Sources */,
-				E09FECDD1E49E5BC002A8D91 /* LoginTableViewController.swift in Sources */,
-				E01BFF5A1E2A4BE600862906 /* ActionViewCell.swift in Sources */,
-				E09FECEB1E49E5D5002A8D91 /* IconCollectionViewCell.swift in Sources */,
-				C1BBC1411CFC511D00EB62B1 /* URLRemoteTests.swift in Sources */,
-				E06828241E018E1900EB0041 /* ActionsViewModel.swift in Sources */,
-				E082D96A1E39350700E143F5 /* Validator.swift in Sources */,
+				E0DAA5A01EC9B2CE005FE314 /* LoginViewModelTests.swift in Sources */,
+				E0DAA5991EC9AF9B005FE314 /* CustomValidatorTests.swift in Sources */,
 				E09FECC31E477A6A002A8D91 /* StringExtensionTests.swift in Sources */,
-				E09FECED1E49E5D8002A8D91 /* IconCollectionViewController.swift in Sources */,
-				E09FECCE1E49E451002A8D91 /* AppDelegate.swift in Sources */,
-				E09FECD71E49E5AF002A8D91 /* EntrySetupViewModel.swift in Sources */,
-				E082D96C1E39357800E143F5 /* ValidatorFactory.swift in Sources */,
-				E0C0FA271E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */,
-				E082D9681E3934FE00E143F5 /* EntryAction.swift in Sources */,
-				E0E2FBFA1E23FA0500C54FF8 /* CheckboxButton.swift in Sources */,
 				E0E09B081E54EB7E00B74CEA /* EnumCollectionTests.swift in Sources */,
-				E09FECE51E49E5CA002A8D91 /* TypeEntryTableViewCell.swift in Sources */,
+				E0DAA5A21EC9B7C0005FE314 /* EntrySetupViewModelTests.swift in Sources */,
+				E0DAA5931EC99DC3005FE314 /* EntryTests.swift in Sources */,
+				E0DAA59B1EC9B0CB005FE314 /* SimpleHTTPValidatorTests.swift in Sources */,
+				E0DAA5951EC9AA2C005FE314 /* CategoryTests.swift in Sources */,
 				E05020E41E5388CF0067AF0F /* ArrayExtensionTests.swift in Sources */,
-				E09FECCA1E49E3F7002A8D91 /* ArrayExtension.swift in Sources */,
-				E09FECE91E49E5D2002A8D91 /* EntrySetupViewController.swift in Sources */,
-				E09FECD91E49E5B2002A8D91 /* TypeViewModel.swift in Sources */,
-				E0628FB51E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift in Sources */,
-				C16B4F691CFC834F001E572E /* UIColorExtension.swift in Sources */,
-				E02C36F01E3F8B20009649B3 /* Category.swift in Sources */,
+				E0DAA59D1EC9B0DC005FE314 /* QuidoValidatorTests.swift in Sources */,
+				E0DAA5911EC999AD005FE314 /* FirebaseObjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,53 +810,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E068282B1E02FE8F00EB0041 /* Entry.swift in Sources */,
-				E06828331E0309C700EB0041 /* Firebase+ReactiveKit.swift in Sources */,
-				E09FECF21E49E5DF002A8D91 /* TypeTableViewController.swift in Sources */,
-				E09FECF01E49E5DC002A8D91 /* TypeSelectionTableViewCell.swift in Sources */,
-				E09FECE61E49E5CB002A8D91 /* TypeEntryTableViewCell.swift in Sources */,
-				E09FECD61E49E5AB002A8D91 /* LoginViewModel.swift in Sources */,
-				E06828291E01C48400EB0041 /* ApplicationNavigationController.swift in Sources */,
-				E068282F1E03067D00EB0041 /* FirebaseDataSource.swift in Sources */,
-				E0628FB11E2F9EDF00DADAB3 /* SettingsViewModel.swift in Sources */,
-				E09FECC91E49E3F4002A8D91 /* StringExtension.swift in Sources */,
-				E09FECE41E49E5C8002A8D91 /* DesignEntryTableViewCell.swift in Sources */,
-				E082D9731E39358500E143F5 /* QuidoValidator.swift in Sources */,
-				E0E2FBFD1E2413E000C54FF8 /* ActionEntryTableViewCell.swift in Sources */,
-				E02C36F51E3F8EBF009649B3 /* FirebaseObject.swift in Sources */,
-				C16B4F6E1CFC8392001E572E /* UIViewGradientExtension.swift in Sources */,
-				E0F328981E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */,
-				E09FECCB1E49E3F7002A8D91 /* ArrayExtension.swift in Sources */,
-				E09FECC51E49E3E1002A8D91 /* Material+Bond.swift in Sources */,
-				E09FECC71E49E3EA002A8D91 /* UIViewController+Material.swift in Sources */,
-				E082D9711E39358000E143F5 /* SimpleHTTPValidator.swift in Sources */,
-				E09FECD41E49E572002A8D91 /* ShadedView.swift in Sources */,
-				E09FECDE1E49E5BC002A8D91 /* LoginTableViewController.swift in Sources */,
-				E09FECDA1E49E5B3002A8D91 /* TypeViewModel.swift in Sources */,
-				E09FECCD1E49E3FF002A8D91 /* UIViewControllerExtension.swift in Sources */,
-				E0B41D191E2D4AD300F7242E /* EnumCollection.swift in Sources */,
-				E082D96F1E39357D00E143F5 /* GenericValidator.swift in Sources */,
-				E09FECCF1E49E452002A8D91 /* AppDelegate.swift in Sources */,
-				E01BFF5B1E2A4BE700862906 /* ActionViewCell.swift in Sources */,
 				C1BBC14C1CFC511D00EB62B1 /* URLRemoteUITests.swift in Sources */,
-				E09FECEE1E49E5D8002A8D91 /* IconCollectionViewController.swift in Sources */,
-				E06828251E018E1900EB0041 /* ActionsViewModel.swift in Sources */,
-				E082D96B1E39350800E143F5 /* Validator.swift in Sources */,
-				E09FECD81E49E5B0002A8D91 /* EntrySetupViewModel.swift in Sources */,
-				E082D96D1E39357800E143F5 /* ValidatorFactory.swift in Sources */,
-				E0C0FA281E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */,
-				E09FECDC1E49E5B6002A8D91 /* IconCollectionViewModel.swift in Sources */,
-				E082D9691E3934FF00E143F5 /* EntryAction.swift in Sources */,
-				E09FECE81E49E5CE002A8D91 /* CustomCriteriaTableViewCell.swift in Sources */,
-				E0E2FBFB1E23FA0600C54FF8 /* CheckboxButton.swift in Sources */,
-				E0628FB61E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift in Sources */,
-				C16B4F6A1CFC834F001E572E /* UIColorExtension.swift in Sources */,
-				E02C36F11E3F8B21009649B3 /* Category.swift in Sources */,
-				E09FECE21E49E5C3002A8D91 /* ActionsCollectionViewController.swift in Sources */,
-				E09FECF41E49E5E5002A8D91 /* SettingsTableViewController.swift in Sources */,
-				E09FECD21E49E56F002A8D91 /* ColorSelectorView.swift in Sources */,
-				E09FECEA1E49E5D2002A8D91 /* EntrySetupViewController.swift in Sources */,
-				E09FECEC1E49E5D6002A8D91 /* IconCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

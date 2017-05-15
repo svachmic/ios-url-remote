@@ -24,7 +24,7 @@ class ValidatorFactory {
         case .some(.Quido):
             return QuidoValidator()
         case .some(.Custom):
-            return CustomCriteriaValidator(with: entry.customCriteria)
+            return CustomCriteriaValidator(with: entry.customCriteria ?? "")
         }
     }
 }
