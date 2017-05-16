@@ -39,4 +39,4 @@ For more validators either:
 
 ## 🔖 License
 
-TBD
+URLRemote is released under the Apache 2.0 license. See [LICENSE](https://github.com/svachmic/URLRemote/blob/master/LICENSE) for details.
