@@ -117,10 +117,8 @@ class EntrySetupViewController: UITableViewController {
                 }
         }
         
-        _ = self.viewModel.name.bidirectionalBind(
-            to: cell.nameField!.reactive.text.bidirectionalMap(
-                to: { $0 ?? "" },
-                from: { $0 }))
+        self.viewModel.name.bind(to: cell.nameField!.reactive.text)
+        cell.nameField?.reactive.text.map { $0 ?? ""}.bind(to: self.viewModel.name)
         
         cell.colorSelector!.setupViews(with: [.green, .yellow, .red])
         cell.colorSelector!.signal.bind(to: self.viewModel.color)
@@ -141,32 +139,24 @@ class EntrySetupViewController: UITableViewController {
     func setupActionCell(cell: ActionEntryTableViewCell) {
         cell.layoutSubviews()
         
-        _ = self.viewModel.url.bidirectionalBind(
-            to: cell.urlField!.reactive.text.bidirectionalMap(
-                to: { $0 ?? "" },
-                from: { $0 }))
+        self.viewModel.url.bind(to: cell.urlField!.reactive.text)
+        cell.urlField?.reactive.text.map { $0 ?? ""}.bind(to: self.viewModel.url)
         
         _ = self.viewModel.requiresAuthentication.bidirectionalBind(to: cell.checkbox!.isChecked)
         
-        _ = self.viewModel.user.bidirectionalBind(
-            to: cell.userField!.reactive.text.bidirectionalMap(
-                to: { $0 ?? "" },
-                from: { $0 }))
+        self.viewModel.user.bind(to: cell.userField!.reactive.text)
+        cell.userField?.reactive.text.map { $0 ?? ""}.bind(to: self.viewModel.user)
         
-        _ = self.viewModel.password.bidirectionalBind(
-            to: cell.passwordField!.reactive.text.bidirectionalMap(
-                to: { $0 ?? "" },
-                from: { $0 }))
+        self.viewModel.password.bind(to: cell.passwordField!.reactive.text)
+        cell.passwordField?.reactive.text.map { $0 ?? ""}.bind(to: self.viewModel.password)
     }
     
     ///
     func setupCustomCriteriaCell(cell: CustomCriteriaTableViewCell) {
         cell.layoutSubviews()
         
-        _ = self.viewModel.customCriteria.bidirectionalBind(
-            to: cell.criteriaField!.reactive.text.bidirectionalMap(
-                to: { $0 ?? "" },
-                from: { $0 }))
+        self.viewModel.customCriteria.bind(to: cell.criteriaField!.reactive.text)
+        cell.criteriaField?.reactive.text.map { $0 ?? ""}.bind(to: self.viewModel.customCriteria)
         
         _ = cell.infoButton?.reactive.tap.observeNext {
             self.presentSimpleAlertDialog(
