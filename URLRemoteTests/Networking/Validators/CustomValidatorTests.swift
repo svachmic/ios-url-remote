@@ -10,14 +10,12 @@ import XCTest
 @testable import URLRemote
 
 class CustomValidatorTests: XCTestCase {
-    var validator: Validator!
+    var entry: Entry!
     
     override func setUp() {
         super.setUp()
-        let entry = Entry()
+        entry = Entry()
         entry.type = EntryType.custom
-        entry.customCriteria = "test"
-        validator = ValidatorFactory.validator(for: entry)
     }
     
     override func tearDown() {
@@ -25,8 +23,19 @@ class CustomValidatorTests: XCTestCase {
     }
     
     func testValidation() {
+        entry.customCriteria = "test"
+        let validator = ValidatorFactory.validator(for: entry)
+        
         XCTAssertTrue(validator is CustomCriteriaValidator)
         XCTAssertFalse(validator.validateOutput(output: "unit"))
         XCTAssertTrue(validator.validateOutput(output: "test"))
+    }
+    
+    func testEmptyValidation() {
+        entry.customCriteria = nil
+        let emptyValidator = ValidatorFactory.validator(for: entry)
+        XCTAssertTrue(emptyValidator is CustomCriteriaValidator)
+        XCTAssertFalse(emptyValidator.validateOutput(output: "test"))
+        XCTAssertTrue(emptyValidator.validateOutput(output: ""))
     }
 }

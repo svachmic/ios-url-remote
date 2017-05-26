@@ -17,6 +17,10 @@ class CustomCriteriaValidator: GenericValidator {
     /// - Parameter output: The output from the device after the action has been performed.
     /// - Returns: Boolean flag indicating whether or not the output matched the criteria.
     override func validateOutput(output: String) -> Bool {
+        if output == "" {
+            return self.criteria == output
+        }
+        
         return self.criteria
             .components(separatedBy: " ")
             .map { output.contains($0) }

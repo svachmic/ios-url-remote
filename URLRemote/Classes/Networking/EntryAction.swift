@@ -39,17 +39,23 @@ class EntryAction {
             var request = Alamofire.request(url, method: HTTPMethod.get)
             
             if let user = user, let password = password, requiresAuthentication {
-                request = request.authenticate(user: user, password: password)
+                let credentialData = "\(user):\(password)".data(using: String.Encoding.utf8)!
+                let base64Credentials = credentialData.base64EncodedString(options: [])
+                request = Alamofire.request(url,
+                    method: HTTPMethod.get,
+                    parameters: nil,
+                    encoding: URLEncoding.default,
+                    headers: ["Authorization": "Basic \(base64Credentials)"])
             }
             
-            request.responseString { response in
+            request.validate(statusCode: 200..<300).responseString { response in
                 switch response.result {
                 case .success(let value):
                     let validated = validator.validateOutput(output: value)
                     observer.completed(with: validated ? .success : .failure)
                     break
                 case .failure(_):
-                    observer.completed(with: .failure)
+                    observer.completed(with: .error)
                     break
                 }
             }

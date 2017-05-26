@@ -13,40 +13,6 @@ import ReactiveKit
 
 /// ReactiveKit/Bond bindings for Material components.
 
-extension FABMenu {
-    
-    /// Toggles the menu open/close.
-    func toggle() {
-        var angle: CGFloat = 0.0
-        
-        if self.isOpened {
-            self.close()
-            for v in self.subviews {
-                (v as? FABMenuItem)?.hideTitleLabel()
-            }
-        } else {
-            angle = 45.0
-            self.open()
-            for v in self.subviews {
-                (v as? FABMenuItem)?.showTitleLabel()
-            }
-            
-        }
-        
-        self.subviews.first?.motion(.rotationAngle(angle), .duration(0.1))
-    }
-}
-
-extension ReactiveExtensions where Base: FABMenu {
-    
-    /// Binding for menu toggle open/collapse on button tap.
-    var bndToggle: Bond<Void> {
-        return bond { menu, _ in
-            menu.toggle()
-        }
-    }
-}
-
 extension ReactiveExtensions where Base: RaisedButton {
     
     /// Binding with a button after EntryAction has been performed.

@@ -15,12 +15,16 @@ import ReactiveKit
 class ActionsCollectionViewController: UICollectionViewController, FABMenuDelegate {
     var viewModel: ActionsViewModel!
     var menu: FABMenu?
+    var pageControl: UIPageControl?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView!.alwaysBounceVertical = true
-        self.collectionView!.backgroundColor = UIColor(named: .gray)
+        collectionView?.showsHorizontalScrollIndicator = false
+        collectionView?.isPagingEnabled = true
+        collectionView?.backgroundColor = UIColor(named: .gray)
+        
+        collectionView?.register(CategoryViewCell.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: "headerCell")
         
         self.setupNavigationController()
         self.setupMenu()
@@ -86,15 +90,17 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
     
     ///
     func setupCollectionDataSource() {
-        self.viewModel.dataSource?.entriesSignal().mapToDataSourceEvent().bind(to: self.collectionView!) { (entries: [Entry], indexPath: IndexPath, collectionView: UICollectionView) -> UICollectionViewCell in
-            
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "entryCell",
-                for: indexPath) as! ActionViewCell
-            cell.setUpView()
-            cell.bind(with: entries[indexPath.row])
-            return cell
+        pageControl = UIPageControl()
+        pageControl?.pageIndicatorTintColor = UIColor.lightGray.withAlphaComponent(0.4)
+        pageControl?.currentPageIndicatorTintColor = UIColor.lightGray
+        
+        self.view.layout(pageControl!).bottom(30.0).centerHorizontally()
+        
+        _ = viewModel.data.observeNext { data in
+            self.pageControl?.numberOfPages = data.dataSource.numberOfSections
+            self.collectionView?.reloadData()
         }
+        viewModel.bindDataSource()
     }
     
     ///
@@ -106,9 +112,7 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         addButton.frame = CGRect(x: 0.0, y: 0.0, width: 48.0, height: 48.0)
         addButton.pulseColor = .white
         addButton.backgroundColor = UIColor(named: .green).darker()
-        self.menu?.reactive.bndToggle
-            .bind(signal: addButton.reactive.tap)
-            .dispose(in: reactive.bag)
+        _ = addButton.reactive.tap.observeNext { _ in self.menu?.toggle() }
         
         let entryItem = FABMenuItem()
         entryItem.fabButton.image = UIImage(named: "new_entry")
@@ -136,14 +140,10 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         menu.delegate = self
         menu.fabButton = addButton
         menu.fabMenuItems = [entryItem, categoryItem]
-        //menu.subviews = [addButton, entryItem, categoryItem]
-        //menu.baseSize = CGSize(width: 48.0, height: 48.0)
-        //menu.itemSize = CGSize(width: 40.0, height: 40.0)
         menu.fabMenuItemSize = CGSize(width: 40.0, height: 40.0)
         
         let margin: CGFloat = 30.0
         self.view.layout(menu).size(addButton.frame.size).bottom(margin).right(margin)
-        //self.view.layout(menu).size(menu.baseSize).bottom(margin).right(margin)
     }
     
     /// MARK: - ViewController presentation
@@ -184,6 +184,7 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
                 if let textFields = categoryDialog.textFields, let textField = textFields[safe: 0], let text = textField.text, text != "" {
                     let cat = Category()
                     cat.name = text
+                    cat.order = self.viewModel.data.numberOfSections
                     self.viewModel.dataSource?.write(cat)
                 }
         }))
@@ -203,10 +204,19 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
     
     ///
     func displaySettings() {
+        let visibleSection = collectionView?.indexPathsForVisibleSupplementaryElements(ofKind: "header")[safe: 0]?.section ?? 0
+        
         let settingsController = self.storyboard?.instantiateViewController(withIdentifier: "editController") as! SettingsTableViewController
-        _ = self.viewModel.dataSource?.entriesSignal().first().observeNext { entries in
-            settingsController.viewModel.setupEntries(entries: entries)
+        
+        settingsController.viewModel.setupEntries(entries: viewModel.data[visibleSection].items)
+        
+        let category = viewModel.data[visibleSection].metadata
+        settingsController.viewModel.categoryName.value = category.name
+        _ = settingsController.viewModel.categoryName.observeNext {
+            category.name = $0
+            self.viewModel.dataSource?.write(category)
         }
+        
         _ = settingsController.viewModel.signal.observeNext { entry in
             self.viewModel.dataSource?.write(entry)
         }
@@ -227,34 +237,36 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         }
     }
     
-    // MARK: - Flow layout delegate
+    // MARK: - Collection view data source methods
     
-    /// Adds margins on the left and on the right.
-    ///
-    /// - Parameter collectionView: The collection view object displaying the flow layout.
-    /// - Parameter collectionViewLayout: The layout object requesting the information.
-    /// - Parameter section: The index number of the section whose insets are needed.
-    /// - Returns: The margins to apply to items in the section.
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        let diff = collectionView.frame.width * (1.0 / 22.0)
-        return UIEdgeInsets(top: 8.0, left: diff/2.0, bottom: 0, right: diff/2.0)
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageWidth = scrollView.frame.width
+        let currentPage = Int(floor((scrollView.contentOffset.x - pageWidth / 2.0) / pageWidth) + 1.0)
+        pageControl?.currentPage = currentPage
     }
     
-    /// Separates the cells in pairs.
-    ///
-    /// - Warning: Should change later on for iPad to display more cells in one row.
-    ///
-    /// - Parameter collectionView: The collection view object displaying the flow layout.
-    /// - Parameter collectionViewLayout: The layout object requesting the information.
-    /// - Parameter indexPath: The index path of the item.
-    /// - Returns: The width and height of the specified item. Both values must be greater than 0.
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
-        //return CGSize(width: collectionView.frame.width/2.2, height: collectionView.frame.width/2.2)
-        
-        let screenRect =  UIScreen.main.bounds
-        let screenWidth = screenRect.size.width
-        let cellWidth = screenWidth / 3.5
-        let size = CGSize(width: cellWidth, height: cellWidth)
-        return size
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return viewModel.data.sections.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.data[section].items.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "entryCell",
+            for: indexPath) as! ActionViewCell
+        cell.setUpView()
+        cell.bind(with: viewModel.data[indexPath.section].items[indexPath.row])
+        return cell
+    }
+    
+    @objc(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: "header", withReuseIdentifier: "headerCell", for: indexPath) as! CategoryViewCell
+        header.setUpView()
+        header.bind(with: viewModel.data[indexPath.section].metadata)
+        return header
     }
 }

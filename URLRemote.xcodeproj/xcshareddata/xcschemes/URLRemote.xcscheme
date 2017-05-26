@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "462DB9D0F551FEC603027722233443C7"
+               BlueprintIdentifier = "72235F6436416D11C581B26ACB987E5D"
                BuildableName = "Pods_URLRemote.framework"
                BlueprintName = "Pods-URLRemote"
-               ReferencedContainer = "container:Pods/Pods.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "331104171D3DD27142B61080EA97EF7E"
-               BuildableName = "Pods_URLRemote_URLRemoteTests.framework"
-               BlueprintName = "Pods-URLRemote-URLRemoteTests"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

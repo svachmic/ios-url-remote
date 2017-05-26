@@ -10,13 +10,10 @@ import XCTest
 @testable import URLRemote
 
 class SimpleHTTPValidatorTests: XCTestCase {
-    var validator: Validator!
+    let entry = Entry()
     
     override func setUp() {
         super.setUp()
-        let entry = Entry()
-        entry.type = EntryType.simpleHTTP
-        validator = ValidatorFactory.validator(for: entry)
     }
     
     override func tearDown() {
@@ -24,6 +21,17 @@ class SimpleHTTPValidatorTests: XCTestCase {
     }
     
     func testValidation() {
+        entry.type = EntryType.simpleHTTP
+        let validator = ValidatorFactory.validator(for: entry)
+        
+        XCTAssertTrue(validator is SimpleHTTPValidator)
+        XCTAssertTrue(validator.validateOutput(output: "test"))
+    }
+    
+    func testNilEntryType() {
+        entry.type = nil
+        let validator = ValidatorFactory.validator(for: entry)
+        
         XCTAssertTrue(validator is SimpleHTTPValidator)
         XCTAssertTrue(validator.validateOutput(output: "test"))
     }

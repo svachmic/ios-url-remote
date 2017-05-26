@@ -14,8 +14,8 @@ import Foundation
 class QuidoValidator: GenericValidator {
     
     /// Custom initializer because Quido has an exact output for success.
-    init() {
-        super.init(with: "1")
+    convenience init() {
+        self.init(with: "1")
     }
     
     /// Hidden initializer from GenericValidator because this object should not be initialized with any other criteria than the one in the initializer above.

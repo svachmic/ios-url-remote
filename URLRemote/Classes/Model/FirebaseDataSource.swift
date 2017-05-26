@@ -24,7 +24,7 @@ extension FIRDataSnapshot {
             JSONArray: self.children
                 .map { $0 as! FIRDataSnapshot }
                 .map { $0.value as! [String : AnyObject] }
-            )?.sorted() ?? []
+            ).sorted()
     }
 }
 
@@ -72,7 +72,7 @@ class FirebaseDataSource {
     ///
     /// - Returns: Signal with an array of entries giving no error.
     func categoriesSignal() -> Signal<[Category], NoError> {
-        return entriesRef.signalForEvent(event: .value)
+        return categoriesRef.signalForEvent(event: .value)
             .map { snapshot in
                 return snapshot.toArray()
             }.flatMapError { _ in Signal<[Category], NoError>.sequence([])}
