@@ -38,8 +38,15 @@ class SettingsTableViewController: UITableViewController {
         }
         self.toolbarController?.toolbar.leftViews = [close]
         
+        let editButton = IconButton(image: Icon.cm.edit, tintColor: .white)
+        editButton.pulseColor = .white
+        _ = editButton.reactive.tap.observeNext {
+            self.displayCategoryNameChange()
+        }
+        self.toolbarController?.toolbar.rightViews = [editButton]
+        
         self.toolbarController?.toolbar.titleLabel.textColor = .white
-        self.toolbarController?.toolbar.title = NSLocalizedString("SETTINGS", comment: "")
+        viewModel.categoryName.bind(to: self.toolbarController!.toolbar.reactive.bndTitle)
     }
     
     ///
@@ -66,6 +73,43 @@ class SettingsTableViewController: UITableViewController {
         self.tableView.separatorInset = UIEdgeInsets.zero
         self.tableView.backgroundColor = UIColor(named: .gray)
         self.tableView.setEditing(true, animated: false)
+    }
+    
+    // MARK: - Category renaming
+    
+    ///
+    func displayCategoryNameChange() {
+        let categoryDialog = UIAlertController(
+            title: NSLocalizedString("CHANGE_CATEGORY_NAME", comment: ""),
+            message: NSLocalizedString("CHANGE_CATEGORY_NAME_DESC", comment: ""),
+            preferredStyle: .alert)
+        
+        categoryDialog.addAction(UIAlertAction(
+            title: NSLocalizedString("CANCEL", comment: ""),
+            style: .destructive,
+            handler: nil))
+        
+        categoryDialog.addAction(UIAlertAction(
+            title: NSLocalizedString("OK", comment: ""),
+            style: .default,
+            handler: { _ in
+                if let textFields = categoryDialog.textFields, let textField = textFields[safe: 0], let text = textField.text, text != "" {
+                    self.viewModel.categoryName.value = text
+                }
+        }))
+        
+        categoryDialog.addTextField { textField in
+            textField.placeholder = NSLocalizedString("CHANGE_CATEGORY_NAME_PLACEHOLDER", comment: "")
+            textField.text = self.viewModel.categoryName.value
+            _ = textField.reactive.text.map {
+                guard let text = $0 else { return false }
+                return text != ""
+                }.observeNext { next in
+                    categoryDialog.actions[safe: 1]?.isEnabled = next
+            }
+        }
+        
+        self.present(categoryDialog, animated: true, completion: nil)
     }
 
     // MARK: - Table view data source

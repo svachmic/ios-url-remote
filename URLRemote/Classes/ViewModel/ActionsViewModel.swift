@@ -16,6 +16,7 @@ import ReactiveKit
 class ActionsViewModel {
     let bndBag = DisposeBag()
     var dataSource: FirebaseDataSource?
+    var data = MutableObservable2DArray<Category, Entry>([])
     
     init() {
         FIRAuth.auth()?.addStateDidChangeListener { _, user in
@@ -46,6 +47,28 @@ class ActionsViewModel {
     
     func logout() {
         try? FIRAuth.auth()?.signOut()
+    }
+    
+    func bindDataSource() {
+        guard let dataSource = dataSource else {
+            return
+        }
+        
+        _ = combineLatest(dataSource.categoriesSignal(), dataSource.entriesSignal()) { (categories, entries) -> MutableObservable2DArray<Category, Entry> in
+            let contents = MutableObservable2DArray<Category, Entry>([])
+            
+            for category in categories {
+                let section = Observable2DArraySection<Category, Entry>(
+                    metadata: category,
+                    items: entries.filter { category.entryKeys.contains($0.firebaseKey!) }
+                )
+                contents.appendSection(section)
+            }
+            
+            return contents
+            }.observeNext {
+                self.data.replace(with: $0, performDiff: true)
+        }.dispose(in: bndBag)
     }
     
     func addTestItem() {

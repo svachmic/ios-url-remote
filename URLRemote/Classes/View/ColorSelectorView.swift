@@ -20,6 +20,11 @@ class ColorSelectorView: UIView {
         super.init(coder: aDecoder)
     }
     
+    /// Exposed initializer for testing purposes
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
     /// Sets up all buttons and hooks them up to the signal emitter.
     ///
     /// - Parameter colors: Array with ColorName enum values to fill buttons with. This is the enum that later on gets emitted through the signal.

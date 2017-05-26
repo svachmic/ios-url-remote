@@ -16,6 +16,8 @@ class SettingsViewModel {
     let bndBag = DisposeBag()
     /// Entries to be edited.
     let entries = MutableObservableArray<Entry>([])
+    /// Category name
+    let categoryName = Observable<String>("")
     
     /// Signal emitting Entries to be modified.
     let signal = PublishSubject<Entry, NoError>()
@@ -47,7 +49,7 @@ class SettingsViewModel {
         var entryIndex = -1
         for index in 0..<self.entries.count {
             let e = self.entries[index]
-            if let fir_origin = e.firebaseKey, let fir_dest = entry.firebaseKey, fir_origin == fir_dest {
+            if let firOrigin = e.firebaseKey, let firDest = entry.firebaseKey, firOrigin == firDest {
                 entryIndex = index
             }
         }

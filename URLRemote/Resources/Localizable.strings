@@ -57,6 +57,9 @@
 /// Settings View Controller
 
 "SETTINGS" = "Settings";
+"CHANGE_CATEGORY_NAME" = "Change category name";
+"CHANGE_CATEGORY_NAME_DESC" = "Type the new name of the category.";
+"CHANGE_CATEGORY_NAME_PLACEHOLDER" = "E.g. \"Home\" or \"Garden\".";
 
 // Networking
 

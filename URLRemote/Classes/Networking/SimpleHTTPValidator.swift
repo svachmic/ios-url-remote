@@ -12,8 +12,8 @@ import Foundation
 class SimpleHTTPValidator: GenericValidator {
     
     /// Custom initializer because no criteria is needed.
-    init() {
-        super.init(with: "")
+    convenience init() {
+        self.init(with: "")
     }
     
     /// Hidden initializer from GenericValidator because this object should not be initialized with any criteria.

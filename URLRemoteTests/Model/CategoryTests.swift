@@ -21,9 +21,17 @@ class CategoryTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testParsing() {
         XCTAssertNotNil(category)
         XCTAssertTrue(category.name == "test category")
         XCTAssertTrue(category.entryKeys.count == 3)
+    }
+    
+    func testInitializer() {
+        let categoryTest = Category()
+        categoryTest.name = "test category"
+        categoryTest.entryKeys = ["abc", "def", "ghi"]
+        XCTAssertEqual(categoryTest.name, category.name)
+        XCTAssertEqual(categoryTest.entryKeys.count, category.entryKeys.count)
     }
 }

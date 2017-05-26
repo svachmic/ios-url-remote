@@ -14,12 +14,10 @@ target "URLRemote" do
     pod 'Material', '~> 2.5.1'
     pod 'Motion', '~> 1.0'
     pod 'ObjectMapper', '~> 2.0'
+    pod 'OHHTTPStubs/Swift', '~> 6.0'
 
     target "URLRemoteTests" do
         inherit! :search_paths
-
-        pod 'OHHTTPStubs'
-        pod 'OHHTTPStubs/Swift'
     end
 end
 
