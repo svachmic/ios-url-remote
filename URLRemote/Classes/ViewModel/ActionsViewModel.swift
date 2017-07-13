@@ -19,7 +19,7 @@ class ActionsViewModel {
     var data = MutableObservable2DArray<Category, Entry>([])
     
     init() {
-        FIRAuth.auth()?.addStateDidChangeListener { _, user in
+        Auth.auth().addStateDidChangeListener { _, user in
             if let user = user {
                 print("signed in as \(user.description)")
                 
@@ -46,7 +46,7 @@ class ActionsViewModel {
     }
     
     func logout() {
-        try? FIRAuth.auth()?.signOut()
+        try? Auth.auth().signOut()
     }
     
     func bindDataSource() {

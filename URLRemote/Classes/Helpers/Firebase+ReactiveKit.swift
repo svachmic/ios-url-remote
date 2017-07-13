@@ -11,13 +11,13 @@ import FirebaseDatabase
 import ReactiveKit
 
 /// ReactiveKit extension to allow turning events into signals.
-extension FIRDatabaseReference {
+extension DatabaseReference {
     
     /// Turns Firebase events into a signal of continuous events.
     ///
     /// - Parameter event: Firebase data event type to observe.
     /// - Returns: Signal with continuous events enabling reactive binding.
-    func signalForEvent(event: FIRDataEventType) -> Signal<FIRDataSnapshot, NSError> {
+    func signalForEvent(event: DataEventType) -> Signal<DataSnapshot, NSError> {
         return Signal { observer in
             let handle = self.observe(event, with: { snapshot in
                 observer.next(snapshot)
@@ -35,7 +35,7 @@ extension FIRDatabaseReference {
     ///
     /// - Parameter event: Firebase data event type to observe.
     /// - Returns: Signal with a single event enabling reactive binding.
-    func signalForSingleEvent(event: FIRDataEventType) -> Signal<FIRDataSnapshot, NSError> {
+    func signalForSingleEvent(event: DataEventType) -> Signal<DataSnapshot, NSError> {
         return Signal { observer in
             self.observeSingleEvent(of: event, with: { snapshot in
                 observer.next(snapshot)
