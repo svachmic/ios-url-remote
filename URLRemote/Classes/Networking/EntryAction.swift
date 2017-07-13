@@ -54,7 +54,7 @@ class EntryAction {
                     let validated = validator.validateOutput(output: value)
                     observer.completed(with: validated ? .success : .failure)
                     break
-                case .failure(_):
+                case .failure:
                     observer.completed(with: .error)
                     break
                 }

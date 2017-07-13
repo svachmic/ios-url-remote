@@ -14,7 +14,7 @@ import FirebaseDatabase
 import ObjectMapper
 
 /// Firebase + ObjectMapper extension
-extension FIRDataSnapshot {
+extension DataSnapshot {
     
     /// Parses Firebase Data Snapshot into an array of model objects.
     ///
@@ -22,7 +22,7 @@ extension FIRDataSnapshot {
     func toArray<T: FirebaseObject>() -> [T] {
         return Mapper<T>().mapArray(
             JSONArray: self.children
-                .map { $0 as! FIRDataSnapshot }
+                .map { $0 as! DataSnapshot }
                 .map { $0.value as! [String : AnyObject] }
             ).sorted()
     }
@@ -30,20 +30,20 @@ extension FIRDataSnapshot {
 
 /// Firebase ReactiveKit wrapper to enable reactive bindings.
 class FirebaseDataSource {
-    var user: FIRUser
-    var database: FIRDatabase
+    var user: User
+    var database: Database
     var isOnline = Observable<Bool>(false)
     
-    init(user: FIRUser) {
+    init(user: User) {
         self.user = user
-        self.database = FIRDatabase.database()
+        self.database = Database.database()
         _ = self.isOnline.bind(signal: connectionSignal())
     }
     
     // MARK: - Connection status
     
     /// Computed value indicating connection status.
-    private var connectedRef: FIRDatabaseReference {
+    private var connectedRef: DatabaseReference {
         return database.reference(withPath: ".info/connected")
     }
     
@@ -59,12 +59,12 @@ class FirebaseDataSource {
     // MARK: - Data
     
     /// Computed variable with all user data.
-    private var userDataRef: FIRDatabaseReference {
+    private var userDataRef: DatabaseReference {
         return database.reference().child("users/\(user.uid)")
     }
     
     /// Computed variable with all entries of the user.
-    private var categoriesRef: FIRDatabaseReference {
+    private var categoriesRef: DatabaseReference {
         return userDataRef.child("categories")
     }
     
@@ -79,7 +79,7 @@ class FirebaseDataSource {
     }
     
     /// Computed variable with all entries of the user.
-    private var entriesRef: FIRDatabaseReference {
+    private var entriesRef: DatabaseReference {
         return userDataRef.child("entries")
     }
     
@@ -99,7 +99,7 @@ class FirebaseDataSource {
     ///
     /// - Parameter category: Category to be written in the database.
     func write(_ category: Category) {
-        var reference: FIRDatabaseReference?
+        var reference: DatabaseReference?
         
         if let key = category.firebaseKey {
             reference = categoriesRef.child(key)
@@ -117,7 +117,7 @@ class FirebaseDataSource {
     ///
     /// - Parameter entry: Entry to be written in the database.
     func write(_ entry: Entry) {
-        var reference: FIRDatabaseReference?
+        var reference: DatabaseReference?
         
         if let key = entry.firebaseKey {
             reference = entriesRef.child(key)

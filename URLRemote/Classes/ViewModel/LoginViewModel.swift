@@ -105,9 +105,11 @@ class LoginViewModel {
     
     /// Attempts signing up - creating a new user.
     func signUp() {
-        guard let auth = FIRAuth.auth(), let email = self.email.value, let password = self.password.value else {
+        guard let email = self.email.value, let password = self.password.value else {
             return
         }
+        
+        let auth = Auth.auth()
         
         auth.createUser(withEmail: email, password: password) { _, error in
             if error == nil {
@@ -122,9 +124,11 @@ class LoginViewModel {
     
     /// Attempts signing in - letting the user in.
     func signIn() {
-        guard let auth = FIRAuth.auth(), let email = self.email.value, let password = self.password.value else {
+        guard let email = self.email.value, let password = self.password.value else {
             return
         }
+        
+        let auth = Auth.auth()
         
         auth.signIn(withEmail: email, password: password) { _, error in
             if error == nil {

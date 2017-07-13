@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
         
         // Initialize Firebase
-        FIRApp.configure()
+        FirebaseApp.configure()
         
         return true
     }
