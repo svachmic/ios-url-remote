@@ -27,6 +27,7 @@ class ActionEntryTableViewCell: UITableViewCell {
         let container = self.viewWithTag(10)!
         
         self.urlField = container.viewWithTag(1) as? TextField
+        self.urlField?.autocorrectionType = .no
         self.urlField?.placeholder = NSLocalizedString("URL", comment: "")
         self.urlField?.font = RobotoFont.regular(with: 13)
         self.urlField?.placeholderActiveColor = UIColor(named: .green).darker()

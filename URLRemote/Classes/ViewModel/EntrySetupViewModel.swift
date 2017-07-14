@@ -36,6 +36,10 @@ class EntrySetupViewModel {
     let password = Observable<String?>(nil)
     let customCriteria = Observable<String>("")
     
+    let categories = MutableObservableArray<String>([])
+    let originalCategoryIndex = Observable<Int?>(nil)
+    let selectedCategoryIndex = Observable<Int>(0)
+    
     /// Observable property indicating the completeness of the form.
     let isFormComplete = Observable<Bool>(false)
     
@@ -44,6 +48,9 @@ class EntrySetupViewModel {
         EntrySetupTableCell(
             identifier: "designCell",
             height: 133.0),
+        EntrySetupTableCell(
+            identifier: "categoryCell",
+            height: 68.0),
         EntrySetupTableCell(
             identifier: "typeCell",
             height: 68.0),
@@ -59,26 +66,28 @@ class EntrySetupViewModel {
     init() {
         self.bindValidation()
         
-        _ = self.type.observeNext { type in
+        originalCategoryIndex.map { $0 ?? 0 }.bind(to: selectedCategoryIndex).dispose(in: bndBag)
+        
+        _ = self.type.observeNext { [unowned self] type in
             if type == .custom {
-                if self.contents.count == 3 {
+                if self.contents.count == 4 {
                     let cell = EntrySetupTableCell(
                         identifier: "criteriaCell",
                         height: 94.0)
-                    self.contents.insert(cell, at: 2)
+                    self.contents.insert(cell, at: 3)
                 }
             } else {
-                if self.contents.count == 4 {
-                    self.contents.remove(at: 2)
+                if self.contents.count == 5 {
+                    self.contents.remove(at: 3)
                     self.customCriteria.value = ""
                 }
             }
-        }
+        }.dispose(in: bndBag)
         
         NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "SELECTED_ICON"))
             .map { return $0.object as! String }
-            .bind(to: self.icon)
-            .dispose(in: self.bndBag)
+            .bind(to: icon)
+            .dispose(in: bndBag)
     }
     
     /// Binds form validation to isFormComplete observable property.
@@ -106,7 +115,7 @@ class EntrySetupViewModel {
                 
                 return true
             }.bind(to: self.isFormComplete)
-            .dispose(in: self.bndBag)
+            .dispose(in: bndBag)
     }
     
     /// Sets observed form data to have previously generated Entry data.

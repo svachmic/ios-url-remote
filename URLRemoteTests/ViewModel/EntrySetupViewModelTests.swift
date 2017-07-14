@@ -47,13 +47,13 @@ class EntrySetupViewModelTests: XCTestCase {
     
     func testTypeSwitching() {
         XCTAssertTrue(viewModel.type.value == EntryType.simpleHTTP)
-        XCTAssertTrue(viewModel.contents.count == 3)
-        
-        viewModel.type.value = EntryType.custom
         XCTAssertTrue(viewModel.contents.count == 4)
         
+        viewModel.type.value = EntryType.custom
+        XCTAssertTrue(viewModel.contents.count == 5)
+        
         viewModel.type.value = EntryType.simpleHTTP
-        XCTAssertTrue(viewModel.contents.count == 3)
+        XCTAssertTrue(viewModel.contents.count == 4)
     }
     
     func testIconNotification() {
