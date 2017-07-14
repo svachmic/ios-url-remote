@@ -95,20 +95,58 @@ class FirebaseDataSource {
     
     // MARK: - Write
     
-    /// Performs writing operation. If a category with the same Firebase Key does not exist a new one is created. Otherwise the old one is updated.
     ///
-    /// - Parameter category: Category to be written in the database.
-    func write(_ category: Category) {
-        var reference: DatabaseReference?
+    private func writeWithExistenceAssertion(_ category: Category) -> String {
+        var reference: DatabaseReference
         
         if let key = category.firebaseKey {
             reference = categoriesRef.child(key)
         } else {
             reference = categoriesRef.childByAutoId()
-            category.firebaseKey = reference!.key
+            category.firebaseKey = reference.key
         }
         
-        reference?.setValue(category.toJSON())
+        reference.setValue(category.toJSON())
+        return reference.key
+    }
+    
+    /// Performs writing operation. If a category with the same Firebase Key does not exist a new one is created. Otherwise the old one is updated.
+    ///
+    /// - Parameter category: Category to be written in the database.
+    func write(_ category: Category) {
+        _ = self.writeWithExistenceAssertion(category)
+    }
+    
+    ///
+    func move(entry: Entry, from: Category, to: Category, shuffleOrder: Bool = false) {
+        if let key = entry.firebaseKey, let index = from.entryKeys.index(where: { $0 == key }) {
+            from.entryKeys.remove(at: index)
+            self.write(from)
+        }
+        
+        // other entries' order is reshuffled after the write has been finished
+        // SettingsViewModel line 35
+        // TODO: Solve this with a better pattern - prepared parameter shuffleOrder
+        entry.order = to.entryKeys.count
+        
+        let entryKey = self.writeWithExistenceAssertion(entry)
+        to.entryKeys.append(entryKey)
+        self.write(to)
+    }
+    
+    ///
+    private func writeWithExistenceAssertion(_ entry: Entry) -> String {
+        var reference: DatabaseReference
+        
+        if let key = entry.firebaseKey {
+            reference = entriesRef.child(key)
+        } else {
+            reference = entriesRef.childByAutoId()
+            entry.firebaseKey = reference.key
+        }
+        
+        reference.setValue(entry.toJSON())
+        return reference.key
     }
     
     /// Performs writing operation. If an entry with the same Firebase Key does not exist a new one is created. Otherwise the old one is updated.
@@ -117,16 +155,18 @@ class FirebaseDataSource {
     ///
     /// - Parameter entry: Entry to be written in the database.
     func write(_ entry: Entry) {
-        var reference: DatabaseReference?
+        _ = self.writeWithExistenceAssertion(entry)
+    }
+    
+    ///
+    func write(entry: Entry, category: Category) {
+        let entryKey = self.writeWithExistenceAssertion(entry)
         
-        if let key = entry.firebaseKey {
-            reference = entriesRef.child(key)
-        } else {
-            reference = entriesRef.childByAutoId()
-            entry.firebaseKey = reference!.key
+        if !category.entryKeys.contains(entryKey) {
+            category.entryKeys.append(entryKey)
         }
         
-        reference?.setValue(entry.toJSON())
+        self.write(category)
     }
     
     /// Deletes entry from the database.

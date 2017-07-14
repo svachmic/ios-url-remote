@@ -10,7 +10,7 @@ import UIKit
 import Material
 
 /// View for a cell representing the type of an entry. Drawn simply as a text with currently selected type and an arrow indicating interaction with the cell.
-class TypeEntryTableViewCell: UITableViewCell {
+class GenericButtonTableViewCell: UITableViewCell {
     var button: FlatButton?
 
     override func awakeFromNib() {

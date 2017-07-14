@@ -38,10 +38,23 @@ class ActionsViewModel {
             }
         }
         
-        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "CREATED_ENTRY"))
-            .observeNext { notification in
-                let entry = notification.object as! Entry
-                self.dataSource?.write(entry)
+        NotificationCenter.default.reactive.notification(name: DataSourceNotifications.createdEntry.name)
+            .observeNext { [unowned self] notification in
+                if self.data.count == 0 {
+                    return
+                }
+                
+                let entryDto = notification.object as! EntryDto
+                let toCategory = self.data[entryDto.categoryIndex].metadata
+                
+                if let originalIdx = entryDto.originalCategoryIndex, originalIdx != entryDto.categoryIndex {
+                    print("this is a change of category")
+                    let fromCategory = self.data[originalIdx].metadata
+                    self.dataSource?.move(entry: entryDto.entry, from: fromCategory, to: toCategory)
+                } else {
+                    print("this is either an update or a new category")
+                    self.dataSource?.write(entry: entryDto.entry, category: toCategory)
+                }
             }.dispose(in: self.bndBag)
     }
     

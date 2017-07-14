@@ -38,31 +38,39 @@ class EntrySetupViewController: UITableViewController {
         cancel.titleColor = .white
         cancel.pulseColor = .white
         cancel.titleLabel?.font = RobotoFont.bold(with: 15)
-        _ = cancel.reactive.tap.observeNext {
-            self.parent?.dismiss(animated: true, completion: nil)
-        }
+        
+        cancel.reactive.tap.bind(to: self) { me, _ in
+            me.parent?.dismiss(animated: true, completion: nil)
+        }.dispose(in: reactive.bag)
+        
         self.toolbarController?.toolbar.leftViews = [cancel]
         
         let done = IconButton(image: Icon.cm.check, tintColor: .white)
         done.pulseColor = .white
-        self.viewModel.isFormComplete.bind(to: done.reactive.isEnabled)
-        _ = done.reactive.tap.observeNext {
-            let entry = self.viewModel.toEntry()
+        viewModel.isFormComplete
+            .bind(to: done.reactive.isEnabled)
+            .dispose(in: reactive.bag)
+        
+        done.reactive.tap.bind(to: self) { me, _ in
+            let entry = me.viewModel.toEntry()
+            let entryDto = EntryDto(entry: entry, originalCategoryIndex: me.viewModel.originalCategoryIndex.value, categoryIndex: me.viewModel.selectedCategoryIndex.value)
             NotificationCenter.default.post(
-                name: NSNotification.Name(rawValue: "CREATED_ENTRY"),
-                object: entry)
+                name: DataSourceNotifications.createdEntry.name,
+                object: entryDto)
             
-            self.parent?.dismiss(animated: true, completion: nil)
-        }
+            me.parent?.dismiss(animated: true, completion: nil)
+        }.dispose(in: reactive.bag)
         self.toolbarController?.toolbar.rightViews = [done]
         
         self.toolbarController?.toolbar.titleLabel.textColor = .white
-        self.viewModel.name.bind(to: self.toolbarController!.toolbar.reactive.bndTitle)
+        viewModel.name
+            .bind(to: toolbarController!.toolbar.reactive.bndTitle)
+            .dispose(in: reactive.bag)
     }
     
     ///
     func setupTableView() {
-        self.viewModel.contents.bind(to: tableView) { contents, indexPath, tableView in
+        viewModel.contents.bind(to: tableView) { [unowned self] contents, indexPath, tableView in
             let content = contents[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: content.identifier, for: indexPath)
             cell.backgroundColor = .clear
@@ -73,8 +81,13 @@ class EntrySetupViewController: UITableViewController {
                     self.setupDesignCell(cell: designCell)
                 }
                 break
+            case "categoryCell":
+                if let categoryCell = cell as? GenericButtonTableViewCell {
+                    self.setupCategoryCell(cell: categoryCell)
+                }
+                break
             case "typeCell":
-                if let typeCell = cell as? TypeEntryTableViewCell {
+                if let typeCell = cell as? GenericButtonTableViewCell {
                     self.setupTypeCell(cell: typeCell)
                 }
                 break
@@ -93,7 +106,7 @@ class EntrySetupViewController: UITableViewController {
             }
             
             return cell
-        }
+        }.dispose(in: self.reactive.bag)
     }
     
     // MARK: - Cell setup
@@ -101,86 +114,153 @@ class EntrySetupViewController: UITableViewController {
     ///
     func setupDesignCell(cell: DesignEntryTableViewCell) {
         cell.layoutSubviews()
-        _ = cell.icon?.reactive.tap.observeNext {
-            self.presentIconController()
-        }
-        self.viewModel.color
+        
+        cell.icon?.reactive.tap.bind(to: self) { me, _ in
+            me.presentIconController()
+        }.dispose(in: cell.reactive.bag)
+        
+        viewModel.color
             .map { return UIColor(named: $0) }
             .bind(to: cell.icon!.reactive.backgroundColor)
+            .dispose(in: cell.reactive.bag)
         
-        _ = self.viewModel.icon
+        viewModel.icon
             .map { UIImage(named: $0) }
-            .observeNext {
-                if let image = $0 {
-                    cell.icon?.image = image.withRenderingMode(.alwaysTemplate)
-                    cell.icon?.imageView?.tintColor = .white
+            .bind(to: cell) { c, im in
+                if let i = im {
+                    c.icon?.image = i.withRenderingMode(.alwaysTemplate)
+                    c.icon?.imageView?.tintColor = .white
                 }
-        }
+            }.dispose(in: cell.reactive.bag)
         
-        self.viewModel.name.bind(to: cell.nameField!.reactive.text)
-        cell.nameField?.reactive.text.map { $0 ?? ""}.bind(to: self.viewModel.name)
+        viewModel.name
+            .bind(to: cell.nameField!.reactive.text)
+            .dispose(in: cell.reactive.bag)
+        
+        cell.nameField?.reactive.text
+            .map { $0 ?? ""}
+            .bind(to: viewModel.name)
+            .dispose(in: cell.reactive.bag)
         
         cell.colorSelector!.setupViews(with: [.green, .yellow, .red])
-        cell.colorSelector!.signal.bind(to: self.viewModel.color)
+        cell.colorSelector!.signal
+            .bind(to: viewModel.color)
+            .dispose(in: cell.reactive.bag)
     }
     
     ///
-    func setupTypeCell(cell: TypeEntryTableViewCell) {
+    func setupCategoryCell(cell: GenericButtonTableViewCell) {
         cell.layoutSubviews()
-        self.viewModel.type
+        viewModel.selectedCategoryIndex
+            .map { [unowned self] in self.viewModel.categories[$0] }
+            .bind(to: cell.button!.reactive.title)
+            .dispose(in: cell.reactive.bag)
+        cell.button?.reactive.tap.bind(to: self) { me, _ in
+            me.presentCategoryController()
+        }.dispose(in: cell.reactive.bag)
+    }
+    
+    ///
+    func setupTypeCell(cell: GenericButtonTableViewCell) {
+        cell.layoutSubviews()
+        viewModel.type
             .map { $0.toString() }
             .bind(to: cell.button!.reactive.title)
-        _ = cell.button?.reactive.tap.observeNext {
-            self.presentTypeController()
-        }
+            .dispose(in: cell.reactive.bag)
+        cell.button?.reactive.tap.bind(to: self) { me, _ in
+            me.presentTypeController()
+        }.dispose(in: cell.reactive.bag)
     }
     
     ///
     func setupActionCell(cell: ActionEntryTableViewCell) {
         cell.layoutSubviews()
         
-        self.viewModel.url.bind(to: cell.urlField!.reactive.text)
-        cell.urlField?.reactive.text.map { $0 ?? ""}.bind(to: self.viewModel.url)
+        viewModel.url
+            .bind(to: cell.urlField!.reactive.text)
+            .dispose(in: cell.reactive.bag)
         
-        _ = self.viewModel.requiresAuthentication.bidirectionalBind(to: cell.checkbox!.isChecked)
+        cell.urlField?.reactive.text
+            .map { $0 ?? ""}
+            .bind(to: viewModel.url)
+            .dispose(in: cell.reactive.bag)
         
-        self.viewModel.user.bind(to: cell.userField!.reactive.text)
-        cell.userField?.reactive.text.map { $0 ?? ""}.bind(to: self.viewModel.user)
+        viewModel.requiresAuthentication
+            .bidirectionalBind(to: cell.checkbox!.isChecked)
+            .dispose(in: cell.reactive.bag)
         
-        self.viewModel.password.bind(to: cell.passwordField!.reactive.text)
-        cell.passwordField?.reactive.text.map { $0 ?? ""}.bind(to: self.viewModel.password)
+        viewModel.user
+            .bind(to: cell.userField!.reactive.text)
+            .dispose(in: cell.reactive.bag)
+        
+        cell.userField?.reactive.text
+            .map { $0 ?? ""}
+            .bind(to: viewModel.user)
+            .dispose(in: cell.reactive.bag)
+        
+        viewModel.password
+            .bind(to: cell.passwordField!.reactive.text)
+            .dispose(in: cell.reactive.bag)
+        
+        cell.passwordField?.reactive.text
+            .map { $0 ?? ""}
+            .bind(to: viewModel.password)
+            .dispose(in: cell.reactive.bag)
     }
     
     ///
     func setupCustomCriteriaCell(cell: CustomCriteriaTableViewCell) {
         cell.layoutSubviews()
         
-        self.viewModel.customCriteria.bind(to: cell.criteriaField!.reactive.text)
-        cell.criteriaField?.reactive.text.map { $0 ?? ""}.bind(to: self.viewModel.customCriteria)
+        viewModel.customCriteria
+            .bind(to: cell.criteriaField!.reactive.text)
+            .dispose(in: cell.reactive.bag)
         
-        _ = cell.infoButton?.reactive.tap.observeNext {
-            self.presentSimpleAlertDialog(
+        cell.criteriaField?.reactive.text
+            .map { $0 ?? ""}
+            .bind(to: viewModel.customCriteria)
+            .dispose(in: cell.reactive.bag)
+        
+        cell.infoButton?.reactive.tap.bind(to: self) { me, _ in
+            me.presentSimpleAlertDialog(
                 header: NSLocalizedString("CUSTOM_CRITERIA", comment: ""),
                 message: NSLocalizedString("CUSTOM_CRITERIA_DESC", comment: ""))
-        }
+        }.dispose(in: cell.reactive.bag)
     }
+    
+    // MARK: - Presentation methods
     
     func presentIconController() {
         let iconController = self.storyboard?.instantiateViewController(withIdentifier: "iconController") as! IconCollectionViewController
-        iconController.iconColor = UIColor(named: self.viewModel.color.value)
-        iconController.viewModel.setInitial(value: self.viewModel.icon.value)
+        iconController.iconColor = UIColor(named: viewModel.color.value)
+        iconController.viewModel.setInitial(value: viewModel.icon.value)
         self.presentEmbedded(viewController: iconController, barTintColor: UIColor(named: .green))
+    }
+    
+    func presentCategoryController() {
+        let categoryController = self.storyboard?.instantiateViewController(withIdentifier: "categoryTableController") as! CategoryTableViewController
+        viewModel.categories
+            .bind(to: categoryController.viewModel.contents)
+            .dispose(in: categoryController.reactive.bag)
+        categoryController.viewModel.signal
+            .bind(to: viewModel.selectedCategoryIndex)
+            .dispose(in: categoryController.reactive.bag)
+        
+        self.presentEmbedded(viewController: categoryController, barTintColor: UIColor(named: .green))
     }
     
     func presentTypeController() {
         let typeController = self.storyboard?.instantiateViewController(withIdentifier: "typeController") as! TypeTableViewController
-        typeController.viewModel.signal.bind(to: self.viewModel.type)
+        typeController.viewModel
+            .signal.bind(to: viewModel.type)
+            .dispose(in: typeController.reactive.bag)
+        
         self.presentEmbedded(viewController: typeController, barTintColor: UIColor(named: .green))
     }
     
     // MARK: - UITableView delegate
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.viewModel.contents[indexPath.row].height
+        return viewModel.contents[indexPath.row].height
     }
 }

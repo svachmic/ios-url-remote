@@ -77,6 +77,13 @@ class ActionsCollectionLayout: UICollectionViewLayout {
         return attributesInRect
     }
     
+    override func invalidateLayout() {
+        super.invalidateLayout()
+        
+        cellCache = [:]
+        headerCache = [:]
+    }
+    
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return false
     }

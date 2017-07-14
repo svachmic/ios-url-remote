@@ -1,6 +1,7 @@
 included:
   - URLRemote/Classes
 line_length: 300
+cyclomatic_complexity: 12
 identifier_name:
   min_length: # not possible to disable this partial rule, so set it to zero
     warning: 0

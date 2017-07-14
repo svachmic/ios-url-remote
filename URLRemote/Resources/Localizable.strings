@@ -50,6 +50,7 @@
 "PLAYER" = "PLAYER";
 "ARROWS" = "ARROWS";
 "LIGHTS" = "LIGHTS";
+"SELECT_CATEGORY" = "Select a category";
 "SELECT_TYPE" = "Select a type";
 "CUSTOM_CRITERIA" = "Custom criteria";
 "CUSTOM_CRITERIA_DESC" = "Custom criteria for evaluating whether or not the action has been successful. The expression is evaluated word by word, separated by a space. If at least one of the words is present in the output of the action, the action will be considered a success.\n\n Example 1: Criteria \"success ok\" will be applied on output \"ok\" and will result in success.\n\n Example 2: Criteria \"success ok\" will be applied on output \"fail\" and will result in failure.";

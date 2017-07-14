@@ -18,6 +18,7 @@ class SettingsViewModel {
     let entries = MutableObservableArray<Entry>([])
     /// Category name
     let categoryName = Observable<String>("")
+    let categories = MutableObservableArray<String>([])
     
     /// Signal emitting Entries to be modified.
     let signal = PublishSubject<Entry, NoError>()
@@ -25,11 +26,18 @@ class SettingsViewModel {
     let deleteSignal = PublishSubject<Entry, NoError>()
     
     init() {
-        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "CREATED_ENTRY"))
-            .observeNext { notification in
-                let entry = notification.object as! Entry
-                self.replace(with: entry)
-            }.dispose(in: self.bndBag)
+        NotificationCenter.default.reactive.notification(name: DataSourceNotifications.createdEntry.name)
+            .observeNext { [unowned self] notification in
+                let entryDto = notification.object as! EntryDto
+                if entryDto.originalCategoryIndex != entryDto.categoryIndex {
+                    if let index = self.entries.index(where: { $0.firebaseKey == entryDto.entry.firebaseKey }) {
+                        self.entries.remove(at: index)
+                        self.shuffleOrder()
+                    }
+                } else {
+                    self.replace(with: entryDto.entry)
+                }
+            }.dispose(in: bndBag)
     }
     
     /// Sets up/populates observable entries array.
@@ -66,12 +74,7 @@ class SettingsViewModel {
     /// - Parameter to: Index where the d&d ended.
     func moveItem(from: Int, to: Int) {
         self.entries.moveItem(from: from, to: to)
-        
-        for index in 0..<self.entries.count {
-            let entry = self.entries[index]
-            entry.order = index
-            self.signal.next(entry)
-        }
+        self.shuffleOrder()
     }
     
     /// Removes item fully from the database.
@@ -82,6 +85,11 @@ class SettingsViewModel {
         self.entries.remove(at: index)
         self.deleteSignal.next(entry)
         
+        self.shuffleOrder()
+    }
+    
+    ///
+    private func shuffleOrder() {
         for index in 0..<self.entries.count {
             let entry = self.entries[index]
             entry.order = index

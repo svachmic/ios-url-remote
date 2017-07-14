@@ -56,10 +56,10 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         }
         self.navigationItem.leftViews = [logout]
         
-        let addButton = IconButton(image: Icon.cm.add, tintColor: .white)
-        addButton.pulseColor = .white
-        _ = addButton.reactive.tap.observeNext {
-            self.displayEntrySetup()
+        let settingsButton = IconButton(image: Icon.cm.settings, tintColor: .white)
+        settingsButton.pulseColor = .white
+        _ = settingsButton.reactive.tap.observeNext {
+            print("Settings coming soon!")
         }
         
         let editButton = IconButton(image: Icon.cm.edit, tintColor: .white)
@@ -68,7 +68,7 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
             self.displaySettings()
         }
         
-        self.navigationItem.rightViews = [editButton, addButton]
+        self.navigationItem.rightViews = [editButton, settingsButton]
         
         self.navigationItem.titleLabel.textColor = .white
         self.navigationItem.detailLabel.textColor = .white
@@ -98,7 +98,9 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         
         _ = viewModel.data.observeNext { data in
             self.pageControl?.numberOfPages = data.dataSource.numberOfSections
+            
             self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
         }
         viewModel.bindDataSource()
     }
@@ -161,6 +163,10 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         self.viewModel.dataSource?.entriesSignal()
             .map { return $0.count }
             .bind(to: entryController.viewModel.order)
+        self.viewModel.dataSource?.categoriesSignal()
+            .map { $0.name }
+            .bind(to: entryController.viewModel.categories)
+        entryController.viewModel.selectedCategoryIndex.value = pageControl!.currentPage
         
         self.presentEmbedded(viewController: entryController, barTintColor: UIColor(named: .green))
     }
@@ -209,9 +215,13 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         let settingsController = self.storyboard?.instantiateViewController(withIdentifier: "editController") as! SettingsTableViewController
         
         settingsController.viewModel.setupEntries(entries: viewModel.data[visibleSection].items)
+        settingsController.viewModel.categories.insert(
+            contentsOf: viewModel.data.sections.map { $0.metadata.name },
+            at: 0)
         
         let category = viewModel.data[visibleSection].metadata
         settingsController.viewModel.categoryName.value = category.name
+        
         _ = settingsController.viewModel.categoryName.observeNext {
             category.name = $0
             self.viewModel.dataSource?.write(category)
@@ -246,6 +256,7 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        collectionView.collectionViewLayout.invalidateLayout()
         return viewModel.data.sections.count
     }
     
