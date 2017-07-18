@@ -65,7 +65,7 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         let editButton = IconButton(image: Icon.cm.edit, tintColor: .white)
         editButton.pulseColor = .white
         _ = editButton.reactive.tap.observeNext {
-            self.displaySettings()
+            self.displayEditCategory()
         }
         
         self.navigationItem.rightViews = [editButton, settingsButton]
@@ -209,33 +209,33 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
     }
     
     ///
-    func displaySettings() {
+    func displayEditCategory() {
         let visibleSection = collectionView?.indexPathsForVisibleSupplementaryElements(ofKind: "header")[safe: 0]?.section ?? 0
         
-        let settingsController = self.storyboard?.instantiateViewController(withIdentifier: "editController") as! SettingsTableViewController
+        let editCategoryController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.categoryEdit) as! CategoryEditTableViewController
         
-        settingsController.viewModel.setupEntries(entries: viewModel.data[visibleSection].items)
-        settingsController.viewModel.categories.insert(
+        editCategoryController.viewModel.setupEntries(entries: viewModel.data[visibleSection].items)
+        editCategoryController.viewModel.categories.insert(
             contentsOf: viewModel.data.sections.map { $0.metadata.name },
             at: 0)
         
         let category = viewModel.data[visibleSection].metadata
-        settingsController.viewModel.categoryName.value = category.name
+        editCategoryController.viewModel.categoryName.value = category.name
         
-        _ = settingsController.viewModel.categoryName.observeNext {
+        _ = editCategoryController.viewModel.categoryName.observeNext {
             category.name = $0
             self.viewModel.dataSource?.write(category)
         }
         
-        _ = settingsController.viewModel.signal.observeNext { entry in
+        _ = editCategoryController.viewModel.signal.observeNext { entry in
             self.viewModel.dataSource?.write(entry)
         }
         
-        _ = settingsController.viewModel.deleteSignal.observeNext { entry in
+        _ = editCategoryController.viewModel.deleteSignal.observeNext { entry in
             self.viewModel.dataSource?.delete(entry)
         }
         
-        self.presentEmbedded(viewController: settingsController, barTintColor: UIColor(named: .green))
+        self.presentEmbedded(viewController: editCategoryController, barTintColor: UIColor(named: .green))
     }
     
     /// MARK: - Menu delegate method

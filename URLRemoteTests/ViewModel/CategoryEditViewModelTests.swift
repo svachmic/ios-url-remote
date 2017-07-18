@@ -9,12 +9,12 @@
 import XCTest
 @testable import URLRemote
 
-class SettingsViewModelTests: XCTestCase {
-    var viewModel: SettingsViewModel!
+class CategoryEditViewModelTests: XCTestCase {
+    var viewModel: CategoryEditViewModel!
     
     override func setUp() {
         super.setUp()
-        viewModel = SettingsViewModel()
+        viewModel = CategoryEditViewModel()
         viewModel.categories.append("category")
         viewModel.categoryName.value = "category"
         let entry1 = Entry(JSONString: "{\r\n\"firebaseKey\":\"abcdef\",\r\n\"order\":0,\r\n\"color\":4173881855,\r\n\"icon\":\"lightbulb_on\",\r\n\"name\":\"test\",\r\n\"requiresAuthentication\":true,\r\n\"user\":\"test_user\",\r\n\"password\":\"test_password\",\r\n\"type\":0,\r\n\"url\":\"https://www.seznam.cz\",\r\n\"customCriteria\":\"success\"\r\n}")!

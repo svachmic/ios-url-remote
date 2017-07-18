@@ -11,8 +11,8 @@ import Bond
 import Material
 
 ///
-class SettingsTableViewController: UITableViewController {
-    let viewModel = SettingsViewModel()
+class CategoryEditTableViewController: UITableViewController {
+    let viewModel = CategoryEditViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
