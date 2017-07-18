@@ -11,7 +11,7 @@ import ReactiveKit
 import Bond
 
 /// View Model for controller enabling editing/deleting/rearranging of entries.
-class SettingsViewModel {
+class CategoryEditViewModel {
     /// Dispose bag for observables/signals in the scope of the viewModel.
     let bndBag = DisposeBag()
     /// Entries to be edited.

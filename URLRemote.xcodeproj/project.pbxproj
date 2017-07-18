@@ -34,7 +34,7 @@
 		E052E7711E368F58007D19EB /* SimpleHTTPValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E052E7701E368F58007D19EB /* SimpleHTTPValidator.swift */; };
 		E056B96F1E00A48900B70AA0 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E056B96E1E00A48900B70AA0 /* Entry.swift */; };
 		E056B9711E00A5EB00B70AA0 /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E056B9701E00A5EB00B70AA0 /* ActionsViewModel.swift */; };
-		E0628FAF1E2F9EDF00DADAB3 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0628FAE1E2F9EDF00DADAB3 /* SettingsViewModel.swift */; };
+		E0628FAF1E2F9EDF00DADAB3 /* CategoryEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0628FAE1E2F9EDF00DADAB3 /* CategoryEditViewModel.swift */; };
 		E0628FB41E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0628FB31E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift */; };
 		E06828211E01876F00EB0041 /* ActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828201E01876F00EB0041 /* ActionViewCell.swift */; };
 		E06828271E01C48400EB0041 /* ApplicationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828261E01C48400EB0041 /* ApplicationNavigationController.swift */; };
@@ -47,8 +47,9 @@
 		E098E84B1E314F3000456FCB /* UIViewController+Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = E098E84A1E314F3000456FCB /* UIViewController+Material.swift */; };
 		E09FECC31E477A6A002A8D91 /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09FECC21E477A6A002A8D91 /* StringExtensionTests.swift */; };
 		E0ADCD6F1DE4A98D004B7BAD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0ADCD6E1DE4A98D004B7BAD /* GoogleService-Info.plist */; };
+		E0B1D8C71F1E79C100C25584 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B1D8C61F1E79C100C25584 /* Constants.swift */; };
 		E0B41D171E2D4AD300F7242E /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D161E2D4AD300F7242E /* EnumCollection.swift */; };
-		E0B41D1B1E2E5BE600F7242E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D1A1E2E5BE600F7242E /* SettingsTableViewController.swift */; };
+		E0B41D1B1E2E5BE600F7242E /* CategoryEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D1A1E2E5BE600F7242E /* CategoryEditTableViewController.swift */; };
 		E0C0FA261E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */; };
 		E0C2E35E1E328DA400923A2D /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E35D1E328DA400923A2D /* Validator.swift */; };
 		E0C2E3611E33C60300923A2D /* QuidoValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3601E33C60300923A2D /* QuidoValidator.swift */; };
@@ -70,7 +71,7 @@
 		E0DAA5A21EC9B7C0005FE314 /* EntrySetupViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA5A11EC9B7C0005FE314 /* EntrySetupViewModelTests.swift */; };
 		E0DAA5A41ECA06EE005FE314 /* TypeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA5A31ECA06EE005FE314 /* TypeViewModelTests.swift */; };
 		E0DAA5A61ECA092F005FE314 /* IconCollectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA5A51ECA092F005FE314 /* IconCollectionViewModelTests.swift */; };
-		E0DAA5A81ECA1352005FE314 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA5A71ECA1352005FE314 /* SettingsViewModelTests.swift */; };
+		E0DAA5A81ECA1352005FE314 /* CategoryEditViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DAA5A71ECA1352005FE314 /* CategoryEditViewModelTests.swift */; };
 		E0E09B081E54EB7E00B74CEA /* EnumCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E09B071E54EB7E00B74CEA /* EnumCollectionTests.swift */; };
 		E0E25A4E1E1D7874006F8C14 /* EntrySetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E25A4D1E1D7874006F8C14 /* EntrySetupViewController.swift */; };
 		E0E25A501E1D78A4006F8C14 /* EntrySetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E25A4F1E1D78A4006F8C14 /* EntrySetupViewModel.swift */; };
@@ -150,7 +151,7 @@
 		E052E7701E368F58007D19EB /* SimpleHTTPValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleHTTPValidator.swift; sourceTree = "<group>"; };
 		E056B96E1E00A48900B70AA0 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Entry.swift; path = Model/Entry.swift; sourceTree = "<group>"; };
 		E056B9701E00A5EB00B70AA0 /* ActionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsViewModel.swift; sourceTree = "<group>"; };
-		E0628FAE1E2F9EDF00DADAB3 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		E0628FAE1E2F9EDF00DADAB3 /* CategoryEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryEditViewModel.swift; sourceTree = "<group>"; };
 		E0628FB31E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntrySettingsTableViewCell.swift; path = Controllers/EntrySettingsTableViewCell.swift; sourceTree = "<group>"; };
 		E06828201E01876F00EB0041 /* ActionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionViewCell.swift; path = Controllers/ActionViewCell.swift; sourceTree = "<group>"; };
 		E06828261E01C48400EB0041 /* ApplicationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApplicationNavigationController.swift; path = Controllers/ApplicationNavigationController.swift; sourceTree = "<group>"; };
@@ -164,8 +165,9 @@
 		E098E84A1E314F3000456FCB /* UIViewController+Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Material.swift"; sourceTree = "<group>"; };
 		E09FECC21E477A6A002A8D91 /* StringExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtensionTests.swift; path = Helpers/StringExtensionTests.swift; sourceTree = "<group>"; };
 		E0ADCD6E1DE4A98D004B7BAD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E0B1D8C61F1E79C100C25584 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E0B41D161E2D4AD300F7242E /* EnumCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumCollection.swift; sourceTree = "<group>"; };
-		E0B41D1A1E2E5BE600F7242E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = Controllers/SettingsTableViewController.swift; sourceTree = "<group>"; };
+		E0B41D1A1E2E5BE600F7242E /* CategoryEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryEditTableViewController.swift; path = Controllers/CategoryEditTableViewController.swift; sourceTree = "<group>"; };
 		E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocalAuthentication+ReactiveKit.swift"; sourceTree = "<group>"; };
 		E0C2E35D1E328DA400923A2D /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		E0C2E3601E33C60300923A2D /* QuidoValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuidoValidator.swift; sourceTree = "<group>"; };
@@ -187,7 +189,7 @@
 		E0DAA5A11EC9B7C0005FE314 /* EntrySetupViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntrySetupViewModelTests.swift; path = ViewModel/EntrySetupViewModelTests.swift; sourceTree = "<group>"; };
 		E0DAA5A31ECA06EE005FE314 /* TypeViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeViewModelTests.swift; path = ViewModel/TypeViewModelTests.swift; sourceTree = "<group>"; };
 		E0DAA5A51ECA092F005FE314 /* IconCollectionViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconCollectionViewModelTests.swift; path = ViewModel/IconCollectionViewModelTests.swift; sourceTree = "<group>"; };
-		E0DAA5A71ECA1352005FE314 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewModelTests.swift; path = ViewModel/SettingsViewModelTests.swift; sourceTree = "<group>"; };
+		E0DAA5A71ECA1352005FE314 /* CategoryEditViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryEditViewModelTests.swift; path = ViewModel/CategoryEditViewModelTests.swift; sourceTree = "<group>"; };
 		E0E09B071E54EB7E00B74CEA /* EnumCollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnumCollectionTests.swift; path = Helpers/EnumCollectionTests.swift; sourceTree = "<group>"; };
 		E0E25A4D1E1D7874006F8C14 /* EntrySetupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntrySetupViewController.swift; path = Controllers/EntrySetupViewController.swift; sourceTree = "<group>"; };
 		E0E25A4F1E1D78A4006F8C14 /* EntrySetupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrySetupViewModel.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				C1BBC12B1CFC511D00EB62B1 /* AppDelegate.swift */,
+				E0B1D8C61F1E79C100C25584 /* Constants.swift */,
 				C16B4F661CFC831E001E572E /* Helpers */,
 				E06828381E04407500EB0041 /* Networking */,
 				E0CD15B41F19171D00F63FE9 /* Persistence */,
@@ -412,7 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				E0628FB31E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift */,
-				E0B41D1A1E2E5BE600F7242E /* SettingsTableViewController.swift */,
+				E0B41D1A1E2E5BE600F7242E /* CategoryEditTableViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -446,7 +449,7 @@
 				E0E2FC001E2581FF00C54FF8 /* IconCollectionViewModel.swift */,
 				E0CD15AE1F19022500F63FE9 /* CategoryTableViewModel.swift */,
 				E04DB69B1E292DF100AC8C3D /* TypeViewModel.swift */,
-				E0628FAE1E2F9EDF00DADAB3 /* SettingsViewModel.swift */,
+				E0628FAE1E2F9EDF00DADAB3 /* CategoryEditViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -537,7 +540,7 @@
 				E0DAA5A11EC9B7C0005FE314 /* EntrySetupViewModelTests.swift */,
 				E0DAA5A31ECA06EE005FE314 /* TypeViewModelTests.swift */,
 				E0DAA5A51ECA092F005FE314 /* IconCollectionViewModelTests.swift */,
-				E0DAA5A71ECA1352005FE314 /* SettingsViewModelTests.swift */,
+				E0DAA5A71ECA1352005FE314 /* CategoryEditViewModelTests.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -828,7 +831,7 @@
 				E04DB69C1E292DF100AC8C3D /* TypeViewModel.swift in Sources */,
 				E056B96F1E00A48900B70AA0 /* Entry.swift in Sources */,
 				E005D09D1DE5EC6E002B79C0 /* LoginTableViewController.swift in Sources */,
-				E0B41D1B1E2E5BE600F7242E /* SettingsTableViewController.swift in Sources */,
+				E0B41D1B1E2E5BE600F7242E /* CategoryEditTableViewController.swift in Sources */,
 				E0CD15B61F1917A700F63FE9 /* DataSource.swift in Sources */,
 				E0E2FBEB1E22A38700C54FF8 /* ShadedView.swift in Sources */,
 				E04DB69A1E292D8400AC8C3D /* TypeTableViewController.swift in Sources */,
@@ -868,12 +871,13 @@
 				E098E84B1E314F3000456FCB /* UIViewController+Material.swift in Sources */,
 				E0F328961E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */,
 				E0C2E35E1E328DA400923A2D /* Validator.swift in Sources */,
-				E0628FAF1E2F9EDF00DADAB3 /* SettingsViewModel.swift in Sources */,
+				E0628FAF1E2F9EDF00DADAB3 /* CategoryEditViewModel.swift in Sources */,
 				E0CD15B11F190F2400F63FE9 /* EntryDto.swift in Sources */,
 				E0B41D171E2D4AD300F7242E /* EnumCollection.swift in Sources */,
 				E068283B1E04436F00EB0041 /* Material+Bond.swift in Sources */,
 				E01E58E71EDCC7C900296A81 /* MaterialExtension.swift in Sources */,
 				E02C36EF1E3F8B14009649B3 /* Category.swift in Sources */,
+				E0B1D8C71F1E79C100C25584 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -884,7 +888,7 @@
 				E0DAA5A41ECA06EE005FE314 /* TypeViewModelTests.swift in Sources */,
 				E0DAA5A01EC9B2CE005FE314 /* LoginViewModelTests.swift in Sources */,
 				E0DAA5991EC9AF9B005FE314 /* CustomValidatorTests.swift in Sources */,
-				E0DAA5A81ECA1352005FE314 /* SettingsViewModelTests.swift in Sources */,
+				E0DAA5A81ECA1352005FE314 /* CategoryEditViewModelTests.swift in Sources */,
 				E0DAA5A61ECA092F005FE314 /* IconCollectionViewModelTests.swift in Sources */,
 				E09FECC31E477A6A002A8D91 /* StringExtensionTests.swift in Sources */,
 				E01E58DD1EDB65BE00296A81 /* ColorSelectorTests.swift in Sources */,

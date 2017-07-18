@@ -169,10 +169,10 @@
             </objects>
             <point key="canvasLocation" x="4112.8000000000002" y="1977.6611694152925"/>
         </scene>
-        <!--Settings Table View Controller-->
+        <!--Category Edit Table View Controller-->
         <scene sceneID="uAT-si-JIm">
             <objects>
-                <tableViewController storyboardIdentifier="editController" id="cr2-X4-mQE" customClass="SettingsTableViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="categoryEditViewConroller" id="cr2-X4-mQE" customClass="CategoryEditTableViewController" customModule="URLRemote" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" id="X7t-LC-YzO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
