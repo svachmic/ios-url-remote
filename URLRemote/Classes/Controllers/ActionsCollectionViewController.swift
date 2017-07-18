@@ -269,6 +269,8 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
             withReuseIdentifier: "entryCell",
             for: indexPath) as! ActionViewCell
         cell.setUpView()
+        // Dispose all bindings because the cell objects are reused.
+        cell.bag.dispose()
         cell.bind(with: viewModel.data[indexPath.section].items[indexPath.row])
         return cell
     }

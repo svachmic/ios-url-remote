@@ -43,18 +43,18 @@ class ActionViewCell: UICollectionViewCell {
         button?.pulseColor = .white
         
         if let url = entry.url {
-            let action = EntryAction()
+            let action = EntryAction().signalForAction(
+                url: url,
+                validator: ValidatorFactory.validator(for: entry),
+                requiresAuthentication: entry.requiresAuthentication,
+                user: entry.user,
+                password: entry.password)
             
-            _ = button?.reactive.tap.observe { _ in
-                _ = self.button?.reactive.bndAction.bind(signal:
-                    action.signalForAction(
-                        url: url,
-                        validator: ValidatorFactory.validator(for: entry),
-                        requiresAuthentication: entry.requiresAuthentication,
-                        user: entry.user,
-                        password: entry.password)
-                )
-            }
+            button?.reactive.tap.bind(to: self) { me, _ in
+                me.button?.reactive.bndAction
+                    .bind(signal: action.take(first: 1))
+                    .dispose(in: me.reactive.bag)
+            }.dispose(in: reactive.bag)
         }
     }
 }
