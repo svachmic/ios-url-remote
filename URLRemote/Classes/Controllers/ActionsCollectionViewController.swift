@@ -221,6 +221,7 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         
         let category = viewModel.data[visibleSection].metadata
         editCategoryController.viewModel.categoryName.value = category.name
+        editCategoryController.viewModel.category = category
         
         _ = editCategoryController.viewModel.categoryName.observeNext {
             category.name = $0
@@ -233,6 +234,10 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         
         _ = editCategoryController.viewModel.deleteSignal.observeNext { entry in
             self.viewModel.dataSource?.delete(entry)
+        }
+        
+        _ = editCategoryController.viewModel.deleteSignalCategory.observeNext { category in
+            self.viewModel.dataSource?.delete(category)
         }
         
         self.presentEmbedded(viewController: editCategoryController, barTintColor: UIColor(named: .green))

@@ -42,13 +42,13 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.11)
-  - Material (2.6.3):
-    - Material/Core (= 2.6.3)
-  - Material/Core (2.6.3)
+  - Material (2.8.1):
+    - Material/Core (= 2.8.1)
+  - Material/Core (2.8.1)
   - MBProgressHUD (1.0.0)
-  - Motion (1.0.8):
-    - Motion/Core (= 1.0.8)
-  - Motion/Core (1.0.8)
+  - Motion (1.1.1):
+    - Motion/Core (= 1.1.1)
+  - Motion/Core (1.1.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -98,10 +98,10 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
-  Material: af607a7ec0e9978ef85cf189a3d8ceeeb650400f
+  Material: cc27757e6c91999ac41b2089769106a9d83364c0
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  Motion: cae3bf09f58547f5866140b44f813f9f5af44b90
-  nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
+  Motion: 3edaf4bb0ebad79ffee0bb1e2b528f93585f630f
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   ObjectMapper: 3d571bb5af471c779e1160828cd9ad5c4ef90958
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   ReactiveKit: ced30f9647912f74510bd8179790cf2dfc9454c8

@@ -28,6 +28,7 @@ extension FABMenu {
             }
         }
         
-        self.subviews.first?.motion(.rotationAngle(angle), .duration(0.1))
+        let animations: [MotionAnimation] = [.rotate(angle), .duration(0.1)]
+        self.subviews.first?.animate(animations)
     }
 }
