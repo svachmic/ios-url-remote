@@ -117,6 +117,16 @@ class FirebaseDataSource {
         _ = self.writeWithExistenceAssertion(category)
     }
     
+    /// Deletes category from the database.
+    ///
+    /// - Parameter category: Category to be deleted.
+    func delete(_ category: Category) {
+        if let key = category.firebaseKey {
+            let reference = categoriesRef.child(key)
+            reference.removeValue()
+        }
+    }
+    
     ///
     func move(entry: Entry, from: Category, to: Category, shuffleOrder: Bool = false) {
         if let key = entry.firebaseKey, let index = from.entryKeys.index(where: { $0 == key }) {

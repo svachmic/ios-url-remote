@@ -37,6 +37,7 @@ class DesignEntryTableViewCell: UITableViewCell {
         self.nameField?.dividerActiveColor = UIColor(named: .green).darker()
         self.nameField?.isClearIconButtonEnabled = true
         self.nameField?.detailColor = UIColor(named: .red)
+        self.nameField?.autocorrectionType = .no
         
         self.colorSelector = container.viewWithTag(4) as? ColorSelectorView
         

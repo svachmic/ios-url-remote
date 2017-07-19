@@ -43,7 +43,14 @@ class CategoryEditTableViewController: UITableViewController {
         editButton.reactive.tap.bind(to: self) { me, _ in
             me.displayCategoryNameChange()
         }.dispose(in: reactive.bag)
-        self.toolbarController?.toolbar.rightViews = [editButton]
+        
+        let deleteButton = IconButton(image: UIImage(named: "delete"), tintColor: .white)
+        deleteButton.pulseColor = .white
+        deleteButton.reactive.tap.bind(to: self) { me, _ in
+            me.presentCategoryRemovalDialog()
+        }.dispose(in: reactive.bag)
+        
+        self.toolbarController?.toolbar.rightViews = [editButton, deleteButton]
         
         self.toolbarController?.toolbar.titleLabel.textColor = .white
         viewModel.categoryName
@@ -112,6 +119,30 @@ class CategoryEditTableViewController: UITableViewController {
                     categoryDialog.actions[safe: 1]?.isEnabled = next
             }.dispose(in: categoryDialog.reactive.bag)
         }
+        
+        self.present(categoryDialog, animated: true, completion: nil)
+    }
+    
+    // MARK: - Category removal
+    
+    func presentCategoryRemovalDialog() {
+        let categoryDialog = UIAlertController(
+            title: NSLocalizedString("DELETE_CATEGORY", comment: ""),
+            message: NSLocalizedString("DELETE_CATEGORY_DESC", comment: ""),
+            preferredStyle: .alert)
+        
+        categoryDialog.addAction(UIAlertAction(
+            title: NSLocalizedString("CANCEL", comment: ""),
+            style: .default,
+            handler: nil))
+        
+        categoryDialog.addAction(UIAlertAction(
+            title: NSLocalizedString("DELETE", comment: ""),
+            style: .destructive,
+            handler: { [unowned self] _ in
+                self.viewModel.removeCategory()
+                self.parent?.dismiss(animated: true, completion: nil)
+        }))
         
         self.present(categoryDialog, animated: true, completion: nil)
     }

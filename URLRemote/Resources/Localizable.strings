@@ -55,12 +55,15 @@
 "CUSTOM_CRITERIA" = "Custom criteria";
 "CUSTOM_CRITERIA_DESC" = "Custom criteria for evaluating whether or not the action has been successful. The expression is evaluated word by word, separated by a space. If at least one of the words is present in the output of the action, the action will be considered a success.\n\n Example 1: Criteria \"success ok\" will be applied on output \"ok\" and will result in success.\n\n Example 2: Criteria \"success ok\" will be applied on output \"fail\" and will result in failure.";
 
-/// Settings View Controller
+/// Edit Category View Controller
 
-"SETTINGS" = "Settings";
+//"SETTINGS" = "Settings";
 "CHANGE_CATEGORY_NAME" = "Change category name";
 "CHANGE_CATEGORY_NAME_DESC" = "Type the new name of the category.";
 "CHANGE_CATEGORY_NAME_PLACEHOLDER" = "E.g. \"Home\" or \"Garden\".";
+"DELETE_CATEGORY" = "Delete Category";
+"DELETE_CATEGORY_DESC" = "This action will delete the category and all of its contents (entries). This action cannot be reversed.";
+"DELETE" = "Delete";
 
 // Networking
 

@@ -17,6 +17,7 @@ class CategoryEditViewModel {
     /// Entries to be edited.
     let entries = MutableObservableArray<Entry>([])
     /// Category name
+    var category: Category?
     let categoryName = Observable<String>("")
     let categories = MutableObservableArray<String>([])
     
@@ -24,6 +25,8 @@ class CategoryEditViewModel {
     let signal = PublishSubject<Entry, NoError>()
     /// Signal emitting Entries to be deleted.
     let deleteSignal = PublishSubject<Entry, NoError>()
+    /// Signal emitting Categories to be deleted.
+    let deleteSignalCategory = PublishSubject<Category, NoError>()
     
     init() {
         NotificationCenter.default.reactive.notification(name: DataSourceNotifications.createdEntry.name)
@@ -95,5 +98,11 @@ class CategoryEditViewModel {
             entry.order = index
             self.signal.next(entry)
         }
+    }
+    
+    ///
+    func removeCategory() {
+        self.entries.forEach { self.deleteSignal.next($0) }
+        self.deleteSignalCategory.next(category!)
     }
 }
