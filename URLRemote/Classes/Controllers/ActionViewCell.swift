@@ -51,7 +51,7 @@ class ActionViewCell: UICollectionViewCell {
                 password: entry.password)
             
             button?.reactive.tap.bind(to: self) { me, _ in
-                me.button?.reactive.bndAction
+                me.button?.reactive.action
                     .bind(signal: action.take(first: 1))
                     .dispose(in: me.reactive.bag)
             }.dispose(in: reactive.bag)

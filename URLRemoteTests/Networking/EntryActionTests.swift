@@ -7,9 +7,9 @@
 //
 
 import XCTest
+import Bond
 @testable import URLRemote
 @testable import OHHTTPStubs
-@testable import Bond
 
 class EntryActionTests: XCTestCase {
     var validator: Validator?

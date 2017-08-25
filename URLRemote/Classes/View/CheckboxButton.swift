@@ -22,13 +22,13 @@ class CheckboxButton: UIButton {
         
         self.tintColor = .black
         
-        _ = self.reactive.tap.observeNext {
+        reactive.tap.observeNext {
             self.isChecked.value = !self.isChecked.value
-        }
+        }.dispose(in: bag)
         
-        _ = self.isChecked.observeNext {
+        isChecked.observeNext {
             let name = $0 ? "checkbox_selected" : "checkbox_unselected"
             self.setImage(UIImage(named: name), for: .normal)
-        }
+        }.dispose(in: bag)
     }
 }

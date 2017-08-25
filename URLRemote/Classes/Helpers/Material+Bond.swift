@@ -16,7 +16,7 @@ import ReactiveKit
 extension ReactiveExtensions where Base: RaisedButton {
     
     /// Binding with a button after EntryAction has been performed.
-    var bndAction: Bond<EntryActionStatus> {
+    var action: Bond<EntryActionStatus> {
         return bond { button, status in
             print(status)
             
@@ -41,7 +41,7 @@ extension ReactiveExtensions where Base: RaisedButton {
 extension ReactiveExtensions where Base: Toolbar {
     
     /// Binding for the toolbar's title.
-    var bndTitle: Bond<String> {
+    var title: Bond<String> {
         return bond { toolbar, title in
             toolbar.title = title
         }
@@ -51,7 +51,7 @@ extension ReactiveExtensions where Base: Toolbar {
 extension ReactiveExtensions where Base: TextField {
     
     /// Binding for the detail field of the TextField.
-    var bndDetail: Bond<String> {
+    var detail: Bond<String> {
         return bond { field, text in
             field.detail = text
         }

@@ -67,6 +67,7 @@
 
 // Networking
 
+"ERROR" = "Error";
 "GENERIC_ERROR" = "An error has occurred while processing your request. Please try again later.";
 "FAILED_SIGN_UP" = "Sign up failed";
 "FAILED_SIGN_IN" = "Sign in failed";

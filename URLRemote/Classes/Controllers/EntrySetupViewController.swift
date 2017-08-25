@@ -64,7 +64,7 @@ class EntrySetupViewController: UITableViewController {
         
         self.toolbarController?.toolbar.titleLabel.textColor = .white
         viewModel.name
-            .bind(to: toolbarController!.toolbar.reactive.bndTitle)
+            .bind(to: toolbarController!.toolbar.reactive.title)
             .dispose(in: reactive.bag)
     }
     
