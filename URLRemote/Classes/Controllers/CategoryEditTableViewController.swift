@@ -54,7 +54,7 @@ class CategoryEditTableViewController: UITableViewController {
         
         self.toolbarController?.toolbar.titleLabel.textColor = .white
         viewModel.categoryName
-            .bind(to: toolbarController!.toolbar.reactive.bndTitle)
+            .bind(to: toolbarController!.toolbar.reactive.title)
             .dispose(in: reactive.bag)
     }
     

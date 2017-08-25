@@ -37,6 +37,10 @@
 		E056B9711E00A5EB00B70AA0 /* ActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E056B9701E00A5EB00B70AA0 /* ActionsViewModel.swift */; };
 		E0628FAF1E2F9EDF00DADAB3 /* CategoryEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0628FAE1E2F9EDF00DADAB3 /* CategoryEditViewModel.swift */; };
 		E0628FB41E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0628FB31E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift */; };
+		E062F7671F51E6B6002AD39C /* MockDataSourceAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = E062F7661F51E6B6002AD39C /* MockDataSourceAuthentication.swift */; };
+		E062F7691F52BBDC002AD39C /* MockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E062F7681F52BBDC002AD39C /* MockDataSource.swift */; };
+		E062F76B1F533200002AD39C /* MockPersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E062F76A1F533200002AD39C /* MockPersistenceStack.swift */; };
+		E062F76D1F53396A002AD39C /* ActionsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E062F76C1F53396A002AD39C /* ActionsViewModelTests.swift */; };
 		E06828211E01876F00EB0041 /* ActionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828201E01876F00EB0041 /* ActionViewCell.swift */; };
 		E06828271E01C48400EB0041 /* ApplicationNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06828261E01C48400EB0041 /* ApplicationNavigationController.swift */; };
 		E068282D1E03067D00EB0041 /* FirebaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068282C1E03067D00EB0041 /* FirebaseDataSource.swift */; };
@@ -51,6 +55,9 @@
 		E0B1D8C71F1E79C100C25584 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B1D8C61F1E79C100C25584 /* Constants.swift */; };
 		E0B41D171E2D4AD300F7242E /* EnumCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D161E2D4AD300F7242E /* EnumCollection.swift */; };
 		E0B41D1B1E2E5BE600F7242E /* CategoryEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B41D1A1E2E5BE600F7242E /* CategoryEditTableViewController.swift */; };
+		E0B4E6301F500BD700216A7B /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B4E62F1F500BD600216A7B /* PersistenceStack.swift */; };
+		E0B4E6321F507E5200216A7B /* FirebasePersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B4E6311F507E5200216A7B /* FirebasePersistenceStack.swift */; };
+		E0B4E6341F50906600216A7B /* PersistenceStackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B4E6331F50906600216A7B /* PersistenceStackController.swift */; };
 		E0C0FA261E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */; };
 		E0C2E35E1E328DA400923A2D /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E35D1E328DA400923A2D /* Validator.swift */; };
 		E0C2E3611E33C60300923A2D /* QuidoValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3601E33C60300923A2D /* QuidoValidator.swift */; };
@@ -151,6 +158,10 @@
 		E056B9701E00A5EB00B70AA0 /* ActionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsViewModel.swift; sourceTree = "<group>"; };
 		E0628FAE1E2F9EDF00DADAB3 /* CategoryEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryEditViewModel.swift; sourceTree = "<group>"; };
 		E0628FB31E2FB05300DADAB3 /* EntrySettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntrySettingsTableViewCell.swift; path = Controllers/EntrySettingsTableViewCell.swift; sourceTree = "<group>"; };
+		E062F7661F51E6B6002AD39C /* MockDataSourceAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockDataSourceAuthentication.swift; path = Mock/MockDataSourceAuthentication.swift; sourceTree = "<group>"; };
+		E062F7681F52BBDC002AD39C /* MockDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockDataSource.swift; path = Mock/MockDataSource.swift; sourceTree = "<group>"; };
+		E062F76A1F533200002AD39C /* MockPersistenceStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockPersistenceStack.swift; path = Mock/MockPersistenceStack.swift; sourceTree = "<group>"; };
+		E062F76C1F53396A002AD39C /* ActionsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionsViewModelTests.swift; path = ViewModel/ActionsViewModelTests.swift; sourceTree = "<group>"; };
 		E06828201E01876F00EB0041 /* ActionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionViewCell.swift; path = Controllers/ActionViewCell.swift; sourceTree = "<group>"; };
 		E06828261E01C48400EB0041 /* ApplicationNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApplicationNavigationController.swift; path = Controllers/ApplicationNavigationController.swift; sourceTree = "<group>"; };
 		E068282C1E03067D00EB0041 /* FirebaseDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseDataSource.swift; path = Persistence/FirebaseDataSource.swift; sourceTree = "<group>"; };
@@ -166,6 +177,9 @@
 		E0B1D8C61F1E79C100C25584 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E0B41D161E2D4AD300F7242E /* EnumCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnumCollection.swift; sourceTree = "<group>"; };
 		E0B41D1A1E2E5BE600F7242E /* CategoryEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryEditTableViewController.swift; path = Controllers/CategoryEditTableViewController.swift; sourceTree = "<group>"; };
+		E0B4E62F1F500BD600216A7B /* PersistenceStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistenceStack.swift; path = Persistence/PersistenceStack.swift; sourceTree = "<group>"; };
+		E0B4E6311F507E5200216A7B /* FirebasePersistenceStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebasePersistenceStack.swift; path = Persistence/FirebasePersistenceStack.swift; sourceTree = "<group>"; };
+		E0B4E6331F50906600216A7B /* PersistenceStackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistenceStackController.swift; path = Controllers/PersistenceStackController.swift; sourceTree = "<group>"; };
 		E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocalAuthentication+ReactiveKit.swift"; sourceTree = "<group>"; };
 		E0C2E35D1E328DA400923A2D /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		E0C2E3601E33C60300923A2D /* QuidoValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuidoValidator.swift; sourceTree = "<group>"; };
@@ -320,6 +334,7 @@
 		C1BBC13F1CFC511D00EB62B1 /* URLRemoteTests */ = {
 			isa = PBXGroup;
 			children = (
+				E062F7651F51E697002AD39C /* Mock */,
 				E09FECC11E477A2A002A8D91 /* Helpers */,
 				E0DAA5961EC9AF56005FE314 /* Networking */,
 				E0D3764F1ED8170A00FAFA4F /* View */,
@@ -359,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				E06828261E01C48400EB0041 /* ApplicationNavigationController.swift */,
+				E0B4E6331F50906600216A7B /* PersistenceStackController.swift */,
 				E005D09C1DE5EC6E002B79C0 /* LoginTableViewController.swift */,
 				E06828391E04431A00EB0041 /* ActionsCollection */,
 				E0E2FBEF1E23BE6400C54FF8 /* EntrySetup */,
@@ -418,6 +434,16 @@
 				E0B41D1A1E2E5BE600F7242E /* CategoryEditTableViewController.swift */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		E062F7651F51E697002AD39C /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				E062F76A1F533200002AD39C /* MockPersistenceStack.swift */,
+				E062F7661F51E6B6002AD39C /* MockDataSourceAuthentication.swift */,
+				E062F7681F52BBDC002AD39C /* MockDataSource.swift */,
+			);
+			name = Mock;
 			sourceTree = "<group>";
 		};
 		E06828381E04407500EB0041 /* Networking */ = {
@@ -488,8 +514,10 @@
 		E0CD15B41F19171D00F63FE9 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				E0CD15B51F1917A700F63FE9 /* DataSource.swift */,
+				E0B4E62F1F500BD600216A7B /* PersistenceStack.swift */,
+				E0B4E6311F507E5200216A7B /* FirebasePersistenceStack.swift */,
 				E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */,
+				E0CD15B51F1917A700F63FE9 /* DataSource.swift */,
 				E068282C1E03067D00EB0041 /* FirebaseDataSource.swift */,
 			);
 			name = Persistence;
@@ -537,6 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				E0DAA59F1EC9B2CE005FE314 /* LoginViewModelTests.swift */,
+				E062F76C1F53396A002AD39C /* ActionsViewModelTests.swift */,
 				E0DAA5A11EC9B7C0005FE314 /* EntrySetupViewModelTests.swift */,
 				E0DAA5A31ECA06EE005FE314 /* TypeViewModelTests.swift */,
 				E0DAA5A51ECA092F005FE314 /* IconCollectionViewModelTests.swift */,
@@ -860,6 +889,7 @@
 				E04DB69F1E29331100AC8C3D /* TypeSelectionTableViewCell.swift in Sources */,
 				E0F328941E3A554E00282B33 /* CustomCriteriaTableViewCell.swift in Sources */,
 				E052E7711E368F58007D19EB /* SimpleHTTPValidator.swift in Sources */,
+				E0B4E6301F500BD700216A7B /* PersistenceStack.swift in Sources */,
 				C1BBC12C1CFC511D00EB62B1 /* AppDelegate.swift in Sources */,
 				E072B1351E40EB9A0012589D /* ArrayExtension.swift in Sources */,
 				E0C2E3631E354C1600923A2D /* GenericValidator.swift in Sources */,
@@ -878,6 +908,8 @@
 				E01E58E71EDCC7C900296A81 /* MaterialExtension.swift in Sources */,
 				E02C36EF1E3F8B14009649B3 /* Category.swift in Sources */,
 				E0B1D8C71F1E79C100C25584 /* Constants.swift in Sources */,
+				E0B4E6341F50906600216A7B /* PersistenceStackController.swift in Sources */,
+				E0B4E6321F507E5200216A7B /* FirebasePersistenceStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,13 +918,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0DAA5A41ECA06EE005FE314 /* TypeViewModelTests.swift in Sources */,
+				E062F7691F52BBDC002AD39C /* MockDataSource.swift in Sources */,
 				E0DAA5A01EC9B2CE005FE314 /* LoginViewModelTests.swift in Sources */,
 				E0DAA5991EC9AF9B005FE314 /* CustomValidatorTests.swift in Sources */,
 				E0DAA5A81ECA1352005FE314 /* CategoryEditViewModelTests.swift in Sources */,
+				E062F76B1F533200002AD39C /* MockPersistenceStack.swift in Sources */,
 				E0DAA5A61ECA092F005FE314 /* IconCollectionViewModelTests.swift in Sources */,
+				E062F76D1F53396A002AD39C /* ActionsViewModelTests.swift in Sources */,
 				E09FECC31E477A6A002A8D91 /* StringExtensionTests.swift in Sources */,
 				E01E58DD1EDB65BE00296A81 /* ColorSelectorTests.swift in Sources */,
 				E0E09B081E54EB7E00B74CEA /* EnumCollectionTests.swift in Sources */,
+				E062F7671F51E6B6002AD39C /* MockDataSourceAuthentication.swift in Sources */,
 				E0D376511ED8174300FAFA4F /* ActionsCollectionLayoutTests.swift in Sources */,
 				E01E58E51EDC39E300296A81 /* EntryActionTests.swift in Sources */,
 				E0DAA5A21EC9B7C0005FE314 /* EntrySetupViewModelTests.swift in Sources */,

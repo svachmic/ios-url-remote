@@ -8,7 +8,7 @@
 
 import Foundation
 import Bond
-import FirebaseAuth
+import ReactiveKit
 
 /// Enum representing the state of the Login View Controller.
 enum LoginState {
@@ -35,6 +35,11 @@ struct LoginTableCell {
 
 /// View Model of the Login View Controller. Handles UI state + form validity.
 class LoginViewModel {
+    var authentication: DataSourceAuthentication
+    let dataSource = Observable<DataSource?>(nil)
+    let errors = SafePublishSubject<AuthError>()
+    let bag = DisposeBag()
+    
     var state = LoginState.signIn
     
     var email = Observable<String?>("")
@@ -73,6 +78,10 @@ class LoginViewModel {
             height: 66.0)
         ])
     
+    init(authentication: DataSourceAuthentication) {
+        self.authentication = authentication
+    }
+    
     /// Transforms the view from one state to another. After each transformation, one of the buttons should be higher than the other.
     func transform() {
         if self.state == .signIn {
@@ -109,17 +118,11 @@ class LoginViewModel {
             return
         }
         
-        let auth = Auth.auth()
-        
-        auth.createUser(withEmail: email, password: password) { _, error in
-            if error == nil {
-                self.signIn()
-            } else {
-                NotificationCenter.default.post(
-                    name: NSNotification.Name(rawValue: "FAILED_SIGN_UP"),
-                    object: error)
-            }
-        }
+        self.authentication
+            .createUser(email: email, password: password)
+            .suppressAndFeedError(into: errors)
+            .bind(to: dataSource)
+            .dispose(in: bag)
     }
     
     /// Attempts signing in - letting the user in.
@@ -128,19 +131,10 @@ class LoginViewModel {
             return
         }
         
-        let auth = Auth.auth()
-        
-        auth.signIn(withEmail: email, password: password) { _, error in
-            if error == nil {
-                // success
-                NotificationCenter.default.post(
-                    name: NSNotification.Name(rawValue: "SUCCESS_SIGN_IN"),
-                    object: nil)
-            } else {
-                NotificationCenter.default.post(
-                    name: NSNotification.Name(rawValue: "FAILED_SIGN_IN"),
-                    object: error)
-            }
-        }
+        self.authentication
+            .signIn(email: email, password: password)
+            .suppressAndFeedError(into: errors)
+            .bind(to: dataSource)
+            .dispose(in: bag)
     }
 }

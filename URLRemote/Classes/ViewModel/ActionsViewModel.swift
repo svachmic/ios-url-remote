@@ -7,36 +7,44 @@
 //
 
 import Foundation
-import FirebaseAuth
-import ObjectMapper
 import Bond
 import ReactiveKit
 
 ///
 class ActionsViewModel {
-    let bndBag = DisposeBag()
-    var dataSource: FirebaseDataSource?
+    var combiner: Disposable?
+    let bag = DisposeBag()
+    
+    let dataSource = Observable<DataSource?>(nil)
+    
+    
     var data = MutableObservable2DArray<Category, Entry>([])
     
     init() {
-        Auth.auth().addStateDidChangeListener { _, user in
-            if let user = user {
-                print("signed in as \(user.description)")
-                
-                if let data = self.dataSource, data.user.uid == user.uid {
-                    // do nothing
-                } else {
-                    self.dataSource = FirebaseDataSource(user: user)
-                    NotificationCenter.default.post(
-                        name: NSNotification.Name(rawValue: "USER_LOGGED_IN"),
-                        object: nil)
-                }
+        dataSource.observeNext { [unowned self] dataSource in
+            if let dataSource = dataSource {
+                self.combiner = combineLatest(
+                    dataSource.categoriesSignal(),
+                    dataSource.entriesSignal()) { (categories, entries) -> MutableObservable2DArray<Category, Entry> in
+                        let contents = MutableObservable2DArray<Category, Entry>([])
+                    
+                        for category in categories {
+                            let section = Observable2DArraySection<Category, Entry>(
+                                metadata: category,
+                                items: entries.filter { category.entryKeys.contains($0.firebaseKey!) }
+                            )
+                            contents.appendSection(section)
+                        }
+                    
+                        return contents
+                    }.observeNext { [unowned self] in
+                        self.data.replace(with: $0, performDiff: true)
+                    }
             } else {
-                NotificationCenter.default.post(
-                    name: NSNotification.Name(rawValue: "USER_LOGGED_OUT"),
-                    object: nil)
+                self.combiner?.dispose()
+                self.data.removeAllItems()
             }
-        }
+        }.dispose(in: bag)
         
         NotificationCenter.default.reactive.notification(name: DataSourceNotifications.createdEntry.name)
             .observeNext { [unowned self] notification in
@@ -50,48 +58,11 @@ class ActionsViewModel {
                 if let originalIdx = entryDto.originalCategoryIndex, originalIdx != entryDto.categoryIndex {
                     print("this is a change of category")
                     let fromCategory = self.data[originalIdx].metadata
-                    self.dataSource?.move(entry: entryDto.entry, from: fromCategory, to: toCategory)
+                    self.dataSource.value?.move(entry: entryDto.entry, from: fromCategory, to: toCategory, shuffleOrder: false)
                 } else {
                     print("this is either an update or a new category")
-                    self.dataSource?.write(entry: entryDto.entry, category: toCategory)
+                    self.dataSource.value?.write(entry: entryDto.entry, category: toCategory)
                 }
-            }.dispose(in: self.bndBag)
-    }
-    
-    func logout() {
-        try? Auth.auth().signOut()
-    }
-    
-    func bindDataSource() {
-        guard let dataSource = dataSource else {
-            return
-        }
-        
-        _ = combineLatest(dataSource.categoriesSignal(), dataSource.entriesSignal()) { (categories, entries) -> MutableObservable2DArray<Category, Entry> in
-            let contents = MutableObservable2DArray<Category, Entry>([])
-            
-            for category in categories {
-                let section = Observable2DArraySection<Category, Entry>(
-                    metadata: category,
-                    items: entries.filter { category.entryKeys.contains($0.firebaseKey!) }
-                )
-                contents.appendSection(section)
-            }
-            
-            return contents
-            }.observeNext {
-                self.data.replace(with: $0, performDiff: true)
-        }.dispose(in: bndBag)
-    }
-    
-    func addTestItem() {
-        let testEntry = Entry()
-        testEntry.name = "test"
-        testEntry.color = .green
-        testEntry.icon = "lightbulb_on"
-        testEntry.url = "https://www.seznam.cz"
-        testEntry.type = .simpleHTTP
-        testEntry.requiresAuthentication = false
-        self.dataSource?.write(testEntry)
+            }.dispose(in: self.bag)
     }
 }

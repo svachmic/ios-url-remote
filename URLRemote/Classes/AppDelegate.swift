@@ -22,6 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize Firebase
         FirebaseApp.configure()
         
+        /// Dependency injection
+        if let navigationController = window?.rootViewController as? ApplicationNavigationController, let actionsController = navigationController.visibleViewController as? ActionsCollectionViewController {
+            if let dev = ProcessInfo.processInfo.environment["dev"], dev == "1" {
+                print(dev)
+                // TODO: Mocking
+            } else {
+                actionsController.stack = FirebasePersistenceStack()
+            }
+        }
+        
         return true
     }
 

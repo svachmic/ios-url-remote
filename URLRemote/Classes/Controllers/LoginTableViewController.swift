@@ -12,16 +12,20 @@ import ReactiveKit
 import Material
 
 /// Controller used for logging user in. It is presented when the there is no user logged in.
-class LoginTableViewController: UITableViewController {
-    let viewModel = LoginViewModel()
+class LoginTableViewController: UITableViewController, PersistenceStackController {
+    var stack: PersistenceStack!
+    var viewModel: LoginViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.backgroundColor = UIColor(named: .gray)
         self.tableView.tableFooterView = UIView(frame: .zero)
         self.tableView.alwaysBounceVertical = false
         self.tableView.alwaysBounceHorizontal = false
         self.tableView.separatorStyle = .none
+        
+        viewModel = LoginViewModel(authentication: stack.authentication)
         
         self.setupNotificationHandler()
         self.setupTableView()
@@ -33,30 +37,23 @@ class LoginTableViewController: UITableViewController {
     
     /// Sets up notification handlers for sign in/up actions.
     func setupNotificationHandler() {
-        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "FAILED_SIGN_UP"))
-            .observeNext { self.handle(notification: $0) }
-            .dispose(in: reactive.bag)
+        viewModel.errors.observeNext { [unowned self] error in
+            self.handle(error: error)
+        }.dispose(in: bag)
         
-        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "FAILED_SIGN_IN"))
-            .observeNext { self.handle(notification: $0) }
-            .dispose(in: reactive.bag)
-        
-        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "SUCCESS_SIGN_IN"))
-            .observeNext { _ in self.parent?.dismiss(animated: true) }
-            .dispose(in: reactive.bag)
+        viewModel.dataSource.flatMap {$0}.observeNext { [unowned self] _ in
+            self.parent?.dismiss(animated: true)
+        }.dispose(in: bag)
     }
     
     /// Handles a notification simply by displaying an alert dialog with an error message describing the problem that has occurred.
     ///
     /// - Parameter notification: Notification to be handled.
-    func handle(notification: Notification) {
-        var message = NSLocalizedString("GENERIC_ERROR", comment: "")
-        if let body = notification.object as? Error {
-            message = body.localizedDescription
-        }
+    func handle(error: Error) {
+        let message = error.localizedDescription
         
         self.presentSimpleAlertDialog(
-            header: NSLocalizedString(notification.name.rawValue, comment: ""),
+            header: NSLocalizedString("ERROR", comment: ""),
             message: message)
     }
     
@@ -127,14 +124,17 @@ class LoginTableViewController: UITableViewController {
     ///
     /// - Parameter textField: TextField object to be bound.
     func bindEmailCell(textField: TextField) {
-        textField.reactive.text.bind(to: self.viewModel.email)
+        textField.reactive.text
+            .bind(to: viewModel.email)
+            .dispose(in: textField.bag)
         
-        _ = textField.reactive.text.map { text -> String in
+        textField.reactive.text.map { text -> String in
             if let text = text, !text.isValidEmail(), text != "" {
                 return NSLocalizedString("INVALID_EMAIL", comment: "")
             }
             return ""
-        }.bind(to: textField.reactive.bndDetail)
+        }.bind(to: textField.reactive.detail)
+        .dispose(in: textField.bag)
     }
     
     /// Binds the password and repeated password TextFields to the view-model.
@@ -146,25 +146,31 @@ class LoginTableViewController: UITableViewController {
     func bindPasswordCell(index: Int, textField: TextField) {
         if index == 0 {
             // first password field during both sign in/up
-            textField.reactive.text.bind(to: self.viewModel.password)
+            textField.reactive.text
+                .bind(to: self.viewModel.password)
+                .dispose(in: textField.bag)
             
             textField.reactive.text.skip(first: 1).map { text in
                 if let text = text, (text.characters.count < 6 && text.characters.count != 0) {
                     return NSLocalizedString("INVALID_PASSWORD_LENGTH", comment: "")
                 }
                 return ""
-            }.bind(to: textField.reactive.bndDetail)
+            }.bind(to: textField.reactive.detail)
+            .dispose(in: textField.bag)
         } else {
             // second password field during sign up
-            textField.reactive.text.bind(to: self.viewModel.passwordAgain)
+            textField.reactive.text
+                .bind(to: self.viewModel.passwordAgain)
+                .dispose(in: textField.bag)
             
-            _ = combineLatest(self.viewModel.password, self.viewModel.passwordAgain)
+            combineLatest(self.viewModel.password, self.viewModel.passwordAgain)
                 .map { password, repeated in
                     if let pwd = password, let rep = repeated, pwd != rep {
                         return NSLocalizedString("INVALID_PASSWORD", comment: "")
                     }
                     return ""
-                }.bind(to: textField.reactive.bndDetail)
+            }.bind(to: textField.reactive.detail)
+            .dispose(in: textField.bag)
         }
     }
     
@@ -175,7 +181,7 @@ class LoginTableViewController: UITableViewController {
     /// - Parameter state: State to be compared for transformation.
     /// - Parameter button: RaisedButton object to be bound.
     func bindSignButton(state: LoginState, button: RaisedButton) {
-        _ = button.reactive.tap.observeNext {
+        button.reactive.tap.observeNext { [unowned self] _ in
             self.view.endEditing(true)
             
             if self.viewModel.state == state {
@@ -187,7 +193,7 @@ class LoginTableViewController: UITableViewController {
                     self.viewModel.signIn()
                 }
             }
-        }
+        }.dispose(in: button.bag)
     }
     
     // MARK: - UITableView delegate

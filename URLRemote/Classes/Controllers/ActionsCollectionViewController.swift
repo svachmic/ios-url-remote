@@ -12,8 +12,10 @@ import Bond
 import ReactiveKit
 
 ///
-class ActionsCollectionViewController: UICollectionViewController, FABMenuDelegate {
+class ActionsCollectionViewController: UICollectionViewController, PersistenceStackController, FABMenuDelegate {
+    var stack: PersistenceStack!
     var viewModel: ActionsViewModel!
+    
     var menu: FABMenu?
     var pageControl: UIPageControl?
     
@@ -28,9 +30,9 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         
         self.setupNavigationController()
         self.setupMenu()
-        self.setLoginNotifications()
         
         self.viewModel = ActionsViewModel()
+        self.setLoginNotifications()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,9 +53,9 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         logout.titleColor = .white
         logout.pulseColor = .white
         logout.titleLabel?.font = RobotoFont.bold(with: 15)
-        _ = logout.reactive.tap.observeNext {
-            self.viewModel.logout()
-        }
+        _ = logout.reactive.tap.observeNext { [unowned self] in
+            self.stack.authentication.logOut()
+        }.dispose(in: bag)
         self.navigationItem.leftViews = [logout]
         
         let settingsButton = IconButton(image: Icon.cm.settings, tintColor: .white)
@@ -79,13 +81,19 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
     
     ///
     func setLoginNotifications() {
-        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "USER_LOGGED_OUT"))
-            .observeNext { _ in self.displayLogin() }
-            .dispose(in: reactive.bag)
-        
-        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "USER_LOGGED_IN"))
-            .observeNext { _ in self.setupCollectionDataSource() }
-            .dispose(in: reactive.bag)
+        stack.authentication
+            .dataSourceSignal()
+            .observeNext {
+                if let src = $0 {
+                    self.viewModel.dataSource.value = src
+                    self.setupCollectionDataSource()
+                } else {
+                    self.viewModel.dataSource.value = nil
+                    self.resetCollectionDataSource()
+                    self.displayLogin()
+                }
+            }
+            .dispose(in: bag)
     }
     
     ///
@@ -101,8 +109,14 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
             
             self.collectionView?.reloadData()
             self.collectionView?.collectionViewLayout.invalidateLayout()
-        }
-        viewModel.bindDataSource()
+        }.dispose(in: bag)
+    }
+    
+    ///
+    func resetCollectionDataSource() {
+        pageControl?.removeFromSuperview()
+        collectionView?.contentOffset = CGPoint(x: 0, y: 0)
+        collectionView?.collectionViewLayout.invalidateLayout()
     }
     
     ///
@@ -152,18 +166,18 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
     
     ///
     func displayLogin() {
-        let loginController = self.storyboard?.instantiateViewController(withIdentifier: "loginController")
-        
-        self.presentEmbedded(viewController: loginController!, barTintColor: UIColor(named: .green))
+        let loginController = self.storyboard?.instantiateViewController(withIdentifier: "loginController") as! LoginTableViewController
+        loginController.stack = stack
+        self.presentEmbedded(viewController: loginController, barTintColor: UIColor(named: .green))
     }
     
     ///
     func displayEntrySetup() {
         let entryController = self.storyboard?.instantiateViewController(withIdentifier: "entrySetupController") as! EntrySetupViewController
-        self.viewModel.dataSource?.entriesSignal()
+        self.viewModel.dataSource.value?.entriesSignal()
             .map { return $0.count }
             .bind(to: entryController.viewModel.order)
-        self.viewModel.dataSource?.categoriesSignal()
+        self.viewModel.dataSource.value?.categoriesSignal()
             .map { $0.name }
             .bind(to: entryController.viewModel.categories)
         entryController.viewModel.selectedCategoryIndex.value = pageControl!.currentPage
@@ -191,7 +205,7 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
                     let cat = Category()
                     cat.name = text
                     cat.order = self.viewModel.data.numberOfSections
-                    self.viewModel.dataSource?.write(cat)
+                    self.viewModel.dataSource.value?.write(cat)
                 }
         }))
         
@@ -225,19 +239,19 @@ class ActionsCollectionViewController: UICollectionViewController, FABMenuDelega
         
         _ = editCategoryController.viewModel.categoryName.observeNext {
             category.name = $0
-            self.viewModel.dataSource?.write(category)
+            self.viewModel.dataSource.value?.write(category)
         }
         
         _ = editCategoryController.viewModel.signal.observeNext { entry in
-            self.viewModel.dataSource?.write(entry)
+            self.viewModel.dataSource.value?.write(entry)
         }
         
         _ = editCategoryController.viewModel.deleteSignal.observeNext { entry in
-            self.viewModel.dataSource?.delete(entry)
+            self.viewModel.dataSource.value?.delete(entry)
         }
         
         _ = editCategoryController.viewModel.deleteSignalCategory.observeNext { category in
-            self.viewModel.dataSource?.delete(category)
+            self.viewModel.dataSource.value?.delete(category)
         }
         
         self.presentEmbedded(viewController: editCategoryController, barTintColor: UIColor(named: .green))

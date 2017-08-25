@@ -28,11 +28,67 @@ extension DataSnapshot {
     }
 }
 
+///
+class FirebaseDataSourceAuthentication: DataSourceAuthentication {
+    
+    func dataSourceSignal() -> Signal<DataSource?, NoError> {
+        return Signal { observer in
+            let listener = { (auth: Auth, user: User?) -> Void in
+                if let u = user {
+                    observer.next(FirebaseDataSource(user: u))
+                } else {
+                    observer.next(nil)
+                }
+            }
+            let handle = Auth.auth().addStateDidChangeListener(listener)
+            
+            return BlockDisposable {
+                Auth.auth().removeStateDidChangeListener(handle)
+            }
+        }
+    }
+    
+    private func handleSignedUser(user: User?, error: Error?, observer: AtomicObserver<DataSource, AuthError>) {
+        if let user = user {
+            let dataSource = FirebaseDataSource(user: user)
+            observer.next(dataSource)
+            observer.completed()
+        } else {
+            observer.failed(AuthError.error(error: error))
+            observer.completed()
+        }
+    }
+    
+    func createUser(email: String, password: String) -> Signal<DataSource, AuthError> {
+        return Signal { observer in
+            Auth.auth().createUser(withEmail: email, password: password) { [unowned self] user, error in
+                self.handleSignedUser(user: user, error: error, observer: observer)
+            }
+            
+            return NonDisposable.instance
+        }
+    }
+    
+    func signIn(email: String, password: String) -> Signal<DataSource, AuthError> {
+        return Signal { observer in
+            Auth.auth().signIn(withEmail: email, password: password) { [unowned self] user, error in
+                self.handleSignedUser(user: user, error: error, observer: observer)
+            }
+            
+            return NonDisposable.instance
+        }
+    }
+    
+    func logOut() {
+        try? Auth.auth().signOut()
+    }
+}
+
 /// Firebase ReactiveKit wrapper to enable reactive bindings.
-class FirebaseDataSource {
+class FirebaseDataSource: DataSource {
     var user: User
     var database: Database
-    var isOnline = Observable<Bool>(false)
+    let isOnline = Observable<Bool>(false)
     
     init(user: User) {
         self.user = user
