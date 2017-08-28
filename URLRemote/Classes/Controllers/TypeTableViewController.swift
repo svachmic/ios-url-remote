@@ -45,7 +45,7 @@ class TypeTableViewController: UITableViewController {
     ///
     func setupTableView() {
         self.viewModel.contents.bind(to: self.tableView) { conts, indexPath, tableView in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "typeCell") as! TypeSelectionTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableViewCell.entryType) as! TypeSelectionTableViewCell
             let type = conts[indexPath.row]
             cell.layoutSubviews()
             cell.label?.text = type.toString()

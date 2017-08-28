@@ -12,63 +12,28 @@ import Bond
 
 /// View Model for controller enabling editing/deleting/rearranging of entries.
 class CategoryEditViewModel {
-    /// Dispose bag for observables/signals in the scope of the viewModel.
-    let bndBag = DisposeBag()
-    /// Entries to be edited.
+    let dataSource: DataSource
+    let bag = DisposeBag()
+    
     let entries = MutableObservableArray<Entry>([])
-    /// Category name
-    var category: Category?
+    var category: Category? {
+        didSet {
+            self.setup()
+        }
+    }
     let categoryName = Observable<String>("")
-    let categories = MutableObservableArray<String>([])
     
-    /// Signal emitting Entries to be modified.
-    let signal = PublishSubject<Entry, NoError>()
-    /// Signal emitting Entries to be deleted.
-    let deleteSignal = PublishSubject<Entry, NoError>()
-    /// Signal emitting Categories to be deleted.
-    let deleteSignalCategory = PublishSubject<Category, NoError>()
-    
-    init() {
-        NotificationCenter.default.reactive.notification(name: DataSourceNotifications.createdEntry.name)
-            .observeNext { [unowned self] notification in
-                let entryDto = notification.object as! EntryDto
-                if entryDto.originalCategoryIndex != entryDto.categoryIndex {
-                    if let index = self.entries.index(where: { $0.firebaseKey == entryDto.entry.firebaseKey }) {
-                        self.entries.remove(at: index)
-                        self.shuffleOrder()
-                    }
-                } else {
-                    self.replace(with: entryDto.entry)
-                }
-            }.dispose(in: bndBag)
+    init(dataSource: DataSource) {
+        self.dataSource = dataSource
     }
     
-    /// Sets up/populates observable entries array.
-    ///
-    /// - Parameter entries: Array of entries to be displayed.
-    func setupEntries(entries: [Entry]) {
-        self.entries.removeAll()
-        self.entries.insert(contentsOf: entries, at: 0)
-    }
-    
-    /// Replaces the entry in the observable array with the entry given on the input.
-    /// This method is used when an entry is modified to reflect the changes in the observable array for next edits.
-    /// It finds the existing entry by its ID and replaces it.
-    ///
-    /// - Parameter entry: Entry to be put into the array.
-    private func replace(with entry: Entry) {
-        var entryIndex = -1
-        for index in 0..<self.entries.count {
-            let e = self.entries[index]
-            if let firOrigin = e.firebaseKey, let firDest = entry.firebaseKey, firOrigin == firDest {
-                entryIndex = index
-            }
-        }
-        
-        if entryIndex != -1 {
-            self.entries.remove(at: entryIndex)
-            self.entries.insert(entry, at: entryIndex)
-        }
+    /// Sets up/populates observables.
+    func setup() {
+        categoryName.value = category!.name
+        dataSource.entries(under: category!)
+            .observeNext { [unowned self] in
+                self.entries.replace(with: $0, performDiff: true)
+            }.dispose(in: bag)
     }
     
     /// Moves entries up/down. This method is called when an entry has been drag & dropped in the table view.
@@ -77,7 +42,7 @@ class CategoryEditViewModel {
     /// - Parameter to: Index where the d&d ended.
     func moveItem(from: Int, to: Int) {
         self.entries.moveItem(from: from, to: to)
-        self.shuffleOrder()
+        self.reindexEntries()
     }
     
     /// Removes item fully from the database.
@@ -85,24 +50,49 @@ class CategoryEditViewModel {
     /// - Parameter index: Index of the entry to be deleted.
     func removeItem(index: Int) {
         let entry = self.entries[index]
-        self.entries.remove(at: index)
-        self.deleteSignal.next(entry)
-        
-        self.shuffleOrder()
+        dataSource.delete(entry: entry, from: category!)
+        self.reindexEntries()
     }
     
+    /// Decides whether entries need reindexing.
+    /// - Example 1: [0, 1, 3, 6] would return true
+    /// - Example 2: [0, 1, 2, 3] would return false
     ///
-    private func shuffleOrder() {
-        for index in 0..<self.entries.count {
-            let entry = self.entries[index]
-            entry.order = index
-            self.signal.next(entry)
+    /// - Returns: Boolean flag indicating non-even ordering.
+    private func needsReindexing() -> Bool {
+        for index in 0..<entries.count {
+            let entry = entries[index]
+            if entry.order != index {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    /// Reindexes the order of the entries so that they are evenly ordered (0,1,2..).
+    private func reindexEntries() {
+        if needsReindexing() {
+            for index in 0..<self.entries.count {
+                let entry = self.entries[index]
+                entry.order = index
+            }
+            dataSource.update(batch: entries.map{ $0 })
         }
     }
     
+    /// Changes the name of the category.
     ///
+    /// - Parameter name: New name for the category.
+    func renameCategory(name: String) {
+        categoryName.value = name
+        category?.name = name
+        dataSource.update(category!)
+    }
+    
+    /// Removes the whole category along with its entries.
     func removeCategory() {
-        self.entries.forEach { self.deleteSignal.next($0) }
-        self.deleteSignalCategory.next(category!)
+        self.entries.forEach { dataSource.delete($0) }
+        dataSource.delete(category!)
     }
 }

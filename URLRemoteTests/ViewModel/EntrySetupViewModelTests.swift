@@ -7,14 +7,16 @@
 //
 
 import XCTest
+import Bond
 @testable import URLRemote
 
 class EntrySetupViewModelTests: XCTestCase {
     var viewModel: EntrySetupViewModel!
+    let dataSource = MockDataSource()
     
     override func setUp() {
         super.setUp()
-        viewModel = EntrySetupViewModel()
+        viewModel = EntrySetupViewModel(dataSource: dataSource)
     }
     
     override func tearDown() {
@@ -112,5 +114,83 @@ class EntrySetupViewModelTests: XCTestCase {
         XCTAssertTrue(viewModelOutputEntry.user == entry.user)
         XCTAssertTrue(viewModelOutputEntry.password == entry.password)
         XCTAssertTrue(viewModelOutputEntry.customCriteria == entry.customCriteria)
+    }
+    
+    func testSaveNewEntry() {
+        let testArray = MutableObservableArray<Entry>()
+        let observed = dataSource.entries().observeNext {
+            testArray.removeAll()
+            testArray.insert(contentsOf: $0, at: 0)
+        }
+        XCTAssertTrue(testArray.count == 0)
+        
+        let category = Category(JSONString: "{\r\n\"firebaseKey\":\"abcdef\",\r\n\"order\":0,\r\n\"name\":\"test category\",\r\n\"entryKeys\":[]\r\n}")!
+        dataSource.update(category)
+        XCTAssertTrue(viewModel.categories.count == 1)
+        
+        let entry = Entry(JSONString: "{\r\n\"firebaseKey\":\"abcdef\",\r\n\"order\":1,\r\n\"color\":4173881855,\r\n\"icon\":\"lightbulb_on\",\r\n\"name\":\"test\",\r\n\"requiresAuthentication\":true,\r\n\"user\":\"test_user\",\r\n\"password\":\"test_password\",\r\n\"type\":0,\r\n\"url\":\"https://www.seznam.cz\",\r\n\"customCriteria\":\"success\"\r\n}")!
+        viewModel.setup(with: entry)
+        viewModel.saveData()
+        
+        XCTAssertTrue(testArray.count == 1)
+        observed.dispose()
+    }
+    
+    func testSaveExistingEntry() {
+        let testArray = MutableObservableArray<Entry>()
+        let observed = dataSource.entries().observeNext {
+            testArray.removeAll()
+            testArray.insert(contentsOf: $0, at: 0)
+        }
+        XCTAssertTrue(testArray.count == 0)
+        
+        let entry = Entry(JSONString: "{\r\n\"firebaseKey\":\"abcdef\",\r\n\"order\":1,\r\n\"color\":4173881855,\r\n\"icon\":\"lightbulb_on\",\r\n\"name\":\"test\",\r\n\"requiresAuthentication\":true,\r\n\"user\":\"test_user\",\r\n\"password\":\"test_password\",\r\n\"type\":0,\r\n\"url\":\"https://www.seznam.cz\",\r\n\"customCriteria\":\"success\"\r\n}")!
+        let category = Category(JSONString: "{\r\n\"firebaseKey\":\"abcdef\",\r\n\"order\":0,\r\n\"name\":\"test category\",\r\n\"entryKeys\":[]\r\n}")!
+        dataSource.add(entry, to: category)
+        
+        XCTAssertTrue(viewModel.categories.count == 1)
+        XCTAssertTrue(testArray.count == 1)
+        XCTAssertEqual(testArray[0].name, "test")
+        
+        viewModel.setup(with: entry)
+        viewModel.name.value = "renamed"
+        viewModel.saveData()
+        
+        XCTAssertTrue(testArray.count == 1)
+        XCTAssertEqual(testArray[0].name, "renamed")
+        
+        observed.dispose()
+    }
+    
+    func testMoveExistingEntry() {
+        let testArray = MutableObservableArray<Entry>()
+        let observed = dataSource.entries().observeNext {
+            testArray.removeAll()
+            testArray.insert(contentsOf: $0, at: 0)
+        }
+        XCTAssertTrue(testArray.count == 0)
+        
+        let entry = Entry(JSONString: "{\r\n\"firebaseKey\":\"abcdef\",\r\n\"order\":1,\r\n\"color\":4173881855,\r\n\"icon\":\"lightbulb_on\",\r\n\"name\":\"test\",\r\n\"requiresAuthentication\":true,\r\n\"user\":\"test_user\",\r\n\"password\":\"test_password\",\r\n\"type\":0,\r\n\"url\":\"https://www.seznam.cz\",\r\n\"customCriteria\":\"success\"\r\n}")!
+        let category = Category(JSONString: "{\r\n\"firebaseKey\":\"abcdef\",\r\n\"order\":0,\r\n\"name\":\"test category\",\r\n\"entryKeys\":[]\r\n}")!
+        let category2 = Category(JSONString: "{\r\n\"firebaseKey\":\"ghijkl\",\r\n\"order\":1,\r\n\"name\":\"test category\",\r\n\"entryKeys\":[]\r\n}")!
+        dataSource.add(entry, to: category)
+        dataSource.update(category2)
+        
+        XCTAssertTrue(viewModel.categories.count == 2)
+        XCTAssertTrue(testArray.count == 1)
+        XCTAssertEqual(testArray[0].name, "test")
+        
+        viewModel.setup(with: entry)
+        XCTAssertEqual(viewModel.originalCategoryIndex.value, 0)
+        
+        viewModel.selectedCategoryIndex.value = 1
+        viewModel.saveData()
+        
+        XCTAssertTrue(testArray.count == 1)
+        
+        viewModel.setup(with: entry)
+        XCTAssertEqual(viewModel.originalCategoryIndex.value, 1)
+        
+        observed.dispose()
     }
 }

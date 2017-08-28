@@ -31,4 +31,40 @@ class Category: FirebaseObject {
         name <- map["name"]
         entryKeys <- map["entryKeys"]
     }
+    
+    /// Adds entry under this category. Stored only by using unique firebaseKey value.
+    ///
+    /// - Parameter entry: Entry object to be added.
+    func add(entry: Entry) {
+        guard let key = entry.firebaseKey else { return }
+        
+        if !contains(entry: entry) {
+            var keys = entryKeys
+            entry.order = keys.count
+            keys.append(key)
+            entryKeys = keys
+        }
+    }
+    
+    /// Removes entry from this category. If the firebaseKey is nil, it is considered as removed.
+    ///
+    /// - Parameter entry: Entry object to be deleted.
+    func remove(entry: Entry) {
+        guard let key = entry.firebaseKey else { return }
+        
+        var keys = entryKeys
+        if let index = keys.index(of: key) {
+            keys.remove(at: index)
+            entryKeys = keys
+        }
+    }
+    
+    /// Decides whether or not given entry is under this category. If the firebaseKey is nil, it is considered that it is not included.
+    ///
+    /// - Parameter entry: Entry to be found udner this category.
+    /// - Returns: Boolean flag indicating belonging to this category.
+    func contains(entry: Entry) -> Bool {
+        guard let key = entry.firebaseKey else { return false }
+        return entryKeys.contains(key)
+    }
 }

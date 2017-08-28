@@ -28,10 +28,11 @@ extension DataSnapshot {
     }
 }
 
-///
+/// Firebase Auth implementation of DataSourceAuthentication protocol.
 class FirebaseDataSourceAuthentication: DataSourceAuthentication {
     
-    func dataSourceSignal() -> Signal<DataSource?, NoError> {
+    /// Wraps FirebaseAuthentication's auth() listener in a Signal and returns it.
+    func dataSource() -> Signal<DataSource?, NoError> {
         return Signal { observer in
             let listener = { (auth: Auth, user: User?) -> Void in
                 if let u = user {
@@ -48,6 +49,11 @@ class FirebaseDataSourceAuthentication: DataSourceAuthentication {
         }
     }
     
+    /// Handles sign in/up operation by calling appropriate methods on given observer.
+    ///
+    /// - Parameter user: User object returned after sign in/up action.
+    /// - Parameter error: Error provided during sign in/up action.
+    /// - Parameter observer: Signal observer observing the operation.
     private func handleSignedUser(user: User?, error: Error?, observer: AtomicObserver<DataSource, AuthError>) {
         if let user = user {
             let dataSource = FirebaseDataSource(user: user)
@@ -59,6 +65,7 @@ class FirebaseDataSourceAuthentication: DataSourceAuthentication {
         }
     }
     
+    /// Wraps the Firebase Authentication's createUser in a Signal and returns it.
     func createUser(email: String, password: String) -> Signal<DataSource, AuthError> {
         return Signal { observer in
             Auth.auth().createUser(withEmail: email, password: password) { [unowned self] user, error in
@@ -69,6 +76,7 @@ class FirebaseDataSourceAuthentication: DataSourceAuthentication {
         }
     }
     
+    /// Wraps the Firebase Authentication's signIn in a Signal and returns it.
     func signIn(email: String, password: String) -> Signal<DataSource, AuthError> {
         return Signal { observer in
             Auth.auth().signIn(withEmail: email, password: password) { [unowned self] user, error in
@@ -79,17 +87,21 @@ class FirebaseDataSourceAuthentication: DataSourceAuthentication {
         }
     }
     
+    /// Logs user out. Fails silently.
     func logOut() {
         try? Auth.auth().signOut()
     }
 }
 
-/// Firebase ReactiveKit wrapper to enable reactive bindings.
+/// Firebase implementation of DataSource protocol.
 class FirebaseDataSource: DataSource {
     var user: User
     var database: Database
     let isOnline = Observable<Bool>(false)
     
+    /// Initializes the object and sets up the real-time database.
+    ///
+    /// - Parameter user: Firebase object representing a signed in user.
     init(user: User) {
         self.user = user
         self.database = Database.database()
@@ -105,77 +117,80 @@ class FirebaseDataSource: DataSource {
     
     /// Turns computed value into a signal to indicate connection status.
     ///
-    /// - Returns: Signal with Bool value giving no error.
+    /// - Returns: Signal with Bool value representing the connection status, giving no error.
     private func connectionSignal() -> Signal<Bool, NoError> {
         return connectedRef.signalForEvent(event: .value)
             .map { $0.value as! Bool }
             .flatMapError { _ in Signal<Bool, NoError>.sequence([])}
     }
     
-    // MARK: - Data
+    // MARK: - Read -
     
     /// Computed variable with all user data.
     private var userDataRef: DatabaseReference {
         return database.reference().child("users/\(user.uid)")
     }
     
+    // MARK: Categories
+    
     /// Computed variable with all entries of the user.
     private var categoriesRef: DatabaseReference {
         return userDataRef.child("categories")
     }
     
-    /// Returns a signal with Firebase events.
-    ///
-    /// - Returns: Signal with an array of entries giving no error.
-    func categoriesSignal() -> Signal<[Category], NoError> {
+    /// Processes Firebase events into a signal of categories.
+    func categories() -> Signal<[Category], NoError> {
         return categoriesRef.signalForEvent(event: .value)
             .map { snapshot in
                 return snapshot.toArray()
             }.flatMapError { _ in Signal<[Category], NoError>.sequence([])}
     }
     
+    // MARK: Entries
+    
     /// Computed variable with all entries of the user.
     private var entriesRef: DatabaseReference {
         return userDataRef.child("entries")
     }
     
-    /// Returns a signal with Firebase events.
-    ///
-    /// - Returns: Signal with an array of entries giving no error.
-    func entriesSignal() -> Signal<[Entry], NoError> {
+    /// Processes Firebase events into a signal of categories.
+    func entries() -> Signal<[Entry], NoError> {
         return entriesRef.signalForEvent(event: .value)
             .map { snapshot in
                 return snapshot.toArray()
         }.flatMapError { _ in Signal<[Entry], NoError>.sequence([])}
     }
     
-    // MARK: - Write
+    // MARK: - Write -
     
+    /// Modifies the given object by assigning it a unique firebaseKey. After assigned, the object is persisted in the given path.
+    /// - DISCUSSION: Returned String is no longer used. Subject to removal?
     ///
-    private func writeWithExistenceAssertion(_ category: Category) -> String {
+    /// - Parameter domainReference: Path in the database tree where the object should be stored.
+    /// - Parameter object: FirebaseObject to be persisted.
+    /// - Returns: String representing the assigned firebaseKey.
+    private func writeWithExistenceAssertion(using domainReference: DatabaseReference, object: FirebaseObject) -> String {
         var reference: DatabaseReference
         
-        if let key = category.firebaseKey {
-            reference = categoriesRef.child(key)
+        if let key = object.firebaseKey {
+            reference = domainReference.child(key)
         } else {
-            reference = categoriesRef.childByAutoId()
-            category.firebaseKey = reference.key
+            reference = domainReference.childByAutoId()
+            object.firebaseKey = reference.key
         }
         
-        reference.setValue(category.toJSON())
+        reference.setValue(object.toJSON())
         return reference.key
     }
     
-    /// Performs writing operation. If a category with the same Firebase Key does not exist a new one is created. Otherwise the old one is updated.
-    ///
-    /// - Parameter category: Category to be written in the database.
-    func write(_ category: Category) {
-        _ = self.writeWithExistenceAssertion(category)
+    // MARK: Categories
+    
+    /// First modifies the category by assigning it unique firebaseKey, then persists it.
+    func update(_ category: Category) {
+        _ = self.writeWithExistenceAssertion(using: categoriesRef, object: category)
     }
     
-    /// Deletes category from the database.
-    ///
-    /// - Parameter category: Category to be deleted.
+    /// Deletes category from the database if firebaseKey is not nil. Fails silently.
     func delete(_ category: Category) {
         if let key = category.firebaseKey {
             let reference = categoriesRef.child(key)
@@ -183,61 +198,14 @@ class FirebaseDataSource: DataSource {
         }
     }
     
-    ///
-    func move(entry: Entry, from: Category, to: Category, shuffleOrder: Bool = false) {
-        if let key = entry.firebaseKey, let index = from.entryKeys.index(where: { $0 == key }) {
-            from.entryKeys.remove(at: index)
-            self.write(from)
-        }
-        
-        // other entries' order is reshuffled after the write has been finished
-        // SettingsViewModel line 35
-        // TODO: Solve this with a better pattern - prepared parameter shuffleOrder
-        entry.order = to.entryKeys.count
-        
-        let entryKey = self.writeWithExistenceAssertion(entry)
-        to.entryKeys.append(entryKey)
-        self.write(to)
+    // MARK: Entries
+    
+    /// First modifies the entry by assigning it unique firebaseKey, then persists it.
+    func update(_ entry: Entry) {
+        _ = self.writeWithExistenceAssertion(using: entriesRef, object: entry)
     }
     
-    ///
-    private func writeWithExistenceAssertion(_ entry: Entry) -> String {
-        var reference: DatabaseReference
-        
-        if let key = entry.firebaseKey {
-            reference = entriesRef.child(key)
-        } else {
-            reference = entriesRef.childByAutoId()
-            entry.firebaseKey = reference.key
-        }
-        
-        reference.setValue(entry.toJSON())
-        return reference.key
-    }
-    
-    /// Performs writing operation. If an entry with the same Firebase Key does not exist a new one is created. Otherwise the old one is updated.
-    ///
-    /// - Warning: Subject to change with full Category implementation.
-    ///
-    /// - Parameter entry: Entry to be written in the database.
-    func write(_ entry: Entry) {
-        _ = self.writeWithExistenceAssertion(entry)
-    }
-    
-    ///
-    func write(entry: Entry, category: Category) {
-        let entryKey = self.writeWithExistenceAssertion(entry)
-        
-        if !category.entryKeys.contains(entryKey) {
-            category.entryKeys.append(entryKey)
-        }
-        
-        self.write(category)
-    }
-    
-    /// Deletes entry from the database.
-    ///
-    /// - Parameter entry: Entry to be deleted.
+    /// Deletes entry from the database if firebaseKey is not nil. Fails silently.
     func delete(_ entry: Entry) {
         if let key = entry.firebaseKey {
             let reference = entriesRef.child(key)

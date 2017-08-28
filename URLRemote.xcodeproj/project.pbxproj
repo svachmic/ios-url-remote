@@ -64,7 +64,6 @@
 		E0C2E3631E354C1600923A2D /* GenericValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3621E354C1600923A2D /* GenericValidator.swift */; };
 		E0CD15AD1F1901FB00F63FE9 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CD15AC1F1901FB00F63FE9 /* CategoryTableViewController.swift */; };
 		E0CD15AF1F19022500F63FE9 /* CategoryTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CD15AE1F19022500F63FE9 /* CategoryTableViewModel.swift */; };
-		E0CD15B11F190F2400F63FE9 /* EntryDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CD15B01F190F2400F63FE9 /* EntryDto.swift */; };
 		E0CD15B31F19170200F63FE9 /* NotificationRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CD15B21F19170200F63FE9 /* NotificationRepresentable.swift */; };
 		E0CD15B61F1917A700F63FE9 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CD15B51F1917A700F63FE9 /* DataSource.swift */; };
 		E0D3764E1ED6C30400FAFA4F /* ActionsCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D3764D1ED6C30400FAFA4F /* ActionsCollectionLayout.swift */; };
@@ -186,7 +185,6 @@
 		E0C2E3621E354C1600923A2D /* GenericValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericValidator.swift; sourceTree = "<group>"; };
 		E0CD15AC1F1901FB00F63FE9 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryTableViewController.swift; path = Controllers/CategoryTableViewController.swift; sourceTree = "<group>"; };
 		E0CD15AE1F19022500F63FE9 /* CategoryTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewModel.swift; sourceTree = "<group>"; };
-		E0CD15B01F190F2400F63FE9 /* EntryDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryDto.swift; path = Model/EntryDto.swift; sourceTree = "<group>"; };
 		E0CD15B21F19170200F63FE9 /* NotificationRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRepresentable.swift; sourceTree = "<group>"; };
 		E0CD15B51F1917A700F63FE9 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataSource.swift; path = Persistence/DataSource.swift; sourceTree = "<group>"; };
 		E0D3764D1ED6C30400FAFA4F /* ActionsCollectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActionsCollectionLayout.swift; path = Controllers/ActionsCollectionLayout.swift; sourceTree = "<group>"; };
@@ -420,7 +418,6 @@
 		E056B96D1E00A47400B70AA0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E0CD15B01F190F2400F63FE9 /* EntryDto.swift */,
 				E02C36EE1E3F8B14009649B3 /* Category.swift */,
 				E056B96E1E00A48900B70AA0 /* Entry.swift */,
 			);
@@ -902,7 +899,6 @@
 				E0F328961E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */,
 				E0C2E35E1E328DA400923A2D /* Validator.swift in Sources */,
 				E0628FAF1E2F9EDF00DADAB3 /* CategoryEditViewModel.swift in Sources */,
-				E0CD15B11F190F2400F63FE9 /* EntryDto.swift in Sources */,
 				E0B41D171E2D4AD300F7242E /* EnumCollection.swift in Sources */,
 				E068283B1E04436F00EB0041 /* Material+Bond.swift in Sources */,
 				E01E58E71EDCC7C900296A81 /* MaterialExtension.swift in Sources */,

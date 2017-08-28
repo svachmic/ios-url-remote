@@ -14,4 +14,6 @@ protocol PersistenceStack {
     ///
     var authentication: DataSourceAuthentication { get set }
     
+    ///
+    var dataSource: DataSource? { get set }
 }

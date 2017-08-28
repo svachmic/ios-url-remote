@@ -11,8 +11,13 @@ import Bond
 import Material
 
 ///
-class CategoryEditTableViewController: UITableViewController {
-    let viewModel = CategoryEditViewModel()
+class CategoryEditTableViewController: UITableViewController, PersistenceStackController {
+    var stack: PersistenceStack! {
+        didSet {
+            viewModel = CategoryEditViewModel(dataSource: stack.dataSource!)
+        }
+    }
+    var viewModel: CategoryEditViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,18 +66,16 @@ class CategoryEditTableViewController: UITableViewController {
     ///
     func setupTableView() {
         viewModel.entries.bind(to: tableView) { [unowned self] conts, indexPath, tableView in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "editCell") as! EntrySettingsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableViewCell.entryEdit) as! EntrySettingsTableViewCell
             let entry = conts[indexPath.row]
             cell.layoutSubviews()
             cell.label?.text = entry.name
             cell.showsReorderControl = true
             
             cell.button?.reactive.tap.bind(to: self) { me, _ in
-                let entryController = me.storyboard?.instantiateViewController(withIdentifier: "entrySetupController") as! EntrySetupViewController
-                me.viewModel.categories.bind(to: entryController.viewModel.categories)
-                entryController.viewModel.originalCategoryIndex.value = me.viewModel.categories.index(of: me.viewModel.categoryName.value)!
+                let entryController = me.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.entrySetup) as! EntrySetupViewController
+                entryController.stack = me.stack
                 entryController.viewModel.setup(with: entry)
-                
                 me.presentEmbedded(viewController: entryController, barTintColor: UIColor(named: .green))
             }.dispose(in: cell.reactive.bag)
             
@@ -105,18 +108,18 @@ class CategoryEditTableViewController: UITableViewController {
             style: .default,
             handler: { [unowned self] _ in
                 if let textFields = categoryDialog.textFields, let textField = textFields[safe: 0], let text = textField.text, text != "" {
-                    self.viewModel.categoryName.value = text
+                    self.viewModel.renameCategory(name: text)
                 }
         }))
         
         categoryDialog.addTextField { [unowned self] textField in
             textField.placeholder = NSLocalizedString("CHANGE_CATEGORY_NAME_PLACEHOLDER", comment: "")
             textField.text = self.viewModel.categoryName.value
-            _ = textField.reactive.text.map {
+            textField.reactive.text.map {
                 guard let text = $0 else { return false }
                 return text != ""
-                }.observeNext { next in
-                    categoryDialog.actions[safe: 1]?.isEnabled = next
+            }.observeNext { next in
+                categoryDialog.actions[safe: 1]?.isEnabled = next
             }.dispose(in: categoryDialog.reactive.bag)
         }
         

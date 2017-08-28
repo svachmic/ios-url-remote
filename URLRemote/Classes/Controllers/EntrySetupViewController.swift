@@ -9,11 +9,15 @@
 import UIKit
 import Bond
 import Material
-import ReactiveKit
 
 ///
-class EntrySetupViewController: UITableViewController {
-    let viewModel = EntrySetupViewModel()
+class EntrySetupViewController: UITableViewController, PersistenceStackController {
+    var stack: PersistenceStack! {
+        didSet {
+            viewModel = EntrySetupViewModel(dataSource: stack.dataSource!)
+        }
+    }
+    var viewModel: EntrySetupViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +56,7 @@ class EntrySetupViewController: UITableViewController {
             .dispose(in: reactive.bag)
         
         done.reactive.tap.bind(to: self) { me, _ in
-            let entry = me.viewModel.toEntry()
-            let entryDto = EntryDto(entry: entry, originalCategoryIndex: me.viewModel.originalCategoryIndex.value, categoryIndex: me.viewModel.selectedCategoryIndex.value)
-            NotificationCenter.default.post(
-                name: DataSourceNotifications.createdEntry.name,
-                object: entryDto)
-            
+            me.viewModel.saveData()
             me.parent?.dismiss(animated: true, completion: nil)
         }.dispose(in: reactive.bag)
         self.toolbarController?.toolbar.rightViews = [done]
@@ -152,7 +151,7 @@ class EntrySetupViewController: UITableViewController {
     func setupCategoryCell(cell: GenericButtonTableViewCell) {
         cell.layoutSubviews()
         viewModel.selectedCategoryIndex
-            .map { [unowned self] in self.viewModel.categories[$0] }
+            .map { [unowned self] in self.viewModel.categories[$0].name }
             .bind(to: cell.button!.reactive.title)
             .dispose(in: cell.reactive.bag)
         cell.button?.reactive.tap.bind(to: self) { me, _ in
@@ -231,15 +230,16 @@ class EntrySetupViewController: UITableViewController {
     // MARK: - Presentation methods
     
     func presentIconController() {
-        let iconController = self.storyboard?.instantiateViewController(withIdentifier: "iconController") as! IconCollectionViewController
+        let iconController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.iconSelection) as! IconCollectionViewController
         iconController.iconColor = UIColor(named: viewModel.color.value)
         iconController.viewModel.setInitial(value: viewModel.icon.value)
         self.presentEmbedded(viewController: iconController, barTintColor: UIColor(named: .green))
     }
     
     func presentCategoryController() {
-        let categoryController = self.storyboard?.instantiateViewController(withIdentifier: "categoryTableController") as! CategoryTableViewController
+        let categoryController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.categorySelection) as! CategoryTableViewController
         viewModel.categories
+            .map { $0.name }
             .bind(to: categoryController.viewModel.contents)
             .dispose(in: categoryController.reactive.bag)
         categoryController.viewModel.signal
@@ -250,7 +250,7 @@ class EntrySetupViewController: UITableViewController {
     }
     
     func presentTypeController() {
-        let typeController = self.storyboard?.instantiateViewController(withIdentifier: "typeController") as! TypeTableViewController
+        let typeController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.typeSelection) as! TypeTableViewController
         typeController.viewModel
             .signal.bind(to: viewModel.type)
             .dispose(in: typeController.reactive.bag)

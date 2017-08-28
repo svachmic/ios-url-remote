@@ -13,7 +13,11 @@ import Material
 
 /// Controller used for logging user in. It is presented when the there is no user logged in.
 class LoginTableViewController: UITableViewController, PersistenceStackController {
-    var stack: PersistenceStack!
+    var stack: PersistenceStack! {
+        didSet {
+            viewModel = LoginViewModel(authentication: stack.authentication)
+        }
+    }
     var viewModel: LoginViewModel!
 
     override func viewDidLoad() {
@@ -25,8 +29,6 @@ class LoginTableViewController: UITableViewController, PersistenceStackControlle
         self.tableView.alwaysBounceHorizontal = false
         self.tableView.separatorStyle = .none
         
-        viewModel = LoginViewModel(authentication: stack.authentication)
-        
         self.setupNotificationHandler()
         self.setupTableView()
     }
@@ -35,7 +37,7 @@ class LoginTableViewController: UITableViewController, PersistenceStackControlle
         super.didReceiveMemoryWarning()
     }
     
-    /// Sets up notification handlers for sign in/up actions.
+    /// Sets up event handlers for sign in/up actions.
     func setupNotificationHandler() {
         viewModel.errors.observeNext { [unowned self] error in
             self.handle(error: error)
@@ -46,9 +48,9 @@ class LoginTableViewController: UITableViewController, PersistenceStackControlle
         }.dispose(in: bag)
     }
     
-    /// Handles a notification simply by displaying an alert dialog with an error message describing the problem that has occurred.
+    /// Handles an error simply by displaying an alert dialog with the error message describing the problem that has occurred.
     ///
-    /// - Parameter notification: Notification to be handled.
+    /// - Parameter error: Error to be handled.
     func handle(error: Error) {
         let message = error.localizedDescription
         

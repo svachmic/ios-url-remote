@@ -34,4 +34,58 @@ class CategoryTests: XCTestCase {
         XCTAssertEqual(categoryTest.name, category.name)
         XCTAssertEqual(categoryTest.entryKeys.count, category.entryKeys.count)
     }
+    
+    func testEquatability() {
+        let categoryTest = Category()
+        categoryTest.firebaseKey = "abcdef"
+        XCTAssertEqual(category, categoryTest)
+    }
+    
+    func testContains() {
+        let noKeyEntry = Entry()
+        noKeyEntry.firebaseKey = nil
+        XCTAssertFalse(category.contains(entry: noKeyEntry))
+        
+        let validEntry = Entry()
+        validEntry.firebaseKey = "abc"
+        XCTAssertTrue(category.contains(entry: validEntry))
+    }
+    
+    func testEntryAddition() {
+        XCTAssertEqual(category.entryKeys.count, 3)
+        
+        let sameEntry = Entry()
+        sameEntry.firebaseKey = "abc"
+        category.add(entry: sameEntry)
+        XCTAssertEqual(category.entryKeys.count, 3)
+        
+        let noKeyEntry = Entry()
+        noKeyEntry.firebaseKey = nil
+        category.add(entry: noKeyEntry)
+        XCTAssertEqual(category.entryKeys.count, 3)
+        
+        let newEntry = Entry()
+        newEntry.firebaseKey = "mno"
+        category.add(entry: newEntry)
+        XCTAssertEqual(category.entryKeys.count, 4)
+    }
+    
+    func testEntryRemoval() {
+        XCTAssertEqual(category.entryKeys.count, 3)
+        
+        let noKeyEntry = Entry()
+        noKeyEntry.firebaseKey = nil
+        category.remove(entry: noKeyEntry)
+        XCTAssertEqual(category.entryKeys.count, 3)
+        
+        let existingEntry = Entry()
+        existingEntry.firebaseKey = "abc"
+        category.remove(entry: existingEntry)
+        XCTAssertEqual(category.entryKeys.count, 2)
+        
+        let nonExistingEntry = Entry()
+        nonExistingEntry.firebaseKey = "mno"
+        category.remove(entry: nonExistingEntry)
+        XCTAssertEqual(category.entryKeys.count, 2)
+    }
 }
