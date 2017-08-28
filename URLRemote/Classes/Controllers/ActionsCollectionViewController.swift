@@ -13,7 +13,11 @@ import ReactiveKit
 
 ///
 class ActionsCollectionViewController: UICollectionViewController, PersistenceStackController, FABMenuDelegate {
-    var stack: PersistenceStack!
+    var stack: PersistenceStack! {
+        didSet {
+            viewModel = ActionsViewModel()
+        }
+    }
     var viewModel: ActionsViewModel!
     
     var menu: FABMenu?
@@ -26,12 +30,10 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
         collectionView?.isPagingEnabled = true
         collectionView?.backgroundColor = UIColor(named: .gray)
         
-        collectionView?.register(CategoryViewCell.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: "headerCell")
+        collectionView?.register(CategoryViewCell.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: Constants.CollectionViewCell.header)
         
         self.setupNavigationController()
         self.setupMenu()
-        
-        self.viewModel = ActionsViewModel()
         self.setLoginNotifications()
     }
 
@@ -82,7 +84,7 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
     ///
     func setLoginNotifications() {
         stack.authentication
-            .dataSourceSignal()
+            .dataSource()
             .observeNext {
                 if let src = $0 {
                     self.viewModel.dataSource.value = src
@@ -166,22 +168,15 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
     
     ///
     func displayLogin() {
-        let loginController = self.storyboard?.instantiateViewController(withIdentifier: "loginController") as! LoginTableViewController
+        let loginController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.login) as! LoginTableViewController
         loginController.stack = stack
         self.presentEmbedded(viewController: loginController, barTintColor: UIColor(named: .green))
     }
     
     ///
     func displayEntrySetup() {
-        let entryController = self.storyboard?.instantiateViewController(withIdentifier: "entrySetupController") as! EntrySetupViewController
-        self.viewModel.dataSource.value?.entriesSignal()
-            .map { return $0.count }
-            .bind(to: entryController.viewModel.order)
-        self.viewModel.dataSource.value?.categoriesSignal()
-            .map { $0.name }
-            .bind(to: entryController.viewModel.categories)
-        entryController.viewModel.selectedCategoryIndex.value = pageControl!.currentPage
-        
+        let entryController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.entrySetup) as! EntrySetupViewController
+        entryController.stack = stack
         self.presentEmbedded(viewController: entryController, barTintColor: UIColor(named: .green))
     }
     
@@ -202,10 +197,7 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
             style: .default,
             handler: { _ in
                 if let textFields = categoryDialog.textFields, let textField = textFields[safe: 0], let text = textField.text, text != "" {
-                    let cat = Category()
-                    cat.name = text
-                    cat.order = self.viewModel.data.numberOfSections
-                    self.viewModel.dataSource.value?.write(cat)
+                    self.viewModel.createCategory(named: text)
                 }
         }))
         
@@ -227,32 +219,10 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
         let visibleSection = collectionView?.indexPathsForVisibleSupplementaryElements(ofKind: "header")[safe: 0]?.section ?? 0
         
         let editCategoryController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.categoryEdit) as! CategoryEditTableViewController
-        
-        editCategoryController.viewModel.setupEntries(entries: viewModel.data[visibleSection].items)
-        editCategoryController.viewModel.categories.insert(
-            contentsOf: viewModel.data.sections.map { $0.metadata.name },
-            at: 0)
+        editCategoryController.stack = stack
         
         let category = viewModel.data[visibleSection].metadata
-        editCategoryController.viewModel.categoryName.value = category.name
         editCategoryController.viewModel.category = category
-        
-        _ = editCategoryController.viewModel.categoryName.observeNext {
-            category.name = $0
-            self.viewModel.dataSource.value?.write(category)
-        }
-        
-        _ = editCategoryController.viewModel.signal.observeNext { entry in
-            self.viewModel.dataSource.value?.write(entry)
-        }
-        
-        _ = editCategoryController.viewModel.deleteSignal.observeNext { entry in
-            self.viewModel.dataSource.value?.delete(entry)
-        }
-        
-        _ = editCategoryController.viewModel.deleteSignalCategory.observeNext { category in
-            self.viewModel.dataSource.value?.delete(category)
-        }
         
         self.presentEmbedded(viewController: editCategoryController, barTintColor: UIColor(named: .green))
     }
@@ -285,7 +255,7 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "entryCell",
+            withReuseIdentifier: Constants.CollectionViewCell.entry,
             for: indexPath) as! ActionViewCell
         cell.setUpView()
         // Dispose all bindings because the cell objects are reused.
@@ -296,7 +266,7 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
     
     @objc(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: "header", withReuseIdentifier: "headerCell", for: indexPath) as! CategoryViewCell
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: "header", withReuseIdentifier: Constants.CollectionViewCell.header, for: indexPath) as! CategoryViewCell
         header.setUpView()
         header.bind(with: viewModel.data[indexPath.section].metadata)
         return header

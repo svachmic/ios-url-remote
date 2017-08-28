@@ -26,46 +26,50 @@ class ActionEntryTableViewCell: UITableViewCell {
         
         let container = self.viewWithTag(10)!
         
-        self.urlField = container.viewWithTag(1) as? TextField
-        self.urlField?.autocorrectionType = .no
-        self.urlField?.placeholder = NSLocalizedString("URL", comment: "")
-        self.urlField?.font = RobotoFont.regular(with: 13)
-        self.urlField?.placeholderActiveColor = UIColor(named: .green).darker()
-        self.urlField?.dividerActiveColor = UIColor(named: .green).darker()
-        self.urlField?.isClearIconButtonEnabled = true
-        self.urlField?.detailColor = UIColor(named: .red)
+        urlField = container.viewWithTag(1) as? TextField
+        urlField?.autocorrectionType = .no
+        urlField?.placeholder = NSLocalizedString("URL", comment: "")
+        urlField?.font = RobotoFont.regular(with: 13)
+        urlField?.placeholderActiveColor = UIColor(named: .green).darker()
+        urlField?.dividerActiveColor = UIColor(named: .green).darker()
+        urlField?.isClearIconButtonEnabled = true
+        urlField?.detailColor = UIColor(named: .red)
         
-        self.checkbox = container.viewWithTag(2) as? CheckboxButton
-        self.checkbox?.tintColor = .gray
+        checkbox = container.viewWithTag(2) as? CheckboxButton
+        checkbox?.tintColor = .gray
         
         let checkboxLabel = container.viewWithTag(3) as? UILabel
         checkboxLabel?.text = NSLocalizedString("REQUIRES_AUTH", comment: "")
         checkboxLabel?.font = RobotoFont.bold(with: 13)
         checkboxLabel?.textColor = .gray
         
-        self.userField = container.viewWithTag(4) as? TextField
-        self.userField?.placeholder = NSLocalizedString("USER", comment: "")
-        self.userField?.font = RobotoFont.regular(with: 13)
-        self.userField?.placeholderActiveColor = UIColor(named: .green).darker()
-        self.userField?.dividerActiveColor = UIColor(named: .green).darker()
-        self.userField?.isClearIconButtonEnabled = true
-        self.userField?.detailColor = UIColor(named: .red)
+        userField = container.viewWithTag(4) as? TextField
+        userField?.placeholder = NSLocalizedString("USER", comment: "")
+        userField?.font = RobotoFont.regular(with: 13)
+        userField?.placeholderActiveColor = UIColor(named: .green).darker()
+        userField?.dividerActiveColor = UIColor(named: .green).darker()
+        userField?.isClearIconButtonEnabled = true
+        userField?.detailColor = UIColor(named: .red)
         
-        self.passwordField = container.viewWithTag(5) as? TextField
-        self.passwordField?.placeholder = NSLocalizedString("PASSWORD", comment: "")
-        self.passwordField?.font = RobotoFont.regular(with: 13)
-        self.passwordField?.placeholderActiveColor = UIColor(named: .green).darker()
-        self.passwordField?.dividerActiveColor = UIColor(named: .green).darker()
-        self.passwordField?.isClearIconButtonEnabled = true
-        self.passwordField?.detailColor = UIColor(named: .red)
+        passwordField = container.viewWithTag(5) as? TextField
+        passwordField?.placeholder = NSLocalizedString("PASSWORD", comment: "")
+        passwordField?.font = RobotoFont.regular(with: 13)
+        passwordField?.placeholderActiveColor = UIColor(named: .green).darker()
+        passwordField?.dividerActiveColor = UIColor(named: .green).darker()
+        passwordField?.isClearIconButtonEnabled = true
+        passwordField?.detailColor = UIColor(named: .red)
         
-        self.checkbox?.isChecked.bind(to: self.userField!.reactive.isEnabled)
-        self.checkbox?.isChecked.bind(to: self.passwordField!.reactive.isEnabled)
-        _ = self.checkbox?.isChecked.observeNext {
-            let alpha: CGFloat = $0 ? 1.0 : 0.5
-            self.userField?.alpha = alpha
-            self.passwordField?.alpha = alpha
-        }
+        checkbox?.isChecked
+            .bind(to: userField!.reactive.isEnabled)
+            .dispose(in: bag)
+        checkbox?.isChecked
+            .bind(to: passwordField!.reactive.isEnabled)
+            .dispose(in: bag)
+        checkbox?.isChecked.bind(to: self) { me, checked in
+            let alpha: CGFloat = checked ? 1.0 : 0.5
+            me.userField?.alpha = alpha
+            me.passwordField?.alpha = alpha
+        }.dispose(in: bag)
         
         self.selectionStyle = .none
     }

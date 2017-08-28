@@ -7,12 +7,19 @@
 //
 
 import Foundation
+import ReactiveKit
 
 ///
 class FirebasePersistenceStack: PersistenceStack {
     var authentication: DataSourceAuthentication
+    var dataSource: DataSource?
+    var bag = DisposeBag()
     
     init() {
         authentication = FirebaseDataSourceAuthentication()
+        authentication
+            .dataSource()
+            .observeNext { [unowned self] in self.dataSource = $0 }
+            .dispose(in: bag)
     }
 }

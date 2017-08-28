@@ -45,7 +45,7 @@ class CategoryTableViewController: UITableViewController {
     ///
     func setupTableView() {
         viewModel.contents.bind(to: tableView) { conts, indexPath, tableView in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell")!
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableViewCell.category)!
             cell.backgroundColor = .clear
             cell.textLabel?.font = RobotoFont.medium(with: 16)
             cell.textLabel?.textColor = .gray

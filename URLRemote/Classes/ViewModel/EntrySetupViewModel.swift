@@ -22,7 +22,8 @@ struct EntrySetupTableCell {
 
 /// View Model of the Entry Setup View Controller. Handles UI state + form validity.
 class EntrySetupViewModel {
-    let bndBag = DisposeBag()
+    var dataSource: DataSource!
+    let bag = DisposeBag()
     
     var firebaseKey: String?
     let order = Observable<Int>(0)
@@ -36,7 +37,7 @@ class EntrySetupViewModel {
     let password = Observable<String?>(nil)
     let customCriteria = Observable<String>("")
     
-    let categories = MutableObservableArray<String>([])
+    let categories = MutableObservableArray<Category>([])
     let originalCategoryIndex = Observable<Int?>(nil)
     let selectedCategoryIndex = Observable<Int>(0)
     
@@ -63,12 +64,20 @@ class EntrySetupViewModel {
     /// 1. Validation of data.
     /// 2. Addition/Removal of custom criteria cell into the table view model.
     /// 3. Notification handling for selection of icon.
-    init() {
+    ///
+    /// - Parameter dataSource: DataSource class whoch handles data persistence.
+    init(dataSource: DataSource) {
+        self.dataSource = dataSource
+        
+        self.dataSource.categories().observeNext { [unowned self] in
+            self.categories.replace(with: $0, performDiff: true)
+        }.dispose(in: bag)
+        
         self.bindValidation()
         
-        originalCategoryIndex.map { $0 ?? 0 }.bind(to: selectedCategoryIndex).dispose(in: bndBag)
+        originalCategoryIndex.map { $0 ?? 0 }.bind(to: selectedCategoryIndex).dispose(in: bag)
         
-        _ = self.type.observeNext { [unowned self] type in
+        self.type.observeNext { [unowned self] type in
             if type == .custom {
                 if self.contents.count == 4 {
                     let cell = EntrySetupTableCell(
@@ -82,46 +91,54 @@ class EntrySetupViewModel {
                     self.customCriteria.value = ""
                 }
             }
-        }.dispose(in: bndBag)
+        }.dispose(in: bag)
         
         NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "SELECTED_ICON"))
             .map { return $0.object as! String }
             .bind(to: icon)
-            .dispose(in: bndBag)
+            .dispose(in: bag)
     }
     
     /// Binds form validation to isFormComplete observable property.
     func bindValidation() {
-        combineLatest(
-            self.name,
-            self.url,
-            self.requiresAuthentication,
-            self.user,
-            self.password)
-            .map { name, url, auth, usr, pwd in
-                if name == "" || url == "" || !url.isValidURL() {
+        let fieldsValidation = combineLatest(name, url).map { (name, url) -> Bool in
+            return !(name == "" || url == "" || !url.isValidURL())
+        }
+        
+        let credentialsValidation = combineLatest(requiresAuthentication, user, password).map { (auth, usr, pwd) -> Bool in
+            if auth {
+                let areCredentialsNil = (usr == nil || pwd == nil)
+                let areCredentialsBlank = (usr == "" || pwd == "")
+                
+                /// The return must be exclusive and return a value if and only if the undesired state ocurrs.
+                if areCredentialsNil || areCredentialsBlank {
                     return false
                 }
-                
-                if auth {
-                    let areCredentialsNil = (usr == nil || pwd == nil)
-                    let areCredentialsBlank = (usr == "" || pwd == "")
-                    
-                    /// The return must be exclusive and return a value if and only if the undesired state ocurrs.
-                    if areCredentialsNil || areCredentialsBlank {
-                        return false
-                    }
-                }
-                
-                return true
-            }.bind(to: self.isFormComplete)
-            .dispose(in: bndBag)
+            }
+            
+            return true
+        }
+        
+        combineLatest(fieldsValidation, credentialsValidation)
+            .map { $0 && $1 }
+            .bind(to: self.isFormComplete)
+            .dispose(in: bag)
     }
     
     /// Sets observed form data to have previously generated Entry data.
     ///
     /// - Parameter entry: Previously created Entry object with data.
     func setup(with entry: Entry) {
+        dataSource.categories().map { (cats: [Category]) -> Int? in
+            for index in 0..<cats.count {
+                if cats[index].contains(entry: entry) {
+                    return index
+                }
+            }
+            return nil
+        }.bind(to: originalCategoryIndex)
+        .dispose(in: bag)
+        
         self.firebaseKey = entry.firebaseKey
         self.order.value = entry.order
         self.name.value = entry.name ?? ""
@@ -159,5 +176,26 @@ class EntrySetupViewModel {
         }
         
         return entry
+    }
+    
+    /// Persists the data. Decides between move/update/save new.
+    func saveData() {
+        let entry = self.toEntry()
+        
+        if let originalIdx = originalCategoryIndex.value {
+            let fromCategory = categories[originalIdx]
+            
+            if originalIdx != selectedCategoryIndex.value {
+                let toCategory = categories[selectedCategoryIndex.value]
+                dataSource.move(entry, from: fromCategory, to: toCategory)
+            } else {
+                // update
+                dataSource.add(entry, to: fromCategory)
+            }
+        } else {
+            // new
+            let toCategory = categories[selectedCategoryIndex.value]
+            dataSource.add(entry, to: toCategory)
+        }
     }
 }
