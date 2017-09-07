@@ -33,4 +33,4 @@ script:
   - swiftlint
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -J 'URLRemote'
+  - bash <(curl -s https://codecov.io/bash) -J 'URLRemote' -X xcodeplist
