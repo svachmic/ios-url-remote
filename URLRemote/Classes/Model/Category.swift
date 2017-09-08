@@ -32,13 +32,13 @@ class Category: FirebaseObject {
         entryKeys <- map["entryKeys"]
     }
     
-    /// Adds entry under this category. Stored only by using unique firebaseKey value.
+    /// Adds entry under this category. Stored only by using unique firebaseKey value. Fails silently.
     ///
     /// - Parameter entry: Entry object to be added.
     func add(entry: Entry) {
         guard let key = entry.firebaseKey else { return }
         
-        if !contains(entry: entry) {
+        if !contains(entry: entry) && !isFull() {
             var keys = entryKeys
             entry.order = keys.count
             keys.append(key)
@@ -66,5 +66,12 @@ class Category: FirebaseObject {
     func contains(entry: Entry) -> Bool {
         guard let key = entry.firebaseKey else { return false }
         return entryKeys.contains(key)
+    }
+    
+    /// Decides whether or not the category is capable of
+    ///
+    /// - Returns: Boolean flag indicating whether the category is full.
+    func isFull() -> Bool {
+        return entryKeys.count >= 9
     }
 }

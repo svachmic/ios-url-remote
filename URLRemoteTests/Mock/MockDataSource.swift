@@ -59,6 +59,8 @@ class MockDataSource: DataSource {
         _ = entriesDict.removeValue(forKey: entry.firebaseKey!)
     }
     
+    // MARK: - Mock helpers
+    
     func randomString(length: Int) -> String {
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let len = UInt32(letters.length)
@@ -71,5 +73,43 @@ class MockDataSource: DataSource {
         }
         
         return randomString
+    }
+    
+    func generateEntries(count: Int) -> [Entry] {
+        return (0..<count).map {
+            let e = Entry()
+            e.firebaseKey = randomString(length: 8)
+            e.name = "e\($0)"
+            e.order = $0
+            return e
+        }
+    }
+    
+    func generateCategories(count: Int) -> [URLRemote.Category] {
+        return (0..<count).map {
+            let c = Category()
+            c.firebaseKey = randomString(length: 8)
+            c.name = "c\($0)"
+            c.order = $0
+            return c
+        }
+    }
+    
+    func fillWithTestData() {
+        let categoryCount = 3
+        var entriesCategoryCount = [3, 9, 1]
+        
+        if categoryCount != entriesCategoryCount.count {
+            fatalError("Tests will fail unless the counts are right.")
+        }
+        
+        let categories = generateCategories(count: categoryCount)
+        for index in 0..<categories.count {
+            let category = categories[index]
+            let entries = generateEntries(count: entriesCategoryCount[index])
+            for e in entries {
+                self.add(e, to: category)
+            }
+        }
     }
 }

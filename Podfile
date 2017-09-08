@@ -18,6 +18,8 @@ target "URLRemote" do
 
     target "URLRemoteTests" do
         inherit! :search_paths
+        pod 'Quick'
+        pod 'Nimble'
     end
 end
 
