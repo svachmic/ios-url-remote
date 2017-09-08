@@ -8,10 +8,10 @@
 
 import Foundation
 
-///
+/// Constants used throughout the whole application.
 struct Constants {
     
-    ///
+    /// Storyboard IDs for view controllers.
     struct StoryboardID {
         static let login = "loginController"
         static let categoryEdit = "categoryEditViewConroller"
@@ -21,14 +21,16 @@ struct Constants {
         static let categorySelection = "categoryTableController"
     }
     
+    /// Collection view cells' IDs.
     struct CollectionViewCell {
         static let header = "headerCell"
         static let entry = "entryCell"
     }
     
+    /// Table view cells' IDs.
     struct TableViewCell {
         static let entryEdit = "editCell"
-        static let category = "categoryCell"
+        static let categorySelection = "categorySelectionCell"
         static let entryType = "typeCell"
     }
 }

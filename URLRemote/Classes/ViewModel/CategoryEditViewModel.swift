@@ -77,7 +77,7 @@ class CategoryEditViewModel {
                 let entry = self.entries[index]
                 entry.order = index
             }
-            dataSource.update(batch: entries.map{ $0 })
+            dataSource.update(batch: entries.map { $0 })
         }
     }
     

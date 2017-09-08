@@ -88,4 +88,34 @@ class CategoryTests: XCTestCase {
         category.remove(entry: nonExistingEntry)
         XCTAssertEqual(category.entryKeys.count, 2)
     }
+    
+    func testIsFull() {
+        XCTAssertEqual(category.entryKeys.count, 3)
+        
+        let e1 = Entry()
+        e1.firebaseKey = "1"
+        category.add(entry: e1)
+        let e2 = Entry()
+        e2.firebaseKey = "2"
+        category.add(entry: e2)
+        let e3 = Entry()
+        e3.firebaseKey = "3"
+        category.add(entry: e3)
+        let e4 = Entry()
+        e4.firebaseKey = "4"
+        category.add(entry: e4)
+        let e5 = Entry()
+        e5.firebaseKey = "5"
+        category.add(entry: e5)
+        let e6 = Entry()
+        e6.firebaseKey = "6"
+        category.add(entry: e6)
+        XCTAssertEqual(category.entryKeys.count, 9)
+        XCTAssertTrue(category.isFull())
+        
+        let e7 = Entry()
+        e7.firebaseKey = "7"
+        category.add(entry: e7)
+        XCTAssertEqual(category.entryKeys.count, 9)
+    }
 }

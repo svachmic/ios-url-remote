@@ -45,7 +45,7 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
         
         cancel.reactive.tap.bind(to: self) { me, _ in
             me.parent?.dismiss(animated: true, completion: nil)
-        }.dispose(in: reactive.bag)
+        }.dispose(in: bag)
         
         self.toolbarController?.toolbar.leftViews = [cancel]
         
@@ -53,18 +53,18 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
         done.pulseColor = .white
         viewModel.isFormComplete
             .bind(to: done.reactive.isEnabled)
-            .dispose(in: reactive.bag)
+            .dispose(in: bag)
         
         done.reactive.tap.bind(to: self) { me, _ in
             me.viewModel.saveData()
             me.parent?.dismiss(animated: true, completion: nil)
-        }.dispose(in: reactive.bag)
+        }.dispose(in: bag)
         self.toolbarController?.toolbar.rightViews = [done]
         
         self.toolbarController?.toolbar.titleLabel.textColor = .white
         viewModel.name
             .bind(to: toolbarController!.toolbar.reactive.title)
-            .dispose(in: reactive.bag)
+            .dispose(in: bag)
     }
     
     ///
@@ -105,7 +105,7 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
             }
             
             return cell
-        }.dispose(in: self.reactive.bag)
+        }.dispose(in: bag)
     }
     
     // MARK: - Cell setup
@@ -116,12 +116,12 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
         
         cell.icon?.reactive.tap.bind(to: self) { me, _ in
             me.presentIconController()
-        }.dispose(in: cell.reactive.bag)
+        }.dispose(in: cell.bag)
         
         viewModel.color
             .map { return UIColor(named: $0) }
             .bind(to: cell.icon!.reactive.backgroundColor)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         
         viewModel.icon
             .map { UIImage(named: $0) }
@@ -130,21 +130,21 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
                     c.icon?.image = i.withRenderingMode(.alwaysTemplate)
                     c.icon?.imageView?.tintColor = .white
                 }
-            }.dispose(in: cell.reactive.bag)
+            }.dispose(in: cell.bag)
         
         viewModel.name
             .bind(to: cell.nameField!.reactive.text)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         
         cell.nameField?.reactive.text
             .map { $0 ?? ""}
             .bind(to: viewModel.name)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         
         cell.colorSelector!.setupViews(with: [.green, .yellow, .red])
         cell.colorSelector!.signal
             .bind(to: viewModel.color)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
     }
     
     ///
@@ -153,10 +153,10 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
         viewModel.selectedCategoryIndex
             .map { [unowned self] in self.viewModel.categories[$0].name }
             .bind(to: cell.button!.reactive.title)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         cell.button?.reactive.tap.bind(to: self) { me, _ in
             me.presentCategoryController()
-        }.dispose(in: cell.reactive.bag)
+        }.dispose(in: cell.bag)
     }
     
     ///
@@ -165,10 +165,10 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
         viewModel.type
             .map { $0.toString() }
             .bind(to: cell.button!.reactive.title)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         cell.button?.reactive.tap.bind(to: self) { me, _ in
             me.presentTypeController()
-        }.dispose(in: cell.reactive.bag)
+        }.dispose(in: cell.bag)
     }
     
     ///
@@ -177,34 +177,34 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
         
         viewModel.url
             .bind(to: cell.urlField!.reactive.text)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         
         cell.urlField?.reactive.text
             .map { $0 ?? ""}
             .bind(to: viewModel.url)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         
         viewModel.requiresAuthentication
             .bidirectionalBind(to: cell.checkbox!.isChecked)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         
         viewModel.user
             .bind(to: cell.userField!.reactive.text)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         
         cell.userField?.reactive.text
             .map { $0 ?? ""}
             .bind(to: viewModel.user)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         
         viewModel.password
             .bind(to: cell.passwordField!.reactive.text)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         
         cell.passwordField?.reactive.text
             .map { $0 ?? ""}
             .bind(to: viewModel.password)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
     }
     
     ///
@@ -213,18 +213,18 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
         
         viewModel.customCriteria
             .bind(to: cell.criteriaField!.reactive.text)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         
         cell.criteriaField?.reactive.text
             .map { $0 ?? ""}
             .bind(to: viewModel.customCriteria)
-            .dispose(in: cell.reactive.bag)
+            .dispose(in: cell.bag)
         
         cell.infoButton?.reactive.tap.bind(to: self) { me, _ in
             me.presentSimpleAlertDialog(
                 header: NSLocalizedString("CUSTOM_CRITERIA", comment: ""),
                 message: NSLocalizedString("CUSTOM_CRITERIA_DESC", comment: ""))
-        }.dispose(in: cell.reactive.bag)
+        }.dispose(in: cell.bag)
     }
     
     // MARK: - Presentation methods
@@ -239,12 +239,12 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
     func presentCategoryController() {
         let categoryController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.categorySelection) as! CategoryTableViewController
         viewModel.categories
-            .map { $0.name }
             .bind(to: categoryController.viewModel.contents)
-            .dispose(in: categoryController.reactive.bag)
+            .dispose(in: categoryController.bag)
+        categoryController.viewModel.initialSelection.value = viewModel.selectedCategoryIndex.value
         categoryController.viewModel.signal
             .bind(to: viewModel.selectedCategoryIndex)
-            .dispose(in: categoryController.reactive.bag)
+            .dispose(in: categoryController.bag)
         
         self.presentEmbedded(viewController: categoryController, barTintColor: UIColor(named: .green))
     }
@@ -253,7 +253,7 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
         let typeController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.typeSelection) as! TypeTableViewController
         typeController.viewModel
             .signal.bind(to: viewModel.type)
-            .dispose(in: typeController.reactive.bag)
+            .dispose(in: typeController.bag)
         
         self.presentEmbedded(viewController: typeController, barTintColor: UIColor(named: .green))
     }
