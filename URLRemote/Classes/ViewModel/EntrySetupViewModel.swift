@@ -70,7 +70,7 @@ class EntrySetupViewModel {
         self.dataSource = dataSource
         
         self.dataSource.categories().observeNext { [unowned self] in
-            self.categories.replace(with: $0, performDiff: true)
+            self.categories.replace(with: $0, performDiff: false)
         }.dispose(in: bag)
         
         self.bindValidation()
