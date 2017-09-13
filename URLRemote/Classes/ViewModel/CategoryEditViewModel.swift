@@ -32,7 +32,7 @@ class CategoryEditViewModel {
         categoryName.value = category!.name
         dataSource.entries(under: category!)
             .observeNext { [unowned self] in
-                self.entries.replace(with: $0, performDiff: true)
+                self.entries.replace(with: $0, performDiff: false)
             }.dispose(in: bag)
     }
     
