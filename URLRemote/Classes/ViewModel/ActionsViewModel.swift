@@ -35,7 +35,7 @@ class ActionsViewModel {
                     
                         return contents
                     }.observeNext { [unowned self] in
-                        self.data.replace(with: $0, performDiff: true)
+                        self.data.replace(with: $0, performDiff: false)
                     }
             } else {
                 self.combiner?.dispose()
