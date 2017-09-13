@@ -66,27 +66,31 @@ class CategoryEditTableViewController: UITableViewController, PersistenceStackCo
     ///
     func setupTableView() {
         viewModel.entries.bind(to: tableView) { [unowned self] conts, indexPath, tableView in
-            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableViewCell.entryEdit) as! EntrySettingsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableViewCell.entryEdit) as! EntryEditTableViewCell
+            cell.bag.dispose()
+            
             let entry = conts[indexPath.row]
-            cell.layoutSubviews()
-            cell.label?.text = entry.name
+            cell.nameLabel.text = entry.name
             cell.showsReorderControl = true
             
-            cell.button?.reactive.tap.bind(to: self) { me, _ in
-                let entryController = me.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.entrySetup) as! EntrySetupViewController
-                entryController.stack = me.stack
-                entryController.viewModel.setup(with: entry)
-                me.presentEmbedded(viewController: entryController, barTintColor: UIColor(named: .green))
+            cell.editButton.reactive.tap.bind(to: self) { me, _ in
+                let filteredEntries = me.viewModel.entries.array.filter { $0 == entry }
+                if let updatedEntry = filteredEntries[safe: 0] {
+                    let entryController = me.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.entrySetup) as! EntrySetupViewController
+                    entryController.stack = me.stack
+                    entryController.viewModel.setup(with: updatedEntry)
+                    me.presentEmbedded(viewController: entryController, barTintColor: UIColor(named: .green))
+                }
             }.dispose(in: cell.reactive.bag)
             
             return cell
         }.dispose(in: reactive.bag)
         
-        self.tableView.reactive.dataSource.forwardTo = self
-        self.tableView.tableFooterView = UIView(frame: .zero)
-        self.tableView.separatorInset = UIEdgeInsets.zero
-        self.tableView.backgroundColor = UIColor(named: .gray)
-        self.tableView.setEditing(true, animated: false)
+        tableView.reactive.dataSource.forwardTo = self
+        tableView.tableFooterView = UIView(frame: .zero)
+        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.backgroundColor = UIColor(named: .gray)
+        tableView.setEditing(true, animated: false)
     }
     
     // MARK: - Category renaming
