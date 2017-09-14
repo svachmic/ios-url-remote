@@ -23,8 +23,16 @@ struct Constants {
     
     /// Collection view cells' IDs.
     struct CollectionViewCell {
+        
+        // MARK: - Action Controller
+        
         static let header = "headerCell"
         static let entry = "entryCell"
+        
+        // MARK: - Icon Controller
+        
+        static let iconsSection = "iconHeaderCell"
+        static let iconCell = "iconCell"
     }
     
     /// Table view cells' IDs.
@@ -32,5 +40,28 @@ struct Constants {
         static let entryEdit = "editCell"
         static let categorySelection = "categorySelectionCell"
         static let entryType = "typeCell"
+    }
+    
+    /// Icon names.
+    struct Icons {
+        struct General {
+            static let name = "GENERAL"
+            static let items = ["plus", "minus", "on", "off", "house_1", "house_2", "lock_on", "lock_off"]
+        }
+        
+        struct Player {
+            static let name = "PLAYER"
+            static let items = ["play", "pause", "stop", "rew", "fwd", "previous", "next"]
+        }
+        
+        struct Lights {
+            static let name = "LIGHTS"
+            static let items = ["lightbulb_on", "lightbulb_off", "day", "night"]
+        }
+        
+        struct Arrows {
+            static let name = "ARROWS"
+            static let items = ["up", "down", "left", "right", "double_up", "double_down", "double_left", "double_right"]
+        }
     }
 }

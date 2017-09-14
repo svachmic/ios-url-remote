@@ -11,23 +11,15 @@ import Material
 import Bond
 import ReactiveKit
 
-///
+/// View controller taking care of icon selection.
 class IconCollectionViewController: UICollectionViewController {
-    private let reuseIdentifier = "iconCell"
-    private let headerReuseIdentifier = "iconHeaderCell"
-    
     let viewModel = IconCollectionViewModel()
-    var iconColor: UIColor?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.collectionView?.backgroundColor = UIColor(named: .gray)
         self.setupBar()
-        
-        if let initial = self.viewModel.initialSelection.value {
-            self.viewModel.userSelection.value = initial
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,34 +40,23 @@ class IconCollectionViewController: UICollectionViewController {
 
     // MARK: - Setup
     
-    ///
+    /// Sets up all the buttons in the toolbar.
     func setupBar() {
-        let cancel = FlatButton(title: NSLocalizedString("CANCEL", comment: ""))
-        cancel.titleColor = .white
-        cancel.pulseColor = .white
-        cancel.titleLabel?.font = RobotoFont.bold(with: 15)
-        _ = cancel.reactive.tap.observeNext {
-            self.parent?.dismiss(animated: true, completion: nil)
-        }
+        let cancel = MaterialFactory.cancelButton()
+        cancel.reactive.tap.bind(to: self) { me, _ in
+            me.parent?.dismiss(animated: true, completion: nil)
+        }.dispose(in: bag)
         self.toolbarController?.toolbar.leftViews = [cancel]
         
-        let done = IconButton(image: Icon.cm.check, tintColor: .white)
-        done.pulseColor = .white
-        _ = combineLatest(
-            self.viewModel.initialSelection,
-            self.viewModel.userSelection)
+        let done = MaterialFactory.doneButton()
+        combineLatest(viewModel.initialSelection, viewModel.userSelection)
             .map { return $0 != $1 }
             .bind(to: done.reactive.isEnabled)
-        _ = done.reactive.tap.observeNext {
-            if let indexPath = self.viewModel.userSelection.value {
-                let icon = self.viewModel.contents[indexPath.section].items[indexPath.row]
-                NotificationCenter.default.post(
-                    name: NSNotification.Name(rawValue: "SELECTED_ICON"),
-                    object: icon)
-            }
-            
+            .dispose(in: bag)
+        done.reactive.tap.bind(to: self) { me, _ in
+            me.viewModel.done()
             self.parent?.dismiss(animated: true, completion: nil)
-        }
+        }.dispose(in: bag)
         self.toolbarController?.toolbar.rightViews = [done]
         
         self.toolbarController?.toolbar.titleLabel.textColor = .white
@@ -85,30 +66,21 @@ class IconCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return self.viewModel.contents.sections.count
+        return viewModel.contents.sections.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.viewModel.contents[section].items.count
+        return viewModel.contents[section].items.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: reuseIdentifier,
+            withReuseIdentifier: Constants.CollectionViewCell.iconCell,
             for: indexPath) as! IconCollectionViewCell
-        cell.backgroundColor = iconColor
-        cell.layer.cornerRadius = cell.frame.width / 2.0
-        
-        let imageView = cell.viewWithTag(1) as? UIImageView
-        let imageName = self.viewModel.contents[indexPath.section].items[indexPath.row]
-        imageView?.image = UIImage(named: imageName)!.withRenderingMode(.alwaysTemplate)
-        imageView?.tintColor = .white
-        
-        if self.viewModel.userSelection.value == indexPath {
-            cell.highlight()
-        } else {
-            cell.unhighlight()
-        }
+        cell.backgroundColor = viewModel.iconColor
+        let imageName = viewModel.contents[indexPath.section].items[indexPath.row]
+        cell.setIcon(named: imageName)
+        cell.setIsHighlighted(viewModel.userSelection.value == indexPath)
         
         return cell
     }
@@ -116,14 +88,10 @@ class IconCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(
             ofKind: UICollectionElementKindSectionHeader,
-            withReuseIdentifier:headerReuseIdentifier,
-            for: indexPath)
+            withReuseIdentifier: Constants.CollectionViewCell.iconsSection,
+            for: indexPath) as! IconSectionCollectionReusableView
         
-        let label = cell.viewWithTag(1) as? UILabel
-        label?.font = RobotoFont.bold(with: 14)
-        label?.textColor = .gray
-        label?.text = NSLocalizedString(self.viewModel.contents[indexPath.section].metadata, comment: "")
-        
+        cell.sectionNameLabel.text = NSLocalizedString(viewModel.contents[indexPath.section].metadata, comment: "")
         return cell
     }
 
@@ -142,7 +110,7 @@ class IconCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.viewModel.userSelection.value = indexPath
-        self.collectionView?.reloadData()
+        viewModel.userSelection.value = indexPath
+        collectionView.reloadData()
     }
 }

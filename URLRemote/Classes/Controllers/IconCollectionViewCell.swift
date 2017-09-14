@@ -8,13 +8,44 @@
 
 import UIKit
 
-///
+/// View responsible for displaying an icon and reflect the state of being selected or not.
 class IconCollectionViewCell: UICollectionViewCell {
-    ///
+    @IBOutlet weak var iconImageView: UIImageView!
+    
+    /// Layer used for highlighting the cell by drawing a circle around.
     var highlightLayer: CAShapeLayer?
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        layer.cornerRadius = frame.width / 2.0
+    }
+    
+    /// Sets the icon of the cell with the given name. Fails silently.
     ///
-    func highlight() {
+    /// - Parameter imageName: Name of the image resource.
+    func setIcon(named imageName: String) {
+        guard let image = UIImage(named: imageName) else { return }
+        
+        iconImageView.image = image.withRenderingMode(.alwaysTemplate)
+        iconImageView.tintColor = .white
+    }
+    
+    /// Highlights or unhighlights the cell based on the passed parameter.
+    ///
+    /// - Parameter isHighlighted: Boolean flag indicating the state of the cell.
+    func setIsHighlighted(_ isHighlighted: Bool) {
+        if isHighlighted {
+            highlight()
+        } else {
+            unhighlight()
+        }
+    }
+    
+    // MARK: - Helper methods
+    
+    /// Highlights the cell by drawing a circle around it in a cached layer.
+    private func highlight() {
         if let highlightLayer = self.highlightLayer {
             self.layer.addSublayer(highlightLayer)
         } else {
@@ -35,8 +66,8 @@ class IconCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    ///
-    func unhighlight() {
+    /// Unhighlights the cell by removing the cached layer from the canvas.
+    private func unhighlight() {
         self.highlightLayer?.removeFromSuperlayer()
     }
 }
