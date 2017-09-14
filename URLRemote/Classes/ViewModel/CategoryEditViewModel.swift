@@ -77,7 +77,7 @@ class CategoryEditViewModel {
                 let entry = self.entries[index]
                 entry.order = index
             }
-            dataSource.update(batch: entries.map { $0 })
+            dataSource.update(batch: entries.array)
         }
     }
     
@@ -92,7 +92,7 @@ class CategoryEditViewModel {
     
     /// Removes the whole category along with its entries.
     func removeCategory() {
-        self.entries.forEach { dataSource.delete($0) }
+        self.entries.array.forEach { dataSource.delete($0) }
         dataSource.delete(category!)
     }
 }

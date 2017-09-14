@@ -1,8 +1,8 @@
 PODS:
   - Alamofire (4.5.1)
-  - Bond (6.2.10):
-    - Diff (~> 0.4)
-    - ReactiveKit (~> 3.6.0)
+  - Bond (6.3.0):
+    - Diff (~> 0.5.3)
+    - ReactiveKit (~> 3.6.2)
   - Crashlytics (3.8.6):
     - Fabric (~> 1.6.3)
   - Diff (0.5.3)
@@ -46,9 +46,9 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.11)
   - leveldb-library (1.18.3)
-  - Material (2.10.0):
-    - Material/Core (= 2.10.0)
-  - Material/Core (2.10.0)
+  - Material (2.10.2):
+    - Material/Core (= 2.10.2)
+  - Material/Core (2.10.2)
   - MBProgressHUD (1.0.0)
   - Motion (1.1.2):
     - Motion/Core (= 1.1.2)
@@ -74,7 +74,7 @@ PODS:
   - OHHTTPStubs/Swift (6.0.0):
     - OHHTTPStubs/Default
   - Quick (1.1.0)
-  - ReactiveKit (3.6.0)
+  - ReactiveKit (3.6.2)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
@@ -94,7 +94,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  Bond: 8bafdefda68c4f525c9a751b60ef827b0548ef3c
+  Bond: 6a15b0635bbaae915d91b4c4ffa1396807530ef3
   Crashlytics: 95d05f4e4c19a771250c4bd9ce344d996de32bbf
   Diff: befa1d19c32726b2b36ce915d98793e2fbde8dcc
   Fabric: 2fb5676bc811af011a04513451f463dac6803206
@@ -107,7 +107,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
-  Material: 7f109399c33b5f48bf033c53186b791dc702d00b
+  Material: 8265a77332acfb7872a7fd0f4f2023f080d25d1f
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Motion: d4072ac96d5f114ad1f1d9c699808b60a01bd4e9
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
@@ -115,7 +115,7 @@ SPEC CHECKSUMS:
   ObjectMapper: 3d571bb5af471c779e1160828cd9ad5c4ef90958
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  ReactiveKit: b3037cb797aa79b58964d309cd724611bea033e6
+  ReactiveKit: 59813e52505065d14fa77b453d8be5981eced6b7
 
 PODFILE CHECKSUM: 37981630a60fb1e115a4152d4d562f3d2de54366
 
