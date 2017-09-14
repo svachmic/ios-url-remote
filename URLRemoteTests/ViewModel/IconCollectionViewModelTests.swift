@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Bond
 @testable import URLRemote
 
 class IconCollectionViewModelTests: XCTestCase {
@@ -38,5 +39,19 @@ class IconCollectionViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.initialSelection.value == IndexPath(row: 4, section: 3))
         viewModel.setInitial(value: "")
         XCTAssertTrue(viewModel.initialSelection.value == IndexPath(row: 0, section: 0))
+    }
+    
+    func testDone() {
+        let observable = Observable<String?>(nil)
+        XCTAssertNil(observable.value)
+        
+        let binding = viewModel.signal.bind(to: observable)
+        XCTAssertNil(observable.value)
+        
+        viewModel.userSelection.value = IndexPath(row: 2, section: 0)
+        viewModel.done()
+        
+        XCTAssertEqual(observable.value, "on")
+        binding.dispose()
     }
 }

@@ -231,8 +231,9 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
     
     func presentIconController() {
         let iconController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.iconSelection) as! IconCollectionViewController
-        iconController.iconColor = UIColor(named: viewModel.color.value)
+        iconController.viewModel.iconColor = UIColor(named: viewModel.color.value)
         iconController.viewModel.setInitial(value: viewModel.icon.value)
+        iconController.viewModel.signal.bind(to: viewModel.icon)
         self.presentEmbedded(viewController: iconController, barTintColor: UIColor(named: .green))
     }
     

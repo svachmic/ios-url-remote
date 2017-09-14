@@ -58,15 +58,6 @@ class EntrySetupViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.contents.count == 4)
     }
     
-    func testIconNotification() {
-        XCTAssertTrue(viewModel.icon.value == "plus")
-        
-        NotificationCenter.default.post(
-            name: NSNotification.Name(rawValue: "SELECTED_ICON"),
-            object: "play")
-        XCTAssertTrue(viewModel.icon.value == "play")
-    }
-    
     func testSetup() {
         let entry = Entry(JSONString: "{\r\n\"firebaseKey\":\"abcdef\",\r\n\"order\":1,\r\n\"color\":4173881855,\r\n\"icon\":\"lightbulb_on\",\r\n\"name\":\"test\",\r\n\"requiresAuthentication\":true,\r\n\"user\":\"test_user\",\r\n\"password\":\"test_password\",\r\n\"type\":0,\r\n\"url\":\"https://www.seznam.cz\",\r\n\"customCriteria\":\"success\"\r\n}")!
         viewModel.setup(with: entry)

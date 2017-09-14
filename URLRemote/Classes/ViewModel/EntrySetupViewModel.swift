@@ -63,7 +63,6 @@ class EntrySetupViewModel {
     /// Initializes all necessary bindings:
     /// 1. Validation of data.
     /// 2. Addition/Removal of custom criteria cell into the table view model.
-    /// 3. Notification handling for selection of icon.
     ///
     /// - Parameter dataSource: DataSource class whoch handles data persistence.
     init(dataSource: DataSource) {
@@ -92,11 +91,6 @@ class EntrySetupViewModel {
                 }
             }
         }.dispose(in: bag)
-        
-        NotificationCenter.default.reactive.notification(name: NSNotification.Name(rawValue: "SELECTED_ICON"))
-            .map { return $0.object as! String }
-            .bind(to: icon)
-            .dispose(in: bag)
     }
     
     /// Binds form validation to isFormComplete observable property.
