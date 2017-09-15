@@ -13,6 +13,9 @@ import ReactiveKit
 /// Struct representing a cell in the Entry Setup View Controller.
 struct EntrySetupTableCell {
     
+    /// Type of the cell. Useful when more cells use the same UITableViewCell subclass.
+    let type: String
+    
     /// The Storyboard identifier by which the cell is initialized.
     let identifier: String
     
@@ -47,16 +50,20 @@ class EntrySetupViewModel {
     /// Contents of the form.
     let contents = MutableObservableArray<EntrySetupTableCell>([
         EntrySetupTableCell(
-            identifier: "designCell",
+            type: "design",
+            identifier: Constants.TableViewCell.design,
             height: 133.0),
         EntrySetupTableCell(
-            identifier: "categoryCell",
+            type: "category",
+            identifier: Constants.TableViewCell.genericButton,
             height: 68.0),
         EntrySetupTableCell(
-            identifier: "typeCell",
+            type: "type",
+            identifier: Constants.TableViewCell.genericButton,
             height: 68.0),
         EntrySetupTableCell(
-            identifier: "actionCell",
+            type: "action",
+            identifier: Constants.TableViewCell.action,
             height: 228.0)
         ])
     
@@ -80,7 +87,8 @@ class EntrySetupViewModel {
             if type == .custom {
                 if self.contents.count == 4 {
                     let cell = EntrySetupTableCell(
-                        identifier: "criteriaCell",
+                        type: "criteria",
+                        identifier: Constants.TableViewCell.criteria,
                         height: 94.0)
                     self.contents.insert(cell, at: 3)
                 }

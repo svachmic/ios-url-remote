@@ -7,44 +7,50 @@
 //
 
 import UIKit
+import ReactiveKit
+import Bond
 import Material
 
-///
+/// ReactiveKit extension to enable direct binding.
+extension ReactiveExtensions where Base: DesignEntryTableViewCell {
+    
+    /// Binding with the iconButton after the icon has been changed.
+    var iconImage: Bond<UIImage?> {
+        return bond { cell, image in
+            if let i = image {
+                cell.iconButton.image = i.withRenderingMode(.alwaysTemplate)
+                cell.iconButton.imageView?.tintColor = .white
+            }
+        }
+    }
+}
+
+/// View responsible for displaying the icon, color and name of an entry.
 class DesignEntryTableViewCell: UITableViewCell {
-    var icon: FlatButton?
-    var nameField: TextField?
-    var colorSelector: ColorSelectorView?
+    @IBOutlet weak var iconButton: FlatButton!
+    @IBOutlet weak var nameField: TextField!
+    @IBOutlet weak var colorLabel: UILabel!
+    @IBOutlet weak var colorSelector: ColorSelectorView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
         
-        let container = self.viewWithTag(10)!
+        iconButton.pulseColor = .white
+        iconButton.tintColor = .white
+        iconButton.imageEdgeInsets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
+        iconButton.layer.cornerRadius = iconButton.frame.width / 2.0
         
-        self.icon = container.viewWithTag(1) as? FlatButton
-        self.icon?.pulseColor = .white
-        self.icon?.tintColor = .white
-        self.icon?.imageEdgeInsets = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
-        self.icon?.layer.cornerRadius = self.icon!.frame.width / 2.0
+        nameField.placeholder = NSLocalizedString("ENTRY_NAME", comment: "")
+        nameField.font = RobotoFont.regular(with: 13)
+        nameField.placeholderActiveColor = UIColor(named: .green).darker()
+        nameField.dividerActiveColor = UIColor(named: .green).darker()
+        nameField.isClearIconButtonEnabled = true
+        nameField.detailColor = UIColor(named: .red)
+        nameField.autocorrectionType = .no
         
-        self.nameField = container.viewWithTag(2) as? TextField
-        self.nameField?.placeholder = NSLocalizedString("ENTRY_NAME", comment: "")
-        self.nameField?.font = RobotoFont.regular(with: 13)
-        self.nameField?.placeholderActiveColor = UIColor(named: .green).darker()
-        self.nameField?.dividerActiveColor = UIColor(named: .green).darker()
-        self.nameField?.isClearIconButtonEnabled = true
-        self.nameField?.detailColor = UIColor(named: .red)
-        self.nameField?.autocorrectionType = .no
-        
-        self.colorSelector = container.viewWithTag(4) as? ColorSelectorView
-        
-        let label = container.viewWithTag(3) as? UILabel
-        label?.font = RobotoFont.bold(with: 12)
-        label?.text = "\(NSLocalizedString("COLOR", comment: "")):"
-        label?.textColor = .gray
+        colorLabel.font = RobotoFont.bold(with: 12)
+        colorLabel.text = "\(NSLocalizedString("COLOR", comment: "")):"
+        colorLabel.textColor = .gray
         
         self.selectionStyle = .none
     }

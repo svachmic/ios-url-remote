@@ -10,67 +10,60 @@ import UIKit
 import Material
 import Bond
 
+/// View responsible for displaying the URL that's supposed to be called. Also handles authentication logic (username + password) input.
 class ActionEntryTableViewCell: UITableViewCell {
-    var urlField: TextField?
-    var checkbox: CheckboxButton?
-    var userField: TextField?
-    var passwordField: TextField?
-
+    @IBOutlet weak var urlField: TextField!
+    @IBOutlet weak var checkboxButton: CheckboxButton!
+    @IBOutlet weak var checkboxLabel: UILabel!
+    @IBOutlet weak var usernameField: TextField!
+    @IBOutlet weak var passwordField: TextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-    
-    /// Has to be called in order to set up all the subviews. Container with tag 10 is otherwise nil before the super method is called.
-    override func layoutSubviews() {
-        super.layoutSubviews()
         
-        let container = self.viewWithTag(10)!
+        urlField.autocorrectionType = .no
+        urlField.placeholder = NSLocalizedString("URL", comment: "")
+        urlField.font = RobotoFont.regular(with: 13)
+        urlField.placeholderActiveColor = UIColor(named: .green).darker()
+        urlField.dividerActiveColor = UIColor(named: .green).darker()
+        urlField.isClearIconButtonEnabled = true
+        urlField.detailColor = UIColor(named: .red)
         
-        urlField = container.viewWithTag(1) as? TextField
-        urlField?.autocorrectionType = .no
-        urlField?.placeholder = NSLocalizedString("URL", comment: "")
-        urlField?.font = RobotoFont.regular(with: 13)
-        urlField?.placeholderActiveColor = UIColor(named: .green).darker()
-        urlField?.dividerActiveColor = UIColor(named: .green).darker()
-        urlField?.isClearIconButtonEnabled = true
-        urlField?.detailColor = UIColor(named: .red)
+        checkboxButton.tintColor = .gray
         
-        checkbox = container.viewWithTag(2) as? CheckboxButton
-        checkbox?.tintColor = .gray
+        checkboxLabel.text = NSLocalizedString("REQUIRES_AUTH", comment: "")
+        checkboxLabel.font = RobotoFont.bold(with: 13)
+        checkboxLabel.textColor = .gray
         
-        let checkboxLabel = container.viewWithTag(3) as? UILabel
-        checkboxLabel?.text = NSLocalizedString("REQUIRES_AUTH", comment: "")
-        checkboxLabel?.font = RobotoFont.bold(with: 13)
-        checkboxLabel?.textColor = .gray
+        usernameField.placeholder = NSLocalizedString("USER", comment: "")
+        usernameField.font = RobotoFont.regular(with: 13)
+        usernameField.placeholderActiveColor = UIColor(named: .green).darker()
+        usernameField.dividerActiveColor = UIColor(named: .green).darker()
+        usernameField.isClearIconButtonEnabled = true
+        usernameField.detailColor = UIColor(named: .red)
         
-        userField = container.viewWithTag(4) as? TextField
-        userField?.placeholder = NSLocalizedString("USER", comment: "")
-        userField?.font = RobotoFont.regular(with: 13)
-        userField?.placeholderActiveColor = UIColor(named: .green).darker()
-        userField?.dividerActiveColor = UIColor(named: .green).darker()
-        userField?.isClearIconButtonEnabled = true
-        userField?.detailColor = UIColor(named: .red)
-        
-        passwordField = container.viewWithTag(5) as? TextField
-        passwordField?.placeholder = NSLocalizedString("PASSWORD", comment: "")
-        passwordField?.font = RobotoFont.regular(with: 13)
-        passwordField?.placeholderActiveColor = UIColor(named: .green).darker()
-        passwordField?.dividerActiveColor = UIColor(named: .green).darker()
-        passwordField?.isClearIconButtonEnabled = true
-        passwordField?.detailColor = UIColor(named: .red)
-        
-        checkbox?.isChecked
-            .bind(to: userField!.reactive.isEnabled)
-            .dispose(in: bag)
-        checkbox?.isChecked
-            .bind(to: passwordField!.reactive.isEnabled)
-            .dispose(in: bag)
-        checkbox?.isChecked.bind(to: self) { me, checked in
-            let alpha: CGFloat = checked ? 1.0 : 0.5
-            me.userField?.alpha = alpha
-            me.passwordField?.alpha = alpha
-        }.dispose(in: bag)
+        passwordField.placeholder = NSLocalizedString("PASSWORD", comment: "")
+        passwordField.font = RobotoFont.regular(with: 13)
+        passwordField.placeholderActiveColor = UIColor(named: .green).darker()
+        passwordField.dividerActiveColor = UIColor(named: .green).darker()
+        passwordField.isClearIconButtonEnabled = true
+        passwordField.detailColor = UIColor(named: .red)
         
         self.selectionStyle = .none
+    }
+    
+    /// Binds checkbox's state to visibility of username + password fields.
+    func bindCheckbox() {
+        checkboxButton.isChecked
+            .bind(to: usernameField.reactive.isEnabled)
+            .dispose(in: bag)
+        checkboxButton.isChecked
+            .bind(to: passwordField.reactive.isEnabled)
+            .dispose(in: bag)
+        checkboxButton.isChecked.bind(to: self) { me, checked in
+            let alpha: CGFloat = checked ? 1.0 : 0.5
+            me.usernameField.alpha = alpha
+            me.passwordField.alpha = alpha
+        }.dispose(in: bag)
     }
 }
