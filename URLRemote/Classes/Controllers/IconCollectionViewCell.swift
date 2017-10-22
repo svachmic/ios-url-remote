@@ -50,8 +50,8 @@ class IconCollectionViewCell: UICollectionViewCell {
             self.layer.addSublayer(highlightLayer)
         } else {
             let circlePath = UIBezierPath(
-                arcCenter: CGPoint(x: self.width / 2.0, y: self.width / 2.0),
-                radius: self.width / 2.0,
+                arcCenter: CGPoint(x: frame.width / 2.0, y: frame.width / 2.0),
+                radius: frame.width / 2.0,
                 startAngle: CGFloat(0),
                 endAngle:CGFloat(Double.pi * 2),
                 clockwise: true)

@@ -8,6 +8,7 @@
 
 import Foundation
 import Material
+import Motion
 
 /// Extension for FABMenu used for adding categories and entries.
 extension FABMenu {

@@ -77,8 +77,8 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
         self.navigationItem.titleLabel.textColor = .white
         self.navigationItem.detailLabel.textColor = .white
         
-        self.navigationItem.title = "URLRemote"
-        self.navigationItem.detail = "Making your IoT awesome!"
+        self.navigationItem.titleLabel.text = "URLRemote"
+        self.navigationItem.detailLabel.text = "Making your IoT awesome!"
     }
     
     ///
