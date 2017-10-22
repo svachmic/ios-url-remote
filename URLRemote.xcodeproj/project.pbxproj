@@ -68,6 +68,7 @@
 		E0C2E35E1E328DA400923A2D /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E35D1E328DA400923A2D /* Validator.swift */; };
 		E0C2E3611E33C60300923A2D /* QuidoValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3601E33C60300923A2D /* QuidoValidator.swift */; };
 		E0C2E3631E354C1600923A2D /* GenericValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C2E3621E354C1600923A2D /* GenericValidator.swift */; };
+		E0C7E2B51F9E0B6400C317E7 /* TypeTableViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C7E2B41F9E0B6400C317E7 /* TypeTableViewControllerSpec.swift */; };
 		E0CD15AD1F1901FB00F63FE9 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CD15AC1F1901FB00F63FE9 /* CategoryTableViewController.swift */; };
 		E0CD15AF1F19022500F63FE9 /* CategoryTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CD15AE1F19022500F63FE9 /* CategoryTableViewModel.swift */; };
 		E0CD15B31F19170200F63FE9 /* NotificationRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CD15B21F19170200F63FE9 /* NotificationRepresentable.swift */; };
@@ -197,6 +198,7 @@
 		E0C2E35D1E328DA400923A2D /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		E0C2E3601E33C60300923A2D /* QuidoValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuidoValidator.swift; sourceTree = "<group>"; };
 		E0C2E3621E354C1600923A2D /* GenericValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericValidator.swift; sourceTree = "<group>"; };
+		E0C7E2B41F9E0B6400C317E7 /* TypeTableViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TypeTableViewControllerSpec.swift; path = Controllers/TypeTableViewControllerSpec.swift; sourceTree = "<group>"; };
 		E0CD15AC1F1901FB00F63FE9 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryTableViewController.swift; path = Controllers/CategoryTableViewController.swift; sourceTree = "<group>"; };
 		E0CD15AE1F19022500F63FE9 /* CategoryTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewModel.swift; sourceTree = "<group>"; };
 		E0CD15B21F19170200F63FE9 /* NotificationRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRepresentable.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				E051BF051F6BE60300E734C7 /* EntrySetupViewControllerSpec.swift */,
 				E0F9F2FB1F6A839C00C6F8BC /* IconCollectionViewControllerSpec.swift */,
 				E0261F691F62DAF400FB7E4B /* CategoryTableViewControllerSpec.swift */,
+				E0C7E2B41F9E0B6400C317E7 /* TypeTableViewControllerSpec.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -997,6 +1000,7 @@
 				E062F76D1F53396A002AD39C /* ActionsViewModelTests.swift in Sources */,
 				E09FECC31E477A6A002A8D91 /* StringExtensionTests.swift in Sources */,
 				E01E58DD1EDB65BE00296A81 /* ColorSelectorTests.swift in Sources */,
+				E0C7E2B51F9E0B6400C317E7 /* TypeTableViewControllerSpec.swift in Sources */,
 				E0E09B081E54EB7E00B74CEA /* EnumCollectionTests.swift in Sources */,
 				E062F7671F51E6B6002AD39C /* MockDataSourceAuthentication.swift in Sources */,
 				E0D376511ED8174300FAFA4F /* ActionsCollectionLayoutTests.swift in Sources */,

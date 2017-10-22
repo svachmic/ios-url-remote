@@ -126,6 +126,10 @@
                                         <constraint firstAttribute="topMargin" secondItem="MEk-lj-3nX" secondAttribute="top" id="veM-FQ-X8Z"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="infoButton" destination="cEZ-NX-uBG" id="oKf-6c-aEa"/>
+                                    <outlet property="label" destination="MEk-lj-3nX" id="pPd-g9-BSJ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

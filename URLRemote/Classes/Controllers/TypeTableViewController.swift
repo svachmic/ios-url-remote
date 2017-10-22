@@ -47,7 +47,6 @@ class TypeTableViewController: UITableViewController {
         self.viewModel.contents.bind(to: self.tableView) { conts, indexPath, tableView in
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.TableViewCell.entryType) as! TypeSelectionTableViewCell
             let type = conts[indexPath.row]
-            cell.layoutSubviews()
             cell.label?.text = type.toString()
             
             _ = cell.infoButton?.reactive.tap.observeNext {
