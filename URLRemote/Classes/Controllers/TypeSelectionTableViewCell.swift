@@ -11,16 +11,11 @@ import Material
 
 ///
 class TypeSelectionTableViewCell: UITableViewCell {
-    var label: UILabel?
-    var infoButton: UIButton?
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var infoButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-
-    /// Has to be called in order to set up all the subviews. Container with tag 10 is otherwise nil before the super method is called.
-    override func layoutSubviews() {
-        super.layoutSubviews()
         
         self.backgroundColor = .clear
         
