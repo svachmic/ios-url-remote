@@ -10,8 +10,6 @@ env:
   - LC_CTYPE=en_US.UTF-8 LANG=en_US.UTF-8
 
 before_install:
-  - brew update
-  - brew install swiftlint || true
   - pod update
   - gem update fastlane
   - cp ./URLRemote/Resources/mock-GoogleService-Info.plist ./URLRemote/Resources/GoogleService-Info.plist
