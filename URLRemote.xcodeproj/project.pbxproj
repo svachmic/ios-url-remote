@@ -31,6 +31,7 @@
 		E0261F6A1F62DAF400FB7E4B /* CategoryTableViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0261F691F62DAF400FB7E4B /* CategoryTableViewControllerSpec.swift */; };
 		E02C36EF1E3F8B14009649B3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36EE1E3F8B14009649B3 /* Category.swift */; };
 		E02C36F31E3F8EBF009649B3 /* FirebaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */; };
+		E03FA7EF1FC48FCC00955FB4 /* UIKit+ReactiveKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03FA7EE1FC48FCC00955FB4 /* UIKit+ReactiveKit.swift */; };
 		E04DB69A1E292D8400AC8C3D /* TypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB6991E292D8400AC8C3D /* TypeTableViewController.swift */; };
 		E04DB69C1E292DF100AC8C3D /* TypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB69B1E292DF100AC8C3D /* TypeViewModel.swift */; };
 		E04DB69F1E29331100AC8C3D /* TypeSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DB69E1E29331100AC8C3D /* TypeSelectionTableViewCell.swift */; };
@@ -54,6 +55,7 @@
 		E068283B1E04436F00EB0041 /* Material+Bond.swift in Sources */ = {isa = PBXBuildFile; fileRef = E068283A1E04436F00EB0041 /* Material+Bond.swift */; };
 		E072B1351E40EB9A0012589D /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072B1341E40EB9A0012589D /* ArrayExtension.swift */; };
 		E08393401DFACAAF0012A28A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E083933F1DFACAAF0012A28A /* UIViewControllerExtension.swift */; };
+		E086F54B2015ECB00027E329 /* Dismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086F54A2015ECB00027E329 /* Dismissable.swift */; };
 		E098E84B1E314F3000456FCB /* UIViewController+Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = E098E84A1E314F3000456FCB /* UIViewController+Material.swift */; };
 		E09FECC31E477A6A002A8D91 /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09FECC21E477A6A002A8D91 /* StringExtensionTests.swift */; };
 		E0ADCD6F1DE4A98D004B7BAD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0ADCD6E1DE4A98D004B7BAD /* GoogleService-Info.plist */; };
@@ -105,6 +107,9 @@
 		E0F6D03A1ECB31DA00DB9030 /* ReactiveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0F6D0381ECB31DA00DB9030 /* ReactiveKit.framework */; };
 		E0F9F2FC1F6A839C00C6F8BC /* IconCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F9F2FB1F6A839C00C6F8BC /* IconCollectionViewControllerSpec.swift */; };
 		E0F9F2FE1F6A856B00C6F8BC /* MaterialFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F9F2FD1F6A856B00C6F8BC /* MaterialFactoryTests.swift */; };
+		E0FC639A2014E5C100C81188 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC63992014E5C100C81188 /* Style.swift */; };
+		E0FC639C2014E5CC00C81188 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC639B2014E5CC00C81188 /* Stylesheet.swift */; };
+		E0FC639E2015005F00C81188 /* AlertDialogBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC639D2015005F00C81188 /* AlertDialogBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +165,7 @@
 		E0261F691F62DAF400FB7E4B /* CategoryTableViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryTableViewControllerSpec.swift; path = Controllers/CategoryTableViewControllerSpec.swift; sourceTree = "<group>"; };
 		E02C36EE1E3F8B14009649B3 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = Model/Category.swift; sourceTree = "<group>"; };
 		E02C36F21E3F8EBF009649B3 /* FirebaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseObject.swift; path = Persistence/FirebaseObject.swift; sourceTree = "<group>"; };
+		E03FA7EE1FC48FCC00955FB4 /* UIKit+ReactiveKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+ReactiveKit.swift"; sourceTree = "<group>"; };
 		E04DB6991E292D8400AC8C3D /* TypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeTableViewController.swift; path = Controllers/TypeTableViewController.swift; sourceTree = "<group>"; };
 		E04DB69B1E292DF100AC8C3D /* TypeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeViewModel.swift; sourceTree = "<group>"; };
 		E04DB69E1E29331100AC8C3D /* TypeSelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TypeSelectionTableViewCell.swift; path = Controllers/TypeSelectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -183,6 +189,7 @@
 		E068283A1E04436F00EB0041 /* Material+Bond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Material+Bond.swift"; sourceTree = "<group>"; };
 		E072B1341E40EB9A0012589D /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		E083933F1DFACAAF0012A28A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		E086F54A2015ECB00027E329 /* Dismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dismissable.swift; sourceTree = "<group>"; };
 		E08C6FDE1DE4AECB0002A3D0 /* URLRemote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = URLRemote.entitlements; sourceTree = "<group>"; };
 		E098E84A1E314F3000456FCB /* UIViewController+Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Material.swift"; sourceTree = "<group>"; };
 		E09FECC21E477A6A002A8D91 /* StringExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtensionTests.swift; path = Helpers/StringExtensionTests.swift; sourceTree = "<group>"; };
@@ -235,6 +242,9 @@
 		E0F6D0381ECB31DA00DB9030 /* ReactiveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveKit.framework; path = "../../Library/Developer/Xcode/DerivedData/URLRemote-hdsfhwqkafwhdhcfbaohdqvnqxis/Build/Products/Debug-iphonesimulator/ReactiveKit/ReactiveKit.framework"; sourceTree = "<group>"; };
 		E0F9F2FB1F6A839C00C6F8BC /* IconCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IconCollectionViewControllerSpec.swift; path = Controllers/IconCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
 		E0F9F2FD1F6A856B00C6F8BC /* MaterialFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MaterialFactoryTests.swift; path = Helpers/MaterialFactoryTests.swift; sourceTree = "<group>"; };
+		E0FC63992014E5C100C81188 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		E0FC639B2014E5CC00C81188 /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
+		E0FC639D2015005F00C81188 /* AlertDialogBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialogBuilder.swift; sourceTree = "<group>"; };
 		E6E9E25F623E63E108F1F81F /* Pods-URLRemoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-URLRemoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-URLRemoteTests/Pods-URLRemoteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA1D5E534DDE7703933A3354 /* Pods_URLRemoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_URLRemoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -308,8 +318,10 @@
 				E01E58E61EDCC7C900296A81 /* MaterialExtension.swift */,
 				E068283A1E04436F00EB0041 /* Material+Bond.swift */,
 				E098E84A1E314F3000456FCB /* UIViewController+Material.swift */,
+				E03FA7EE1FC48FCC00955FB4 /* UIKit+ReactiveKit.swift */,
 				E0C0FA251E3D1B4600520AB2 /* LocalAuthentication+ReactiveKit.swift */,
 				E0CD15B21F19170200F63FE9 /* NotificationRepresentable.swift */,
+				E086F54A2015ECB00027E329 /* Dismissable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -609,9 +621,12 @@
 		E0E2FBE91E22A35D00C54FF8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E0FC63992014E5C100C81188 /* Style.swift */,
+				E0FC639B2014E5CC00C81188 /* Stylesheet.swift */,
 				E0E2FBEA1E22A38700C54FF8 /* ShadedView.swift */,
 				E0E2FBED1E22BB1900C54FF8 /* ColorSelectorView.swift */,
 				E0E2FBF81E23F7D500C54FF8 /* CheckboxButton.swift */,
+				E0FC639D2015005F00C81188 /* AlertDialogBuilder.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -923,6 +938,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0FC639E2015005F00C81188 /* AlertDialogBuilder.swift in Sources */,
 				E0261F651F62A65B00FB7E4B /* CategorySelectionTableViewCell.swift in Sources */,
 				E0E2FBF31E23D6B900C54FF8 /* GenericButtonTableViewCell.swift in Sources */,
 				E0CD15B31F19170200F63FE9 /* NotificationRepresentable.swift in Sources */,
@@ -942,6 +958,7 @@
 				E068282D1E03067D00EB0041 /* FirebaseDataSource.swift in Sources */,
 				E0CD15AD1F1901FB00F63FE9 /* CategoryTableViewController.swift in Sources */,
 				E0E2FBFF1E2540B000C54FF8 /* IconCollectionViewController.swift in Sources */,
+				E0FC639A2014E5C100C81188 /* Style.swift in Sources */,
 				E0628FB41E2FB05300DADAB3 /* EntryEditTableViewCell.swift in Sources */,
 				E08393401DFACAAF0012A28A /* UIViewControllerExtension.swift in Sources */,
 				E06828311E0309C700EB0041 /* Firebase+ReactiveKit.swift in Sources */,
@@ -965,14 +982,17 @@
 				C1BBC12C1CFC511D00EB62B1 /* AppDelegate.swift in Sources */,
 				E072B1351E40EB9A0012589D /* ArrayExtension.swift in Sources */,
 				E0C2E3631E354C1600923A2D /* GenericValidator.swift in Sources */,
+				E03FA7EF1FC48FCC00955FB4 /* UIKit+ReactiveKit.swift in Sources */,
 				E0CD15AF1F19022500F63FE9 /* CategoryTableViewModel.swift in Sources */,
 				E0E2FBF91E23F7D500C54FF8 /* CheckboxButton.swift in Sources */,
 				E0E2FBF71E23F4E700C54FF8 /* ActionEntryTableViewCell.swift in Sources */,
+				E086F54B2015ECB00027E329 /* Dismissable.swift in Sources */,
 				E06828271E01C48400EB0041 /* ApplicationNavigationController.swift in Sources */,
 				C16B4F681CFC834F001E572E /* UIColorExtension.swift in Sources */,
 				E098E84B1E314F3000456FCB /* UIViewController+Material.swift in Sources */,
 				E0F328961E3B86FB00282B33 /* CustomCriteriaValidator.swift in Sources */,
 				E0C2E35E1E328DA400923A2D /* Validator.swift in Sources */,
+				E0FC639C2014E5CC00C81188 /* Stylesheet.swift in Sources */,
 				E0628FAF1E2F9EDF00DADAB3 /* CategoryEditViewModel.swift in Sources */,
 				E0B41D171E2D4AD300F7242E /* EnumCollection.swift in Sources */,
 				E068283B1E04436F00EB0041 /* Material+Bond.swift in Sources */,

@@ -23,7 +23,7 @@ extension DataSnapshot {
         return Mapper<T>().mapArray(
             JSONArray: self.children
                 .map { $0 as! DataSnapshot }
-                .map { $0.value as! [String : AnyObject] }
+                .map { $0.value as! [String: AnyObject] }
             ).sorted()
     }
 }
@@ -126,6 +126,17 @@ class FirebaseDataSource: DataSource {
     
     // MARK: - Read -
     
+    /// Helper method for turnign entries into signals.
+    ///
+    /// - Parameter reference: Firebase Database Reference
+    /// - Returns: Signal with array of FirebaseObject subclasses.
+    private func modelSignal<T: FirebaseObject>(reference: DatabaseReference) -> Signal<[T], NoError> {
+        return reference.signalForEvent(event: .value)
+            .map { snapshot in
+                return snapshot.toArray()
+            }.flatMapError { _ in Signal<[T], NoError>.sequence([])}
+    }
+    
     /// Computed variable with all user data.
     private var userDataRef: DatabaseReference {
         return database.reference().child("users/\(user.uid)")
@@ -140,10 +151,7 @@ class FirebaseDataSource: DataSource {
     
     /// Processes Firebase events into a signal of categories.
     func categories() -> Signal<[Category], NoError> {
-        return categoriesRef.signalForEvent(event: .value)
-            .map { snapshot in
-                return snapshot.toArray()
-            }.flatMapError { _ in Signal<[Category], NoError>.sequence([])}
+        return modelSignal(reference: categoriesRef)
     }
     
     // MARK: Entries
@@ -155,10 +163,7 @@ class FirebaseDataSource: DataSource {
     
     /// Processes Firebase events into a signal of categories.
     func entries() -> Signal<[Entry], NoError> {
-        return entriesRef.signalForEvent(event: .value)
-            .map { snapshot in
-                return snapshot.toArray()
-        }.flatMapError { _ in Signal<[Entry], NoError>.sequence([])}
+        return modelSignal(reference: entriesRef)
     }
     
     // MARK: - Write -

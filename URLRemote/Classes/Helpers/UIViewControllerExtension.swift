@@ -17,14 +17,9 @@ extension UIViewController {
     /// - Parameter header: Text displayed in the header of the dialog.
     /// - Parameter message: Text displayed in the body of the dialog.
     func presentSimpleAlertDialog(header: String, message: String) {
-        let ac = UIAlertController(
-            title: header,
-            message: message,
-            preferredStyle: UIAlertControllerStyle.alert)
-        ac.addAction(UIAlertAction(
-            title: NSLocalizedString("CLOSE", comment: ""),
-            style: UIAlertActionStyle.default,
-            handler: nil))
-        self.present(ac, animated: true, completion: nil)
+        let alertDialog = AlertDialogBuilder
+            .dialog(title: header, text: message, localized: true)
+            .closeAction()
+        self.present(alertDialog, animated: true, completion: nil)
     }
 }

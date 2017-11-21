@@ -38,23 +38,36 @@ extension FABMenu {
 /// Factory class that generates Material UI componenets used in the application.
 class MaterialFactory {
     
+    /// Generates a FlatButton with given title.
+    ///
+    /// - Returns: FlatButton instance with pre-set design properties.
+    private class func flatButton(title: String) -> FlatButton {
+        let button = FlatButton(title: title)
+        button.apply(Stylesheet.General.flatButton)
+        return button
+    }
+    
     /// Generates a cancel button used in ToolbarController as a left view.
     ///
     /// - Returns: FlatButton instance with pre-set design properties.
     class func cancelButton() -> FlatButton {
-        let cancel = FlatButton(title: NSLocalizedString("CANCEL", comment: ""))
-        cancel.titleColor = .white
-        cancel.pulseColor = .white
-        cancel.titleLabel?.font = RobotoFont.bold(with: 15)
-        return cancel
+        return flatButton(title: NSLocalizedString("CANCEL", comment: ""))
     }
     
-    /// Generates a done button used in ToolbarController as a right view.
+    /// Generates a close button used in ToolbarController as a left view.
     ///
+    /// - Returns: FlatButton instance with pre-set design properties.
+    class func closeButton() -> FlatButton {
+        return flatButton(title: NSLocalizedString("CLOSE", comment: ""))
+    }
+    
+    /// Generates an icon button with supplied image.
+    ///
+    /// - Parameter image: Image to set as the icon on the button.
     /// - Returns: IconButton instance with pre-set design properties.
-    class func doneButton() -> IconButton {
-        let done = IconButton(image: Icon.cm.check, tintColor: .white)
-        done.pulseColor = .white
-        return done
+    class func genericIconButton(image: UIImage?) -> IconButton {
+        let button = IconButton(image: image, tintColor: .white)
+        button.pulseColor = .white
+        return button
     }
 }

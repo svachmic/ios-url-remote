@@ -29,8 +29,17 @@ class MaterialFactoryTests: XCTestCase {
         XCTAssertEqual(cancel.titleLabel?.font, RobotoFont.bold(with: 15))
     }
     
-    func testDoneButton() {
-        let done = MaterialFactory.doneButton()
+    func testCloseButton() {
+        let cancel = MaterialFactory.closeButton()
+        
+        XCTAssertEqual(cancel.title, NSLocalizedString("CLOSE", comment: ""))
+        XCTAssertEqual(cancel.titleColor, .white)
+        XCTAssertEqual(cancel.pulseColor, .white)
+        XCTAssertEqual(cancel.titleLabel?.font, RobotoFont.bold(with: 15))
+    }
+    
+    func testIconButton() {
+        let done = MaterialFactory.genericIconButton(image: Icon.cm.check)
         
         XCTAssertEqual(done.image, Icon.cm.check)
         XCTAssertEqual(done.pulseColor, .white)

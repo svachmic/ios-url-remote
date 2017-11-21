@@ -21,13 +21,8 @@ class ActionEntryTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        urlField.autocorrectionType = .no
+        urlField.apply(Stylesheet.EntrySetup.textField)
         urlField.placeholder = NSLocalizedString("URL", comment: "")
-        urlField.font = RobotoFont.regular(with: 13)
-        urlField.placeholderActiveColor = UIColor(named: .green).darker()
-        urlField.dividerActiveColor = UIColor(named: .green).darker()
-        urlField.isClearIconButtonEnabled = true
-        urlField.detailColor = UIColor(named: .red)
         
         checkboxButton.tintColor = .gray
         
@@ -35,19 +30,12 @@ class ActionEntryTableViewCell: UITableViewCell {
         checkboxLabel.font = RobotoFont.bold(with: 13)
         checkboxLabel.textColor = .gray
         
+        usernameField.apply(Stylesheet.EntrySetup.textField)
         usernameField.placeholder = NSLocalizedString("USER", comment: "")
-        usernameField.font = RobotoFont.regular(with: 13)
-        usernameField.placeholderActiveColor = UIColor(named: .green).darker()
-        usernameField.dividerActiveColor = UIColor(named: .green).darker()
-        usernameField.isClearIconButtonEnabled = true
-        usernameField.detailColor = UIColor(named: .red)
         
+        passwordField.apply(Stylesheet.EntrySetup.textField)
         passwordField.placeholder = NSLocalizedString("PASSWORD", comment: "")
-        passwordField.font = RobotoFont.regular(with: 13)
-        passwordField.placeholderActiveColor = UIColor(named: .green).darker()
-        passwordField.dividerActiveColor = UIColor(named: .green).darker()
-        passwordField.isClearIconButtonEnabled = true
-        passwordField.detailColor = UIColor(named: .red)
+        passwordField.isSecureTextEntry = true
         
         self.selectionStyle = .none
     }
