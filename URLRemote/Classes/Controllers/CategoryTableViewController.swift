@@ -12,7 +12,7 @@ import ReactiveKit
 import Material
 
 /// View controller taking care of category selection.
-class CategoryTableViewController: UITableViewController {
+class CategoryTableViewController: UITableViewController, Dismissable {
     let viewModel = CategoryTableViewModel()
 
     override func viewDidLoad() {
@@ -30,24 +30,16 @@ class CategoryTableViewController: UITableViewController {
     
     /// Sets up all the buttons in the toolbar.
     func setupBar() {
-        let cancel = FlatButton(title: NSLocalizedString("CANCEL", comment: ""))
-        cancel.titleColor = .white
-        cancel.pulseColor = .white
-        cancel.titleLabel?.font = RobotoFont.bold(with: 15)
-        cancel.reactive.tap.bind(to: self) { me, _ in
-            me.parent?.dismiss(animated: true, completion: nil)
-        }.dispose(in: bag)
-        self.toolbarController?.toolbar.leftViews = [cancel]
+        setupDismissButton(with: .cancel)
         
-        let done = IconButton(image: Icon.cm.check, tintColor: .white)
-        done.pulseColor = .white
+        let done = MaterialFactory.genericIconButton(image: Icon.cm.check)
         combineLatest(viewModel.initialSelection, viewModel.userSelection)
-            .map { return $0 != $1 }
+            .map { $0 != $1 }
             .bind(to: done.reactive.isEnabled)
             .dispose(in: bag)
         done.reactive.tap.bind(to: self) { me, _ in
             me.viewModel.done()
-            self.parent?.dismiss(animated: true, completion: nil)
+            me.parent?.dismiss(animated: true, completion: nil)
         }.dispose(in: bag)
         self.toolbarController?.toolbar.rightViews = [done]
         

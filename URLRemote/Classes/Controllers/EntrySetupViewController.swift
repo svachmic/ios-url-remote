@@ -11,7 +11,7 @@ import Bond
 import Material
 
 ///
-class EntrySetupViewController: UITableViewController, PersistenceStackController {
+class EntrySetupViewController: UITableViewController, PersistenceStackController, Dismissable {
     var stack: PersistenceStack! {
         didSet {
             viewModel = EntrySetupViewModel(dataSource: stack.dataSource!)
@@ -38,13 +38,9 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
     
     ///
     func setupBar() {
-        let cancel = MaterialFactory.cancelButton()
-        cancel.reactive.tap.bind(to: self) { me, _ in
-            me.parent?.dismiss(animated: true, completion: nil)
-        }.dispose(in: bag)
-        self.toolbarController?.toolbar.leftViews = [cancel]
+        setupDismissButton(with: .cancel)
         
-        let done = MaterialFactory.doneButton()
+        let done = MaterialFactory.genericIconButton(image: Icon.cm.check)
         viewModel.isFormComplete
             .bind(to: done.reactive.isEnabled)
             .dispose(in: bag)
@@ -77,31 +73,17 @@ class EntrySetupViewController: UITableViewController, PersistenceStackControlle
     
     ///
     func setupBindings(for cell: UITableViewCell, with identifier: String, and type: String) {
-        switch identifier {
-        case Constants.TableViewCell.design:
-            if let designCell = cell as? DesignEntryTableViewCell {
-                self.setupDesignCell(cell: designCell)
-            }
-            break
-        case Constants.TableViewCell.genericButton:
-            if let genericButtonCell = cell as? GenericButtonTableViewCell {
-                if type == "category" {
-                    self.setupCategoryCell(cell: genericButtonCell)
-                } else {
-                    self.setupTypeCell(cell: genericButtonCell)
-                }
-            }
-            break
-        case Constants.TableViewCell.action:
-            if let actionCell = cell as? ActionEntryTableViewCell {
-                self.setupActionCell(cell: actionCell)
-            }
-            break
-        case Constants.TableViewCell.criteria:
-            if let criteriaCell = cell as? CustomCriteriaTableViewCell {
-                self.setupCustomCriteriaCell(cell: criteriaCell)
-            }
-            break
+        switch (identifier, cell) {
+        case (Constants.TableViewCell.design, let designCell as DesignEntryTableViewCell):
+            setupDesignCell(cell: designCell)
+        case (Constants.TableViewCell.genericButton, let categoryCell as GenericButtonTableViewCell) where type == "category":
+            setupCategoryCell(cell: categoryCell)
+        case (Constants.TableViewCell.genericButton, let typeCell as GenericButtonTableViewCell) where type != "category":
+            setupTypeCell(cell: typeCell)
+        case (Constants.TableViewCell.action, let actionCell as ActionEntryTableViewCell):
+            setupActionCell(cell: actionCell)
+        case (Constants.TableViewCell.criteria, let criteriaCell as CustomCriteriaTableViewCell):
+            setupCustomCriteriaCell(cell: criteriaCell)
         default:
             break
         }

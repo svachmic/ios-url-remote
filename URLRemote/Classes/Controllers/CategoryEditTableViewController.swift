@@ -11,7 +11,7 @@ import Bond
 import Material
 
 ///
-class CategoryEditTableViewController: UITableViewController, PersistenceStackController {
+class CategoryEditTableViewController: UITableViewController, PersistenceStackController, Dismissable {
     var stack: PersistenceStack! {
         didSet {
             viewModel = CategoryEditViewModel(dataSource: stack.dataSource!)
@@ -34,14 +34,7 @@ class CategoryEditTableViewController: UITableViewController, PersistenceStackCo
     
     ///
     func setupBar() {
-        let close = FlatButton(title: NSLocalizedString("CLOSE", comment: ""))
-        close.titleColor = .white
-        close.pulseColor = .white
-        close.titleLabel?.font = RobotoFont.bold(with: 15)
-        close.reactive.tap.bind(to: self) { me, _ in
-            me.parent?.dismiss(animated: true, completion: nil)
-        }.dispose(in: reactive.bag)
-        self.toolbarController?.toolbar.leftViews = [close]
+        setupDismissButton(with: .close)
         
         let editButton = IconButton(image: Icon.cm.edit, tintColor: .white)
         editButton.pulseColor = .white
@@ -75,11 +68,8 @@ class CategoryEditTableViewController: UITableViewController, PersistenceStackCo
             
             cell.editButton.reactive.tap.bind(to: self) { me, _ in
                 let filteredEntries = me.viewModel.entries.array.filter { $0 == entry }
-                if let updatedEntry = filteredEntries[safe: 0] {
-                    let entryController = me.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.entrySetup) as! EntrySetupViewController
-                    entryController.stack = me.stack
-                    entryController.viewModel.setup(with: updatedEntry)
-                    me.presentEmbedded(viewController: entryController, barTintColor: UIColor(named: .green))
+                if let filteredEntry = filteredEntries[safe: 0] {
+                    me.displayEntrySetup(entry: filteredEntry)
                 }
             }.dispose(in: cell.reactive.bag)
             
@@ -93,38 +83,39 @@ class CategoryEditTableViewController: UITableViewController, PersistenceStackCo
         tableView.setEditing(true, animated: false)
     }
     
+    ///
+    func displayEntrySetup(entry: Entry) {
+        let entryController = self.storyboard?.instantiateViewController(withIdentifier: Constants.StoryboardID.entrySetup) as! EntrySetupViewController
+        entryController.stack = self.stack
+        entryController.viewModel.setup(with: entry)
+        self.presentEmbedded(viewController: entryController, barTintColor: UIColor(named: .green))
+    }
+    
     // MARK: - Category renaming
     
     ///
     func displayCategoryNameChange() {
-        let categoryDialog = UIAlertController(
-            title: NSLocalizedString("CHANGE_CATEGORY_NAME", comment: ""),
-            message: NSLocalizedString("CHANGE_CATEGORY_NAME_DESC", comment: ""),
-            preferredStyle: .alert)
+        let categoryDialog = AlertDialogBuilder
+            .dialog(title: "CHANGE_CATEGORY_NAME", text: "CHANGE_CATEGORY_NAME_DESC")
+            .cancelAction()
         
-        categoryDialog.addAction(UIAlertAction(
-            title: NSLocalizedString("CANCEL", comment: ""),
-            style: .destructive,
-            handler: nil))
-        
-        categoryDialog.addAction(UIAlertAction(
+        let okAction = UIAlertAction(
             title: NSLocalizedString("OK", comment: ""),
             style: .default,
             handler: { [unowned self] _ in
                 if let textFields = categoryDialog.textFields, let textField = textFields[safe: 0], let text = textField.text, text != "" {
                     self.viewModel.renameCategory(name: text)
                 }
-        }))
+        })
+        categoryDialog.addAction(okAction)
         
         categoryDialog.addTextField { [unowned self] textField in
             textField.placeholder = NSLocalizedString("CHANGE_CATEGORY_NAME_PLACEHOLDER", comment: "")
             textField.text = self.viewModel.categoryName.value
-            textField.reactive.text.map {
-                guard let text = $0 else { return false }
-                return text != ""
-            }.observeNext { next in
-                categoryDialog.actions[safe: 1]?.isEnabled = next
-            }.dispose(in: categoryDialog.reactive.bag)
+            textField.reactive
+                .isEmpty
+                .bind(to: okAction.reactive.enabled)
+                .dispose(in: categoryDialog.bag)
         }
         
         self.present(categoryDialog, animated: true, completion: nil)
@@ -132,24 +123,15 @@ class CategoryEditTableViewController: UITableViewController, PersistenceStackCo
     
     // MARK: - Category removal
     
+    ///
     func presentCategoryRemovalDialog() {
-        let categoryDialog = UIAlertController(
-            title: NSLocalizedString("DELETE_CATEGORY", comment: ""),
-            message: NSLocalizedString("DELETE_CATEGORY_DESC", comment: ""),
-            preferredStyle: .alert)
-        
-        categoryDialog.addAction(UIAlertAction(
-            title: NSLocalizedString("CANCEL", comment: ""),
-            style: .default,
-            handler: nil))
-        
-        categoryDialog.addAction(UIAlertAction(
-            title: NSLocalizedString("DELETE", comment: ""),
-            style: .destructive,
-            handler: { [unowned self] _ in
+        let categoryDialog = AlertDialogBuilder
+            .dialog(title: "DELETE_CATEGORY", text: "DELETE_CATEGORY_DESC")
+            .cancelAction()
+            .destructiveAction(title: "DELETE", handler: { [unowned self] _ in
                 self.viewModel.removeCategory()
                 self.parent?.dismiss(animated: true, completion: nil)
-        }))
+            })
         
         self.present(categoryDialog, animated: true, completion: nil)
     }

@@ -12,7 +12,7 @@ import Bond
 import ReactiveKit
 
 /// View controller taking care of icon selection.
-class IconCollectionViewController: UICollectionViewController {
+class IconCollectionViewController: UICollectionViewController, Dismissable {
     let viewModel = IconCollectionViewModel()
 
     override func viewDidLoad() {
@@ -42,15 +42,11 @@ class IconCollectionViewController: UICollectionViewController {
     
     /// Sets up all the buttons in the toolbar.
     func setupBar() {
-        let cancel = MaterialFactory.cancelButton()
-        cancel.reactive.tap.bind(to: self) { me, _ in
-            me.parent?.dismiss(animated: true, completion: nil)
-        }.dispose(in: bag)
-        self.toolbarController?.toolbar.leftViews = [cancel]
+        setupDismissButton(with: .cancel)
         
-        let done = MaterialFactory.doneButton()
+        let done = MaterialFactory.genericIconButton(image: Icon.cm.check)
         combineLatest(viewModel.initialSelection, viewModel.userSelection)
-            .map { return $0 != $1 }
+            .map { $0 != $1 }
             .bind(to: done.reactive.isEnabled)
             .dispose(in: bag)
         done.reactive.tap.bind(to: self) { me, _ in

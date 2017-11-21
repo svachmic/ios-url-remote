@@ -23,13 +23,10 @@ extension ReactiveExtensions where Base: RaisedButton {
             switch status {
             case .success:
                 button.pulseColor = .green
-                break
             case .failure:
                 button.pulseColor = .yellow
-                break
             case .error:
                 button.pulseColor = .red
-                break
             }
             
             button.pulse()

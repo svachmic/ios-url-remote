@@ -12,7 +12,7 @@ import Bond
 import ReactiveKit
 
 ///
-class ActionsCollectionViewController: UICollectionViewController, PersistenceStackController, FABMenuDelegate {
+class ActionsCollectionViewController: UICollectionViewController, PersistenceStackController {
     var stack: PersistenceStack! {
         didSet {
             viewModel = ActionsViewModel()
@@ -52,25 +52,21 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
         navigationController?.navigationBar.barTintColor = UIColor(named: .yellow)
         
         let logout = FlatButton(title: NSLocalizedString("LOGOUT", comment: ""))
-        logout.titleColor = .white
-        logout.pulseColor = .white
-        logout.titleLabel?.font = RobotoFont.bold(with: 15)
-        _ = logout.reactive.tap.observeNext { [unowned self] in
-            self.stack.authentication.logOut()
+        logout.apply(Stylesheet.General.flatButton)
+        logout.reactive.tap.bind(to: self) { me, _ in
+            me.stack.authentication.logOut()
         }.dispose(in: bag)
         self.navigationItem.leftViews = [logout]
         
-        let settingsButton = IconButton(image: Icon.cm.settings, tintColor: .white)
-        settingsButton.pulseColor = .white
-        _ = settingsButton.reactive.tap.observeNext {
+        let settingsButton = MaterialFactory.genericIconButton(image: Icon.cm.settings)
+        settingsButton.reactive.tap.bind(to: self) { _, _ in
             print("Settings coming soon!")
-        }
+        }.dispose(in: bag)
         
-        let editButton = IconButton(image: Icon.cm.edit, tintColor: .white)
-        editButton.pulseColor = .white
-        _ = editButton.reactive.tap.observeNext {
-            self.displayEditCategory()
-        }
+        let editButton = MaterialFactory.genericIconButton(image: Icon.cm.edit)
+        editButton.reactive.tap.bind(to: self) { me, _ in
+            me.displayEditCategory()
+        }.dispose(in: bag)
         
         self.navigationItem.rightViews = [editButton, settingsButton]
         
@@ -106,11 +102,11 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
         
         self.view.layout(pageControl!).bottom(30.0).centerHorizontally()
         
-        _ = viewModel.data.observeNext { data in
-            self.pageControl?.numberOfPages = data.dataSource.numberOfSections
+        viewModel.data.bind(to: self) { me, data in
+            me.pageControl?.numberOfPages = data.dataSource.numberOfSections
             
-            self.collectionView?.reloadData()
-            self.collectionView?.collectionViewLayout.invalidateLayout()
+            me.collectionView?.reloadData()
+            me.collectionView?.collectionViewLayout.invalidateLayout()
         }.dispose(in: bag)
     }
     
@@ -119,49 +115,6 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
         pageControl?.removeFromSuperview()
         collectionView?.contentOffset = CGPoint(x: 0, y: 0)
         collectionView?.collectionViewLayout.invalidateLayout()
-    }
-    
-    ///
-    func setupMenu() {
-        self.menu = FABMenu()
-        guard let menu = self.menu else { return }
-        
-        let addButton = FABButton(image: Icon.cm.add, tintColor: .white)
-        addButton.frame = CGRect(x: 0.0, y: 0.0, width: 48.0, height: 48.0)
-        addButton.pulseColor = .white
-        addButton.backgroundColor = UIColor(named: .green).darker()
-        _ = addButton.reactive.tap.observeNext { _ in self.menu?.toggle() }
-        
-        let entryItem = FABMenuItem()
-        entryItem.fabButton.image = UIImage(named: "new_entry")
-        entryItem.fabButton.tintColor = .white
-        entryItem.fabButton.pulseColor = .white
-        entryItem.fabButton.backgroundColor = Color.grey.base
-        entryItem.fabButton.depthPreset = .depth1
-        entryItem.title = NSLocalizedString("NEW_ENTRY", comment: "")
-        _ = entryItem.fabButton.reactive.tap.observeNext {
-            menu.toggle()
-            self.displayEntrySetup()
-        }
-        
-        let categoryItem = FABMenuItem()
-        categoryItem.fabButton.image = UIImage(named: "new_category")
-        categoryItem.fabButton.tintColor = .white
-        categoryItem.fabButton.pulseColor = .white
-        categoryItem.fabButton.backgroundColor = Color.grey.base
-        categoryItem.title = NSLocalizedString("NEW_CATEGORY", comment: "")
-        _ = categoryItem.fabButton.reactive.tap.observeNext {
-            menu.toggle()
-            self.displayCategorySetup()
-        }
-        
-        menu.delegate = self
-        menu.fabButton = addButton
-        menu.fabMenuItems = [entryItem, categoryItem]
-        menu.fabMenuItemSize = CGSize(width: 40.0, height: 40.0)
-        
-        let margin: CGFloat = 30.0
-        self.view.layout(menu).size(addButton.frame.size).bottom(margin).right(margin)
     }
     
     /// MARK: - ViewController presentation
@@ -182,33 +135,26 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
     
     ///
     func displayCategorySetup() {
-        let categoryDialog = UIAlertController(
-            title: NSLocalizedString("NEW_CATEGORY", comment: ""),
-            message: NSLocalizedString("NEW_CATEGORY_DESC", comment: ""),
-            preferredStyle: .alert)
+        let categoryDialog = AlertDialogBuilder
+            .dialog(title: "NEW_CATEGORY", text: "NEW_CATEGORY_DESC")
+            .cancelAction()
         
-        categoryDialog.addAction(UIAlertAction(
-            title: NSLocalizedString("CANCEL", comment: ""),
-            style: .destructive,
-            handler: nil))
-        
-        categoryDialog.addAction(UIAlertAction(
+        let okAction = UIAlertAction(
             title: NSLocalizedString("OK", comment: ""),
             style: .default,
             handler: { _ in
                 if let textFields = categoryDialog.textFields, let textField = textFields[safe: 0], let text = textField.text, text != "" {
                     self.viewModel.createCategory(named: text)
                 }
-        }))
+        })
+        categoryDialog.addAction(okAction)
         
         categoryDialog.addTextField { textField in
             textField.placeholder = NSLocalizedString("NEW_CATEGORY_PLACEHOLDER", comment: "")
-            _ = textField.reactive.text.map {
-                guard let text = $0 else { return false }
-                return text != ""
-            }.observeNext { next in
-                categoryDialog.actions[safe: 1]?.isEnabled = next
-            }
+            textField.reactive
+                .isEmpty
+                .bind(to: okAction.reactive.enabled)
+                .dispose(in: categoryDialog.bag)
         }
         
         self.present(categoryDialog, animated: true, completion: nil)
@@ -225,15 +171,6 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
         editCategoryController.viewModel.category = category
         
         self.presentEmbedded(viewController: editCategoryController, barTintColor: UIColor(named: .green))
-    }
-    
-    /// MARK: - Menu delegate method
-    
-    ///
-    public func fabMenu(fabMenu menu: FABMenu, tappedAt point: CGPoint, isOutside: Bool) {
-        if isOutside {
-            menu.toggle()
-        }
     }
     
     // MARK: - Collection view data source methods
@@ -270,5 +207,70 @@ class ActionsCollectionViewController: UICollectionViewController, PersistenceSt
         header.setUpView()
         header.bind(with: viewModel.data[indexPath.section].metadata)
         return header
+    }
+}
+
+//
+extension ActionsCollectionViewController: FABMenuDelegate {
+    
+    ///
+    private func genericMenuItem(image: String, title: String) -> FABMenuItem {
+        let item = FABMenuItem()
+        item.fabButton.image = UIImage(named: image)
+        item.fabButton.apply(Stylesheet.Actions.fabButton)
+        item.title = NSLocalizedString(title, comment: "")
+        return item
+    }
+    
+    ///
+    private func menuEntryItem() -> FABMenuItem {
+        let entryItem = genericMenuItem(image: "new_entry", title: "NEW_ENTRY")
+        entryItem.fabButton.depthPreset = .depth1
+        entryItem.fabButton.reactive.tap.observeNext { [weak self] in
+            self?.menu?.toggle()
+            self?.displayEntrySetup()
+        }.dispose(in: bag)
+        
+        return entryItem
+    }
+    
+    ///
+    private func menuCategoryItem() -> FABMenuItem {
+        let categoryItem = genericMenuItem(image: "new_category", title: "NEW_CATEGORY")
+        categoryItem.fabButton.reactive.tap.observeNext { [weak self] in
+            self?.menu?.toggle()
+            self?.displayCategorySetup()
+        }.dispose(in: bag)
+        
+        return categoryItem
+    }
+    
+    ///
+    func setupMenu() {
+        self.menu = FABMenu()
+        
+        let addButton = FABButton(image: Icon.cm.add, tintColor: .white)
+        addButton.frame = CGRect(x: 0.0, y: 0.0, width: 48.0, height: 48.0)
+        addButton.pulseColor = .white
+        addButton.backgroundColor = UIColor(named: .green).darker()
+        addButton.reactive.tap
+            .observeNext { [weak self] in self?.menu?.toggle() }
+            .dispose(in: bag)
+        
+        menu?.delegate = self
+        menu?.fabButton = addButton
+        menu?.fabMenuItems = [menuEntryItem(), menuCategoryItem()]
+        menu?.fabMenuItemSize = CGSize(width: 40.0, height: 40.0)
+        
+        view.layout(menu!).size(addButton.frame.size).bottom(30).right(30)
+    }
+    
+    /// MARK: - Menu delegate method
+    
+    ///
+    public func fabMenu(fabMenu menu: FABMenu, tappedAt point: CGPoint, isOutside: Bool) {
+        if isOutside {
+            menu.toggle()
+        }
     }
 }

@@ -11,7 +11,7 @@ import Bond
 import Material
 
 ///
-class TypeTableViewController: UITableViewController {
+class TypeTableViewController: UITableViewController, Dismissable {
     let viewModel = TypeViewModel()
 
     override func viewDidLoad() {
@@ -29,14 +29,7 @@ class TypeTableViewController: UITableViewController {
     
     ///
     func setupBar() {
-        let cancel = FlatButton(title: NSLocalizedString("CANCEL", comment: ""))
-        cancel.titleColor = .white
-        cancel.pulseColor = .white
-        cancel.titleLabel?.font = RobotoFont.bold(with: 15)
-        _ = cancel.reactive.tap.observeNext {
-            self.parent?.dismiss(animated: true, completion: nil)
-        }
-        self.toolbarController?.toolbar.leftViews = [cancel]
+        setupDismissButton(with: .cancel)
         
         self.toolbarController?.toolbar.titleLabel.textColor = .white
         self.toolbarController?.toolbar.title = NSLocalizedString("SELECT_TYPE", comment: "")

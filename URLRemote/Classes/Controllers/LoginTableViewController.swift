@@ -23,13 +23,9 @@ class LoginTableViewController: UITableViewController, PersistenceStackControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.backgroundColor = UIColor(named: .gray)
-        self.tableView.tableFooterView = UIView(frame: .zero)
-        self.tableView.alwaysBounceVertical = false
-        self.tableView.alwaysBounceHorizontal = false
-        self.tableView.separatorStyle = .none
-        
         self.setupNotificationHandler()
+        
+        tableView.apply(Stylesheet.Login.tableView)
         self.setupTableView()
     }
     
@@ -72,13 +68,7 @@ class LoginTableViewController: UITableViewController, PersistenceStackControlle
             case "emailCell", "passwordCell", "passwordAgainCell":
                 let textField = cell.viewWithTag(1) as! TextField
                 textField.placeholder = content.text
-                textField.font = RobotoFont.regular(with: 15)
-                textField.leftViewMode = .always
-                textField.placeholderActiveColor = UIColor(named: .green).darker()
-                textField.dividerActiveColor = UIColor(named: .green).darker()
-                textField.leftViewActiveColor = UIColor(named: .green).darker()
-                textField.isClearIconButtonEnabled = true
-                textField.detailColor = UIColor(named: .red)
+                textField.apply(Stylesheet.Login.textField)
                 let leftView = UIImageView()
                 
                 if identifier == "emailCell" {
@@ -93,25 +83,21 @@ class LoginTableViewController: UITableViewController, PersistenceStackControlle
                 }
                 
                 textField.leftView = leftView
-                break
             case "signUpCell":
                 let button = cell.viewWithTag(1) as! RaisedButton
                 button.titleLabel?.font = RobotoFont.bold(with: 17)
                 button.title = content.text
                 button.backgroundColor = UIColor(named: .red)
                 self.bindSignButton(state: .signIn, button: button)
-                break
             case "signInCell":
                 let button = cell.viewWithTag(1) as! RaisedButton
                 button.titleLabel?.font = RobotoFont.bold(with: 17)
                 button.title = content.text
                 button.backgroundColor = UIColor(named: .yellow)
                 self.bindSignButton(state: .signUp, button: button)
-                break
             case "textCell":
                 let label = cell.viewWithTag(1) as! UILabel
                 label.text = content.text
-                break
             default:
                 break
             }
@@ -153,7 +139,7 @@ class LoginTableViewController: UITableViewController, PersistenceStackControlle
                 .dispose(in: textField.bag)
             
             textField.reactive.text.skip(first: 1).map { text in
-                if let text = text, (text.characters.count < 6 && text.characters.count != 0) {
+                if let text = text, (text.count < 6 && text.count != 0) {
                     return NSLocalizedString("INVALID_PASSWORD_LENGTH", comment: "")
                 }
                 return ""
