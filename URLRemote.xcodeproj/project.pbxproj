@@ -1219,7 +1219,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pixeesoft.ios.URLRemote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8197dce5-99fe-44b3-94c7-48f4691a1e28";
+				PROVISIONING_PROFILE = "6f6d1098-1715-4796-aefa-d667cfa31436";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.pixeesoft.ios.URLRemote";
 				SWIFT_OBJC_BRIDGING_HEADER = "URLRemote/URLRemote-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
