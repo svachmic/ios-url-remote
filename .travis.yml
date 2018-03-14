@@ -27,7 +27,7 @@ before_install:
   - cd ../..
 
 script:
-  - if [ "$TRAVIS_BRANCH" = "develop" ]; then fastlane test; fi
+  - fastlane test
   - swiftlint
 
 after_success:
