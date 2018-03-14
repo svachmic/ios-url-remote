@@ -1,0 +1,9 @@
+git_url "https://svachmic@bitbucket.org/svachmic/fastlane_certificates.git"
+git_branch "pixeesoft"
+
+type "development" # The default type, can be: appstore, adhoc or development
+
+app_identifier "com.pixeesoft.ios.URLRemote"
+username "itunes@pixeesoft.com" # Apple Developer Portal username
+
+# For all available options run `match --help`
